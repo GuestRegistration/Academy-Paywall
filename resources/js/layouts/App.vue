@@ -28,7 +28,7 @@
     </v-content>
 
     <v-footer app>
-      <small><a :href="site">2020. Academia</a></small>
+      <small><a href="#">2020. Academia</a></small>
     </v-footer>
   </v-app>
 
@@ -40,7 +40,7 @@
         name: 'LayoutApp',
         data(){
             return {
-                drawer: false
+                drawer: false,
             }
         },
         computed: {

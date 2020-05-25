@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DefaultController;
+use App\Http\Controllers\Auth\SigninController;
+use App\Http\Controllers\Auth\SignoutController;
+use App\Http\Controllers\Auth\SigninPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,5 +16,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', DefaultController::class)->name('home');
+Route::get('/signin', SigninPageController::class)->name('signin');
+Route::post('/signin', SigninController::class)->name('signin.send.link');
+Route::post('/signout', SignoutController::class)->name('signout');
 
-Route::get('/', 'DefaultController@home')->name('home');

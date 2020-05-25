@@ -8,9 +8,9 @@ import Vue from 'vue';
 import Vuetify from 'vuetify';
 import store from './store';
 
+window.Vue = Vue;
 require('./bootstrap');
 
-window.Vue = Vue;
 
 Vue.mixin({
     methods: {
@@ -27,10 +27,9 @@ Vue.mixin({
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+const files = require.context('./components', true, /\.vue$/i);
+files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -47,7 +46,7 @@ new Vue({
   render: h => h(InertiaApp, {
     props: {
       initialPage: JSON.parse(app.dataset.page),
-      resolveComponent: name => require(`./pages/${name}`).default,
+      resolveComponent: name => import(`./${name}`).then(module => module.default),
       transformProps: props => {
         store.commit('setAuth', props.auth);
         store.commit('response/setErrors', props.errors);
@@ -56,5 +55,16 @@ new Vue({
     },
   }),
   store,
-  vuetify: new Vuetify(),
-}).$mount(app)
+  vuetify: new Vuetify({
+    theme: {
+      themes: {
+        light: {
+          primary: '#3f51b5',
+          secondary: '#b0bec5',
+          accent: '#8c9eff',
+          error: '#b71c1c',
+        },
+      },
+    },
+  }),
+}).$mount(app);
