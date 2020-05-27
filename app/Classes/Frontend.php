@@ -15,11 +15,16 @@ class Frontend
             'errors' => function () {
                 return self::errors();
             },
-            'status' => function () {
-                return Session::get('status');
+            'alerts' => function () {
+                return [
+                    'success' => Session::get('success'),
+                    'error' => Session::get('error'),
+                    'warning' => Session::get('warning'),
+                    'info' => Session::get('info'),
+                ];
             },
             'auth' => function () {
-                return optional(Request::user());
+                return Request::user();
             },
         ]);
     }

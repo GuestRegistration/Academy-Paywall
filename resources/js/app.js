@@ -7,8 +7,11 @@ import { InertiaApp } from '@inertiajs/inertia-vue';
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 import store from './store';
+import toastr from 'toastr';
 
 window.Vue = Vue;
+window.toastr = toastr;
+
 require('./bootstrap');
 
 
@@ -48,14 +51,48 @@ new Vue({
       initialPage: JSON.parse(app.dataset.page),
       resolveComponent: name => import(`./${name}`).then(module => module.default),
       transformProps: props => {
+        
         store.commit('setAuth', props.auth);
         store.commit('response/setErrors', props.errors);
+
+        toastr.options = {
+          "closeButton": true,
+          "debug": false,
+          "newestOnTop": false,
+          "progressBar": true,
+          "positionClass": "toast-top-right",
+          "preventDuplicates": false,
+          "onclick": null,
+          "showDuration": "300",
+          "hideDuration": "1000",
+          "timeOut": "5000",
+          "extendedTimeOut": "1000",
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut"
+        }
+        if(props.alerts.success){
+            toastr.success(props.alerts.success);
+        }
+        if(props.alerts.error){
+            toastr.error(props.alerts.error);
+        }
+        if(props.alerts.warning){
+            toastr.warning(props.alerts.warning);
+        }
+        if(props.alerts.info){
+            toastr.info(props.alerts.info);
+        }
         return props;
         },
     },
   }),
   store,
   vuetify: new Vuetify({
+    // icons: {
+    //   iconfont: 'mdi', // default - only for display purposes
+    // },
     theme: {
       themes: {
         light: {

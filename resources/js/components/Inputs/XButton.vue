@@ -1,5 +1,5 @@
 <template>
-    <v-btn v-bind="$attrs" :loading="loading">
+    <v-btn v-bind="$attrs" v-on="$listeners" :loading="loading">
         <slot/>
     </v-btn>
 </template>
@@ -13,7 +13,3 @@
     
   }
 </script>
-
-<style lang="sass">
-  //
-</style>

@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Domain\Auth\Actions;
 
 use Inertia\Inertia;
 use App\Http\Controllers\Controller;
 
-class SigninPageController extends Controller
+class SigninPageAction extends Controller
 {
+    public function __construct(){
+        $this->middleware('guest');
+    }
 
     public function __invoke()
     {

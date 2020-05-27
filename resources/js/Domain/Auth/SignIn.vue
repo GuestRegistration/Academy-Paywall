@@ -49,7 +49,7 @@
         methods: {
             async submit() {
                 this.ui.loading = true;
-                await this.$inertia.post(this.route('signin.send.link'), this.form)
+                await this.$inertia.post(this.route('signin.magic.link'), this.form)
 
                 this.ui.loading = false;
             },
