@@ -115,7 +115,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         title: 'Home',
         icon: 'home'
       }, {
-        route: 'home',
+        route: 'account.show',
         title: 'Account',
         icon: 'account_circle'
       }, {
@@ -307,7 +307,7 @@ var render = function() {
                         {
                           key: i,
                           staticClass: "prevent-default",
-                          attrs: { href: "#" }
+                          attrs: { href: _vm.route(item.route) }
                         },
                         [
                           _c(

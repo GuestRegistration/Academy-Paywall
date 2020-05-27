@@ -7,11 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Domain\Auth\Requests\SignInRequest;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class SigninAction extends Controller
 {
-    use AuthenticatesUsers;
 
     public function __construct()
     {
@@ -33,17 +31,17 @@ class SigninAction extends Controller
 
         Auth::login($user, true);
 
-        return redirect()->route('home');
+        return $this->authenticated($user);
     }
 
     /**
-     * @param Request $request
      * @param User $user
      */
-    protected function authenticated(Request $request, $user)
+    protected function authenticated(User $user)
     {
         $user->last_login_at = now();
         $user->save();
+        return $user->profile_complete ? redirect()->route('home') : redirect()->route('account.show')->with('info', 'Kindly, complete your profile');
     }
 
 }

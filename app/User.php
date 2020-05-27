@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'phone', 'signin_token', 'signin_token_expires_at',
+        'first_name', 'last_name', 'email', 'phone', 'signin_token', 'signin_token_expires_at', 'last_login_at'
     ];
 
     /**
@@ -51,6 +51,14 @@ class User extends Authenticatable
         return Str::upper(
             substr($this->first_name, 0, 1). substr($this->last_name, 0, 1)
         );
+    }
+
+    public function getProfileCompleteAttribute(){
+        $profile = $this;
+        return 
+            collect($this->fillable)->every(function($info) use($profile){
+                return $profile->$info !== null;
+            });
     }
 
 }

@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Domain\Auth\AuthServiceProvider::class,
+        Domain\Account\AccountServiceProvider::class,
     ],
 
     /*

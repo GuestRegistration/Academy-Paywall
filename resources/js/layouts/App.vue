@@ -24,7 +24,7 @@
 
     <v-list>
       <v-list-item-group color="primary">
-        <inertia-link href="#"  class="prevent-default" v-for="(item, i) in items"
+        <inertia-link :href="route(item.route)"  class="prevent-default" v-for="(item, i) in items"
           :key="i">
           <v-list-item>
           <v-list-item-icon>
@@ -91,7 +91,7 @@
                           icon: 'home',
                         },
                         {
-                          route: 'home',
+                          route: 'account.show',
                           title: 'Account',
                           icon: 'account_circle',
                         },
