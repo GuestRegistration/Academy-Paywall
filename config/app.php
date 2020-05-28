@@ -177,6 +177,7 @@ return [
 
         Domain\Auth\AuthServiceProvider::class,
         Domain\Account\AccountServiceProvider::class,
+        Domain\Course\CourseServiceProvider::class,
     ],
 
     /*

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DefaultController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,5 +13,5 @@ use App\Http\Controllers\DefaultController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', DefaultController::class)->name('home');
+Route::get('/', HomeController::class)->name('home');
 

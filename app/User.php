@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Classes\UUID;
+use Domain\Course\Models\Course;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -59,6 +60,10 @@ class User extends Authenticatable
             collect($this->fillable)->every(function($info) use($profile){
                 return $profile->$info !== null;
             });
+    }
+
+    public function courses(){
+        return $this->hasMany(Course::class);
     }
 
 }

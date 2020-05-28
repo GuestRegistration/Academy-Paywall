@@ -4,7 +4,6 @@ namespace Domain\Account\Actions;
 
 use Inertia\Inertia;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
 class AccountShowAction extends Controller
 {
@@ -17,7 +16,7 @@ class AccountShowAction extends Controller
 
     public function __invoke()
     {
-        $account = Auth::user();
+        $account = $this->user();
         return Inertia::render('Domain/Account/Pages/AccountShow', compact('account'));
     }
 

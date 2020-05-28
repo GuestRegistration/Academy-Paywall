@@ -1,25 +1,20 @@
 <template>
     <div>
-        <v-text-field
-            outlined
-            v-bind="$attrs"
-            v-on="$listeners"
-            :label="label"
-            :error="errorString ? true : false"
-            :error-messages="errorString ? errorString : ''"
-        >
-            <slot
-            slot="append-outer"
-            name="append-outer"
-            />
-        </v-text-field>
+        <v-textarea
+          outlined
+          v-bind="$attrs"
+          v-on="$listeners"
+          :clearable="true"
+          :label="label"
+          :error="errorString ? true : false"
+          :error-messages="errorString ? errorString : ''"
+        ></v-textarea>
     </div>
-
 </template>
 
 <script>
   export default {
-    name: 'XInput',
+    name: 'XTexarea',
     props: {
         errors: null,
         label: String,

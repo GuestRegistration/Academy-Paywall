@@ -2,7 +2,7 @@
     <v-container>
         <v-row justify="center" align="center">
            
-            <v-col md="6">
+            <v-col cols="12" md="6">
                 <div class="text-center mb-3" >
                     <v-avatar color="primary" size="100">
                         <v-icon dark size="100">mdi-account-circle</v-icon>

@@ -2,11 +2,11 @@
       <!-- App.vue -->
   <v-app>
     <v-navigation-drawer 
-      v-if="authenticated"
       app 
       v-model="drawer"
-      > 
-    <template v-slot:prepend>
+      >
+
+    <template v-if="authenticated" v-slot:prepend>
           <v-list-item>
             <v-list-item-avatar>
               <v-avatar color="primary">
@@ -24,7 +24,7 @@
 
     <v-list>
       <v-list-item-group color="primary">
-        <inertia-link :href="route(item.route)"  class="prevent-default" v-for="(item, i) in items"
+        <inertia-link :href="route(item.route)"  class="prevent-default" v-for="(item, i) in navItems()"
           :key="i">
           <v-list-item>
           <v-list-item-icon>
@@ -41,7 +41,10 @@
 
     <template v-slot:append>
       <div class="pa-2">
-          <v-btn block dark class="red" v-if="auth" @click="signout">Signout</v-btn>
+          <v-btn block dark class="red" v-if="authenticated" @click="signout">Signout</v-btn>
+          <inertia-link  v-else :href="route('signin')">
+            <v-btn block color="primary">Sign in</v-btn>
+          </inertia-link>
       </div>
     </template>
 
@@ -52,13 +55,32 @@
       color="primary"
       dark
     >
-      <v-app-bar-nav-icon v-if="authenticated" @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <inertia-link :href="route('home')" class="white--text" style="text-decoration: none">
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+       <inertia-link :href="route('home')" class="white--text" style="text-decoration: none">
         <v-toolbar-title dark>Academia</v-toolbar-title>
       </inertia-link>
       <v-spacer></v-spacer>
-      <inertia-link :href="route('signin')">
-        <v-btn dark color="primary" v-if="!authenticated">Sign in</v-btn>
+
+      <v-toolbar
+        dense
+        light
+        v-if="search_active"
+      >
+        <v-text-field
+          hide-details
+          prepend-icon="search"
+          single-line
+          placeholder="Search for courses"
+        ></v-text-field>
+
+      </v-toolbar>
+
+      <v-btn icon ml-1>
+        <v-icon @click="search_active = !search_active">mdi-magnify</v-icon>
+      </v-btn>
+
+      <inertia-link  v-if="!authenticated" :href="route('signin')">
+        <v-btn dark color="primary">Sign in</v-btn>
       </inertia-link>
     </v-app-bar>
     
@@ -85,28 +107,7 @@
         data(){
             return {
                 drawer: false,
-                 items: [{
-                          route: 'home',
-                          title: 'Home',
-                          icon: 'home',
-                        },
-                        {
-                          route: 'account.show',
-                          title: 'Account',
-                          icon: 'account_circle',
-                        },
-                        {
-                          route: 'home',
-                          title: 'Courses',
-                          icon: 'library_books',
-                        },
-                        {
-                          route: 'home',
-                          title: 'Payment',
-                          icon: 'local_atm',
-                        },
-                        
-                        ],
+                search_active: false,
             }
         },
         computed: {
@@ -117,7 +118,45 @@
         },
 
         methods:{
-         async signout(){
+          navItems(){
+            if(this.authenticated){
+              return [{
+                          route: 'home',
+                          title: 'Home',
+                          icon: 'home',
+                        },
+                        {
+                          route: 'account.show',
+                          title: 'Account',
+                          icon: 'account_circle',
+                        },
+                        {
+                          route: 'account.courses',
+                          title: 'Courses',
+                          icon: 'library_books',
+                        },
+                        {
+                          route: 'home',
+                          title: 'Payment',
+                          icon: 'local_atm',
+                        },
+                      ]
+            }else{
+              return [{
+                          route: 'home',
+                          title: 'Home',
+                          icon: 'home',
+                        },
+                        {
+                          route: 'course.list',
+                          title: 'Courses',
+                          icon: 'library_books',
+                        },
+                      ];
+            }
+          },
+
+        async signout(){
            await this.$inertia.post(route('signout'));
           }
         },

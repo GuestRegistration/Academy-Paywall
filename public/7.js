@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[7],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Auth/Login.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Domain/Auth/Login.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Course/Pages/CourseCreate.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Domain/Course/Pages/CourseCreate.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11,6 +11,7 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _layouts_App__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/layouts/App */ "./resources/js/layouts/App.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -44,23 +45,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Login',
-  props: {
-    errors: Object
+  name: "CourseCreate",
+  layout: function layout(h, page) {
+    return h(_layouts_App__WEBPACK_IMPORTED_MODULE_1__["default"], [page]);
   },
   data: function data() {
     return {
-      form: {},
-      ui: {
-        loading: false
-      }
+      loading: false,
+      form: {}
     };
+  },
+  computed: {
+    errors: function errors() {
+      return this.$page.errors;
+    }
   },
   methods: {
     submit: function submit() {
@@ -71,12 +71,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _this.ui.loading = true;
+                _this.loading = true;
                 _context.next = 3;
-                return _this.$inertia.post(_this.route('login'), _this.form);
+                return _this.$inertia.post(_this.route('course.store'), _this.formData());
 
               case 3:
-                _this.ui.loading = false;
+                _this.loading = false;
 
               case 4:
               case "end":
@@ -85,16 +85,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee);
       }))();
+    },
+    getFile: function getFile(files) {
+      this.form.cover_image = files[0];
+    },
+    formData: function formData() {
+      var _this2 = this;
+
+      var form = new FormData();
+      Object.keys(this.form).forEach(function (key) {
+        form.append(key, _this2.form[key]);
+      });
+      return form;
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Auth/Login.vue?vue&type=template&id=73f0393f&":
-/*!*********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Domain/Auth/Login.vue?vue&type=template&id=73f0393f& ***!
-  \*********************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Course/Pages/CourseCreate.vue?vue&type=template&id=7cdb34ee&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Domain/Course/Pages/CourseCreate.vue?vue&type=template&id=7cdb34ee& ***!
+  \************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -106,70 +118,96 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("v-app", { attrs: { light: "" } }, [
-    _c(
-      "div",
-      {
-        staticClass:
-          "d-flex align-items-center border-top border-top-5 border-primary bg-gray-700"
-      },
-      [
-        _c("div", { staticClass: "container mt-lg-5" }, [
-          _c("div", { staticClass: "row justify-content-center" }, [
-            _c(
-              "div",
-              { staticClass: "col-12 col-sm-9 col-md-6 col-lg-4 my-5" },
-              [
-                _c("h1", { staticClass: "text-center my-3" }, [
-                  _vm._v(
-                    "\r\n                            Sign in\r\n                        "
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "form",
-                  {
-                    on: {
-                      submit: function($event) {
-                        $event.preventDefault()
-                        return _vm.submit($event)
-                      }
-                    }
-                  },
-                  [
+  return _c(
+    "v-card",
+    { attrs: { loading: _vm.loading, outlined: "", "pa-md-2": "" } },
+    [
+      _c("v-card-title", [_vm._v(" New course")]),
+      _vm._v(" "),
+      _c("v-divider"),
+      _vm._v(" "),
+      _c(
+        "v-card-text",
+        [
+          _c(
+            "v-container",
+            [
+              _c(
+                "v-row",
+                { attrs: { justify: "center", align: "center" } },
+                [
+                  _c(
+                    "v-col",
+                    { attrs: { cols: "12", md: "6" } },
+                    [
+                      _c("x-file-input", {
+                        attrs: {
+                          errors: _vm.errors,
+                          name: "cover_image",
+                          label: "Cover image"
+                        },
+                        on: { change: _vm.getFile }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("v-col", { attrs: { cols: "12", md: "6" } }, [
                     _c(
-                      "div",
-                      { staticClass: "tab-content py-3" },
+                      "form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.submit($event)
+                          }
+                        }
+                      },
                       [
                         _c("x-input", {
                           attrs: {
                             errors: _vm.errors,
-                            name: "email",
-                            type: "email",
-                            label: "Email"
+                            name: "title",
+                            type: "text",
+                            label: "Course title"
                           },
                           model: {
-                            value: _vm.form.email,
+                            value: _vm.form.title,
                             callback: function($$v) {
-                              _vm.$set(_vm.form, "email", $$v)
+                              _vm.$set(_vm.form, "title", $$v)
                             },
-                            expression: "form.email"
+                            expression: "form.title"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("x-textarea", {
+                          attrs: {
+                            errors: _vm.errors,
+                            name: "description",
+                            label: "Course description"
+                          },
+                          model: {
+                            value: _vm.form.description,
+                            callback: function($$v) {
+                              _vm.$set(_vm.form, "description", $$v)
+                            },
+                            expression: "form.description"
                           }
                         }),
                         _vm._v(" "),
                         _c("x-input", {
                           attrs: {
                             errors: _vm.errors,
-                            name: "password",
-                            type: "password",
-                            label: "Password"
+                            name: "price",
+                            type: "number",
+                            label: "Price"
                           },
                           model: {
-                            value: _vm.form.password,
+                            value: _vm.form.price,
                             callback: function($$v) {
-                              _vm.$set(_vm.form, "password", $$v)
+                              _vm.$set(_vm.form, "price", $$v)
                             },
-                            expression: "form.password"
+                            expression: "form.price"
                           }
                         }),
                         _vm._v(" "),
@@ -178,44 +216,34 @@ var render = function() {
                           {
                             staticClass: "primary",
                             attrs: {
-                              loading: _vm.ui.loading,
+                              loading: _vm.loading,
                               type: "submit",
                               dark: "",
-                              color: "accent-4",
-                              block: ""
+                              color: "accent-4"
                             }
                           },
                           [
                             _vm._v(
-                              "\r\n                                    Sign in\r\n                                "
+                              "\n                        Save\n                        "
                             )
                           ]
                         )
                       ],
                       1
                     )
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "text-right" }, [
-                  _c(
-                    "p",
-                    [
-                      _vm._v("Don't have an account yet? "),
-                      _c("inertia-link", { attrs: { href: "#!" } }, [
-                        _vm._v("Signup")
-                      ])
-                    ],
-                    1
-                  )
-                ])
-              ]
-            )
-          ])
-        ])
-      ]
-    )
-  ])
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -224,18 +252,18 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/Domain/Auth/Login.vue":
-/*!********************************************!*\
-  !*** ./resources/js/Domain/Auth/Login.vue ***!
-  \********************************************/
+/***/ "./resources/js/Domain/Course/Pages/CourseCreate.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/Domain/Course/Pages/CourseCreate.vue ***!
+  \***********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Login_vue_vue_type_template_id_73f0393f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Login.vue?vue&type=template&id=73f0393f& */ "./resources/js/Domain/Auth/Login.vue?vue&type=template&id=73f0393f&");
-/* harmony import */ var _Login_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Login.vue?vue&type=script&lang=js& */ "./resources/js/Domain/Auth/Login.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _CourseCreate_vue_vue_type_template_id_7cdb34ee___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CourseCreate.vue?vue&type=template&id=7cdb34ee& */ "./resources/js/Domain/Course/Pages/CourseCreate.vue?vue&type=template&id=7cdb34ee&");
+/* harmony import */ var _CourseCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CourseCreate.vue?vue&type=script&lang=js& */ "./resources/js/Domain/Course/Pages/CourseCreate.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -244,9 +272,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Login_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Login_vue_vue_type_template_id_73f0393f___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Login_vue_vue_type_template_id_73f0393f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _CourseCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CourseCreate_vue_vue_type_template_id_7cdb34ee___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CourseCreate_vue_vue_type_template_id_7cdb34ee___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -256,38 +284,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/Domain/Auth/Login.vue"
+component.options.__file = "resources/js/Domain/Course/Pages/CourseCreate.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/Domain/Auth/Login.vue?vue&type=script&lang=js&":
-/*!*********************************************************************!*\
-  !*** ./resources/js/Domain/Auth/Login.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************/
+/***/ "./resources/js/Domain/Course/Pages/CourseCreate.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/Domain/Course/Pages/CourseCreate.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Login_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Login.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Auth/Login.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Login_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CourseCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./CourseCreate.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Course/Pages/CourseCreate.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CourseCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/Domain/Auth/Login.vue?vue&type=template&id=73f0393f&":
-/*!***************************************************************************!*\
-  !*** ./resources/js/Domain/Auth/Login.vue?vue&type=template&id=73f0393f& ***!
-  \***************************************************************************/
+/***/ "./resources/js/Domain/Course/Pages/CourseCreate.vue?vue&type=template&id=7cdb34ee&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/Domain/Course/Pages/CourseCreate.vue?vue&type=template&id=7cdb34ee& ***!
+  \******************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Login_vue_vue_type_template_id_73f0393f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Login.vue?vue&type=template&id=73f0393f& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Auth/Login.vue?vue&type=template&id=73f0393f&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Login_vue_vue_type_template_id_73f0393f___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CourseCreate_vue_vue_type_template_id_7cdb34ee___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./CourseCreate.vue?vue&type=template&id=7cdb34ee& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Course/Pages/CourseCreate.vue?vue&type=template&id=7cdb34ee&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CourseCreate_vue_vue_type_template_id_7cdb34ee___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Login_vue_vue_type_template_id_73f0393f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CourseCreate_vue_vue_type_template_id_7cdb34ee___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
