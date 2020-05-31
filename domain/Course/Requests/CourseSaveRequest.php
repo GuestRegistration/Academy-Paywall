@@ -28,7 +28,7 @@ class CourseSaveRequest extends FormRequest
     {
         return [
             'title' => ['required'],
-            'description'=> ['required'],
+            'description'=> ['required', 'min:'.Course::MIN_DESCRIPTION_CHARACTER],
             'price' => ['required'],
             'cover_image' => ['max:2048'],
         ];

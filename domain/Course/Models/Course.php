@@ -10,6 +10,8 @@ class Course extends Model
 {
     use UUID;
 
+    const MIN_DESCRIPTION_CHARACTER = 120;
+    
     protected $fillable = [
         'account_id', 'title', 'description', 'price', 'cover_image', 'published_at', 'slug'
     ];
@@ -39,7 +41,7 @@ class Course extends Model
     }
 
     public function getSnippetAttribute(){
-        $length = 200;
+        $length = self::MIN_DESCRIPTION_CHARACTER;
         return strlen($this->description)  > $length ? \substr($this->description, 0, 200).'..' : $this->description;
     }
 }

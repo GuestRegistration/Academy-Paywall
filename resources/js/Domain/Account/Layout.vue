@@ -26,6 +26,9 @@
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
+      <inertia-link v-if="authenticated && !isMyAccount" :href="auth.username ? route('account.show', {account: auth.username}) : '#'" class="prevent-default mx-1">
+         <avatar :src="auth.avatar" :color="auth.theme_color" size="40" />
+      </inertia-link>
 
       <v-menu v-if="isMyAccount" origin="center center"  transition="scale-transition">
         <template v-slot:activator="{ on }">
@@ -58,7 +61,7 @@
 
     </v-app-bar>
     
-    <v-sheet id="scrolling-techniques-5"  class="overflow-y-auto" style="max-height: 100vh;">
+    <div id="scrolling-techniques-5"  class="overflow-y-auto" style="max-height: 100vh;">
         <v-parallax height="200" :src="account.cover_image" :color="account.theme_color">
             <v-container style="background-color: rgba(0,0,0, .2)">
                 <div class="d-flex align-center">
@@ -80,11 +83,9 @@
                      <slot />
                 </v-col>
                 <v-col cols="12" md="4">
-                  <template v-if="!route().current('account.show')">
-                    <v-divider></v-divider>
-                    <h4 >About {{account.name}}</h4>
-                    <v-divider></v-divider>
-                  </template>
+                  <v-divider></v-divider>
+                  <h4 >About {{account.name}}</h4>
+                  <v-divider></v-divider>
                     
                     <template v-if="account.bio">
                       {{account.bio}}
@@ -150,8 +151,11 @@
                 </v-col>
             </v-row>
         </v-container>
-        
-    </v-sheet>
+    </div>
+    <!-- <v-footer app>
+      <v-spacer></v-spacer>
+      <small>Need help ? <a href="mailto: support@acadaapp.com">support@acadaapp.com</a></small>
+    </v-footer> -->
   </v-app>
 </template>
 

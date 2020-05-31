@@ -7,7 +7,7 @@
             <div>
                 <h1>{{ course.price | money }}</h1>
             </div>
-            <div class="ml-auto">
+            <div class="ml-auto" @click="enroll">
                 <v-btn dark large :color="account.theme_color">
                     Enroll Now <v-icon>arrow_forward</v-icon>
                 </v-btn>
@@ -18,8 +18,8 @@
             {{course.description}}
         </div>
 
-        <v-btn fixed dark fab bottom right large :color="account.theme_color" :title="`Enroll for ${course.title}`">
-                <v-icon>arrow_forward</v-icon>
+        <v-btn fixed dark fab bottom right large :color="account.theme_color" :title="`Enroll for ${course.title}`" @click="enroll">
+            <v-icon>arrow_forward</v-icon>
         </v-btn>
     </div>
     
@@ -48,6 +48,12 @@
                 'auth', 'authenticated', 'isMyAccount', 'isOnMyAccount'
             ]),
         },
+
+        methods: {
+            enroll(){
+                toastr.info("Chill, working on that now");
+            }
+        }
 
     }
 </script>
