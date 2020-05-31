@@ -76,7 +76,10 @@
         </v-parallax>
         <v-container style="min-height: 100vh" fluid>
             <v-row>
-                <v-col :order="route().current('account.show') ? 'first' : 'last'" cols="12" md="4">
+                <v-col cols="12" md="8">
+                     <slot />
+                </v-col>
+                <v-col cols="12" md="4">
                   <template v-if="!route().current('account.show')">
                     <v-divider></v-divider>
                     <h4 >About {{account.name}}</h4>
@@ -144,9 +147,6 @@
                         <v-icon>mdi-plus</v-icon>
                       </v-btn>
                     </template>
-                </v-col>
-                 <v-col cols="12" md="8">
-                     <slot />
                 </v-col>
             </v-row>
         </v-container>
