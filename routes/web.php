@@ -14,4 +14,6 @@ use App\Http\Controllers\HomeController;
 |
 */
 Route::get('/', HomeController::class)->name('home');
+Route::get('/migrate', 'App\Http\Controllers\SystemController@migrate');
+Route::get('/lstorage', 'App\Http\Controllers\SystemController@linkStorage');
 
