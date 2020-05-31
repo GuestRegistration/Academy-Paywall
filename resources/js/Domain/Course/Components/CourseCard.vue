@@ -5,7 +5,7 @@
       <avatar :src="course.account.avatar" :color="course.account.theme_color" size="50"  class="mr-2" />
       <v-list-item-content>
         <v-list-item-title class="headline">{{ course.title }}</v-list-item-title>
-        <v-list-item-subtitle>by {{ course.account.name }} {{ course.account.at_username }}</v-list-item-subtitle>
+        <v-list-item-subtitle>{{ course.account.name }} {{ course.account.at_username }}</v-list-item-subtitle>
       </v-list-item-content>
     </v-list-item>
 

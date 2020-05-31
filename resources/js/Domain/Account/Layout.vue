@@ -4,7 +4,6 @@
       absolute
       :color="account.theme_color"
       dark
-      shrink-on-scroll
       :src="account.cover_image"
       fade-img-on-scroll
       scroll-target="#scrolling-techniques-5"
