@@ -4,9 +4,10 @@
     <v-navigation-drawer 
       app 
       v-model="drawer"
+      v-if="authenticated && auth.profile_complete"
       >
 
-    <template v-if="authenticated && auth.profile_complete" v-slot:prepend>
+    <template  v-slot:prepend>
           <v-list-item>
             <v-list-item-avatar>
               <avatar :src="auth.avatar" :color="auth.theme_color" />
@@ -38,30 +39,25 @@
 
     <template v-slot:append>
       <div class="pa-2">
-          <v-btn block dark class="red" v-if="authenticated" @click="signout">Signout</v-btn>
-          <inertia-link  v-else :href="route('signin')">
-            <v-btn block color="primary">Sign in</v-btn>
-          </inertia-link>
+          <v-btn block dark class="red"  @click="signout">Signout</v-btn>
       </div>
     </template>
 
     </v-navigation-drawer>
 
-    <v-app-bar 
-      app
-      :color="authenticated ? auth.theme_color : 'primary'"
-      dark
-    >
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+    <v-app-bar app :color="authenticated ? auth.theme_color : 'primary'" dark >
+      
+      <v-app-bar-nav-icon v-if="authenticated && auth.profile_complete" @click="drawer = !drawer"></v-app-bar-nav-icon>
+       
        <inertia-link :href="route('home')" class="white--text" style="text-decoration: none">
         <v-toolbar-title dark>AcadaApp</v-toolbar-title>
       </inertia-link>
       <v-spacer></v-spacer>
 
-      <inertia-link v-if="authenticated" :href="route('account.show', {account: auth.username})" class="prevent-default mx-1">
+      <inertia-link v-if="authenticated" :href="auth.username ? route('account.show', {account: auth.username}) : '#'" class="prevent-default mx-1">
          <avatar :src="auth.avatar" :color="auth.theme_color" size="40" />
       </inertia-link>
-      <inertia-link  v-else :href="route('signin')">
+      <inertia-link  v-else-if="!route().current('signin')" :href="route('signin')">
         <v-btn dark color="primary">Sign in</v-btn>
       </inertia-link>
     </v-app-bar>
@@ -89,7 +85,6 @@
         data(){
             return {
                 drawer: false,
-                search_active: false,
             }
         },
         computed: {
@@ -129,11 +124,6 @@
                           title: 'Home',
                           icon: 'home',
                         },
-                        {
-                          route: this.route('course.list'),
-                          title: 'Courses',
-                          icon: 'library_books',
-                        },
                       ];
             }
           },
@@ -142,9 +132,5 @@
            await this.$inertia.post(route('signout'));
           }
         },
-
-        mounted(){
-          console.log(this.$page.auth)
-      }
     }
 </script>

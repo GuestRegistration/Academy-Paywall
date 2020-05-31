@@ -45,8 +45,8 @@ class NewSignin extends Notification
 
 
         return (new MailMessage)
-                ->subject('Sign in to Academy Paywall')
-                ->line('Sign in to Academy paywall with this link')
+                ->subject('Sign in to '.config('app.name'))
+                ->line('Sign in to '.config('app.name').' with this link')
                 ->action("Sign in", URL::temporarySignedRoute('magic.signin', now()->addMinutes(2), ['token' => $this->user->signin_token]))
                 ->line('The link expires in 2 minutes');
 

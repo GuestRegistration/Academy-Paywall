@@ -4,7 +4,14 @@
             <div class="container mt-lg-5">
                 <div class="row justify-content-center">
                     <div class="col-12 col-sm-9 col-md-6 col-lg-4 my-5">
-                        <!-- Heading -->
+                        <div class="text-center">
+                            <h1>
+                                <inertia-link :href="route('home')" class="prevent-default">
+                                    AcadaApp
+                                </inertia-link>
+                            </h1>
+                        </div>
+                        
                         <v-card outlined class="py-5">
                             <v-card-text>
                                  <h2 class="text-center my-3">
@@ -32,14 +39,8 @@
 <script>
 
     export default {
-        name: 'Login',
-        metaInfo()
-         {
-             return{
-                title: `Sign in`,
-                titleTemplate: '%s - AcadaApp',
-             }
-        },
+        name: 'SigninPage',
+
         props: {
             errors: Object,
         },
