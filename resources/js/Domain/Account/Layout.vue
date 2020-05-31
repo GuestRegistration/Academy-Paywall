@@ -93,21 +93,19 @@
                           <v-col>
                             <div class="text-center">
                               <a :href="`tel: ${account.phone}`" class="prevent-default">
-                                <v-btn icon>
+                                <v-btn icon large>
                                   <v-icon>call</v-icon>
                                 </v-btn>
                               </a>
-                              <div>{{account.phone}}</div>
                             </div>
                           </v-col>
                           <v-col>
                             <div class="text-center">
                               <a :href="`mailto: ${account.email}`" class="prevent-default">
-                                <v-btn icon>
+                                <v-btn large icon>
                                   <v-icon>email</v-icon>
                                 </v-btn>
                               </a>
-                              <div>{{account.email}}</div>
                             </div>
                           </v-col>
                         </v-row>

@@ -16,7 +16,12 @@ class SetUpAccount
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {
+
+    {   if(Auth::check() && !Auth::user()){
+            Auth::logout($request);
+            return;
+        }
+
         if((Auth::check() && !Auth::user()->account->profile_complete) && !in_array(Request::route()->getName(), ['account.setup', 'account.setup.store'])){
             return  redirect()->route('account.setup')->with('info', 'Kindly, complete your profile before proceeding'); 
         }
