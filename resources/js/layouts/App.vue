@@ -58,11 +58,10 @@
       </inertia-link>
       <v-spacer></v-spacer>
 
-      <inertia-link :href="route('account.show', {account: auth.username})" class="prevent-default mx-1">
-         <avatar v-if="authenticated" :src="auth.avatar" :color="auth.theme_color" size="40" />
+      <inertia-link v-if="authenticated" :href="route('account.show', {account: auth.username})" class="prevent-default mx-1">
+         <avatar :src="auth.avatar" :color="auth.theme_color" size="40" />
       </inertia-link>
-      
-      <inertia-link  v-if="!authenticated" :href="route('signin')">
+      <inertia-link  v-else :href="route('signin')">
         <v-btn dark color="primary">Sign in</v-btn>
       </inertia-link>
     </v-app-bar>

@@ -20,7 +20,7 @@ class AccountCourseStoreAction extends Controller
     {
         $course = $account->courses()->create($request->data());
 
-        return redirect()->route('account.show', $account->getKey())->with('success', $course->title." saved successfully");
+        return redirect()->route('account.show', $account->username)->with('success', $course->title." saved successfully");
     }
 
 }
