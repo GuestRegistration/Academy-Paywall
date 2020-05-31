@@ -11,6 +11,13 @@
     export default {
         name: "HomePage",
         layout: (h, page) => h(App, [page]),
+        metaInfo()
+         {
+             return{
+                title: `Home`,
+                titleTemplate: '%s - AcadaApp',
+             }
+        },
         components: {
             CoursesWidget
         }

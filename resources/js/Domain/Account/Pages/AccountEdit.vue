@@ -23,6 +23,7 @@
                 </v-col>
             </v-row>
 
+            
             <v-row>
                 <v-col cols="12">
                     <h4>Appearance</h4>
@@ -65,6 +66,14 @@
     export default {
         name: "AccountEdit",
         layout: (h, page) => h(App, [page]),
+        metaInfo()
+         {
+             return{
+                title: `Account Edit ${this.account.at_username}`,
+                titleTemplate: '%s - AcadaApp',
+             }
+        },
+
         data(){
             return {
                 loading: false,

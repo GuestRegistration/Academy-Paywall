@@ -32,6 +32,13 @@
     export default {
         name: "CourseShow",
         layout: (h, page) => h(AccountLayout, [page]),
+         metaInfo()
+         {
+             return{
+                title: `${this.course.title} ${this.account.at_username}`,
+                titleTemplate: '%s - AcadaApp',
+             }
+        },
         props: {
             account: Object,
             course: Object

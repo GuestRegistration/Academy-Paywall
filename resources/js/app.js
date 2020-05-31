@@ -6,8 +6,10 @@
 import { InertiaApp } from '@inertiajs/inertia-vue';
 import Vue from 'vue';
 import Vuetify from 'vuetify';
+import VueMeta from 'vue-meta'
 import store from './store';
 import toastr from 'toastr';
+
 
 window.Vue = Vue;
 window.toastr = toastr;
@@ -44,6 +46,10 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 
 Vue.use(InertiaApp)
 Vue.use(Vuetify);
+Vue.use(VueMeta, {
+  refreshOnceOnNavigation: true
+})
+
 
 const app = document.getElementById('app')
 

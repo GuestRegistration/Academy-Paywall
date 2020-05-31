@@ -33,7 +33,13 @@
 
     export default {
         name: 'Login',
-
+        metaInfo()
+         {
+             return{
+                title: `Sign in`,
+                titleTemplate: '%s - AcadaApp',
+             }
+        },
         props: {
             errors: Object,
         },

@@ -43,8 +43,4 @@ class Frontend
         return $messages;
     }
 
-    public static function business()
-    {
-        return Request::route('business') ?? optional(Request::user())->business;
-    }
 }

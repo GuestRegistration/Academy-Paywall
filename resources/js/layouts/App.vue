@@ -20,10 +20,10 @@
     </template>
 
     <v-list>
-      <v-list-item-group :color="authenticated ? auth.theme_color : 'primary'">
+      <v-list-item-group >
         <inertia-link :href="item.route"  class="prevent-default" v-for="(item, i) in navItems()"
           :key="i">
-          <v-list-item>
+          <v-list-item :color="authenticated ? auth.theme_color : 'primary'">
           <v-list-item-icon>
             <v-icon v-text="item.icon"></v-icon>
           </v-list-item-icon>
@@ -49,33 +49,19 @@
 
     <v-app-bar 
       app
-      color="primary"
+      :color="authenticated ? auth.theme_color : 'primary'"
       dark
     >
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
        <inertia-link :href="route('home')" class="white--text" style="text-decoration: none">
-        <v-toolbar-title dark>Academia</v-toolbar-title>
+        <v-toolbar-title dark>AcadaApp</v-toolbar-title>
       </inertia-link>
       <v-spacer></v-spacer>
 
-      <v-toolbar
-        dense
-        light
-        v-if="search_active"
-      >
-        <v-text-field
-          hide-details
-          prepend-icon="search"
-          single-line
-          placeholder="Search for courses"
-        ></v-text-field>
-
-      </v-toolbar>
-
-      <v-btn icon ml-1>
-        <v-icon @click="search_active = !search_active">mdi-magnify</v-icon>
-      </v-btn>
-
+      <inertia-link :href="route('account.show', {account: auth.username})" class="prevent-default mx-1">
+         <avatar v-if="authenticated" :src="auth.avatar" :color="auth.theme_color" size="40" />
+      </inertia-link>
+      
       <inertia-link  v-if="!authenticated" :href="route('signin')">
         <v-btn dark color="primary">Sign in</v-btn>
       </inertia-link>
@@ -91,7 +77,7 @@
 
     <v-footer app>
       <v-spacer></v-spacer>
-      <small>Need help ? <a href="#">support@academypaywall.com</a></small>
+      <small>Need help ? <a href="mailto: support@acadaapp.com">support@acadaapp.com</a></small>
     </v-footer>
   </v-app>
 

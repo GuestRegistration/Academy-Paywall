@@ -23,6 +23,14 @@
     export default {
         name: "AccountShow",
         layout: (h, page) => h(AccountLayout, [page]),
+        metaInfo()
+         {
+             return{
+                title: `${this.account.name} ${this.account.at_username}`,
+                titleTemplate: '%s - AcadaApp',
+             }
+        },
+
         components: { CourseCard },
         props: {
             account: Object,

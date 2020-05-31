@@ -17,18 +17,16 @@
         ></v-img>
       </template>
       <v-btn @click="$inertia.visit(route('home'))" icon>
-        <v-icon>keyboard_backspace</v-icon>
+        <v-icon>home</v-icon>
       </v-btn>
       
-      <v-toolbar-title >
-        <avatar :src="account.avatar" :color="account.theme_color" size="30" /> {{ account.name }}
+      <v-toolbar-title dark >
+        <inertia-link :href="route('account.show', {account: account.username})" class="prevent-default" style="color: #fff">
+          <avatar :src="account.avatar" :color="account.theme_color" size="30" /> {{ account.name }}
+        </inertia-link>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
-
-      <v-btn icon v-if="!route().current('account.show')" @click="$inertia.visit(route('account.show', {account: account.username}))">
-          <v-icon>home</v-icon>
-      </v-btn>
 
       <v-menu v-if="isMyAccount" origin="center center"  transition="scale-transition">
         <template v-slot:activator="{ on }">
@@ -37,16 +35,25 @@
           </v-btn>
         </template>
         <v-list>
-          <v-list-item>
-              <inertia-link :href="route('account.edit', {account: account.username})" class="prevent-default">
-                  <v-list-item-title><v-icon>edit</v-icon> Edit </v-list-item-title>
-              </inertia-link>
+
+          <v-list-item @click="$inertia.visit(route('account.edit', {account: account.username}))">
+            <v-list-item-icon>
+              <v-icon>edit</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>Edit account</v-list-item-title>
+            </v-list-item-content>
           </v-list-item>
-          <v-list-item>
-              <inertia-link :href="route('account.course.create', {account: account.username})" class="prevent-default">
-                <v-list-item-title><v-icon>add</v-icon> Add course </v-list-item-title>
-              </inertia-link>
+
+          <v-list-item @click="$inertia.visit(route('account.course.create', {account: account.username}))">
+            <v-list-item-icon>
+              <v-icon>add</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>Add new course</v-list-item-title>
+            </v-list-item-content>
           </v-list-item>
+
         </v-list>
       </v-menu>
 

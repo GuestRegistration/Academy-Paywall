@@ -32,6 +32,13 @@
     export default {
         name: "CourseCreate",
         layout: (h, page) => h(AccountLayout, [page]),
+         metaInfo()
+         {
+             return{
+                title: `New course ${this.account.at_username}`,
+                titleTemplate: '%s - AcadaApp',
+             }
+        },
         data(){
             return {
                 loading: false,

@@ -1,10 +1,8 @@
 <template>
-  <v-card
-    max-width="344"
-    class="mx-auto"
+  <v-card max-width="344" class="mx-auto"
   >
     <v-list-item>
-      <avatar :src="course.account.avatar" color="primary" size="50"  class="mr-2" />
+      <avatar :src="course.account.avatar" :color="course.account.theme_color" size="50"  class="mr-2" />
       <v-list-item-content>
         <v-list-item-title class="headline">{{ course.title }}</v-list-item-title>
         <v-list-item-subtitle>by {{ course.account.name }} {{ course.account.at_username }}</v-list-item-subtitle>
