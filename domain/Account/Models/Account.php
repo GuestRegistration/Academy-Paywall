@@ -47,7 +47,7 @@ class Account extends Model
     }
 
     public function getCoverImageAttribute($value){
-        return $value ?? asset('storage/account/covers/default.jpg');
+        return $value ?? asset('images/default-account-cover.jpg');
     }
 
     public function user(){

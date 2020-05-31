@@ -27,9 +27,7 @@ class Course extends Model
     }
 
     public function getCoverImageAttribute($value){
-        if(!$value) return asset('storage/course/default.jpg');
-
-        return asset($value);
+        return $value ?? asset('images/default-course-cover.jpg');
     }
 
     public function getIsPublishedAttribute(){
