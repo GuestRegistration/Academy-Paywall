@@ -24,7 +24,7 @@ class Frontend
                 ];
             },
             'auth' => function () {
-                return Request::user();
+                return optional(Request::user())->load('account');
             },
         ]);
     }

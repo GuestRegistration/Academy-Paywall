@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h4>Recent courses</h4>
         <courses-widget />
     </div>
 </template>

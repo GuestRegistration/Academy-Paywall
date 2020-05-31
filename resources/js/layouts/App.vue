@@ -6,25 +6,22 @@
       v-model="drawer"
       >
 
-    <template v-if="authenticated" v-slot:prepend>
+    <template v-if="authenticated && auth.profile_complete" v-slot:prepend>
           <v-list-item>
             <v-list-item-avatar>
-              <v-avatar color="primary">
-                <span class="white--text headline" v-if="auth.initials"> {{ auth.initials }} </span>
-                <v-icon color="white" v-else>account_circle</v-icon>
-              </v-avatar>
+              <avatar :src="auth.avatar" :color="auth.theme_color" />
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title v-html="auth.name"></v-list-item-title>
-              <v-list-item-subtitle v-html="auth.email"></v-list-item-subtitle>
+              <v-list-item-subtitle v-html="auth.at_username"></v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
           <hr>
     </template>
 
     <v-list>
-      <v-list-item-group color="primary">
-        <inertia-link :href="route(item.route)"  class="prevent-default" v-for="(item, i) in navItems()"
+      <v-list-item-group :color="authenticated ? auth.theme_color : 'primary'">
+        <inertia-link :href="item.route"  class="prevent-default" v-for="(item, i) in navItems()"
           :key="i">
           <v-list-item>
           <v-list-item-icon>
@@ -119,36 +116,36 @@
 
         methods:{
           navItems(){
-            if(this.authenticated){
+            if(this.authenticated  && this.auth.profile_complete){
               return [{
-                          route: 'home',
+                          route: this.route('home'),
                           title: 'Home',
                           icon: 'home',
                         },
                         {
-                          route: 'account.show',
+                          route: this.route('account.show', {account: this.auth.username}),
                           title: 'Account',
                           icon: 'account_circle',
                         },
                         {
-                          route: 'account.courses',
-                          title: 'Courses',
-                          icon: 'library_books',
+                          route: this.route('account.course.create', {account: this.auth.username}),
+                          title: 'New course',
+                          icon: 'add_circle',
                         },
                         {
-                          route: 'home',
+                          route: this.route('home'),
                           title: 'Payment',
                           icon: 'local_atm',
                         },
                       ]
             }else{
               return [{
-                          route: 'home',
+                          route: this.route('home'),
                           title: 'Home',
                           icon: 'home',
                         },
                         {
-                          route: 'course.list',
+                          route: this.route('course.list'),
                           title: 'Courses',
                           icon: 'library_books',
                         },

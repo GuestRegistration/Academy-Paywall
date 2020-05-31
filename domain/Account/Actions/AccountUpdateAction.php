@@ -2,8 +2,8 @@
 
 namespace Domain\Account\Actions;
 
+use Domain\Account\Models\Account;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Domain\Account\Requests\AccountUpdateRequest;
 
 class AccountUpdateAction extends Controller
@@ -15,14 +15,11 @@ class AccountUpdateAction extends Controller
     }
 
 
-    public function __invoke(AccountUpdateRequest $request)
+    public function __invoke(AccountUpdateRequest $request, Account $account)
     {
-        $account = Auth::user();
-        $account->update($request->only([
-            'first_name', 'last_name', 'email', 'phone'
-        ]));
+        $account->update($request->data());
 
-        return redirect()->back()->with('success', 'Account updated');
+        return redirect()->route('account.edit', $account->username)->with('success', 'Account updated');
     }
 
 }

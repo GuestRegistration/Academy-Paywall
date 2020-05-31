@@ -15,15 +15,16 @@ class CreateCoursesTable extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('user_id');
+            $table->uuid('account_id');
             $table->string('title');
             $table->mediumText('description');
             $table->integer('price');
             $table->text('cover_image')->nullable();
+            $table->string('slug');
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
             
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('account_id')->references('id')->on('accounts');
         });
     }
 

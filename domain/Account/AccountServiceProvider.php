@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 
 class AccountServiceProvider extends ServiceProvider
 {
-    public const PREFIX = 'account';
+    public const PREFIX = '@{account:username}';
 
     /**
      * Register services.

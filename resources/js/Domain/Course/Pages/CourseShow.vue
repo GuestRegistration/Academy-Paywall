@@ -1,42 +1,46 @@
 <template>
-    <v-container>
-        <v-row justify="center" align="center">
-           
-        </v-row>
-    </v-container>
+    <div>
+        <h4>{{course.title}}</h4>
+        <v-img :src="course.cover_image" ></v-img>
+        <v-divider></v-divider>
+        <div class="d-flex">
+            <div>
+                <h1>{{ course.price | money }}</h1>
+            </div>
+            <div class="ml-auto">
+                <v-btn dark large :color="account.theme_color">
+                    Enroll Now <v-icon>arrow_forward</v-icon>
+                </v-btn>
+            </div>
+        </div>
+        <v-divider></v-divider>
+        <div>
+            {{course.description}}
+        </div>
+
+        <v-btn fixed dark fab bottom right large :color="account.theme_color" :title="`Enroll for ${course.title}`">
+                <v-icon>arrow_forward</v-icon>
+        </v-btn>
+    </div>
+    
 </template>
 
 <script>
-    import App from '@/layouts/App';
+    import {mapGetters} from "vuex";
+    import AccountLayout from '@/Domain/Account/Layout';
 
     export default {
-        name: "AccountShow",
-        layout: (h, page) => h(App, [page]),
-        data(){
-            return {
-                loading: false,
-                form: {},
-            }
-        },
+        name: "CourseShow",
+        layout: (h, page) => h(AccountLayout, [page]),
         props: {
-            account: Object
+            account: Object,
+            course: Object
         },
         computed: {
-            errors(){
-                return this.$page.errors;
-            },
+            ...mapGetters([
+                'auth', 'authenticated', 'isMyAccount', 'isOnMyAccount'
+            ]),
         },
 
-        methods: {
-           async submit(){
-               this.loading = true;
-               await this.$inertia.put(this.route('account.update'), this.form);
-               this.loading = false;
-            }
-        },
-
-        mounted(){
-            this.form = this.account;
-        }
     }
 </script>

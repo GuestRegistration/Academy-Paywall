@@ -1,8 +1,15 @@
  <template>
     <div>
         <v-container mb-2>
-            <template v-for="(file, i) in files">
-                <v-img v-if="file.type == 'image'" :src="file.src" aspect-ratio="1.7" :key="i"></v-img>
+            <template v-if="!fileSelected && src">
+                <avatar v-if="isAvatar" :src="src" :color="$attrs.color" size="100" />
+                <v-img v-else :src="src" aspect-ratio="1.7"></v-img>
+            </template>
+            <template v-else v-for="(file, i) in files">
+                <template  v-if="file.type == 'image'">
+                    <avatar v-if="isAvatar" :src="file.src" size="100" :key="i" />
+                    <v-img v-else :src="file.src" aspect-ratio="1.7" :key="i"></v-img>
+                </template>
             </template>
         </v-container>
          
@@ -38,6 +45,7 @@
     data(){
         return {
             files: [],
+            fileSelected: false,
         }
     },
     props: {
@@ -46,6 +54,11 @@
         rule: String,
         appendIcon: String,
         prependIcon: String,
+        src: String,
+        isAvatar: {
+            type: Boolean,
+            default: () => false,
+        }
     },
     computed: {
         errorString() {
@@ -58,9 +71,15 @@
 
     methods:{
          getFiles(files){
+            if(!files){
+                 this.fileSelected = false;
+                 this.$emit('change', files);
+                 return;
+             }
             this.files = [];
             files = files instanceof Array ? files : [files];
-            
+            this.fileSelected = true;
+
             files.forEach(file => {
                 const imageRegex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.png)$/;
                 let type = 'unknown'

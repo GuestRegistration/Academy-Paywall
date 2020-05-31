@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Domain\Auth\Events\Authenticated;
 use Domain\Auth\Requests\SignInRequest;
 
 class SigninAction extends Controller
@@ -31,17 +32,8 @@ class SigninAction extends Controller
 
         Auth::login($user, true);
 
-        return $this->authenticated($user);
-    }
+        event(new Authenticated($user));
 
-    /**
-     * @param User $user
-     */
-    protected function authenticated(User $user)
-    {
-        $user->last_login_at = now();
-        $user->save();
-        return $user->profile_complete ? redirect()->route('home') : redirect()->route('account.show')->with('info', 'Kindly, complete your profile');
+        return redirect()->route('home');
     }
-
 }

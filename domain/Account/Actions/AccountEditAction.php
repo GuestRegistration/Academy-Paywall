@@ -6,18 +6,18 @@ use Inertia\Inertia;
 use Domain\Account\Models\Account;
 use App\Http\Controllers\Controller;
 
-class AccountShowAction extends Controller
+class AccountEditAction extends Controller
 {
 
     public function __construct()
     {
-
+        $this->middleware('auth');
     }
+
 
     public function __invoke(Account $account)
     {
-        $courses = $account->courses()->latest()->paginate();
-        return Inertia::render('Domain/Account/Pages/AccountShow', compact('account', 'courses'));
+        return Inertia::render('Domain/Account/Pages/AccountEdit', compact('account'));
     }
 
 }

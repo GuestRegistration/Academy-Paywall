@@ -22,7 +22,6 @@
                                 </form>
                             </v-card-text>
                         </v-card>
-                       
                     </div>
                 </div> <!-- / .row -->
             </div>

@@ -3,6 +3,8 @@
 namespace Domain\Course\Requests;
 
 use App\Classes\FileUpload;
+use Illuminate\Support\Str;
+use Domain\Course\Models\Course;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CourseSaveRequest extends FormRequest
@@ -35,9 +37,10 @@ class CourseSaveRequest extends FormRequest
     public function data()
     {
         return $this->merge([
-            'user_id' => $this->user()->id,
+            'account_id' => $this->user()->account->id,
         ])->only('title', 'description', 'price', 'user_id') + [
             'cover_image' => FileUpload::storeFile($this, 'cover_image', 'course'),
+            'slug' => Str::slug(str_replace([' ',',','_','&'],' ',$this->title.' '.(Course::count()+1)))
         ];
     }
 }
