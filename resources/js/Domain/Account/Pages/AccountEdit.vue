@@ -23,7 +23,22 @@
                 </v-col>
             </v-row>
 
-            
+            <v-row>
+                <v-col cols="12">
+                    <h4>Header</h4>
+                    <v-switch v-model="form.show_caption" label="Use headline caption" ></v-switch>
+                    <v-divider></v-divider>
+                    <v-row v-if="form.show_caption">
+                        <v-col cols="12" md="6">
+                            <x-textarea :errors="errors" name="caption" v-model="form.caption" label="Headline caption" />
+                        </v-col>
+                        <v-col>
+                            <x-textarea :errors="errors" name="subcaption" v-model="form.subcaption" label="Headline subcaption" />
+                        </v-col>
+                    </v-row>
+                </v-col>
+            </v-row>
+
             <v-row>
                 <v-col cols="12">
                     <h4>Appearance</h4>

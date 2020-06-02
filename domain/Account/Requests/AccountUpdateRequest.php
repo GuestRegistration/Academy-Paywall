@@ -30,6 +30,8 @@ class AccountUpdateRequest extends FormRequest
             'email' => ['required', 'email', 'string', Rule::unique('accounts')->ignore(optional($this->user()->account)->id)],
             'phone' => ['required', Rule::unique('accounts')->ignore(optional($this->user()->account)->id)],
             'username' => ['required', Rule::unique('accounts')->ignore(optional($this->user()->account)->id)],
+            'caption' => [Rule::requiredIf((Bool) $this->show_caption == true ), 'max: 50'],
+            'subcaption' => [Rule::requiredIf((Bool) $this->show_caption == true ), 'max: 150'],
             // 'facebook_url' => ['url'],
             // 'instagram_url' => ['url'],
             // 'twitter_url' => ['url'],
@@ -41,9 +43,10 @@ class AccountUpdateRequest extends FormRequest
 
     public function data(){
         return $this->only([
-            'name', 'email', 'phone', 'username', 'bio', 'theme_color',
+            'name', 'email', 'phone', 'username', 'bio', 'theme_color', 'caption', 'subcaption',
             'facebook_url', 'instagram_url', 'twitter_url', 'linkedin_url', 'youtube_url', 'website',
         ]) + [
+            'show_caption' => (Bool) $this->show_caption,
             'avatar' => FileUpload::storeFile($this, 'avatar', 'account/avatar'),
             'cover_image' => FileUpload::storeFile($this, 'cover_image', 'account/covers'),
         ];

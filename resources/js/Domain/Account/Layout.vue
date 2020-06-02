@@ -63,8 +63,8 @@
     
     <div id="scrolling-techniques-5"  class="overflow-y-auto" style="max-height: 100vh;">
         <v-parallax height="200" :src="account.cover_image" :color="account.theme_color">
-            <v-container style="background-color: rgba(0,0,0, .2)">
-                <div class="d-flex align-center">
+            <div class="p-3" style="background-color: rgba(0,0,0, .2)">
+                <div v-if="!account.show_caption" class="d-flex align-center justify-content-center mb-2">
                     <div class="mr-2">
                         <avatar :src="account.avatar" :color="account.theme_color" size="100" />
                     </div>
@@ -75,10 +75,14 @@
                         </div>
                     </div>
                 </div>
+                <div v-else class="text-center mb-2">
+                    <h1>{{account.caption}}</h1>
+                    <h4>{{account.subcaption}}</h4>
+                </div>
                 <template v-if="courses">
                   <courses-quick-enroll :account="account" :courses="courses" />
                 </template>
-            </v-container>
+            </div>
         </v-parallax>
         <v-container style="min-height: 100vh" fluid>
             <v-row>

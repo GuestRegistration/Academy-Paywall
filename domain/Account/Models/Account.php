@@ -19,7 +19,8 @@ class Account extends Model
     protected $fillable = [
         'name', 'email', 'phone', 'username', 'bio',
         'facebook_url', 'twitter_url', 'instagram_url', 'linkedin_url', 
-        'youtube_url', 'website', 'avatar', 'cover_image', 'theme_color'
+        'youtube_url', 'website', 'avatar', 'cover_image', 'theme_color',
+        'caption', 'subcaption', 'show_caption'
     ];
 
     protected $essentials = [

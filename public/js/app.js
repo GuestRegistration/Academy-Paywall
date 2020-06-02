@@ -92965,180 +92965,180 @@ var map = {
 	"./Domain/Account/Components/Avatar": [
 		"./resources/js/Domain/Account/Components/Avatar.vue",
 		9,
-		5
+		6
 	],
 	"./Domain/Account/Components/Avatar.vue": [
 		"./resources/js/Domain/Account/Components/Avatar.vue",
 		9,
-		5
+		6
 	],
 	"./Domain/Account/Components/CoursesQuickEnroll": [
 		"./resources/js/Domain/Account/Components/CoursesQuickEnroll.vue",
 		9,
-		9
+		1
 	],
 	"./Domain/Account/Components/CoursesQuickEnroll.vue": [
 		"./resources/js/Domain/Account/Components/CoursesQuickEnroll.vue",
 		9,
-		9
+		1
 	],
 	"./Domain/Account/Layout": [
 		"./resources/js/Domain/Account/Layout.vue",
 		9,
-		9,
-		4
+		1,
+		18
 	],
 	"./Domain/Account/Layout.vue": [
 		"./resources/js/Domain/Account/Layout.vue",
 		9,
-		9,
-		4
+		1,
+		18
 	],
 	"./Domain/Account/Pages/AccountEdit": [
 		"./resources/js/Domain/Account/Pages/AccountEdit.vue",
 		9,
 		0,
-		2,
-		6
+		3,
+		7
 	],
 	"./Domain/Account/Pages/AccountEdit.vue": [
 		"./resources/js/Domain/Account/Pages/AccountEdit.vue",
 		9,
 		0,
-		2,
-		6
+		3,
+		7
 	],
 	"./Domain/Account/Pages/AccountShow": [
 		"./resources/js/Domain/Account/Pages/AccountShow.vue",
 		9,
-		9,
-		4,
-		16
+		1,
+		18,
+		8
 	],
 	"./Domain/Account/Pages/AccountShow.vue": [
 		"./resources/js/Domain/Account/Pages/AccountShow.vue",
 		9,
-		9,
-		4,
-		16
+		1,
+		18,
+		8
 	],
 	"./Domain/Auth/SignIn": [
 		"./resources/js/Domain/Auth/SignIn.vue",
 		9,
 		0,
-		7
+		9
 	],
 	"./Domain/Auth/SignIn.vue": [
 		"./resources/js/Domain/Auth/SignIn.vue",
 		9,
 		0,
-		7
+		9
 	],
 	"./Domain/Course/Components/CourseCard": [
 		"./resources/js/Domain/Course/Components/CourseCard.vue",
 		9,
-		8
+		10
 	],
 	"./Domain/Course/Components/CourseCard.vue": [
 		"./resources/js/Domain/Course/Components/CourseCard.vue",
 		9,
-		8
+		10
 	],
 	"./Domain/Course/Components/CoursesWidget": [
 		"./resources/js/Domain/Course/Components/CoursesWidget.vue",
 		9,
-		3
+		4
 	],
 	"./Domain/Course/Components/CoursesWidget.vue": [
 		"./resources/js/Domain/Course/Components/CoursesWidget.vue",
 		9,
-		3
+		4
 	],
 	"./Domain/Course/Layout": [
 		"./resources/js/Domain/Course/Layout.vue",
 		9,
-		13
+		15
 	],
 	"./Domain/Course/Layout.vue": [
 		"./resources/js/Domain/Course/Layout.vue",
 		9,
-		13
+		15
 	],
 	"./Domain/Course/Pages/CourseCreate": [
 		"./resources/js/Domain/Course/Pages/CourseCreate.vue",
 		9,
 		0,
-		9,
-		4,
-		18
+		1,
+		18,
+		11
 	],
 	"./Domain/Course/Pages/CourseCreate.vue": [
 		"./resources/js/Domain/Course/Pages/CourseCreate.vue",
 		9,
 		0,
-		9,
-		4,
-		18
+		1,
+		18,
+		11
 	],
 	"./Domain/Course/Pages/CourseEnroll": [
 		"./resources/js/Domain/Course/Pages/CourseEnroll.vue",
 		9,
 		0,
-		9,
-		4,
-		17
+		1,
+		18,
+		5
 	],
 	"./Domain/Course/Pages/CourseEnroll.vue": [
 		"./resources/js/Domain/Course/Pages/CourseEnroll.vue",
 		9,
 		0,
-		9,
-		4,
-		17
+		1,
+		18,
+		5
 	],
 	"./Domain/Course/Pages/CourseShow": [
 		"./resources/js/Domain/Course/Pages/CourseShow.vue",
 		9,
-		9,
-		4,
-		15
+		1,
+		18,
+		12
 	],
 	"./Domain/Course/Pages/CourseShow.vue": [
 		"./resources/js/Domain/Course/Pages/CourseShow.vue",
 		9,
-		9,
-		4,
-		15
+		1,
+		18,
+		12
 	],
 	"./Pages/Home": [
 		"./resources/js/Pages/Home.vue",
 		9,
 		0,
-		2,
 		3,
-		11
+		4,
+		13
 	],
 	"./Pages/Home.vue": [
 		"./resources/js/Pages/Home.vue",
 		9,
 		0,
-		2,
 		3,
-		11
+		4,
+		13
 	],
 	"./Pages/Sample": [
 		"./resources/js/Pages/Sample.vue",
 		9,
 		0,
-		2,
-		12
+		3,
+		14
 	],
 	"./Pages/Sample.vue": [
 		"./resources/js/Pages/Sample.vue",
 		9,
 		0,
-		2,
-		12
+		3,
+		14
 	],
 	"./app": [
 		"./resources/js/app.js",
@@ -93216,13 +93216,13 @@ var map = {
 		"./resources/js/layouts/App.vue",
 		9,
 		0,
-		2
+		3
 	],
 	"./layouts/App.vue": [
 		"./resources/js/layouts/App.vue",
 		9,
 		0,
-		2
+		3
 	],
 	"./store": [
 		"./resources/js/store/index.js",
