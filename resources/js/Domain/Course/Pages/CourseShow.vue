@@ -2,6 +2,9 @@
     <div>
         <h4>{{course.title}}</h4>
         <v-img :src="course.cover_image" ></v-img>
+        <div class="tex-muted mt-3">
+            <v-icon :color="account.theme_color">date_range</v-icon> {{course.start_date}} - {{course.end_date}}
+        </div>
         <v-divider></v-divider>
         <div class="d-flex">
             <div>
@@ -11,13 +14,42 @@
                 <v-btn dark large :color="account.theme_color">
                     Enroll Now <v-icon>arrow_forward</v-icon>
                 </v-btn>
+
+                <v-menu v-if="isOnMyAccount(course)" origin="center center"  transition="scale-transition">
+                    <template v-slot:activator="{ on }">
+                        <v-btn icon v-on="on">
+                            <v-icon>mdi-dots-vertical</v-icon>
+                        </v-btn>
+                    </template>
+                    <v-list>
+
+                        <v-list-item @click="$inertia.visit(route('account.course.edit', {account: account.username, course: course.slug}))">
+                            <v-list-item-icon>
+                            <v-icon>edit</v-icon>
+                            </v-list-item-icon>
+                            <v-list-item-content>
+                            <v-list-item-title>Edit course</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+
+                        <v-list-item >
+                            <v-list-item-icon>
+                            <v-icon>delete</v-icon>
+                            </v-list-item-icon>
+                            <v-list-item-content>
+                            <v-list-item-title>Delete</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+
+                    </v-list>
+                </v-menu>
             </div>
         </div>
         <v-divider></v-divider>
         <div>
             {{course.description}}
         </div>
-
+        <slot />
         <v-btn fixed dark fab bottom right large :color="account.theme_color" :title="`Enroll for ${course.title}`" @click="enroll">
             <v-icon>arrow_forward</v-icon>
         </v-btn>
@@ -39,19 +71,21 @@
                 titleTemplate: '%s - AcadaApp',
              }
         },
-        props: {
-            account: Object,
-            course: Object
-        },
         computed: {
             ...mapGetters([
                 'auth', 'authenticated', 'isMyAccount', 'isOnMyAccount'
             ]),
+            account(){
+                return this.$page.account;
+            },
+            course(){
+                return this.$page.course;
+            }
         },
 
         methods: {
             enroll(){
-                toastr.info("Chill, working on that now");
+                this.$inertia.visit(this.route('account.course.enroll', { account: this.account.username, course: this.course.slug }));
             }
         }
 

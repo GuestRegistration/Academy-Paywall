@@ -18,7 +18,7 @@ class AccountCourseStoreAction extends Controller
 
     public function __invoke(CourseSaveRequest $request, Account $account)
     {
-        $course = $account->courses()->create($request->data());
+        $course = $account->courses()->create($request->storeData());
 
         return redirect()->route('account.show', $account->username)->with('success', $course->title." saved successfully");
     }

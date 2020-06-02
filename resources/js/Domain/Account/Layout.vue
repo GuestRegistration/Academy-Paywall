@@ -30,7 +30,7 @@
          <avatar :src="auth.avatar" :color="auth.theme_color" size="40" />
       </inertia-link>
 
-      <v-menu v-if="isMyAccount" origin="center center"  transition="scale-transition">
+      <v-menu v-if="isMyAccount(account)" origin="center center"  transition="scale-transition">
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on">
             <v-icon>mdi-dots-vertical</v-icon>
@@ -75,6 +75,9 @@
                         </div>
                     </div>
                 </div>
+                <template v-if="courses">
+                  <courses-quick-enroll :account="account" :courses="courses" />
+                </template>
             </v-container>
         </v-parallax>
         <v-container style="min-height: 100vh" fluid>
@@ -160,28 +163,29 @@
 </template>
 
 <script>
-    import {mapState} from "vuex";
+    import {mapGetters} from "vuex";
+    import CoursesQuickEnroll from './Components/CoursesQuickEnroll';
     export default {
         name: 'AccountLayout',
+        components: {
+          CoursesQuickEnroll
+        },
         data(){
           return {
-           
+            courses_dialog: false
           }
         },
         computed:{
-            ...mapState({
-              auth: state => state.auth,
-              authenticated: state => state.authenticated,
-            }),
+            ...mapGetters([
+                'auth', 'authenticated', 'isMyAccount', 'isOnMyAccount'
+            ]),
 
             account(){
                 return this.$page.account;
             },
-
-            isMyAccount(){
-                return this.authenticated && this.auth.id === this.account.id ? true : false;
+            courses(){
+                return this.$page.courses ? this.$page.courses.data : null;
             },
-
             socials(){
               return [
                 {

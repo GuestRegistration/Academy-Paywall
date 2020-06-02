@@ -13,19 +13,28 @@ class Course extends Model
     const MIN_DESCRIPTION_CHARACTER = 120;
     
     protected $fillable = [
-        'account_id', 'title', 'description', 'price', 'cover_image', 'published_at', 'slug'
+        'account_id', 'title', 'description', 'price', 'cover_image', 'published_at', 'slug',
+        'preview_video', 'start_at', 'end_at',
     ];
 
     protected $dates = [
+        'start_at',
+        'end_at',
         'published_at',
     ];
 
     protected $appends = [
-        'is_published', 'published_time', 'snippet'
+        'is_published', 'published_time', 'snippet',
+        'start_date', 'end_date', 'started', 'ended',
+        'raw_dates',
     ];
 
     public function account(){
         return $this->belongsTo(Account::class);
+    }
+
+    public function students(){
+        return $this->hasMany(Student::class);
     }
 
     public function getCoverImageAttribute($value){
@@ -34,6 +43,33 @@ class Course extends Model
 
     public function getIsPublishedAttribute(){
         return !($this->published_at == null);
+    }
+
+    public function getStartDateAttribute(){
+        return optional($this->start_at)->format('F d, Y');
+    }
+
+    public function getRawDatesAttribute(){
+        return [
+            'start' =>  optional($this->start_at)->format('Y-m-d'),
+            'end' =>  optional($this->end_at)->format('Y-m-d'),
+        ];
+    }
+
+    public function getEndDateAttribute(){
+        return optional($this->end_at)->format('F d, Y');
+    }
+
+    public function getStartedAttribute(){
+        return $this->start_at < now() ;
+    }
+
+    public function getEndedAttribute(){
+        return $this->end_at < now() ;
+    }
+
+    public function getOngoingAttribute(){
+        return ($this->started && !$this->ended);
     }
 
     public function getPublishedTimeAttribute(){
