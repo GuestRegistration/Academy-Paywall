@@ -140,7 +140,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           title: 'New course',
           icon: 'add_circle'
         }, {
-          route: this.route('home'),
+          route: this.route('account.payment.gateway', {
+            account: this.auth.username
+          }),
           title: 'Payment',
           icon: 'local_atm'
         }];

@@ -18,11 +18,11 @@ class AccountCourseRegisterAction extends Controller
 
     public function __invoke(CourseRegisterRequest $request, Account $account, Course $course)
     {
-        dd($request->data());
+        if(!$request->get('for_real')) return true;
         
-        $course->students()->create($request->data());
+        $student = $course->students()->create($request->data());
 
-        return redirect()->back()->with('success', "Enrollment successful");
+        return $request->get('raw') ? response($student) : redirect()->back()->with('success', "Enrollment successful");
     }
 
 }

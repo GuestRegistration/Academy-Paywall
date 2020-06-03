@@ -58,4 +58,8 @@ class Account extends Model
     public function courses(){
         return $this->hasMany(Course::class);
     }
+
+    public function paymentGateways(){
+        return $this->hasMany(PaymentGateway::class);
+    }
 }

@@ -92986,13 +92986,13 @@ var map = {
 		"./resources/js/Domain/Account/Layout.vue",
 		9,
 		1,
-		18
+		2
 	],
 	"./Domain/Account/Layout.vue": [
 		"./resources/js/Domain/Account/Layout.vue",
 		9,
 		1,
-		18
+		2
 	],
 	"./Domain/Account/Pages/AccountEdit": [
 		"./resources/js/Domain/Account/Pages/AccountEdit.vue",
@@ -93008,41 +93008,55 @@ var map = {
 		3,
 		7
 	],
+	"./Domain/Account/Pages/AccountPayment": [
+		"./resources/js/Domain/Account/Pages/AccountPayment.vue",
+		9,
+		0,
+		3,
+		8
+	],
+	"./Domain/Account/Pages/AccountPayment.vue": [
+		"./resources/js/Domain/Account/Pages/AccountPayment.vue",
+		9,
+		0,
+		3,
+		8
+	],
 	"./Domain/Account/Pages/AccountShow": [
 		"./resources/js/Domain/Account/Pages/AccountShow.vue",
 		9,
 		1,
-		18,
-		8
+		2,
+		9
 	],
 	"./Domain/Account/Pages/AccountShow.vue": [
 		"./resources/js/Domain/Account/Pages/AccountShow.vue",
 		9,
 		1,
-		18,
-		8
+		2,
+		9
 	],
 	"./Domain/Auth/SignIn": [
 		"./resources/js/Domain/Auth/SignIn.vue",
 		9,
 		0,
-		9
+		10
 	],
 	"./Domain/Auth/SignIn.vue": [
 		"./resources/js/Domain/Auth/SignIn.vue",
 		9,
 		0,
-		9
+		10
 	],
 	"./Domain/Course/Components/CourseCard": [
 		"./resources/js/Domain/Course/Components/CourseCard.vue",
 		9,
-		10
+		11
 	],
 	"./Domain/Course/Components/CourseCard.vue": [
 		"./resources/js/Domain/Course/Components/CourseCard.vue",
 		9,
-		10
+		11
 	],
 	"./Domain/Course/Components/CoursesWidget": [
 		"./resources/js/Domain/Course/Components/CoursesWidget.vue",
@@ -93054,61 +93068,79 @@ var map = {
 		9,
 		4
 	],
+	"./Domain/Course/Components/PaymentGateways": [
+		"./resources/js/Domain/Course/Components/PaymentGateways.vue",
+		9,
+		12
+	],
+	"./Domain/Course/Components/PaymentGateways.vue": [
+		"./resources/js/Domain/Course/Components/PaymentGateways.vue",
+		9,
+		12
+	],
+	"./Domain/Course/Components/StudentEnrollment": [
+		"./resources/js/Domain/Course/Components/StudentEnrollment.vue",
+		9,
+		13
+	],
+	"./Domain/Course/Components/StudentEnrollment.vue": [
+		"./resources/js/Domain/Course/Components/StudentEnrollment.vue",
+		9,
+		13
+	],
 	"./Domain/Course/Layout": [
 		"./resources/js/Domain/Course/Layout.vue",
 		9,
-		15
+		18
 	],
 	"./Domain/Course/Layout.vue": [
 		"./resources/js/Domain/Course/Layout.vue",
 		9,
-		15
+		18
 	],
 	"./Domain/Course/Pages/CourseCreate": [
 		"./resources/js/Domain/Course/Pages/CourseCreate.vue",
 		9,
 		0,
 		1,
-		18,
-		11
+		2,
+		14
 	],
 	"./Domain/Course/Pages/CourseCreate.vue": [
 		"./resources/js/Domain/Course/Pages/CourseCreate.vue",
 		9,
 		0,
 		1,
-		18,
-		11
+		2,
+		14
 	],
 	"./Domain/Course/Pages/CourseEnroll": [
 		"./resources/js/Domain/Course/Pages/CourseEnroll.vue",
 		9,
-		0,
 		1,
-		18,
+		2,
 		5
 	],
 	"./Domain/Course/Pages/CourseEnroll.vue": [
 		"./resources/js/Domain/Course/Pages/CourseEnroll.vue",
 		9,
-		0,
 		1,
-		18,
+		2,
 		5
 	],
 	"./Domain/Course/Pages/CourseShow": [
 		"./resources/js/Domain/Course/Pages/CourseShow.vue",
 		9,
 		1,
-		18,
-		12
+		2,
+		15
 	],
 	"./Domain/Course/Pages/CourseShow.vue": [
 		"./resources/js/Domain/Course/Pages/CourseShow.vue",
 		9,
 		1,
-		18,
-		12
+		2,
+		15
 	],
 	"./Pages/Home": [
 		"./resources/js/Pages/Home.vue",
@@ -93116,7 +93148,7 @@ var map = {
 		0,
 		3,
 		4,
-		13
+		16
 	],
 	"./Pages/Home.vue": [
 		"./resources/js/Pages/Home.vue",
@@ -93124,21 +93156,21 @@ var map = {
 		0,
 		3,
 		4,
-		13
+		16
 	],
 	"./Pages/Sample": [
 		"./resources/js/Pages/Sample.vue",
 		9,
 		0,
 		3,
-		14
+		17
 	],
 	"./Pages/Sample.vue": [
 		"./resources/js/Pages/Sample.vue",
 		9,
 		0,
 		3,
-		14
+		17
 	],
 	"./app": [
 		"./resources/js/app.js",
@@ -93443,6 +93475,13 @@ try {
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+var token = document.head.querySelector('meta[name="csrf-token"]');
+
+if (token) {
+  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+} else {
+  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+}
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

@@ -77,6 +77,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "CoursesQuickEnroll",
@@ -399,6 +400,12 @@ var render = function() {
                                                 attrs: { "max-width": "344" }
                                               },
                                               [
+                                                _c("h4", [
+                                                  _vm._v(
+                                                    _vm._s(_vm.course.title)
+                                                  )
+                                                ]),
+                                                _vm._v(" "),
                                                 _c("v-img", {
                                                   attrs: {
                                                     src: _vm.course.cover_image,
@@ -421,7 +428,8 @@ var render = function() {
                                                     _c(
                                                       "div",
                                                       {
-                                                        staticClass: "tex-muted"
+                                                        staticClass:
+                                                          "text-muted"
                                                       },
                                                       [
                                                         _c(

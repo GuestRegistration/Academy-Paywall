@@ -18,7 +18,10 @@ class AccountCourseEnrollAction extends Controller
 
     public function __invoke(Account $account, Course $course)
     {
-        return Inertia::render('Domain/Course/Pages/CourseEnroll', compact('account', 'course'));
+       $payment_gateways =  $account->paymentGateways()
+                            ->where('active', true)->get();
+
+        return Inertia::render('Domain/Course/Pages/CourseEnroll', compact('account', 'course', 'payment_gateways'));
     }
 
 }

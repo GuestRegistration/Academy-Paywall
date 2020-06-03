@@ -113,7 +113,7 @@
                           icon: 'add_circle',
                         },
                         {
-                          route: this.route('home'),
+                          route: this.route('account.payment.gateway', {account: this.auth.username}),
                           title: 'Payment',
                           icon: 'local_atm',
                         },

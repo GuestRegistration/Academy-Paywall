@@ -34,11 +34,12 @@
                             </v-col>
                             <v-col v-if="course !== null" cols="6" style="max-height: 500px">
                                   <v-card max-width="344" class="mx-auto" >
+                                      <h4>{{ course.title }}</h4>
                                     <v-img :src="course.cover_image" height="194"></v-img>
                                     <v-card-text>
                                         {{ course.snippet }}
                                         <v-divider></v-divider>
-                                    <div class="tex-muted">
+                                    <div class="text-muted">
                                         <v-icon :color="account.theme_color">date_range</v-icon> {{course.start_date}} - {{course.end_date}}
                                     </div>
                                     </v-card-text>
