@@ -15,7 +15,7 @@
                 <template v-else>
                     <v-container fluid>
                         <v-row>
-                            <v-col :cols="`${course !== null ? '6' : '12'}`">
+                            <v-col cols="12" :md="`${course !== null ? '6' : '12'}`">
                                 <v-list flat>
                                     <v-list-item-group v-model="course_index" :color="account.theme_color">
                                         <v-list-item
@@ -32,7 +32,7 @@
                                     </v-list-item-group>
                                 </v-list>
                             </v-col>
-                            <v-col v-if="course !== null" cols="6" style="max-height: 500px">
+                            <v-col v-if="course !== null" cols="12" md="6" style="max-height: 500px">
                                   <v-card max-width="344" class="mx-auto" >
                                       <h4>{{ course.title }}</h4>
                                     <v-img :src="course.cover_image" height="194"></v-img>

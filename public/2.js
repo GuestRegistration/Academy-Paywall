@@ -298,7 +298,8 @@ var render = function() {
                                       "v-col",
                                       {
                                         attrs: {
-                                          cols:
+                                          cols: "12",
+                                          md:
                                             "" +
                                             (_vm.course !== null ? "6" : "12")
                                         }
@@ -378,7 +379,7 @@ var render = function() {
                                             staticStyle: {
                                               "max-height": "500px"
                                             },
-                                            attrs: { cols: "6" }
+                                            attrs: { cols: "12", md: "6" }
                                           },
                                           [
                                             _c(
