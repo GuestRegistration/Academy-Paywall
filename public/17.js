@@ -172,7 +172,7 @@ var render = function() {
     { attrs: { justify: "center" } },
     [
       _c(
-        "v-cols",
+        "v-col",
         { attrs: { cols: "12", md: "8", lg: "6" } },
         [
           _c(

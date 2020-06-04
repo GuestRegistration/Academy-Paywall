@@ -1,6 +1,6 @@
 <template>
     <v-row justify="center">
-        <v-cols cols="12" md="8" lg="6">
+        <v-col cols="12" md="8" lg="6">
             <v-card :loading="loading" outlined pa-md-2> 
                 <v-card-title> {{ course ? 'Edit course: '+course.title : 'New course' }}</v-card-title>
                 <v-divider></v-divider>
@@ -37,7 +37,7 @@
                     </form>                    
                 </v-card-text>
             </v-card>
-        </v-cols>
+        </v-col>
     </v-row>
 </template>
 
