@@ -49,6 +49,19 @@
               </course-card>
           </v-col>
       </v-row>    
+      <v-btn
+          :color="account.theme_color"
+          dark
+          large
+          fixed
+          bottom
+          right
+          fab
+          title="Create  course"
+          @click="$inertia.visit(route('account.course.create', {account: account.username}))"
+        >
+          <v-icon>mdi-plus</v-icon>
+      </v-btn>
     </div>
 </template>
 

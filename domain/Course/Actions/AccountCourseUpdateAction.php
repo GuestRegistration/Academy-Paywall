@@ -14,6 +14,8 @@ class AccountCourseUpdateAction extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('can:access,course');
+
     }
 
     public function __invoke(CourseSaveRequest $request, Account $account, Course $course)

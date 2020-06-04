@@ -140,21 +140,6 @@
                         </v-list-item-group>
                       </v-list>
                     </v-card>
-                     <template v-if="route().current('account.show') && isMyAccount">
-                      <v-btn
-                        :color="account.theme_color"
-                        dark
-                        large
-                        fixed
-                        bottom
-                        right
-                        fab
-                        title="Create  course"
-                        @click="$inertia.visit(route('account.course.create', {account: account.username}))"
-                      >
-                        <v-icon>mdi-plus</v-icon>
-                      </v-btn>
-                    </template>
                 </v-col>
             </v-row>
         </v-container>

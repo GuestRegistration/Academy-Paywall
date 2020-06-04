@@ -149,6 +149,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -535,7 +548,34 @@ var render = function() {
               )
             }),
             1
-          )
+          ),
+      _vm._v(" "),
+      _c(
+        "v-btn",
+        {
+          attrs: {
+            color: _vm.account.theme_color,
+            dark: "",
+            large: "",
+            fixed: "",
+            bottom: "",
+            right: "",
+            fab: "",
+            title: "Create  course"
+          },
+          on: {
+            click: function($event) {
+              _vm.$inertia.visit(
+                _vm.route("account.course.create", {
+                  account: _vm.account.username
+                })
+              )
+            }
+          }
+        },
+        [_c("v-icon", [_vm._v("mdi-plus")])],
+        1
+      )
     ],
     1
   )
