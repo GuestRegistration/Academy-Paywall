@@ -22,7 +22,7 @@
       </v-card>
     </v-dialog>
 
-    <v-dialog v-model="dialog" persistent max-width="600px">
+    <v-dialog v-model="dialog" scrollable  persistent max-width="600px">
         <form @submit.prevent="submit">
           <v-card>
             <v-card-title>

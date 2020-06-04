@@ -744,7 +744,7 @@ var render = function() {
       _c(
         "v-dialog",
         {
-          attrs: { persistent: "", "max-width": "600px" },
+          attrs: { scrollable: "", persistent: "", "max-width": "600px" },
           model: {
             value: _vm.dialog,
             callback: function($$v) {
