@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Course\Actions;
+namespace Domain\Account\Actions;
 
 use Inertia\Inertia;
 use Domain\Course\Models\Course;
@@ -17,8 +17,9 @@ class AccountCourseListAction extends Controller
 
     public function __invoke(Account $account)
     {
-        $courses = $account->courses()->paginate();
-        return response($courses);
+        $courses = $account->courses()->latest()->get();
+
+        return Inertia::render('Domain/Course/Pages/CourseList', compact('account', 'courses'));
     }
 
 }

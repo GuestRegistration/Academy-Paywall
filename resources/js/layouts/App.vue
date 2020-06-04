@@ -113,9 +113,19 @@
                           icon: 'add_circle',
                         },
                         {
+                          route: this.route('account.course.list', {account: this.auth.username}),
+                          title: 'Courses',
+                          icon: 'library_books',
+                        },
+                        {
                           route: this.route('account.payment.gateway', {account: this.auth.username}),
                           title: 'Payment',
                           icon: 'local_atm',
+                        },
+                        {
+                          route: this.route('account.student.list', {account: this.auth.username}),
+                          title: 'Students',
+                          icon: 'people',
                         },
                       ]
             }else{

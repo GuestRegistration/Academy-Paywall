@@ -25,19 +25,7 @@
       <inertia-link :href="route('account.course.show', {account: course.account.username, course: course.slug})" class="prevent-default">
         <v-btn dark :color="course.account.theme_color" > view course</v-btn>
       </inertia-link>
-      <!-- <v-menu  origin="center center"  transition="scale-transition">
-        <template v-slot:activator="{ on }">
-          <v-btn icon v-on="on">
-            <v-icon>mdi-share-variant</v-icon>
-          </v-btn>
-        </template>
-        <v-list>
-          <v-list-item>
-            <v-list-item-title>Share options here</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu> -->
-      
+      <slot name="options" />      
     </v-card-actions>
   </v-card>
 </template>

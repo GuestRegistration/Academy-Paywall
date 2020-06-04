@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[6],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[22],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Course/Components/CourseCard.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************!*\
@@ -95,7 +95,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
 //
 //
 //
@@ -343,8 +342,6 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("h4", [_vm._v("Courses (" + _vm._s(_vm.data.length) + ")")]),
-      _vm._v(" "),
       !_vm.data.length
         ? _c("div", { staticClass: "text-center text-muted my-5" }, [
             _vm._v("\n            No course available\n  ")

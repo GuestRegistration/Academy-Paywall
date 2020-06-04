@@ -15,16 +15,9 @@ class PaymentGateway extends Model
             'name' => 'Paystack',
             'credentials' => [
                 'Public key',
-                'Private key'
             ],
         ],
-        'stripe' => [
-            'name' => 'Stripe pay',
-            'credentials' => [
-                'Secret pin',
-                'Safety net'
-            ]
-        ]
+
     ];
 
     public static function getCredentials($gateway){
@@ -51,6 +44,11 @@ class PaymentGateway extends Model
     protected $appends = [
         'credentials_complete'
     ];
+
+    protected $hidden = [
+        // 'credentials'
+    ];
+
 
     public function getCredentialsCompleteAttribute(){
         $complete = true;

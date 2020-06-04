@@ -428,14 +428,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1024,99 +1016,7 @@ var render = function() {
                 _c("v-icon", [_vm._v("arrow_forward")])
               ],
               1
-            ),
-            _vm._v(" "),
-            _vm.isOnMyAccount(_vm.course)
-              ? _c(
-                  "v-menu",
-                  {
-                    attrs: {
-                      origin: "center center",
-                      transition: "scale-transition"
-                    },
-                    scopedSlots: _vm._u(
-                      [
-                        {
-                          key: "activator",
-                          fn: function(ref) {
-                            var on = ref.on
-                            return [
-                              _c(
-                                "v-btn",
-                                _vm._g({ attrs: { icon: "" } }, on),
-                                [_c("v-icon", [_vm._v("mdi-dots-vertical")])],
-                                1
-                              )
-                            ]
-                          }
-                        }
-                      ],
-                      null,
-                      false,
-                      2097855828
-                    )
-                  },
-                  [
-                    _vm._v(" "),
-                    _c(
-                      "v-list",
-                      [
-                        _c(
-                          "v-list-item",
-                          {
-                            on: {
-                              click: function($event) {
-                                _vm.$inertia.visit(
-                                  _vm.route("account.course.edit", {
-                                    account: _vm.account.username,
-                                    course: _vm.course.slug
-                                  })
-                                )
-                              }
-                            }
-                          },
-                          [
-                            _c(
-                              "v-list-item-icon",
-                              [_c("v-icon", [_vm._v("edit")])],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "v-list-item-content",
-                              [
-                                _c("v-list-item-title", [_vm._v("Edit course")])
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "v-list-item",
-                          [
-                            _c(
-                              "v-list-item-icon",
-                              [_c("v-icon", [_vm._v("delete")])],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "v-list-item-content",
-                              [_c("v-list-item-title", [_vm._v("Delete")])],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              : _vm._e()
+            )
           ],
           1
         )

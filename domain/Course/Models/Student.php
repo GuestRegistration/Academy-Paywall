@@ -16,6 +16,10 @@ class Student extends Model
       'first_name', 'last_name', 'email', 'phone', 'course_id', 'payment_ref', 'payment_gateway_id'
   ];
 
+  protected $appends = [
+    'fullname', 'registered_time', 'registered_time_diff'
+  ];
+
   public function course(){
       return $this->belongsTo(Course::class);
   }
@@ -23,4 +27,17 @@ class Student extends Model
   public function paymentGateway(){
     return $this->belongsTo(PaymentGateway::class);
   }
+
+  public function getFullnameAttribute(){
+    return "$this->first_name $this->last_name";
+  }
+
+  public function getRegisteredTimeAttribute(){
+    return $this->created_at->format('D d F, Y h:m a');
+  }
+
+  public function getRegisteredTimeDiffAttribute(){
+    return $this->created_at->diffForHumans();
+  }
+
 }

@@ -15,34 +15,26 @@
                     Enroll Now <v-icon>arrow_forward</v-icon>
                 </v-btn>
 
-                <v-menu v-if="isOnMyAccount(course)" origin="center center"  transition="scale-transition">
+                <!-- <v-menu origin="center center"  transition="scale-transition">
                     <template v-slot:activator="{ on }">
                         <v-btn icon v-on="on">
-                            <v-icon>mdi-dots-vertical</v-icon>
+                            <v-icon>share</v-icon>
                         </v-btn>
                     </template>
                     <v-list>
 
-                        <v-list-item @click="$inertia.visit(route('account.course.edit', {account: account.username, course: course.slug}))">
+                        <v-list-item>
                             <v-list-item-icon>
                             <v-icon>edit</v-icon>
                             </v-list-item-icon>
                             <v-list-item-content>
-                            <v-list-item-title>Edit course</v-list-item-title>
-                            </v-list-item-content>
-                        </v-list-item>
-
-                        <v-list-item >
-                            <v-list-item-icon>
-                            <v-icon>delete</v-icon>
-                            </v-list-item-icon>
-                            <v-list-item-content>
-                            <v-list-item-title>Delete</v-list-item-title>
+                            <v-list-item-title>Whatsapp</v-list-item-title>
                             </v-list-item-content>
                         </v-list-item>
 
                     </v-list>
-                </v-menu>
+                </v-menu> -->
+                
             </div>
         </div>
         <v-divider></v-divider>
