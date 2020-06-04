@@ -20,9 +20,12 @@ class CreateStudentsTable extends Migration
             $table->string('last_name');
             $table->string('email');
             $table->string('phone');
+            $table->uuid('payment_gateway_id')->nullable();
+            $table->string('payment_ref')->nullable();
             $table->timestamps();
 
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            $table->foreign('payment_gateway_id')->references('id')->on('payment_gateways')->onDelete('cascade');
 
         });
     }

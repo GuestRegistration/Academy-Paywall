@@ -212,7 +212,7 @@
         },
         methods: {
           anySocial(){
-              return this.socials.every(s => s.link && s.link !=  '' ?  true : false);
+              return this.socials.filter(s => s.link ?  true : false).length
             },
         },
 

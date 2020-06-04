@@ -22,6 +22,9 @@ class CreateCoursesTable extends Migration
             $table->text('cover_image')->nullable();
             $table->string('slug');
             $table->timestamp('published_at')->nullable();
+            $table->text('preview_video')->nullable();
+            $table->timestamp('start_at')->nullable();
+            $table->timestamp('end_at')->nullable();
             $table->timestamps();
             
             $table->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');

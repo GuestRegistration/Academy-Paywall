@@ -20,6 +20,9 @@ class CreateAccountsTable extends Migration
             $table->string('phone')->nullable();
             $table->string('email')->unique();
             $table->string('username')->nullable()->unique();
+            $table->string('caption')->nullable();
+            $table->string('subcaption')->nullable();
+            $table->boolean('show_caption')->nullable();
             $table->string('facebook_url')->nullable();
             $table->string('instagram_url')->nullable();
             $table->string('twitter_url')->nullable();

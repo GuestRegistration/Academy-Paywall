@@ -215,9 +215,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }),
   methods: {
     anySocial: function anySocial() {
-      return this.socials.every(function (s) {
-        return s.link && s.link != '' ? true : false;
-      });
+      return this.socials.filter(function (s) {
+        return s.link ? true : false;
+      }).length;
     }
   },
   mounted: function mounted() {
