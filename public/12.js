@@ -55,6 +55,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'SigninPage',
   metaInfo: function metaInfo() {
@@ -73,6 +82,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         loading: false
       }
     };
+  },
+  computed: {
+    status: function status() {
+      return this.$page.status;
+    }
   },
   methods: {
     submit: function submit() {
@@ -157,68 +171,93 @@ var render = function() {
                   "v-card",
                   { staticClass: "py-5", attrs: { outlined: "" } },
                   [
-                    _c("v-card-text", [
-                      _c("h2", { staticClass: "text-center my-3" }, [
-                        _vm._v(
-                          "\r\n                                    Sign in\r\n                                "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "form",
-                        {
-                          on: {
-                            submit: function($event) {
-                              $event.preventDefault()
-                              return _vm.submit($event)
-                            }
-                          }
-                        },
-                        [
-                          _c(
-                            "div",
-                            { staticClass: "tab-content py-3" },
-                            [
-                              _c("x-input", {
-                                attrs: {
-                                  errors: _vm.errors,
-                                  name: "email",
-                                  type: "email",
-                                  label: "Email"
-                                },
-                                model: {
-                                  value: _vm.form.email,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.form, "email", $$v)
-                                  },
-                                  expression: "form.email"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "x-button",
-                                {
-                                  staticClass: "primary",
-                                  attrs: {
-                                    loading: _vm.ui.loading,
-                                    type: "submit",
-                                    dark: "",
-                                    color: "accent-4",
-                                    block: ""
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "\r\n                                            Sign in\r\n                                        "
-                                  )
-                                ]
-                              )
-                            ],
-                            1
+                    _c(
+                      "v-card-text",
+                      [
+                        _c("h2", { staticClass: "text-center my-3" }, [
+                          _vm._v(
+                            "\r\n                                    Sign in\r\n                                "
                           )
-                        ]
-                      )
-                    ])
+                        ]),
+                        _vm._v(" "),
+                        _vm.status
+                          ? _c(
+                              "v-alert",
+                              {
+                                attrs: {
+                                  icon: "info",
+                                  prominent: "",
+                                  text: "",
+                                  type: "info"
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\r\n                                   " +
+                                    _vm._s(_vm.status) +
+                                    "\r\n                                "
+                                )
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c(
+                          "form",
+                          {
+                            on: {
+                              submit: function($event) {
+                                $event.preventDefault()
+                                return _vm.submit($event)
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "div",
+                              { staticClass: "tab-content py-3" },
+                              [
+                                _c("x-input", {
+                                  attrs: {
+                                    errors: _vm.errors,
+                                    name: "email",
+                                    type: "email",
+                                    label: "Email"
+                                  },
+                                  model: {
+                                    value: _vm.form.email,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.form, "email", $$v)
+                                    },
+                                    expression: "form.email"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "x-button",
+                                  {
+                                    staticClass: "primary",
+                                    attrs: {
+                                      loading: _vm.ui.loading,
+                                      type: "submit",
+                                      dark: "",
+                                      color: "accent-4",
+                                      block: ""
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\r\n                                            Sign in\r\n                                        "
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    )
                   ],
                   1
                 )

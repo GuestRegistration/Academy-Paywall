@@ -17,6 +17,15 @@
                                  <h2 class="text-center my-3">
                                     Sign in
                                 </h2>
+                                 <v-alert
+                                    v-if="status"
+                                    icon="info"
+                                    prominent
+                                    text
+                                    type="info"
+                                    >
+                                   {{status}}
+                                </v-alert>
                                 <!-- Form -->
                                 <form @submit.prevent="submit">
                                     <div  class="tab-content py-3">
@@ -59,6 +68,13 @@
                 },
             };
         },
+
+        computed: {
+            status(){
+                return this.$page.status
+            }
+        },
+        
         methods: {
             async submit() {
                 this.ui.loading = true;

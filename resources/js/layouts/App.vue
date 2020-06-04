@@ -4,50 +4,49 @@
     <v-navigation-drawer 
       app 
       v-model="drawer"
-      v-if="authenticated && auth.profile_complete"
       >
 
-    <template  v-slot:prepend>
-          <v-list-item>
-            <v-list-item-avatar>
-              <avatar :src="auth.avatar" :color="auth.theme_color" />
-            </v-list-item-avatar>
+      <template v-if="auth.profile_complete"  v-slot:prepend>
+            <v-list-item>
+              <v-list-item-avatar>
+                <avatar :src="auth.avatar" :color="auth.theme_color" />
+              </v-list-item-avatar>
+              <v-list-item-content>
+                <v-list-item-title v-html="auth.name"></v-list-item-title>
+                <v-list-item-subtitle v-html="auth.at_username"></v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+            <hr>
+      </template>
+
+      <v-list>
+        <v-list-item-group v-model="active" >
+          <inertia-link :href="route(item.route, item.param)"  class="prevent-default" v-for="(item, i) in navItems()"
+            :key="i">
+            <v-list-item :color="authenticated ? auth.theme_color : 'primary'">
+            <v-list-item-icon>
+              <v-icon v-text="item.icon"></v-icon>
+            </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title v-html="auth.name"></v-list-item-title>
-              <v-list-item-subtitle v-html="auth.at_username"></v-list-item-subtitle>
+              <v-list-item-title v-text="item.title"></v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <hr>
-    </template>
+          </inertia-link>
+          
+        </v-list-item-group>
+      </v-list>
 
-    <v-list>
-      <v-list-item-group v-model="active" >
-        <inertia-link :href="route(item.route, item.param)"  class="prevent-default" v-for="(item, i) in navItems()"
-          :key="i">
-          <v-list-item :color="authenticated ? auth.theme_color : 'primary'">
-          <v-list-item-icon>
-            <v-icon v-text="item.icon"></v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title"></v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        </inertia-link>
-        
-      </v-list-item-group>
-    </v-list>
-
-    <template v-slot:append>
-      <div class="pa-2">
-          <v-btn block dark class="red"  @click="signout">Signout</v-btn>
-      </div>
-    </template>
+      <template v-slot:append>
+        <div class="pa-2">
+            <v-btn block dark class="red"  @click="signout">Signout</v-btn>
+        </div>
+      </template>
 
     </v-navigation-drawer>
 
     <v-app-bar app :color="authenticated ? auth.theme_color : 'primary'" dark >
       
-      <v-app-bar-nav-icon v-if="authenticated && auth.profile_complete" @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
        
        <inertia-link :href="route('home')" class="white--text" style="text-decoration: none">
         <v-toolbar-title dark>AcadaApp</v-toolbar-title>

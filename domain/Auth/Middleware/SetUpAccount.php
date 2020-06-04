@@ -22,7 +22,7 @@ class SetUpAccount
             return;
         }
 
-        if((Auth::check() && !Auth::user()->account->profile_complete) && !in_array(Request::route()->getName(), ['account.setup', 'account.setup.store'])){
+        if((Auth::check() && !Auth::user()->account->profile_complete) && !in_array(Request::route()->getName(), ['account.setup', 'account.setup.store', 'signout'])){
             return  redirect()->route('account.setup')->with('info', 'Kindly, complete your profile before proceeding'); 
         }
        

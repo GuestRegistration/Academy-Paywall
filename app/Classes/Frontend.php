@@ -15,6 +15,7 @@ class Frontend
             'errors' => function () {
                 return self::errors();
             },
+            
             'alerts' => function () {
                 return [
                     'success' => Session::get('success'),
@@ -23,6 +24,11 @@ class Frontend
                     'info' => Session::get('info'),
                 ];
             },
+
+            'status' => function(){
+                return Session::get('status');
+            },
+
             'auth' => function () {
                 return optional(Request::user())->load('account');
             },

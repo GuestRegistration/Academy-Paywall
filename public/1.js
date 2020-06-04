@@ -103,7 +103,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'LayoutApp',
@@ -222,14 +221,14 @@ var render = function() {
   return _c(
     "v-app",
     [
-      _vm.authenticated && _vm.auth.profile_complete
-        ? _c(
-            "v-navigation-drawer",
-            {
-              attrs: { app: "" },
-              scopedSlots: _vm._u(
-                [
-                  {
+      _c(
+        "v-navigation-drawer",
+        {
+          attrs: { app: "" },
+          scopedSlots: _vm._u(
+            [
+              _vm.auth.profile_complete
+                ? {
                     key: "prepend",
                     fn: function() {
                       return [
@@ -272,116 +271,113 @@ var render = function() {
                       ]
                     },
                     proxy: true
-                  },
-                  {
-                    key: "append",
-                    fn: function() {
-                      return [
-                        _c(
-                          "div",
-                          { staticClass: "pa-2" },
-                          [
-                            _c(
-                              "v-btn",
-                              {
-                                staticClass: "red",
-                                attrs: { block: "", dark: "" },
-                                on: { click: _vm.signout }
-                              },
-                              [_vm._v("Signout")]
-                            )
-                          ],
-                          1
-                        )
-                      ]
-                    },
-                    proxy: true
                   }
-                ],
-                null,
-                false,
-                3022372395
-              ),
-              model: {
-                value: _vm.drawer,
-                callback: function($$v) {
-                  _vm.drawer = $$v
+                : null,
+              {
+                key: "append",
+                fn: function() {
+                  return [
+                    _c(
+                      "div",
+                      { staticClass: "pa-2" },
+                      [
+                        _c(
+                          "v-btn",
+                          {
+                            staticClass: "red",
+                            attrs: { block: "", dark: "" },
+                            on: { click: _vm.signout }
+                          },
+                          [_vm._v("Signout")]
+                        )
+                      ],
+                      1
+                    )
+                  ]
                 },
-                expression: "drawer"
+                proxy: true
               }
+            ],
+            null,
+            true
+          ),
+          model: {
+            value: _vm.drawer,
+            callback: function($$v) {
+              _vm.drawer = $$v
             },
+            expression: "drawer"
+          }
+        },
+        [
+          _vm._v(" "),
+          _c(
+            "v-list",
             [
-              _vm._v(" "),
               _c(
-                "v-list",
-                [
-                  _c(
-                    "v-list-item-group",
-                    {
-                      model: {
-                        value: _vm.active,
-                        callback: function($$v) {
-                          _vm.active = $$v
-                        },
-                        expression: "active"
-                      }
+                "v-list-item-group",
+                {
+                  model: {
+                    value: _vm.active,
+                    callback: function($$v) {
+                      _vm.active = $$v
                     },
-                    _vm._l(_vm.navItems(), function(item, i) {
-                      return _c(
-                        "inertia-link",
+                    expression: "active"
+                  }
+                },
+                _vm._l(_vm.navItems(), function(item, i) {
+                  return _c(
+                    "inertia-link",
+                    {
+                      key: i,
+                      staticClass: "prevent-default",
+                      attrs: { href: _vm.route(item.route, item.param) }
+                    },
+                    [
+                      _c(
+                        "v-list-item",
                         {
-                          key: i,
-                          staticClass: "prevent-default",
-                          attrs: { href: _vm.route(item.route, item.param) }
+                          attrs: {
+                            color: _vm.authenticated
+                              ? _vm.auth.theme_color
+                              : "primary"
+                          }
                         },
                         [
                           _c(
-                            "v-list-item",
-                            {
-                              attrs: {
-                                color: _vm.authenticated
-                                  ? _vm.auth.theme_color
-                                  : "primary"
-                              }
-                            },
+                            "v-list-item-icon",
                             [
-                              _c(
-                                "v-list-item-icon",
-                                [
-                                  _c("v-icon", {
-                                    domProps: { textContent: _vm._s(item.icon) }
-                                  })
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-list-item-content",
-                                [
-                                  _c("v-list-item-title", {
-                                    domProps: {
-                                      textContent: _vm._s(item.title)
-                                    }
-                                  })
-                                ],
-                                1
-                              )
+                              _c("v-icon", {
+                                domProps: { textContent: _vm._s(item.icon) }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-list-item-content",
+                            [
+                              _c("v-list-item-title", {
+                                domProps: { textContent: _vm._s(item.title) }
+                              })
                             ],
                             1
                           )
                         ],
                         1
                       )
-                    }),
+                    ],
                     1
                   )
-                ],
+                }),
                 1
               )
             ],
             1
           )
-        : _vm._e(),
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
         "v-app-bar",
@@ -393,15 +389,13 @@ var render = function() {
           }
         },
         [
-          _vm.authenticated && _vm.auth.profile_complete
-            ? _c("v-app-bar-nav-icon", {
-                on: {
-                  click: function($event) {
-                    _vm.drawer = !_vm.drawer
-                  }
-                }
-              })
-            : _vm._e(),
+          _c("v-app-bar-nav-icon", {
+            on: {
+              click: function($event) {
+                _vm.drawer = !_vm.drawer
+              }
+            }
+          }),
           _vm._v(" "),
           _c(
             "inertia-link",

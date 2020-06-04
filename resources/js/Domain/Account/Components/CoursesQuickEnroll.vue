@@ -9,7 +9,7 @@
             <v-card-text class="px-0" style="max-height: 500px">
                 <template v-if="!courses.length">
                     <div class="text-center text-muted">
-                    <h4>No course is available for now. You can check back.</h4>
+                    <small>No course is available for now. You can check back.</small>
                     </div>
                 </template>
                 <template v-else>

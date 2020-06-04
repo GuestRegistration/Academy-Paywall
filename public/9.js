@@ -145,7 +145,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     formData: function formData() {
       var _this = this;
 
-      console.log(this.form);
       var form = new FormData();
       Object.keys(this.form).forEach(function (key) {
         if (_this.form[key]) {

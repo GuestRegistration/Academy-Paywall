@@ -278,7 +278,7 @@ var render = function() {
                               "div",
                               { staticClass: "text-center text-muted" },
                               [
-                                _c("h4", [
+                                _c("small", [
                                   _vm._v(
                                     "No course is available for now. You can check back."
                                   )

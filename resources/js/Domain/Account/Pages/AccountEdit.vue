@@ -115,7 +115,6 @@
 
         methods: {
             formData() {
-                console.log(this.form);
                 const form = new FormData;
                 Object.keys(this.form).forEach(key => {
                     if(this.form[key]){
