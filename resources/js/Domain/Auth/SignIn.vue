@@ -40,6 +40,13 @@
 
     export default {
         name: 'SigninPage',
+         metaInfo()
+         {
+             return{
+                title: `Signin`,
+                titleTemplate: '%s - AcadaApp',
+             }
+        },
 
         props: {
             errors: Object,
