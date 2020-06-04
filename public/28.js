@@ -1,13 +1,206 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[28],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/layouts/App.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/layouts/App.vue?vue&type=script&lang=js& ***!
   \***********************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\xampp\\htdocs\\academia\\resources\\js\\layouts\\App.vue: Unexpected token, expected \",\" (104:35)\n\n\u001b[0m \u001b[90m 102 | \u001b[39m        \u001b[36mif\u001b[39m(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mauthenticated  \u001b[33m&&\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mauth\u001b[33m.\u001b[39mprofile_complete){\u001b[0m\n\u001b[0m \u001b[90m 103 | \u001b[39m          \u001b[36mreturn\u001b[39m [{\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 104 | \u001b[39m                      route\u001b[33m:\u001b[39m \u001b[32m'home'\u001b[39m)\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m     | \u001b[39m                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 105 | \u001b[39m                      title\u001b[33m:\u001b[39m \u001b[32m'Home'\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 106 | \u001b[39m                      icon\u001b[33m:\u001b[39m \u001b[32m'home'\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 107 | \u001b[39m                    }\u001b[33m,\u001b[39m\u001b[0m\n    at Parser._raise (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:742:17)\n    at Parser.raiseWithData (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:735:17)\n    at Parser.raise (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:729:17)\n    at Parser.unexpected (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:8779:16)\n    at Parser.expect (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:8765:28)\n    at Parser.parseObj (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:10387:14)\n    at Parser.parseExprAtom (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:10017:28)\n    at Parser.parseExprSubscripts (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:9624:23)\n    at Parser.parseMaybeUnary (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:9604:21)\n    at Parser.parseExprOps (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:9474:23)\n    at Parser.parseMaybeConditional (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:9447:23)\n    at Parser.parseMaybeAssign (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:9402:21)\n    at Parser.parseExprListItem (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:10740:18)\n    at Parser.parseExprList (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:10714:22)\n    at Parser.parseExprAtom (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:9991:32)\n    at Parser.parseExprSubscripts (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:9624:23)\n    at Parser.parseMaybeUnary (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:9604:21)\n    at Parser.parseExprOps (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:9474:23)\n    at Parser.parseMaybeConditional (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:9447:23)\n    at Parser.parseMaybeAssign (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:9402:21)\n    at Parser.parseExpression (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:9354:23)\n    at Parser.parseReturnStatement (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:11471:28)\n    at Parser.parseStatementContent (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:11152:21)\n    at Parser.parseStatement (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:11104:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:11679:25)\n    at Parser.parseBlockBody (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:11665:10)\n    at Parser.parseBlock (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:11649:10)\n    at Parser.parseStatementContent (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:11180:21)\n    at Parser.parseStatement (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:11104:17)\n    at Parser.parseIfStatement (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:11456:28)\n    at Parser.parseStatementContent (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:11149:21)\n    at Parser.parseStatement (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:11104:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:11679:25)\n    at Parser.parseBlockBody (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:11665:10)\n    at Parser.parseBlock (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:11649:10)\n    at Parser.parseFunctionBody (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:10656:24)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'LayoutApp',
+  data: function data() {
+    return {
+      drawer: false
+    };
+  },
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
+    auth: function auth(state) {
+      return state.auth;
+    },
+    authenticated: function authenticated(state) {
+      return state.authenticated;
+    }
+  })), {}, {
+    active: function active() {
+      var _this = this;
+
+      return this.navItems().findIndex(function (item) {
+        return item.route == _this.route().current();
+      });
+    }
+  }),
+  methods: {
+    navItems: function navItems() {
+      if (this.authenticated && this.auth.profile_complete) {
+        return [// {
+        //   route: 'home',
+        //   title: 'Home',
+        //   icon: 'home',
+        // },
+        {
+          route: 'account.show',
+          param: {
+            account: this.auth.username
+          },
+          title: 'Account',
+          icon: 'account_circle'
+        }, {
+          route: 'account.course.create',
+          param: {
+            account: this.auth.username
+          },
+          title: 'New course',
+          icon: 'add_circle'
+        }, {
+          route: 'account.course.list',
+          param: {
+            account: this.auth.username
+          },
+          title: 'Courses',
+          icon: 'library_books'
+        }, {
+          route: 'account.payment.gateway',
+          param: {
+            account: this.auth.username
+          },
+          title: 'Payment',
+          icon: 'local_atm'
+        }, {
+          route: 'account.student.list',
+          param: {
+            account: this.auth.username
+          },
+          title: 'Students',
+          icon: 'people'
+        }];
+      } else {
+        return [{
+          route: 'home',
+          title: 'Home',
+          icon: 'home'
+        }];
+      }
+    },
+    signout: function signout() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return _this2.$inertia.post(route('signout'));
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    }
+  }
+});
 
 /***/ }),
 

@@ -21,8 +21,8 @@
     </template>
 
     <v-list>
-      <v-list-item-group >
-        <inertia-link :href="item.route"  class="prevent-default" v-for="(item, i) in navItems()"
+      <v-list-item-group v-model="active" >
+        <inertia-link :href="route(item.route, item.param)"  class="prevent-default" v-for="(item, i) in navItems()"
           :key="i">
           <v-list-item :color="authenticated ? auth.theme_color : 'primary'">
           <v-list-item-icon>
@@ -92,45 +92,64 @@
               auth: state => state.auth,
               authenticated: state => state.authenticated,
             }),
+            active(){
+              return this.navItems().findIndex(item => item.route == this.route().current())
+            }
         },
 
         methods:{
           navItems(){
             if(this.authenticated  && this.auth.profile_complete){
-              return [{
-                          route: this.route('home'),
-                          title: 'Home',
-                          icon: 'home',
-                        },
+              return [
+                        // {
+                        //   route: 'home',
+                        //   title: 'Home',
+                        //   icon: 'home',
+                        // },
                         {
-                          route: this.route('account.show', {account: this.auth.username}),
+                          route: 'account.show',
+                          param: {
+                            account: this.auth.username
+                          },
                           title: 'Account',
                           icon: 'account_circle',
                         },
                         {
-                          route: this.route('account.course.create', {account: this.auth.username}),
+                          route: 'account.course.create',
+                          param: {
+                            account: this.auth.username
+                          },
                           title: 'New course',
                           icon: 'add_circle',
                         },
                         {
-                          route: this.route('account.course.list', {account: this.auth.username}),
+                          route: 'account.course.list',
+                          param: {
+                            account: this.auth.username
+                          },
                           title: 'Courses',
                           icon: 'library_books',
                         },
                         {
-                          route: this.route('account.payment.gateway', {account: this.auth.username}),
+                          route: 'account.payment.gateway',
+                          param: {
+                            account: this.auth.username
+                          },
                           title: 'Payment',
                           icon: 'local_atm',
                         },
                         {
-                          route: this.route('account.student.list', {account: this.auth.username}),
+                          route: 'account.student.list',
+                          param: {
+                            account: this.auth.username
+                          },
                           title: 'Students',
                           icon: 'people',
                         },
                       ]
             }else{
               return [{
-                          route: this.route('home'),
+                          route: 'home',
                           title: 'Home',
                           icon: 'home',
                         },

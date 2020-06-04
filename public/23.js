@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[10],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[23],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Account/Pages/AccountPayment.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************!*\
@@ -147,7 +147,7 @@ var render = function() {
             [
               _c(
                 "v-expansion-panels",
-                { attrs: { popout: "", focusable: "" } },
+                { attrs: { inset: "", focusable: "" } },
                 _vm._l(_vm.gateways, function(gateway, g) {
                   return _c(
                     "v-expansion-panel",

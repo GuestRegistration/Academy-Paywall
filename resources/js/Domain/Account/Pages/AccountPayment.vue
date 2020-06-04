@@ -3,7 +3,7 @@
         <v-row justify="center">
             <v-col cols="12" md="8" lg="6">
                 <v-expansion-panels
-                inset
+                popout
                 focusable
                 >
                 <v-expansion-panel
