@@ -15,7 +15,7 @@
           :gradient="`to top right, ${account.theme_color}, rgba(255,255,255,.7)`"
         ></v-img>
       </template>
-      <v-btn @click="$inertia.visit(route('home'))" icon>
+      <v-btn v-if="!inFrame" @click="$inertia.visit(route('home'))" icon>
         <v-icon>home</v-icon>
       </v-btn>
       
@@ -152,7 +152,7 @@
 </template>
 
 <script>
-    import {mapGetters} from "vuex";
+    import {mapGetters, mapState} from "vuex";
     import CoursesQuickEnroll from './Components/CoursesQuickEnroll';
     export default {
         name: 'AccountLayout',
@@ -165,6 +165,9 @@
           }
         },
         computed:{
+            ...mapState({
+              inFrame: (state) => state.inFrame
+            }),
             ...mapGetters([
                 'auth', 'authenticated', 'isMyAccount', 'isOnMyAccount'
             ]),

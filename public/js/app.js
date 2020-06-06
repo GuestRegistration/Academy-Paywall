@@ -93423,6 +93423,7 @@ new vue__WEBPACK_IMPORTED_MODULE_1__["default"]({
         transformProps: function transformProps(props) {
           _store__WEBPACK_IMPORTED_MODULE_4__["default"].commit('setAuth', props.auth);
           _store__WEBPACK_IMPORTED_MODULE_4__["default"].commit('response/setErrors', props.errors);
+          _store__WEBPACK_IMPORTED_MODULE_4__["default"].commit('setFrame');
           toastr__WEBPACK_IMPORTED_MODULE_5___default.a.options = {
             "closeButton": true,
             "debug": false,
@@ -94075,12 +94076,18 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
     auth: {},
-    authenticated: false
+    authenticated: false,
+    inFrame: false
   },
   mutations: {
     setAuth: function setAuth(state, auth) {
       state.auth = auth ? auth.account || {} : {};
       state.authenticated = auth ? true : false;
+    },
+    setFrame: function setFrame(state) {
+      var url = window.location.search.split('?')[1];
+      if (!url) return false;
+      state.inFrame = window.location.search.split('?')[1].includes("frame=true");
     }
   },
   getters: {

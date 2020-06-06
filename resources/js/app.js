@@ -16,7 +16,6 @@ window.toastr = toastr;
 
 require('./bootstrap');
 
-
 Vue.mixin({
     methods: {
         route: window.route,
@@ -62,7 +61,7 @@ new Vue({
         
         store.commit('setAuth', props.auth);
         store.commit('response/setErrors', props.errors);
-
+        store.commit('setFrame');
         toastr.options = {
           "closeButton": true,
           "debug": false,

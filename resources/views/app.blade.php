@@ -15,6 +15,11 @@
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
+    <script>
+            function initFrame(){
+                console.log('I got the message. Frame body loaded');
+            }
+    </script>
 
     @routes
 </head>

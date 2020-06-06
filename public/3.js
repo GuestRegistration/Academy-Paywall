@@ -182,7 +182,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       courses_dialog: false
     };
   },
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['auth', 'authenticated', 'isMyAccount', 'isOnMyAccount'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
+    inFrame: function inFrame(state) {
+      return state.inFrame;
+    }
+  })), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['auth', 'authenticated', 'isMyAccount', 'isOnMyAccount'])), {}, {
     account: function account() {
       return this.$page.account;
     },
@@ -289,19 +293,21 @@ var render = function() {
         },
         [
           _vm._v(" "),
-          _c(
-            "v-btn",
-            {
-              attrs: { icon: "" },
-              on: {
-                click: function($event) {
-                  _vm.$inertia.visit(_vm.route("home"))
-                }
-              }
-            },
-            [_c("v-icon", [_vm._v("home")])],
-            1
-          ),
+          !_vm.inFrame
+            ? _c(
+                "v-btn",
+                {
+                  attrs: { icon: "" },
+                  on: {
+                    click: function($event) {
+                      _vm.$inertia.visit(_vm.route("home"))
+                    }
+                  }
+                },
+                [_c("v-icon", [_vm._v("home")])],
+                1
+              )
+            : _vm._e(),
           _vm._v(" "),
           _c(
             "v-toolbar-title",

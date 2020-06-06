@@ -8,12 +8,18 @@ export default new Vuex.Store({
     state: {
         auth: {},
         authenticated: false,
+        inFrame: false,
     },
     mutations: {
         setAuth(state, auth) {
             state.auth = auth ? auth.account || {} : {};
             state.authenticated = auth ? true : false;
         },
+        setFrame(state){
+            const url = window.location.search.split('?')[1];
+            if(!url) return false;
+            state.inFrame = window.location.search.split('?')[1].includes("frame=true");
+        }
     },
     getters: {
         auth: state => {
