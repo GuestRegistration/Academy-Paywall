@@ -293,22 +293,6 @@ var render = function() {
         },
         [
           _vm._v(" "),
-          !_vm.inFrame
-            ? _c(
-                "v-btn",
-                {
-                  attrs: { icon: "" },
-                  on: {
-                    click: function($event) {
-                      _vm.$inertia.visit(_vm.route("home"))
-                    }
-                  }
-                },
-                [_c("v-icon", [_vm._v("home")])],
-                1
-              )
-            : _vm._e(),
-          _vm._v(" "),
           _c(
             "v-toolbar-title",
             { attrs: { dark: "" } },
