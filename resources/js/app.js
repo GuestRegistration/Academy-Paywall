@@ -9,6 +9,7 @@ import Vuetify from 'vuetify';
 import VueMeta from 'vue-meta'
 import store from './store';
 import toastr from 'toastr';
+import wysiwyg from "vue-wysiwyg";
 
 
 window.Vue = Vue;
@@ -47,8 +48,8 @@ Vue.use(InertiaApp)
 Vue.use(Vuetify);
 Vue.use(VueMeta, {
   refreshOnceOnNavigation: true
-})
-
+});
+Vue.use(wysiwyg, {});
 
 const app = document.getElementById('app')
 

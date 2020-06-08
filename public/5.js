@@ -428,6 +428,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -979,7 +980,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "tex-muted mt-3" },
+        { staticClass: "text-muted mt-3" },
         [
           _c("v-icon", { attrs: { color: _vm.account.theme_color } }, [
             _vm._v("date_range")
@@ -989,8 +990,12 @@ var render = function() {
               _vm._s(_vm.course.start_date) +
               " - " +
               _vm._s(_vm.course.end_date) +
-              "\n    "
-          )
+              "\n        "
+          ),
+          _c("v-icon", { attrs: { color: _vm.account.theme_color } }, [
+            _vm._v("info")
+          ]),
+          _vm._v(" " + _vm._s(_vm.course.course_type) + "\n    ")
         ],
         1
       ),
@@ -1016,7 +1021,81 @@ var render = function() {
                 _c("v-icon", [_vm._v("arrow_forward")])
               ],
               1
-            )
+            ),
+            _vm._v(" "),
+            _vm.isOnMyAccount(_vm.course)
+              ? _c(
+                  "v-menu",
+                  {
+                    attrs: {
+                      origin: "center center",
+                      transition: "scale-transition"
+                    },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "activator",
+                          fn: function(ref) {
+                            var on = ref.on
+                            return [
+                              _c(
+                                "v-btn",
+                                _vm._g({ attrs: { icon: "" } }, on),
+                                [_c("v-icon", [_vm._v("mdi-dots-vertical")])],
+                                1
+                              )
+                            ]
+                          }
+                        }
+                      ],
+                      null,
+                      false,
+                      2097855828
+                    )
+                  },
+                  [
+                    _vm._v(" "),
+                    _c(
+                      "v-list",
+                      [
+                        _c(
+                          "v-list-item",
+                          {
+                            on: {
+                              click: function($event) {
+                                _vm.$inertia.visit(
+                                  _vm.route("account.course.edit", {
+                                    account: _vm.account.username,
+                                    course: _vm.course.slug
+                                  })
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "v-list-item-icon",
+                              [_c("v-icon", [_vm._v("edit")])],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-list-item-content",
+                              [
+                                _c("v-list-item-title", [_vm._v("Edit course")])
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              : _vm._e()
           ],
           1
         )

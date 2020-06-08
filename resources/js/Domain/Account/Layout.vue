@@ -15,9 +15,9 @@
           :gradient="`to top right, ${account.theme_color}, rgba(255,255,255,.7)`"
         ></v-img>
       </template>
-      <!-- <v-btn v-if="!inFrame" @click="$inertia.visit(route('home'))" icon>
+      <v-btn v-if="authenticated && isMyAccount(account)" @click="$inertia.visit(route('home'))" icon>
         <v-icon>home</v-icon>
-      </v-btn> -->
+      </v-btn>
       
       <v-toolbar-title dark >
         <inertia-link :href="route('account.show', {account: account.username})" class="prevent-default" style="color: #fff">

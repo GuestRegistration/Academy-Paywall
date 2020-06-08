@@ -14,7 +14,7 @@ class Course extends Model
     
     protected $fillable = [
         'account_id', 'title', 'description', 'price', 'cover_image', 'published_at', 'slug',
-        'preview_video', 'start_at', 'end_at',
+        'preview_video', 'start_at', 'end_at', 'course_type', 'send_instructions', 'instructions'
     ];
 
     protected $dates = [

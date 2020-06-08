@@ -6,11 +6,12 @@ namespace Domain\Course\Models;
 
 use App\Classes\UUID;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use Domain\Account\Models\PaymentGateway;
 
 class Student extends Model
 {
-  use UUID;
+  use UUID, Notifiable;
 
   protected $fillable = [
       'first_name', 'last_name', 'email', 'phone', 'course_id', 'payment_ref', 'payment_gateway_id'

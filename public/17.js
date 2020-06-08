@@ -61,6 +61,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "CourseCreate",
@@ -76,7 +91,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       loading: false,
-      form: {}
+      form: {},
+      course_types: ['Zoom', 'Google classroom']
     };
   },
   computed: {
@@ -136,7 +152,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       var form = new FormData();
       Object.keys(this.form).forEach(function (key) {
-        form.append(key, _this2.form[key]);
+        if (_this2.form[key] != null && _this2.form[key] != "null") {
+          form.append(key, _this2.form[key]);
+        }
       });
       return form;
     }
@@ -173,7 +191,7 @@ var render = function() {
     [
       _c(
         "v-col",
-        { attrs: { cols: "12", md: "8", lg: "6" } },
+        { attrs: { cols: "12", md: "8" } },
         [
           _c(
             "v-card",
@@ -267,6 +285,7 @@ var render = function() {
                                   [
                                     _c(
                                       "v-col",
+                                      { attrs: { cols: "12", lg: "6" } },
                                       [
                                         _c("x-date-picker", {
                                           attrs: {
@@ -287,6 +306,7 @@ var render = function() {
                                     _vm._v(" "),
                                     _c(
                                       "v-col",
+                                      { attrs: { cols: "12", lg: "6" } },
                                       [
                                         _c("x-date-picker", {
                                           attrs: {
@@ -306,7 +326,23 @@ var render = function() {
                                     )
                                   ],
                                   1
-                                )
+                                ),
+                                _vm._v(" "),
+                                _c("x-select", {
+                                  attrs: {
+                                    errors: _vm.errors,
+                                    value: _vm.form.course_type,
+                                    label: "Course type",
+                                    name: "course_type",
+                                    items: _vm.course_types,
+                                    outlined: ""
+                                  },
+                                  on: {
+                                    change: function(selected) {
+                                      return (_vm.form.course_type = selected)
+                                    }
+                                  }
+                                })
                               ],
                               1
                             ),
@@ -328,6 +364,80 @@ var render = function() {
                                     }
                                   }
                                 })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-col",
+                              { attrs: { cols: "12" } },
+                              [
+                                _c("v-switch", {
+                                  attrs: {
+                                    label: "Send instruction after enrollment"
+                                  },
+                                  model: {
+                                    value: _vm.form.send_instructions,
+                                    callback: function($$v) {
+                                      _vm.$set(
+                                        _vm.form,
+                                        "send_instructions",
+                                        $$v
+                                      )
+                                    },
+                                    expression: "form.send_instructions"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("div", [
+                                  _c("small", [
+                                    _vm._v(
+                                      "Send a mail to your student after a successful enrollment. This could be an instruction on how to proceed with the course or a welcoming message"
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _vm.form.send_instructions
+                                  ? _c(
+                                      "div",
+                                      [
+                                        _c("label", [_vm._v("Message")]),
+                                        _vm._v(" "),
+                                        _c("wysiwyg", {
+                                          model: {
+                                            value: _vm.form.instructions,
+                                            callback: function($$v) {
+                                              _vm.$set(
+                                                _vm.form,
+                                                "instructions",
+                                                $$v
+                                              )
+                                            },
+                                            expression: "form.instructions"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _vm.errors &&
+                                        _vm.errors["instructions"] &&
+                                        _vm.errors["instructions"].length
+                                          ? _c(
+                                              "div",
+                                              { staticClass: "text-danger" },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    _vm.errors[
+                                                      "instructions"
+                                                    ][0]
+                                                  )
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e()
+                                      ],
+                                      1
+                                    )
+                                  : _vm._e()
                               ],
                               1
                             )

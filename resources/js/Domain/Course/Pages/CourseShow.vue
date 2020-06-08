@@ -2,8 +2,9 @@
     <div>
         <h4>{{course.title}}</h4>
         <v-img :src="course.cover_image" ></v-img>
-        <div class="tex-muted mt-3">
+        <div class="text-muted mt-3">
             <v-icon :color="account.theme_color">date_range</v-icon> {{course.start_date}} - {{course.end_date}}
+            <v-icon :color="account.theme_color">info</v-icon> {{course.course_type}}
         </div>
         <v-divider></v-divider>
         <div class="d-flex">
@@ -15,25 +16,25 @@
                     Enroll Now <v-icon>arrow_forward</v-icon>
                 </v-btn>
 
-                <!-- <v-menu origin="center center"  transition="scale-transition">
+                <v-menu v-if="isOnMyAccount(course)" origin="center center"  transition="scale-transition">
                     <template v-slot:activator="{ on }">
                         <v-btn icon v-on="on">
-                            <v-icon>share</v-icon>
+                            <v-icon>mdi-dots-vertical</v-icon>
                         </v-btn>
                     </template>
                     <v-list>
 
-                        <v-list-item>
+                        <v-list-item @click="$inertia.visit(route('account.course.edit', {account: account.username, course: course.slug}))">
                             <v-list-item-icon>
                             <v-icon>edit</v-icon>
                             </v-list-item-icon>
                             <v-list-item-content>
-                            <v-list-item-title>Whatsapp</v-list-item-title>
+                            <v-list-item-title>Edit course</v-list-item-title>
                             </v-list-item-content>
                         </v-list-item>
 
                     </v-list>
-                </v-menu> -->
+                </v-menu>
                 
             </div>
         </div>
