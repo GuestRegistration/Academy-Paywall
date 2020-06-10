@@ -7,6 +7,11 @@
             :label="label"
             :error="errorString ? true : false"
             :error-messages="errorString ? errorString : ''"
+            :prepend-icon="prependIcon"
+            :prepend-inner-icon="prependInnerIcon"
+            :append-icon="appendIcon"
+            :append-inner-icon="appendInnerIcon"
+
         >
             <slot
             slot="append-outer"
@@ -26,6 +31,8 @@
         rule: String,
         appendIcon: String,
         prependIcon: String,
+        appendInnerIcon: String,
+        prependInnerIcon: String,
     },
     computed: {
         errorString() {

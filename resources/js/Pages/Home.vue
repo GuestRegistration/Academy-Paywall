@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h4>Recent courses</h4>
         <courses-widget />
     </div>
 </template>
@@ -12,6 +11,13 @@
     export default {
         name: "HomePage",
         layout: (h, page) => h(App, [page]),
+        metaInfo()
+         {
+             return{
+                title: `Home`,
+                titleTemplate: '%s - AcadaApp',
+             }
+        },
         components: {
             CoursesWidget
         }

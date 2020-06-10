@@ -16,3 +16,6 @@ use App\Http\Controllers\PaymentController;
 */
 Route::get('/', HomeController::class)->name('home');
 Route::post('payment', PaymentController::class);
+Route::get('/migrate', 'App\Http\Controllers\SystemController@migrate');
+Route::get('/lstorage', 'App\Http\Controllers\SystemController@linkStorage');
+

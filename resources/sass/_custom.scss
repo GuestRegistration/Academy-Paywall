@@ -1,3 +1,11 @@
+
+html[no-scroll]{
+    overflow-y: hidden;
+}
+.overflow-y-auto{
+    overflow-y: auto !important;
+}
+
 a.prevent-default{
     text-decoration: none !important;
 }

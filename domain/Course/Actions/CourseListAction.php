@@ -19,8 +19,8 @@ class CourseListAction extends Controller
 
     public function __invoke(Request $request)
     {
-        $courses = $this->model->with('user')->paginate();
-        return $request->get('raw') ? response($courses) : Inertia::render('Domain/Course/Pages/CourseList', compact('courses'));
+        $courses = $this->model->with('account')->paginate();
+        return response($courses);
     }
 
 }

@@ -4,12 +4,28 @@
             <div class="container mt-lg-5">
                 <div class="row justify-content-center">
                     <div class="col-12 col-sm-9 col-md-6 col-lg-4 my-5">
-                        <!-- Heading -->
+                        <div class="text-center">
+                            <h1>
+                                <inertia-link :href="route('home')" class="prevent-default">
+                                    AcadaApp
+                                </inertia-link>
+                            </h1>
+                        </div>
+                        
                         <v-card outlined class="py-5">
                             <v-card-text>
                                  <h2 class="text-center my-3">
                                     Sign in
                                 </h2>
+                                 <v-alert
+                                    v-if="status"
+                                    icon="info"
+                                    prominent
+                                    text
+                                    type="info"
+                                    >
+                                   {{status}}
+                                </v-alert>
                                 <!-- Form -->
                                 <form @submit.prevent="submit">
                                     <div  class="tab-content py-3">
@@ -22,7 +38,6 @@
                                 </form>
                             </v-card-text>
                         </v-card>
-                       
                     </div>
                 </div> <!-- / .row -->
             </div>
@@ -33,7 +48,14 @@
 <script>
 
     export default {
-        name: 'Login',
+        name: 'SigninPage',
+         metaInfo()
+         {
+             return{
+                title: `Signin`,
+                titleTemplate: '%s - AcadaApp',
+             }
+        },
 
         props: {
             errors: Object,
@@ -46,6 +68,13 @@
                 },
             };
         },
+
+        computed: {
+            status(){
+                return this.$page.status
+            }
+        },
+        
         methods: {
             async submit() {
                 this.ui.loading = true;

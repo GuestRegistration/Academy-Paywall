@@ -34,7 +34,7 @@ class MagicLinkAction extends Controller
 
         Notification::send($user, new NewSignin($user));
 
-        return redirect()->back()->with('success', "Magic link has been sent to $email . Follow the link to sign in");
+        return redirect()->back()->with('status', "Signin link has been sent to $email . Follow the link to sign in");
     }
 
 }

@@ -6,14 +6,16 @@
 import { InertiaApp } from '@inertiajs/inertia-vue';
 import Vue from 'vue';
 import Vuetify from 'vuetify';
+import VueMeta from 'vue-meta'
 import store from './store';
 import toastr from 'toastr';
+import wysiwyg from "vue-wysiwyg";
+
 
 window.Vue = Vue;
 window.toastr = toastr;
 
 require('./bootstrap');
-
 
 Vue.mixin({
     methods: {
@@ -21,6 +23,8 @@ Vue.mixin({
         validationPass: (errors = {}) => !Object.keys(errors).length,
     },
 });
+
+Vue.filter('money', (value) => `₦ ${new Intl.NumberFormat().format(value)}`);
 
 /**
  * The following block of code may be used to automatically register your
@@ -42,6 +46,10 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 
 Vue.use(InertiaApp)
 Vue.use(Vuetify);
+Vue.use(VueMeta, {
+  refreshOnceOnNavigation: true
+});
+Vue.use(wysiwyg, {});
 
 const app = document.getElementById('app')
 
@@ -54,7 +62,7 @@ new Vue({
         
         store.commit('setAuth', props.auth);
         store.commit('response/setErrors', props.errors);
-
+        store.commit('setFrame');
         toastr.options = {
           "closeButton": true,
           "debug": false,

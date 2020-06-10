@@ -6,9 +6,10 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
-
 // vuetify
 @import '~vuetify/dist/vuetify.min.css';
+
+@import "~vue-wysiwyg/dist/vueWysiwyg.css";
 
 // material icon icons
 @import '~@mdi/font/css/materialdesignicons.css';

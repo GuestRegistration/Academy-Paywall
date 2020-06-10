@@ -1,43 +1,31 @@
 <template>
-  <v-card
-    max-width="344"
-    class="mx-auto"
+  <v-card max-width="344" class="mx-auto"
   >
     <v-list-item>
-      <v-list-item-avatar color="grey"></v-list-item-avatar>
+      <avatar :src="course.account.avatar" :color="course.account.theme_color" size="50"  class="mr-2" />
       <v-list-item-content>
         <v-list-item-title class="headline">{{ course.title }}</v-list-item-title>
-        <v-list-item-subtitle>by {{ course.user.name }}</v-list-item-subtitle>
+        <v-list-item-subtitle>{{ course.account.name }} <inertia-link :href="route('account.show', {account: course.account.username})">{{ course.account.at_username }}</inertia-link></v-list-item-subtitle>
       </v-list-item-content>
     </v-list-item>
 
     <v-img :src="course.cover_image" height="194"></v-img>
 
     <v-card-text>
-      {{ course.description }}
+      {{ course.snippet }}
+      <v-divider></v-divider>
+      <div class="tex-muted">
+        <v-icon :color="course.account.theme_color">date_range</v-icon> {{course.start_date}} - {{course.end_date}}
+      </div>
     </v-card-text>
 
     <v-card-actions>
-      <v-btn text color="primary">View</v-btn>
-      <v-btn text color="primary" v-if="course.is_published"> Purchase</v-btn>
-      <v-btn color="primary" v-else-if="authenticated && auth.id == course.user.id"> Publish course</v-btn>
-      
+      <h2>{{course.price | money}}</h2>
       <v-spacer></v-spacer>
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-      <v-menu  origin="center center"  transition="scale-transition">
-        <template v-slot:activator="{ on }">
-          <v-btn icon v-on="on">
-            <v-icon>mdi-share-variant</v-icon>
-          </v-btn>
-        </template>
-        <v-list>
-          <v-list-item>
-            <v-list-item-title>Share options here</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
+      <inertia-link :href="route('account.course.show', {account: course.account.username, course: course.slug})" class="prevent-default">
+        <v-btn dark :color="course.account.theme_color" > view course</v-btn>
+      </inertia-link>
+      <slot name="options" />      
     </v-card-actions>
   </v-card>
 </template>
@@ -49,12 +37,23 @@
       name: "CourseCard",
       props: {
           course: Object,
+          account: Object,
       },
       computed: {
         ...mapState({
           authenticated: state => state.authenticated,
           auth: state=> state.auth,
         })
+      },
+      watch: {
+        account: {
+          immediate: true,
+          handler(account){
+            if(account && !this.course.account){
+              this.course.account = account;
+            }
+          }
+        }
       }
   }
 </script>

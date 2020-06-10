@@ -15,6 +15,7 @@ class Frontend
             'errors' => function () {
                 return self::errors();
             },
+            
             'alerts' => function () {
                 return [
                     'success' => Session::get('success'),
@@ -23,8 +24,13 @@ class Frontend
                     'info' => Session::get('info'),
                 ];
             },
+
+            'status' => function(){
+                return Session::get('status');
+            },
+
             'auth' => function () {
-                return Request::user();
+                return optional(Request::user())->load('account');
             },
         ]);
     }
@@ -43,8 +49,4 @@ class Frontend
         return $messages;
     }
 
-    public static function business()
-    {
-        return Request::route('business') ?? optional(Request::user())->business;
-    }
 }

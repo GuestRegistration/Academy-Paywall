@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Domain\Course\Models\Course;
+use Domain\Account\Models\Account;
 use Illuminate\Support\Facades\Gate;
+use Domain\Course\Policies\CoursePolicy;
+use Domain\Account\Policies\AccountPolicy;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -13,13 +17,13 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Model' => 'App\Policies\ModelPolicy',
+        Course::class => CoursePolicy::class,
+        Account::class => AccountPolicy::class,
     ];
 
     /**
      * Register any authentication / authorization services.
-     *
-     * @return void
+@return void
      */
     public function boot()
     {

@@ -54,7 +54,7 @@
       methods: {
           getCourses(){
               this.loading = true;
-              axios.get(this.route('course.list', {raw:true}))
+              axios.get(this.route('course.list'))
               .then(response => {
                   this.loading = false;
                   this.data = response.data.data;
