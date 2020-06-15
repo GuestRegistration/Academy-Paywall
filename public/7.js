@@ -78,7 +78,7 @@ __webpack_require__.r(__webpack_exports__);
         value: 'register_time'
       }],
       items: [],
-      expanded: {}
+      expanded: []
     };
   },
   props: {

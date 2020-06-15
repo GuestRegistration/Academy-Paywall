@@ -192,7 +192,7 @@
               callback: (response) => {
                   toastr.success(`Payment successful`);
                   this.process = `Registering you as ${this.student.first_name} ${this.student.last_name}`;
-                  console.log(response);
+                  // console.log(response);
                   this.register({
                     ...this.student,
                     payment_ref: response.reference,

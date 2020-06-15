@@ -5,7 +5,9 @@ namespace Domain\Account\Models;
 use App\User;
 use App\Classes\UUID;
 use Domain\Course\Models\Course;
+use Domain\Subscription\Models\Payment;
 use Illuminate\Database\Eloquent\Model;
+use Domain\Subscription\Models\Subscription;
 
 class Account extends Model
 {
@@ -61,5 +63,13 @@ class Account extends Model
 
     public function paymentGateways(){
         return $this->hasMany(PaymentGateway::class);
+    }
+
+    public function subscription(){
+        return $this->hasOne(Subscription::class);
+    }
+
+    public function payments(){
+        return $this->hasMany(Payment::class);
     }
 }

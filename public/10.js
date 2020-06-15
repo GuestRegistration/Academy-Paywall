@@ -57,6 +57,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -145,6 +146,8 @@ var render = function() {
             "v-col",
             { attrs: { cols: "12", md: "8", lg: "6" } },
             [
+              _c("h4", [_vm._v("Payment Gateways")]),
+              _vm._v(" "),
               _c(
                 "v-expansion-panels",
                 { attrs: { popout: "", focusable: "" } },

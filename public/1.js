@@ -108,25 +108,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: 'LayoutApp',
   data: function data() {
     return {
-      drawer: false
+      drawer: false,
+      active: 0
     };
   },
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
     auth: function auth(state) {
       return state.auth;
     },
     authenticated: function authenticated(state) {
       return state.authenticated;
     }
-  })), {}, {
-    active: function active() {
-      var _this = this;
-
-      return this.navItems().findIndex(function (item) {
-        return item.route == _this.route().current();
-      });
-    }
-  }),
+  })),
   methods: {
     navItems: function navItems() {
       if (this.authenticated && this.auth.profile_complete) {
@@ -157,6 +150,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           title: 'Courses',
           icon: 'library_books'
         }, {
+          route: 'account.student.list',
+          param: {
+            account: this.auth.username
+          },
+          title: 'Students',
+          icon: 'people'
+        }, {
           route: 'account.payment.gateway',
           param: {
             account: this.auth.username
@@ -164,12 +164,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           title: 'Payment',
           icon: 'local_atm'
         }, {
-          route: 'account.student.list',
+          route: 'account.subscription.show',
           param: {
             account: this.auth.username
           },
-          title: 'Students',
-          icon: 'people'
+          title: 'Subscription',
+          icon: 'account_balance'
         }];
       } else {
         return [{
@@ -180,7 +180,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     signout: function signout() {
-      var _this2 = this;
+      var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
@@ -188,7 +188,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return _this2.$inertia.post(route('signout'));
+                return _this.$inertia.post(route('signout'));
 
               case 2:
               case "end":
@@ -198,6 +198,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee);
       }))();
     }
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    this.active = this.navItems().findIndex(function (item) {
+      return item.route == _this2.route().current();
+    });
   }
 });
 

@@ -3,6 +3,7 @@
 namespace Domain\Account\Listeners;
 
 use Domain\Auth\Events\Authenticated;
+use Domain\Subscription\Models\SubscriptionPlan;
 
 
 class CheckAccount
@@ -27,7 +28,7 @@ class CheckAccount
     {
         $user = $event->user;
         if(!$user->account){
-            $user->account()->create([
+            $account = $user->account()->create([
                 'email' =>  $user->email
             ]);
         }

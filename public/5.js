@@ -328,8 +328,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         },
         callback: function callback(response) {
           toastr.success("Payment successful");
-          _this3.process = "Registering you as ".concat(_this3.student.first_name, " ").concat(_this3.student.last_name);
-          console.log(response);
+          _this3.process = "Registering you as ".concat(_this3.student.first_name, " ").concat(_this3.student.last_name); // console.log(response);
 
           _this3.register(_objectSpread(_objectSpread({}, _this3.student), {}, {
             payment_ref: response.reference,

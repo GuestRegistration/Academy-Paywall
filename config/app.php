@@ -1,5 +1,6 @@
 <?php
 
+
 return [
 
     /*
@@ -177,6 +178,7 @@ return [
 
         Domain\Auth\AuthServiceProvider::class,
         Domain\Account\AccountServiceProvider::class,
+        Domain\Subscription\SubscriptionServiceProvider::class,
         Domain\Course\CourseServiceProvider::class,
     ],
 

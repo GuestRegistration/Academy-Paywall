@@ -84,6 +84,7 @@
         data(){
             return {
                 drawer: false,
+                active: 0,
             }
         },
         computed: {
@@ -91,9 +92,6 @@
               auth: state => state.auth,
               authenticated: state => state.authenticated,
             }),
-            active(){
-              return this.navItems().findIndex(item => item.route == this.route().current())
-            }
         },
 
         methods:{
@@ -130,6 +128,14 @@
                           icon: 'library_books',
                         },
                         {
+                          route: 'account.student.list',
+                          param: {
+                            account: this.auth.username
+                          },
+                          title: 'Students',
+                          icon: 'people',
+                        },
+                        {
                           route: 'account.payment.gateway',
                           param: {
                             account: this.auth.username
@@ -138,12 +144,12 @@
                           icon: 'local_atm',
                         },
                         {
-                          route: 'account.student.list',
+                          route: 'account.subscription.show',
                           param: {
                             account: this.auth.username
                           },
-                          title: 'Students',
-                          icon: 'people',
+                          title: 'Subscription',
+                          icon: 'account_balance',
                         },
                       ]
             }else{
@@ -160,5 +166,9 @@
            await this.$inertia.post(route('signout'));
           }
         },
+
+        mounted(){
+          this.active = this.navItems().findIndex(item => item.route == this.route().current())
+        }
     }
 </script>

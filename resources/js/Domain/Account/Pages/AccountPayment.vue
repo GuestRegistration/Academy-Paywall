@@ -2,6 +2,7 @@
     <v-container>
         <v-row justify="center">
             <v-col cols="12" md="8" lg="6">
+                <h4>Payment Gateways</h4>
                 <v-expansion-panels
                 popout
                 focusable
