@@ -2,7 +2,23 @@
     <v-container>
         <v-row justify="center">
             <v-col cols="12" md="8">
-                <template>
+                <template v-if="course.started">
+                    <div class="text-center">
+                        <h4>{{ course.title }}</h4>
+                        <div class="text-muted">
+                            <v-icon :color="course.account.theme_color">date_range</v-icon> {{course.start_date}} - {{course.end_date}}
+                        </div>
+                    </div>
+                    <v-alert  icon="info" prominent text type="info">
+                        You can no longer edit course once started
+                    </v-alert>
+                    <div class="text-center">
+                        <inertia-link :href="route('account.course.create', {account: account.username})" class="prevent-default">
+                            <v-btn dark :color="account.theme_color">Add new course</v-btn>
+                        </inertia-link>
+                    </div>
+                </template>
+                <template v-else>
                     <v-card :loading="loading" outlined pa-md-2> 
                         <v-card-title> {{ 'Edit course: '+course.title }}</v-card-title>
                         <v-divider></v-divider>
@@ -11,7 +27,6 @@
                         </v-card-text>
                     </v-card>
                 </template>
-
             </v-col>
         </v-row>
     </v-container>
@@ -55,9 +70,5 @@
 
         },
 
-        mounted(){
-            this.payment = this.$page.payment;
-           
-        }
     }
 </script>

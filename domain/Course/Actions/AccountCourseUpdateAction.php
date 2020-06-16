@@ -20,7 +20,9 @@ class AccountCourseUpdateAction extends Controller
 
     public function __invoke(CourseSaveRequest $request, Account $account, Course $course)
     {
-
+        if($course->started){
+            return redirect()->back()->with('error', 'You can no longer edit this course because it has started');
+        }
         $course->update($request->updateData());
 
         return redirect()->route('account.course.show', [$account->username, $course->slug])->with('success', $course->title." updated successfully");

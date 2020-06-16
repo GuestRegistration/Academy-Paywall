@@ -9,7 +9,6 @@
           :error-messages="errorString ? errorString : ''"
           :append-icon="appendIcon"
           :append-outer-icon="appendOuterIcon"
-          @change="$emit('change', selected)"
         ></v-select>
     </div>
 </template>
@@ -17,7 +16,7 @@
 <script>
   export default {
     name: 'XSelect',
-    
+
     props: {
         errors: null,
         label: String,

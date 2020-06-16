@@ -38,6 +38,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -92,9 +107,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     }
-  },
-  mounted: function mounted() {
-    this.payment = this.$page.payment;
   }
 });
 
@@ -126,37 +138,120 @@ var render = function() {
             "v-col",
             { attrs: { cols: "12", md: "8" } },
             [
-              [
-                _c(
-                  "v-card",
-                  {
-                    attrs: { loading: _vm.loading, outlined: "", "pa-md-2": "" }
-                  },
-                  [
-                    _c("v-card-title", [
-                      _vm._v(" " + _vm._s("Edit course: " + _vm.course.title))
+              _vm.course.started
+                ? [
+                    _c("div", { staticClass: "text-center" }, [
+                      _c("h4", [_vm._v(_vm._s(_vm.course.title))]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "text-muted" },
+                        [
+                          _c(
+                            "v-icon",
+                            {
+                              attrs: { color: _vm.course.account.theme_color }
+                            },
+                            [_vm._v("date_range")]
+                          ),
+                          _vm._v(
+                            " " +
+                              _vm._s(_vm.course.start_date) +
+                              " - " +
+                              _vm._s(_vm.course.end_date) +
+                              "\n                    "
+                          )
+                        ],
+                        1
+                      )
                     ]),
                     _vm._v(" "),
-                    _c("v-divider"),
+                    _c(
+                      "v-alert",
+                      {
+                        attrs: {
+                          icon: "info",
+                          prominent: "",
+                          text: "",
+                          type: "info"
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                    You can no longer edit course once started\n                "
+                        )
+                      ]
+                    ),
                     _vm._v(" "),
                     _c(
-                      "v-card-text",
+                      "div",
+                      { staticClass: "text-center" },
                       [
-                        _c("course-form", {
-                          attrs: {
-                            course: _vm.course,
-                            loading: _vm.loading,
-                            color: _vm.account.theme_color
+                        _c(
+                          "inertia-link",
+                          {
+                            staticClass: "prevent-default",
+                            attrs: {
+                              href: _vm.route("account.course.create", {
+                                account: _vm.account.username
+                              })
+                            }
                           },
-                          on: { submit: _vm.submit }
-                        })
+                          [
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: {
+                                  dark: "",
+                                  color: _vm.account.theme_color
+                                }
+                              },
+                              [_vm._v("Add new course")]
+                            )
+                          ],
+                          1
+                        )
                       ],
                       1
                     )
-                  ],
-                  1
-                )
-              ]
+                  ]
+                : [
+                    _c(
+                      "v-card",
+                      {
+                        attrs: {
+                          loading: _vm.loading,
+                          outlined: "",
+                          "pa-md-2": ""
+                        }
+                      },
+                      [
+                        _c("v-card-title", [
+                          _vm._v(
+                            " " + _vm._s("Edit course: " + _vm.course.title)
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("v-divider"),
+                        _vm._v(" "),
+                        _c(
+                          "v-card-text",
+                          [
+                            _c("course-form", {
+                              attrs: {
+                                course: _vm.course,
+                                loading: _vm.loading,
+                                color: _vm.account.theme_color
+                              },
+                              on: { submit: _vm.submit }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]
             ],
             2
           )

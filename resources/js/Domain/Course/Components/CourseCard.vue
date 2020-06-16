@@ -14,7 +14,7 @@
     <v-card-text>
       {{ course.snippet }}
       <v-divider></v-divider>
-      <div class="tex-muted">
+      <div class="text-muted">
         <v-icon :color="course.account.theme_color">date_range</v-icon> {{course.start_date}} - {{course.end_date}}
       </div>
     </v-card-text>

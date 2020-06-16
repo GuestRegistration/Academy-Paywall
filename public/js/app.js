@@ -2408,7 +2408,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'XSelect',
   props: {
@@ -40283,11 +40282,6 @@ var render = function() {
                 "error-messages": _vm.errorString ? _vm.errorString : "",
                 "append-icon": _vm.appendIcon,
                 "append-outer-icon": _vm.appendOuterIcon
-              },
-              on: {
-                change: function($event) {
-                  return _vm.$emit("change", _vm.selected)
-                }
               }
             },
             "v-select",
