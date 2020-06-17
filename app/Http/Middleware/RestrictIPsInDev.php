@@ -16,10 +16,9 @@ class RestrictIPsInDev
      */
     public function handle($request, Closure $next)
     {
-        $whiteIps = explode(',', env('DEV_IP_WHITE_LIST'));
+        $whiteIps = explode('|', env('DEV_IP_WHITE_LIST'));
         if (env('APP_ENV') == 'development' &&  !in_array(Request::ip(), $whiteIps)) {
-            echo "Not authorized....";
-            return;
+            return response('Not authorized....');
         }
         return $next($request);
     }
