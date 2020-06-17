@@ -14,6 +14,7 @@
         "guzzlehttp/guzzle": "^6.3",
         "inertiajs/inertia-laravel": "^0.2.5",
         "laravel/framework": "^7.0",
+        "laravel/installer": "^3.1",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "stripe/stripe-php": "^7.37",

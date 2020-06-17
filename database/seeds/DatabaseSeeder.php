@@ -1,6 +1,8 @@
 <?php
 
+use App\User;
 use Illuminate\Database\Seeder;
+use Domain\Account\Models\Account;
 
 class DatabaseSeeder extends Seeder
 {
