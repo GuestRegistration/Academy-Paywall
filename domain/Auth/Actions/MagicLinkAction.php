@@ -29,7 +29,7 @@ class MagicLinkAction extends Controller
         $user->fill([
             'email' => $email,
             'signin_token' => $token,
-            'signin_token_expires_at' => now()->addMinutes(2)
+            'signin_token_expires_at' => now()->addMinutes(5)
         ])->save();
 
         Notification::send($user, new NewSignin($user));
