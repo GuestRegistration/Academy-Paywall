@@ -14,7 +14,7 @@ class Subscription extends Model
         'account_id', 'subscription_plan_id', 'payment_id', 'start_at', 'end_at'
     ];
 
-    protected $appends = ['expired', 'expiring_time'];
+    protected $appends = ['expired', 'start_time', 'end_time', 'expiring_time'];
 
     protected $dates = [
         'start_at', 'end_at',
@@ -36,7 +36,7 @@ class Subscription extends Model
         return now() > $this->end_at ? true : false;
     }
 
-    public function getStartTimetribute(){
+    public function getStartTimeAttribute(){
         return $this->start_at->format('d F, Y h:i a');
     }
 

@@ -39,6 +39,10 @@ class SubscriptionPlan extends Model
         'name', 'description', 'month_duration', 'amount', 'currency'
     ];
 
+    public static function unlimited(){
+       return self::where('name', self::PLAN_UNLIMITED['name'])->first();
+    }
+
     public function accounts(){
         return $this->hasMany(Account::class);
     }

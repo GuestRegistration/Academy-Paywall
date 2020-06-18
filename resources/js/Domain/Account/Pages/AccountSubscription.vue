@@ -5,7 +5,17 @@
             <v-row justify="center">
                 <v-col cols="12" md="8" lg="6">
                     <h4>Subscriptions</h4>
-                    <template v-if="!account.subscription">
+                    <template v-if="account.is_unlimited">
+                        <v-alert
+                            icon="info"
+                            prominent
+                            text
+                            type="info"
+                            >
+                            You are currently on an unlimited plan
+                        </v-alert>
+                    </template>
+                    <template v-else-if="!account.subscription">
                         <v-alert
                             icon="info"
                             prominent
@@ -15,15 +25,18 @@
                             You are currently on the Pay As You Go Plan. Each course upload cost {{payg.amount | money(payg.currency)}}
                         </v-alert>
                     </template>
+
                     <v-expansion-panels
                     popout
                     focusable
+                    v-if="!account.is_unlimited"
                     >
                     <v-expansion-panel v-for="plan in plans" :key="plan.id" >
                         <v-expansion-panel-header>
                             {{ plan.name }}
                             <v-spacer></v-spacer>
-                            <v-icon v-if="isSubscribed(plan)" color="success" title="Credentials complete">check_circle</v-icon>
+                            <v-icon v-if="isSubscribed(plan) && !account.subscription.expired" color="success" title="Currently subscribed">check_circle</v-icon>
+                            <v-icon v-else-if="isSubscribed(plan) && account.subscription.expired" color="red" title="Subscription expired">report_problem</v-icon>
                         </v-expansion-panel-header>
                         <v-expansion-panel-content>
                             <div class="m-3 text-center">
@@ -31,36 +44,39 @@
                                 <div>
                                     <h1>{{plan.amount | money(plan.currency)}}</h1>
                                 </div>
-                                <template v-if="plan.amount > 0">
-                                    <template v-if="!isSubscribed(plan)">
-                                        <div>
-                                            <v-btn @click="subscribe(plan)" :color="account.theme_color" dark>Subscribe</v-btn>
-                                        </div>
-                                    </template>
-                                </template>
-                                <template v-else>
-                                   <v-alert
-                                        v-if="!isSubscribed(plan)"
-                                        icon="info"
-                                        prominent
-                                        text
-                                        type="info"
+                                
+                                <template  v-if="isSubscribed(plan)">
+                                    <div v-if="!account.subscription.expired">
+                                        <v-alert
+                                            icon="check_circle"
+                                            prominent
+                                            text
+                                            type="success"
+                                            my-2
                                         >
-                                        This is an exclusive package. Contact <a href="mailto: support@acadaapp.com">support@acadaapp.com</a> for more information
-                                    </v-alert>
+                                            You are currently subscribed
+                                        </v-alert>
+                                        {{account.subscription.start_time}} - {{account.subscription.end_time}}, {{account.subscription.expiring_time}} days remaining
+                                    </div>
+                                    <div v-else>
+                                        <v-alert
+                                            icon="report_problem"
+                                            prominent
+                                            text
+                                            type="error"
+                                            my-2
+                                        >
+                                            Subscription expired
+                                        </v-alert>
+                                    </div>
                                 </template>
 
-                                <v-alert
-                                        v-if="isSubscribed(plan)"
-                                        icon="check_circle"
-                                        prominent
-                                        text
-                                        type="success"
-                                        my-2
-                                    >
-                                        You are currently subscribed
-                                    </v-alert>
-                               
+                                <template v-if="!account.is_unlimited && (!account.subscription || (account.subscription && account.subscription.expired))">
+                                    <div>
+                                        <v-btn @click="subscribe(plan)" :color="account.theme_color" dark>Subscribe</v-btn>
+                                    </div>
+                                </template>
+
                             </div>
                         </v-expansion-panel-content>
                     </v-expansion-panel>
@@ -138,10 +154,12 @@
                    })
                })
            },
-           paymentSuccessful(response){
-              toastr.success("Subscription successfull")
-              if(response.subscription){
-                this.account.subscription = response.subscription
+            paymentSuccessful(response){
+              if(response.data.subscription){
+                toastr.success("Subscription was successfull")
+                this.account.subscription = response.data.subscription;
+              }else{
+                toastr.error("Subscription was not successfull")
               }
               this.closeGateway();
            },

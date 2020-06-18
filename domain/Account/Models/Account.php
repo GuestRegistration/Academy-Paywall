@@ -8,6 +8,7 @@ use Domain\Course\Models\Course;
 use Domain\Subscription\Models\Payment;
 use Illuminate\Database\Eloquent\Model;
 use Domain\Subscription\Models\Subscription;
+use Domain\Subscription\Models\SubscriptionPlan;
 
 class Account extends Model
 {
@@ -30,7 +31,7 @@ class Account extends Model
     ];
 
     protected $appends = [
-        'at_username', 'profile_complete'
+        'at_username', 'profile_complete', 'is_unlimited'
     ];
 
     public function getProfileCompleteAttribute(){
@@ -51,6 +52,11 @@ class Account extends Model
 
     public function getCoverImageAttribute($value){
         return $value ?? asset('images/default-account-cover.jpg');
+    }
+
+    public function getIsUnlimitedAttribute(){
+        $unlimited_plan = SubscriptionPlan::unlimited();
+        return $this->subscription && $unlimited_plan && $this->subscription->subscription_plan_id == $unlimited_plan->id;
     }
 
     public function user(){
