@@ -187,6 +187,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -754,152 +765,160 @@ var render = function() {
           }
         },
         [
-          _c(
-            "form",
-            {
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  return _vm.submit($event)
-                }
-              }
-            },
-            [
-              _c(
-                "v-card",
+          !_vm.course.ended
+            ? _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.submit($event)
+                    }
+                  }
+                },
                 [
                   _c(
-                    "v-card-title",
-                    [
-                      _c("span", { staticClass: "headline" }, [
-                        _vm._v('Enroll for "' + _vm._s(_vm.course.title) + '"')
-                      ]),
-                      _vm._v(" "),
-                      _c("v-spacer"),
-                      _vm._v(" "),
-                      _c("h4", { style: "color: " + _vm.account.theme_color }, [
-                        _vm._v(_vm._s(_vm._f("money")(_vm.course.price)))
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("v-divider"),
-                  _vm._v(" "),
-                  _c(
-                    "v-card-text",
-                    [
-                      _c("x-input", {
-                        attrs: {
-                          errors: _vm.errors,
-                          name: "first_name",
-                          type: "text",
-                          label: "First name*"
-                        },
-                        model: {
-                          value: _vm.student.first_name,
-                          callback: function($$v) {
-                            _vm.$set(_vm.student, "first_name", $$v)
-                          },
-                          expression: "student.first_name"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("x-input", {
-                        attrs: {
-                          errors: _vm.errors,
-                          name: "last_name",
-                          type: "text",
-                          label: "Last name*"
-                        },
-                        model: {
-                          value: _vm.student.last_name,
-                          callback: function($$v) {
-                            _vm.$set(_vm.student, "last_name", $$v)
-                          },
-                          expression: "student.last_name"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("x-input", {
-                        attrs: {
-                          errors: _vm.errors,
-                          name: "email",
-                          type: "text",
-                          label: "Email*"
-                        },
-                        model: {
-                          value: _vm.student.email,
-                          callback: function($$v) {
-                            _vm.$set(_vm.student, "email", $$v)
-                          },
-                          expression: "student.email"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("x-input", {
-                        attrs: {
-                          errors: _vm.errors,
-                          name: "phone",
-                          type: "text",
-                          label: "Phone*"
-                        },
-                        model: {
-                          value: _vm.student.phone,
-                          callback: function($$v) {
-                            _vm.$set(_vm.student, "phone", $$v)
-                          },
-                          expression: "student.phone"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("small", { attrs: { color: "red" } }, [
-                        _vm._v("*indicates required field")
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-card-actions",
+                    "v-card",
                     [
                       _c(
-                        "v-btn",
-                        {
-                          attrs: {
-                            type: "button",
-                            color: "red darken-1",
-                            text: ""
-                          },
-                          on: {
-                            click: function($event) {
-                              _vm.$inertia.visit(
-                                _vm.route("account.course.show", {
-                                  account: _vm.account.username,
-                                  course: _vm.course.slug
-                                })
-                              )
-                            }
-                          }
-                        },
-                        [_vm._v("Cancel")]
+                        "v-card-title",
+                        [
+                          _c("span", { staticClass: "headline" }, [
+                            _vm._v(
+                              'Enroll for "' + _vm._s(_vm.course.title) + '"'
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("v-spacer"),
+                          _vm._v(" "),
+                          _c(
+                            "h4",
+                            { style: "color: " + _vm.account.theme_color },
+                            [_vm._v(_vm._s(_vm._f("money")(_vm.course.price)))]
+                          )
+                        ],
+                        1
                       ),
                       _vm._v(" "),
-                      _c("v-spacer"),
+                      _c("v-divider"),
                       _vm._v(" "),
                       _c(
-                        "v-btn",
-                        {
-                          attrs: {
-                            type: "submit",
-                            loading: _vm.loading,
-                            color: _vm.account.theme_color,
-                            dark: ""
-                          }
-                        },
+                        "v-card-text",
                         [
-                          _vm._v("Proceed to payment  "),
-                          _c("v-icon", [_vm._v("arrow_forward")])
+                          _c("x-input", {
+                            attrs: {
+                              errors: _vm.errors,
+                              name: "first_name",
+                              type: "text",
+                              label: "First name*"
+                            },
+                            model: {
+                              value: _vm.student.first_name,
+                              callback: function($$v) {
+                                _vm.$set(_vm.student, "first_name", $$v)
+                              },
+                              expression: "student.first_name"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("x-input", {
+                            attrs: {
+                              errors: _vm.errors,
+                              name: "last_name",
+                              type: "text",
+                              label: "Last name*"
+                            },
+                            model: {
+                              value: _vm.student.last_name,
+                              callback: function($$v) {
+                                _vm.$set(_vm.student, "last_name", $$v)
+                              },
+                              expression: "student.last_name"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("x-input", {
+                            attrs: {
+                              errors: _vm.errors,
+                              name: "email",
+                              type: "text",
+                              label: "Email*"
+                            },
+                            model: {
+                              value: _vm.student.email,
+                              callback: function($$v) {
+                                _vm.$set(_vm.student, "email", $$v)
+                              },
+                              expression: "student.email"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("x-input", {
+                            attrs: {
+                              errors: _vm.errors,
+                              name: "phone",
+                              type: "text",
+                              label: "Phone*"
+                            },
+                            model: {
+                              value: _vm.student.phone,
+                              callback: function($$v) {
+                                _vm.$set(_vm.student, "phone", $$v)
+                              },
+                              expression: "student.phone"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("small", { attrs: { color: "red" } }, [
+                            _vm._v("*indicates required field")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-card-actions",
+                        [
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: {
+                                type: "button",
+                                color: "red darken-1",
+                                text: ""
+                              },
+                              on: {
+                                click: function($event) {
+                                  _vm.$inertia.visit(
+                                    _vm.route("account.course.show", {
+                                      account: _vm.account.username,
+                                      course: _vm.course.slug
+                                    })
+                                  )
+                                }
+                              }
+                            },
+                            [_vm._v("Cancel")]
+                          ),
+                          _vm._v(" "),
+                          _c("v-spacer"),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: {
+                                type: "submit",
+                                loading: _vm.loading,
+                                color: _vm.account.theme_color,
+                                dark: ""
+                              }
+                            },
+                            [
+                              _vm._v("Proceed to payment  "),
+                              _c("v-icon", [_vm._v("arrow_forward")])
+                            ],
+                            1
+                          )
                         ],
                         1
                       )
@@ -909,9 +928,55 @@ var render = function() {
                 ],
                 1
               )
-            ],
-            1
-          )
+            : _c(
+                "div",
+                [
+                  _c(
+                    "v-card",
+                    [
+                      _c("v-card-text", [
+                        _c(
+                          "div",
+                          { staticClass: "text-center" },
+                          [
+                            _vm._v(
+                              "\n              You can no longer enroll for this course. It ended since " +
+                                _vm._s(_vm.course.end_date) +
+                                "\n              "
+                            ),
+                            _c("v-divider"),
+                            _vm._v(" "),
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: {
+                                  type: "button",
+                                  color: "red darken-1",
+                                  text: ""
+                                },
+                                on: {
+                                  click: function($event) {
+                                    _vm.$inertia.visit(
+                                      _vm.route("account.course.show", {
+                                        account: _vm.account.username,
+                                        course: _vm.course.slug
+                                      })
+                                    )
+                                  }
+                                }
+                              },
+                              [_vm._v("Cancel")]
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
         ]
       ),
       _vm._v(" "),

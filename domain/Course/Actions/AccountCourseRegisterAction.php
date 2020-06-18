@@ -21,6 +21,10 @@ class AccountCourseRegisterAction extends Controller
     {
         if(!$request->get('for_real')) return true;
         
+        if($course->ended){
+            return redirect()->back()->with('error', 'Can not register for this course. It ended already');
+        }
+
         $student = $course->students()->create($request->data());
 
         event(new Enrolled($student));

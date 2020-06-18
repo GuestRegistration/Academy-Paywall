@@ -23,7 +23,7 @@
     </v-dialog>
 
     <v-dialog v-model="dialog" scrollable  persistent max-width="600px">
-        <form @submit.prevent="submit">
+        <form  v-if="!course.ended" @submit.prevent="submit">
           <v-card>
             <v-card-title>
               <span class="headline">Enroll for "{{course.title}}"</span>
@@ -45,6 +45,17 @@
             </v-card-actions>
           </v-card>
         </form>
+        <div v-else>
+          <v-card>
+            <v-card-text>
+              <div class="text-center">
+                You can no longer enroll for this course. It ended since {{course.end_date}}
+                <v-divider></v-divider>
+                <v-btn type="button" color="red darken-1" text @click="$inertia.visit(route('account.course.show', {account: account.username, course: course.slug}))">Cancel</v-btn>
+              </div>
+            </v-card-text>
+          </v-card>
+        </div>
     </v-dialog>
     <payment-gateways :account="account" :gateways="payment_gateways" :show="selectPaymentGateway" @continue="initializeGateway" @cancel="selectPaymentGateway = false; freeProcess()" />
     <student-enrollment  :account="account"  :student="student" :show="showEnrollment" @close="$inertia.visit(route('account.show', {account: account.username}))" />
