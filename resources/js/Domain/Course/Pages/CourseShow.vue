@@ -2,9 +2,13 @@
     <div>
         <h4>{{course.title}}</h4>
         <v-img :src="course.cover_image" ></v-img>
-        <div class="text-muted mt-3">
-            <v-icon :color="account.theme_color">date_range</v-icon> {{course.start_date}} - {{course.end_date}}
-            <v-icon :color="account.theme_color">info</v-icon> {{course.course_type}}
+        <div class="d-flex">
+            <div class="text-muted mt-3">
+                <v-icon :color="account.theme_color">date_range</v-icon> {{course.start_date}} - {{course.end_date}}
+                <v-icon :color="account.theme_color">info</v-icon> {{course.course_type}}
+            </div>
+            <v-spacer></v-spacer>
+            <course-status :course="course" />
         </div>
         <v-divider></v-divider>
         <div class="d-flex">
@@ -53,10 +57,14 @@
 <script>
     import {mapGetters} from "vuex";
     import AccountLayout from '@/Domain/Account/Layout';
+    import CourseStatus from './../Components/CourseStatus';
 
     export default {
         name: "CourseShow",
         layout: (h, page) => h(AccountLayout, [page]),
+        components: {
+            CourseStatus
+        },
          metaInfo()
          {
              return{

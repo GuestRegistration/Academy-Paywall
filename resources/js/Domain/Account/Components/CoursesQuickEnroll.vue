@@ -33,25 +33,7 @@
                                 </v-list>
                             </v-col>
                             <v-col v-if="course !== null" cols="12" md="6" style="max-height: 500px">
-                                  <v-card max-width="344" class="mx-auto" >
-                                      <h4>{{ course.title }}</h4>
-                                    <v-img :src="course.cover_image" height="194"></v-img>
-                                    <v-card-text>
-                                        {{ course.snippet }}
-                                        <v-divider></v-divider>
-                                    <div class="text-muted">
-                                        <v-icon :color="account.theme_color">date_range</v-icon> {{course.start_date}} - {{course.end_date}}
-                                    </div>
-                                    </v-card-text>
-
-                                    <v-card-actions>
-                                        <h4>{{course.price | money}}</h4>
-                                        <v-spacer></v-spacer>
-                                        <inertia-link :href="route('account.course.show', {account: account.username, course: course.slug})" class="prevent-default">
-                                            <v-btn dark :color="account.theme_color" > view course</v-btn>
-                                        </inertia-link>
-                                    </v-card-actions>
-                                </v-card>
+                                 <course-card :course="course" :account="account" :showInstructor="false" display="grid" :showStatus="true" />
                             </v-col>
                         </v-row>
                     </v-container>

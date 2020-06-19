@@ -63,6 +63,8 @@ new Vue({
         store.commit('setAuth', props.auth);
         store.commit('response/setErrors', props.errors);
         store.commit('setFrame');
+        store.commit('setNavDrawer', false);
+        
         toastr.options = {
           "closeButton": true,
           "debug": false,

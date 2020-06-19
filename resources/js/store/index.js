@@ -9,6 +9,7 @@ export default new Vuex.Store({
         auth: {},
         authenticated: false,
         inFrame: false,
+        navDrawer: false
     },
     mutations: {
         setAuth(state, auth) {
@@ -19,6 +20,25 @@ export default new Vuex.Store({
             const url = window.location.search.split('?')[1];
             if(!url) return false;
             state.inFrame = window.location.search.split('?')[1].includes("frame=true");
+        },
+        setNavDrawer(state, open){
+            const isMobile = [
+                /Android/i,
+                /webOS/i,
+                /iPhone/i,
+                /iPad/i,
+                /iPod/i,
+                /BlackBerry/i,
+                /Windows Phone/i
+            ].some((toMatchItem) => {
+                return navigator.userAgent.match(toMatchItem);
+            });
+            if(isMobile){
+                state.navDrawer = open;
+            }else{
+                state.navDrawer = true;
+            }
+            
         }
     },
     getters: {

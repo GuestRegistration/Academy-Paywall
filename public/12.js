@@ -99,10 +99,16 @@ var render = function() {
                 _vm._l(_vm.courses.data, function(course) {
                   return _c(
                     "v-col",
-                    { key: course.id, attrs: { cols: "12", md: "6" } },
+                    { key: course.id, attrs: { cols: "12" } },
                     [
                       _c("course-card", {
-                        attrs: { course: course, account: _vm.account }
+                        attrs: {
+                          course: course,
+                          account: _vm.account,
+                          showInstructor: false,
+                          display: "list",
+                          showStatus: true
+                        }
                       })
                     ],
                     1

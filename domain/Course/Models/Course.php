@@ -25,7 +25,7 @@ class Course extends Model
 
     protected $appends = [
         'is_published', 'published_time', 'snippet',
-        'start_date', 'end_date', 'started', 'ended',
+        'start_date', 'end_date', 'started', 'ended', 'ongoing',
         'raw_dates',
     ];
 

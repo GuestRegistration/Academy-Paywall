@@ -381,6 +381,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _Domain_Account_Layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Domain/Account/Layout */ "./resources/js/Domain/Account/Layout.vue");
+/* harmony import */ var _Components_CourseStatus__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../Components/CourseStatus */ "./resources/js/Domain/Course/Components/CourseStatus.vue");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -439,12 +440,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "CourseShow",
   layout: function layout(h, page) {
     return h(_Domain_Account_Layout__WEBPACK_IMPORTED_MODULE_1__["default"], [page]);
+  },
+  components: {
+    CourseStatus: _Components_CourseStatus__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   metaInfo: function metaInfo() {
     return {
@@ -1044,22 +1053,33 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "text-muted mt-3" },
+        { staticClass: "d-flex" },
         [
-          _c("v-icon", { attrs: { color: _vm.account.theme_color } }, [
-            _vm._v("date_range")
-          ]),
-          _vm._v(
-            " " +
-              _vm._s(_vm.course.start_date) +
-              " - " +
-              _vm._s(_vm.course.end_date) +
-              "\n        "
+          _c(
+            "div",
+            { staticClass: "text-muted mt-3" },
+            [
+              _c("v-icon", { attrs: { color: _vm.account.theme_color } }, [
+                _vm._v("date_range")
+              ]),
+              _vm._v(
+                " " +
+                  _vm._s(_vm.course.start_date) +
+                  " - " +
+                  _vm._s(_vm.course.end_date) +
+                  "\n            "
+              ),
+              _c("v-icon", { attrs: { color: _vm.account.theme_color } }, [
+                _vm._v("info")
+              ]),
+              _vm._v(" " + _vm._s(_vm.course.course_type) + "\n        ")
+            ],
+            1
           ),
-          _c("v-icon", { attrs: { color: _vm.account.theme_color } }, [
-            _vm._v("info")
-          ]),
-          _vm._v(" " + _vm._s(_vm.course.course_type) + "\n    ")
+          _vm._v(" "),
+          _c("v-spacer"),
+          _vm._v(" "),
+          _c("course-status", { attrs: { course: _vm.course } })
         ],
         1
       ),

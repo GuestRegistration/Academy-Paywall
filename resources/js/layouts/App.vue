@@ -3,7 +3,7 @@
   <v-app>
     <v-navigation-drawer 
       app 
-      v-model="drawer"
+      v-model="$store.state.navDrawer"
       >
 
       <template v-if="auth.profile_complete"  v-slot:prepend>
@@ -19,7 +19,7 @@
             <hr>
       </template>
 
-      <v-list>
+      <v-list dense>
         <v-list-item-group v-model="active" >
           <inertia-link :href="route(item.route, item.param)"  class="prevent-default" v-for="(item, i) in navItems()"
             :key="i">
@@ -46,7 +46,7 @@
 
     <v-app-bar app :color="authenticated ? auth.theme_color : 'primary'" dark >
       
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click="$store.state.navDrawer = !$store.state.navDrawer"></v-app-bar-nav-icon>
        
        <inertia-link :href="route('home')" class="white--text" style="text-decoration: none">
         <v-toolbar-title dark>AcadaApp</v-toolbar-title>
@@ -78,23 +78,23 @@
 </template>
 
 <script>
-    import {mapState, mapGetters} from "vuex";
+    import {mapState, mapGetters, mapMutations} from "vuex";
     export default {
         name: 'LayoutApp',
         data(){
             return {
-                drawer: false,
                 active: 0,
+                drawer: false,
             }
         },
         computed: {
-            ...mapState({
-              auth: state => state.auth,
-              authenticated: state => state.authenticated,
-            }),
+            ...mapState([
+              'auth', 'authenticated', 'navDrawer'
+            ])
         },
 
         methods:{
+
           navItems(){
             if(this.authenticated  && this.auth.profile_complete){
               return [
@@ -110,6 +110,14 @@
                           },
                           title: 'Account',
                           icon: 'account_circle',
+                        },
+                        {
+                          route: 'account.edit',
+                          param: {
+                            account: this.auth.username
+                          },
+                          title: 'Edit Account',
+                          icon: 'edit',
                         },
                         {
                           route: 'account.course.create',
@@ -161,12 +169,10 @@
                       ];
             }
           },
-
         async signout(){
            await this.$inertia.post(route('signout'));
           }
         },
-
         mounted(){
           this.active = this.navItems().findIndex(item => item.route == this.route().current())
         }

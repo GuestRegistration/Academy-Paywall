@@ -6,7 +6,7 @@
       </div>
       <v-row v-else>
           <v-col cols="12" md="6" lg="4"  v-for="course in data" :key="course.id">
-              <course-card :account="account" :course="course">
+              <course-card :account="account" :course="course" :showStatus="true" :showInstructor="false">
                 <template v-slot:options>
                   <v-menu v-if="isOnMyAccount(course)" origin="center center"  transition="scale-transition">
                       <template v-slot:activator="{ on }">

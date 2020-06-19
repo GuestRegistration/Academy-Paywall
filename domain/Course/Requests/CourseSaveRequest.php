@@ -4,6 +4,7 @@ namespace Domain\Course\Requests;
 
 use App\Classes\FileUpload;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Domain\Course\Models\Course;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Http\FormRequest;
@@ -36,6 +37,7 @@ class CourseSaveRequest extends FormRequest
             'cover_image' => ['max:2048'],
             'course_type' => ['required'],
             'preview_video' => ['max:10048'],
+            'instructions' => [Rule::requiredIf($this->get('send_instructions') == "true")]
         ];
     }
 

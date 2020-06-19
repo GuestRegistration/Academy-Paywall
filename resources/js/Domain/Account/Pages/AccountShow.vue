@@ -7,8 +7,8 @@
         </div>
         <div v-else>
              <v-row>
-                <v-col cols="12" md="6"  v-for="course in courses.data" :key="course.id">
-                    <course-card :course="course" :account="account" />
+                <v-col cols="12" v-for="course in courses.data" :key="course.id">
+                    <course-card :course="course" :account="account" :showInstructor="false" display="list" :showStatus="true" />
                 </v-col>
             </v-row>
         </div>

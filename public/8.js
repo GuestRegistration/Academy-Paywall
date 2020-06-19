@@ -291,7 +291,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("students-table", {
-    attrs: { account: _vm.account, students: _vm.students },
+    attrs: { account: _vm.account, students: _vm.students, course: _vm.course },
     scopedSlots: _vm._u([
       {
         key: "header",

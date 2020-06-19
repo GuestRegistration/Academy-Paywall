@@ -1,5 +1,5 @@
 <template>
-    <students-table :account="account" :students="students">
+    <students-table :account="account" :students="students" :course="course">
         <template v-slot:header>
           <h4 v-if="course">"{{ course.title }}" students ({{students.length}})</h4>
           <h4 v-else>All students ({{students.length}})</h4>
