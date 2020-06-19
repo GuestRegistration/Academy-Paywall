@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container class="p-0">
         <v-row justify="center">
             <v-col cols="12" md="8">
                 <template v-if="course.started">
@@ -19,13 +19,9 @@
                     </div>
                 </template>
                 <template v-else>
-                    <v-card :loading="loading" outlined pa-md-2> 
-                        <v-card-title> {{ 'Edit course: '+course.title }}</v-card-title>
-                        <v-divider></v-divider>
-                        <v-card-text>                                         
-                            <course-form @submit="submit" :course="course" :loading="loading" :color="account.theme_color" />              
-                        </v-card-text>
-                    </v-card>
+                    <h4> {{ 'Edit course: '+course.title }} </h4>
+                    <hr>
+                    <course-form @submit="submit" :course="course" :loading="loading" :color="account.theme_color" />
                 </template>
             </v-col>
         </v-row>

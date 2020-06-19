@@ -13,6 +13,14 @@ class Payment extends Model
         'account_id', 'amount', 'currency', 'gateway', 'transaction_ref'
     ];
 
+    protected $appends = [
+        'time'
+    ];
+
+    public function getTimeAttribute(){
+        return $this->created_at->format('d F, Y h:i a');
+    }
+    
     public function account(){
         return $this->belongsTo(Account::class);
     }

@@ -1,24 +1,19 @@
 <template>
-    <v-container>
+    <v-container class="p-0">
         <stripe-gateway ref="stripeGateway" :pk="stripe_pk" :amount="payg.amount" :currency="payg.currency" :color="account.theme_color" :charge_callback="paymentCallback" @success="paymentSuccessful" @error="paymentError" />
         
         <v-row justify="center">
             <v-col cols="12" md="8">
                 <template v-if="payment || (account.subscription && !account.subscription.expired)">
+                    <h4>New Course</h4>
+                    <hr>
                     <v-alert v-if="payment"  icon="info" prominent text type="info">
                         You are adding this course with the "Pay As You Go" payment of {{payment.amount | money(payment.currency)}} on {{payment.time}}
                     </v-alert>
                     <v-alert v-else-if="account.subscription && !account.subscription.expired"  icon="info" prominent text type="info">
                         You are adding this course with your subscription
                     </v-alert>
-                    
-                    <v-card :loading="loading" outlined pa-md-2> 
-                        <v-card-title> New Course</v-card-title>
-                        <v-divider></v-divider>
-                        <v-card-text>                                         
-                            <course-form @submit="submit" :loading="loading" :color="account.theme_color" />              
-                        </v-card-text>
-                    </v-card>
+                    <course-form @submit="submit" :loading="loading" :color="account.theme_color" />
                 </template>
                 <template v-else-if="account.subscription && account.subscription.expired">
                     <v-alert  icon="info" prominent text type="info">

@@ -1,6 +1,6 @@
 <template>
     <form @submit.prevent="submit">
-        <v-container>
+        <v-container fluid style="overflow: auto">
             <v-row justify="center" align="center">
                 <v-col cols="12">
                     <x-input :errors="errors" name="title" type="text" v-model="form.title" label="Course title" />
@@ -26,7 +26,7 @@
                     <div>
                         <small>Send a mail to your student after a successful enrollment. This could be an instruction on how to proceed with the course or a welcoming message</small>
                     </div>
-                    <div v-if="form.send_instructions">
+                    <div v-if="form.send_instructions" style="overflow: auto">
                         <label>Message</label>
                         <wysiwyg v-model="form.instructions" />
                         <div v-if="errors && errors['instructions'] && errors['instructions'].length" class="text-danger">{{ errors['instructions'][0] }}</div>
