@@ -30,7 +30,7 @@ class Frontend
             },
 
             'auth' => function () {
-                return optional(Request::user())->load('account');
+                return optional(Request::user())->load(['account', 'profile']);
             },
         ]);
     }

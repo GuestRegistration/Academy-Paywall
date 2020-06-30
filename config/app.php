@@ -180,6 +180,7 @@ return [
         Domain\Account\AccountServiceProvider::class,
         Domain\Subscription\SubscriptionServiceProvider::class,
         Domain\Course\CourseServiceProvider::class,
+        Domain\User\UserServiceProvider::class,
     ],
 
     /*

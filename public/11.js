@@ -1,1 +1,364 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[11,18],{"+c/H":function(t,e,r){"use strict";r.r(e);var o={name:"CourseForm",props:{course:Object,loading:Boolean,color:String},data:function(){return{form:{},course_types:["Zoom","Google classroom"]}},computed:{errors:function(){return this.$page.errors}},methods:{submit:function(){this.$emit("submit",this.formData())},formData:function(){var t=this,e=new FormData;return Object.keys(this.form).forEach((function(r){null!=t.form[r]&&"null"!=t.form[r]&&e.append(r,t.form[r])})),e}},mounted:function(){this.course&&(this.form=this.course,this.form.start_date=this.course.raw_dates.start,this.form.end_date=this.course.raw_dates.end)}},n=r("KHd+"),s=Object(n.a)(o,(function(){var t=this,e=t.$createElement,r=t._self._c||e;return r("form",{on:{submit:function(e){return e.preventDefault(),t.submit(e)}}},[r("v-container",{staticStyle:{overflow:"auto"},attrs:{fluid:""}},[r("v-row",{attrs:{justify:"center",align:"center"}},[r("v-col",{attrs:{cols:"12"}},[r("x-input",{attrs:{errors:t.errors,name:"title",type:"text",label:"Course title"},model:{value:t.form.title,callback:function(e){t.$set(t.form,"title",e)},expression:"form.title"}}),t._v(" "),r("x-textarea",{attrs:{errors:t.errors,name:"description",label:"Course description"},model:{value:t.form.description,callback:function(e){t.$set(t.form,"description",e)},expression:"form.description"}}),t._v(" "),r("x-input",{attrs:{errors:t.errors,name:"price",type:"number",label:"Price"},model:{value:t.form.price,callback:function(e){t.$set(t.form,"price",e)},expression:"form.price"}}),t._v(" "),r("v-row",[r("v-col",{attrs:{cols:"12",lg:"6"}},[r("x-date-picker",{attrs:{errors:t.errors,label:"Starting date",name:"start_date",current:t.form.start_date},on:{change:function(e){return t.form.start_date=e}}})],1),t._v(" "),r("v-col",{attrs:{cols:"12",lg:"6"}},[r("x-date-picker",{attrs:{errors:t.errors,label:"Ending date",name:"end_date",current:t.form.end_date},on:{change:function(e){return t.form.end_date=e}}})],1)],1),t._v(" "),r("x-select",{attrs:{errors:t.errors,value:t.form.course_type,label:"Course type",name:"course_type",items:t.course_types,outlined:""},on:{change:function(e){return t.form.course_type=e}}})],1),t._v(" "),r("v-col",{attrs:{cols:"12"}},[r("x-file-input",{attrs:{errors:t.errors,src:t.form.cover_image,name:"cover_image",label:"Cover image"},on:{change:function(e){return t.form.cover_image=e[0]}}})],1),t._v(" "),r("v-col",{attrs:{cols:"12"}},[r("v-switch",{attrs:{label:"Send instruction after enrollment"},model:{value:t.form.send_instructions,callback:function(e){t.$set(t.form,"send_instructions",e)},expression:"form.send_instructions"}}),t._v(" "),r("div",[r("small",[t._v("Send a mail to your student after a successful enrollment. This could be an instruction on how to proceed with the course or a welcoming message")])]),t._v(" "),t.form.send_instructions?r("div",{staticStyle:{overflow:"auto"}},[r("label",[t._v("Message")]),t._v(" "),r("wysiwyg",{model:{value:t.form.instructions,callback:function(e){t.$set(t.form,"instructions",e)},expression:"form.instructions"}}),t._v(" "),t.errors&&t.errors.instructions&&t.errors.instructions.length?r("div",{staticClass:"text-danger"},[t._v(t._s(t.errors.instructions[0]))]):t._e()],1):t._e()],1)],1),t._v(" "),r("v-btn",{attrs:{fixed:"",dark:"",fab:"",bottom:"",right:"","x-large":"",loading:t.loading,type:"submit",color:t.color}},[r("v-icon",[t._v("mdi-check")])],1)],1)],1)}),[],!1,null,null,null);e.default=s.exports},HDyh:function(t,e,r){"use strict";r.r(e);var o=r("o0o1"),n=r.n(o),s=r("EmcK");function a(t,e,r,o,n,s,a){try{var c=t[s](a),i=c.value}catch(t){return void r(t)}c.done?e(i):Promise.resolve(i).then(o,n)}var c={name:"CourseCreate",layout:function(t,e){return t(s.default,[e])},components:{CourseForm:r("+c/H").default},metaInfo:function(){return{title:"".concat(this.course?this.course.title+" edit":"New course "+this.account.at_username),titleTemplate:"%s - AcadaApp"}},data:function(){return{payment:null,loading:!1}},props:{account:Object,course:Object,payg:Object,stripe_pk:String},methods:{submit:function(t){var e,r=this;return(e=n.a.mark((function e(){return n.a.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return r.loading=!0,e.next=3,r.$inertia.post(r.route("account.course.store",{account:r.account.username}),t);case 3:r.loading=!1;case 4:case"end":return e.stop()}}),e)})),function(){var t=this,r=arguments;return new Promise((function(o,n){var s=e.apply(t,r);function c(t){a(s,o,n,c,i,"next",t)}function i(t){a(s,o,n,c,i,"throw",t)}c(void 0)}))})()},paymentCallback:function(t){var e=this;return new Promise((function(r,o){axios.post(e.route("subscription.payg",{account:e.account.username}),{token:t}).then((function(t){r(t)})).catch((function(t){o(t)}))}))},paymentSuccessful:function(t){toastr.success("Subscription successfull"),this.payment=t.data.payment,this.closeStripeGateway()},paymentError:function(t){toastr.error("There was an error "+t.message),this.closeStripeGateway()},openStripeGateway:function(){this.$refs.stripeGateway.open()},closeStripeGateway:function(){this.$refs.stripeGateway.close()}},mounted:function(){this.payment=this.$page.payment}},i=r("KHd+"),u=Object(i.a)(c,(function(){var t=this,e=t.$createElement,r=t._self._c||e;return r("v-container",{staticClass:"p-0"},[r("stripe-gateway",{ref:"stripeGateway",attrs:{pk:t.stripe_pk,amount:t.payg.amount,currency:t.payg.currency,color:t.account.theme_color,charge_callback:t.paymentCallback},on:{success:t.paymentSuccessful,error:t.paymentError}}),t._v(" "),r("v-row",{attrs:{justify:"center"}},[r("v-col",{attrs:{cols:"12",md:"8"}},[t.payment||t.account.subscription&&!t.account.subscription.expired?[r("h4",[t._v("New Course")]),t._v(" "),r("hr"),t._v(" "),t.payment?r("v-alert",{attrs:{icon:"info",prominent:"",text:"",type:"info"}},[t._v('\n                    You are adding this course with the "Pay As You Go" payment of '+t._s(t._f("money")(t.payment.amount,t.payment.currency))+" on "+t._s(t.payment.time)+"\n                ")]):t.account.subscription&&!t.account.subscription.expired?r("v-alert",{attrs:{icon:"info",prominent:"",text:"",type:"info"}},[t._v("\n                    You are adding this course with your subscription\n                ")]):t._e(),t._v(" "),r("course-form",{attrs:{loading:t.loading,color:t.account.theme_color},on:{submit:t.submit}})]:t.account.subscription&&t.account.subscription.expired?[r("v-alert",{attrs:{icon:"info",prominent:"",text:"",type:"info"}},[t._v("\n                Your subscription has expired. Go to "),r("inertia-link",{attrs:{href:t.route("account.subscription.show",{account:t.account.username})}},[t._v("YOUR SUBSCRIPTIONS")]),t._v(" to subscribe\n                ")],1),t._v(" "),r("div",{staticClass:"my-5 text-center"},[r("h4",[t._v("Pay As You Go")]),t._v(" "),r("p",[t._v("You can pay "+t._s(t._f("money")(t.payg.amount,t.payg.currency))+" to add a course if you are not ready to renew your subscription")]),t._v(" "),r("v-btn",{attrs:{dark:"",color:t.account.theme_color},on:{click:t.openStripeGateway}},[t._v('Do "Pay As You Go"')])],1)]:t.payment?t._e():[r("v-alert",{attrs:{icon:"info",prominent:"",text:"",type:"info"}},[t._v('\n                    You are currently on the "Pay As You Go" Plan. Adding a new courses cost '+t._s(t._f("money")(t.payg.amount,t.payg.currency))+"\n                ")]),t._v(" "),r("v-btn",{attrs:{dark:"",color:t.account.theme_color},on:{click:t.openStripeGateway}},[t._v("Pay "+t._s(t._f("money")(t.payg.amount,t.payg.currency)))]),t._v(" "),r("inertia-link",{staticClass:"prevent-default",attrs:{href:t.route("account.subscription.show",{account:t.account.username})}},[r("v-btn",{attrs:{dark:"",color:t.account.theme_color}},[t._v("View subscription")])],1)]],2)],1)],1)}),[],!1,null,null,null);e.default=u.exports}}]);
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[11],{
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Account/Pages/AccountPayment.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Domain/Account/Pages/AccountPayment.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _layouts_App__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/layouts/App */ "./resources/js/layouts/App.vue");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "AccountPayment",
+  layout: function layout(h, page) {
+    return h(_layouts_App__WEBPACK_IMPORTED_MODULE_1__["default"], [page]);
+  },
+  metaInfo: function metaInfo() {
+    return {
+      title: "Payment setup ".concat(this.account.at_username),
+      titleTemplate: '%s - AcadaApp'
+    };
+  },
+  data: function data() {
+    return {
+      loading: null,
+      form: {}
+    };
+  },
+  props: {
+    account: Object,
+    gateways: Array
+  },
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
+    auth: function auth(state) {
+      return state.auth;
+    },
+    authenticated: function authenticated(state) {
+      return state.authenticated;
+    }
+  })), {}, {
+    errors: function errors() {
+      return this.$page.errors;
+    }
+  }),
+  methods: {
+    saveGateway: function saveGateway(i) {
+      var _this = this;
+
+      this.loading = i;
+
+      var data = _objectSpread({
+        gateway: this.gateways[i].gateway
+      }, this.gateways[i].data);
+
+      axios.post(this.route('account.payment.gateway.store', {
+        account: this.account.username
+      }), data).then(function (response) {
+        _this.gateways[i].data = response.data;
+        toastr.success("".concat(_this.gateways[i].gateway_name, " settings saved"));
+      })["catch"](function (e) {
+        toastr.error("".concat(_this.gateways[i].gateway_name, " settings not saved"));
+      })["finally"](function () {
+        _this.loading = null;
+      });
+    }
+  },
+  mounted: function mounted() {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Account/Pages/AccountPayment.vue?vue&type=template&id=294c2783&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Domain/Account/Pages/AccountPayment.vue?vue&type=template&id=294c2783& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-container",
+    [
+      _c(
+        "v-row",
+        { attrs: { justify: "center" } },
+        [
+          _c(
+            "v-col",
+            { attrs: { cols: "12", md: "8", lg: "6" } },
+            [
+              _c("h4", [_vm._v("Payment Gateways")]),
+              _vm._v(" "),
+              _c(
+                "v-expansion-panels",
+                { attrs: { popout: "", focusable: "" } },
+                _vm._l(_vm.gateways, function(gateway, g) {
+                  return _c(
+                    "v-expansion-panel",
+                    { key: g },
+                    [
+                      _c(
+                        "v-expansion-panel-header",
+                        [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(gateway.gateway_name) +
+                              "\n                    "
+                          ),
+                          _c("v-spacer"),
+                          _vm._v(" "),
+                          gateway.data.credentials_complete
+                            ? _c(
+                                "v-icon",
+                                {
+                                  attrs: {
+                                    color: "success",
+                                    title: "Credentials complete"
+                                  }
+                                },
+                                [_vm._v("check_circle")]
+                              )
+                            : _c(
+                                "v-icon",
+                                {
+                                  attrs: {
+                                    color: "red",
+                                    title: "Some credentials are missing"
+                                  }
+                                },
+                                [_vm._v("report_problem")]
+                              )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("v-expansion-panel-content", [
+                        _c("div", { staticClass: "my-3" }, [
+                          _c(
+                            "form",
+                            {
+                              on: {
+                                submit: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.saveGateway(g)
+                                }
+                              }
+                            },
+                            [
+                              _c("v-switch", {
+                                attrs: {
+                                  label: "Activate " + gateway.gateway_name
+                                },
+                                model: {
+                                  value: gateway.data.active,
+                                  callback: function($$v) {
+                                    _vm.$set(gateway.data, "active", $$v)
+                                  },
+                                  expression: "gateway.data.active"
+                                }
+                              }),
+                              _vm._v(" "),
+                              gateway.data.active
+                                ? [
+                                    _vm._l(gateway.credentials, function(
+                                      credential,
+                                      c
+                                    ) {
+                                      return [
+                                        _c("x-input", {
+                                          key: c,
+                                          attrs: {
+                                            errors: _vm.errors,
+                                            name: credential.slug,
+                                            label: credential.name
+                                          },
+                                          model: {
+                                            value:
+                                              gateway.data.credentials[
+                                                credential.slug
+                                              ],
+                                            callback: function($$v) {
+                                              _vm.$set(
+                                                gateway.data.credentials,
+                                                credential.slug,
+                                                $$v
+                                              )
+                                            },
+                                            expression:
+                                              "gateway.data.credentials[credential.slug]"
+                                          }
+                                        })
+                                      ]
+                                    })
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c(
+                                "x-button",
+                                {
+                                  attrs: {
+                                    type: "sumbit",
+                                    loading: _vm.loading == g,
+                                    color: _vm.account.theme_color,
+                                    dark: ""
+                                  }
+                                },
+                                [_vm._v("Save")]
+                              )
+                            ],
+                            2
+                          )
+                        ])
+                      ])
+                    ],
+                    1
+                  )
+                }),
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./resources/js/Domain/Account/Pages/AccountPayment.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/Domain/Account/Pages/AccountPayment.vue ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AccountPayment_vue_vue_type_template_id_294c2783___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AccountPayment.vue?vue&type=template&id=294c2783& */ "./resources/js/Domain/Account/Pages/AccountPayment.vue?vue&type=template&id=294c2783&");
+/* harmony import */ var _AccountPayment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AccountPayment.vue?vue&type=script&lang=js& */ "./resources/js/Domain/Account/Pages/AccountPayment.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AccountPayment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AccountPayment_vue_vue_type_template_id_294c2783___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AccountPayment_vue_vue_type_template_id_294c2783___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Domain/Account/Pages/AccountPayment.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Domain/Account/Pages/AccountPayment.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/Domain/Account/Pages/AccountPayment.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountPayment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AccountPayment.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Account/Pages/AccountPayment.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountPayment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Domain/Account/Pages/AccountPayment.vue?vue&type=template&id=294c2783&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/Domain/Account/Pages/AccountPayment.vue?vue&type=template&id=294c2783& ***!
+  \*********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountPayment_vue_vue_type_template_id_294c2783___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AccountPayment.vue?vue&type=template&id=294c2783& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Account/Pages/AccountPayment.vue?vue&type=template&id=294c2783&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountPayment_vue_vue_type_template_id_294c2783___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountPayment_vue_vue_type_template_id_294c2783___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ })
+
+}]);

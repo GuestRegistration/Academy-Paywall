@@ -2,6 +2,7 @@
 
 namespace Domain\Course\Models;
 
+use App\User;
 use App\Classes\UUID;
 use Domain\Account\Models\Account;
 use Illuminate\Database\Eloquent\Model;
@@ -35,6 +36,10 @@ class Course extends Model
 
     public function students(){
         return $this->hasMany(Student::class);
+    }
+
+    public function users(){
+        return $this->belongsToMany(User::class);
     }
 
     public function getCoverImageAttribute($value){

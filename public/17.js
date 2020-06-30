@@ -1,1 +1,258 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[17],{"6nZ9":function(t,e,n){"use strict";n.r(e);var r=n("L2JU"),c=n("EmcK");function i(t,e){var n=Object.keys(t);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(t);e&&(r=r.filter((function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable}))),n.push.apply(n,r)}return n}function s(t){for(var e=1;e<arguments.length;e++){var n=null!=arguments[e]?arguments[e]:{};e%2?i(Object(n),!0).forEach((function(e){o(t,e,n[e])})):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(n)):i(Object(n)).forEach((function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(n,e))}))}return t}function o(t,e,n){return e in t?Object.defineProperty(t,e,{value:n,enumerable:!0,configurable:!0,writable:!0}):t[e]=n,t}var a={name:"AccounSubscription",layout:function(t,e){return t(c.default,[e])},metaInfo:function(){return{title:"Subsription ".concat(this.account.at_username),titleTemplate:"%s - AcadaApp"}},data:function(){return{plan:{}}},props:{account:Object,plans:Array,payg:Object,stripe_pk:String},computed:s(s({},Object(r.c)({auth:function(t){return t.auth},authenticated:function(t){return t.authenticated}})),{},{processing:function(){return""!==this.process},errors:function(){return this.$page.errors}}),methods:{isSubscribed:function(t){return!!this.account.subscription&&t.id===this.account.subscription.subscription_plan_id},subscribe:function(t){this.plan=t,this.$refs.stripeGateway.open()},chargeCallback:function(t){var e=this;return new Promise((function(n,r){axios.post(e.route("subscription.subscribe",{account:e.account.username}),{token:t,plan:e.plan.id}).then((function(t){n(t)})).catch((function(t){r(t)}))}))},paymentSuccessful:function(t){t.data.subscription?(toastr.success("Subscription was successfull"),this.account.subscription=t.data.subscription):toastr.error("Subscription was not successfull"),this.closeGateway()},paymentError:function(t){toastr.error("There was an error "+t.message),this.closeGateway()},closeGateway:function(){this.plan={},this.$refs.stripeGateway.close()}}},u=n("KHd+"),p=Object(u.a)(a,(function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("div",[n("v-container",[n("stripe-gateway",{ref:"stripeGateway",attrs:{pk:t.stripe_pk,amount:t.plan.amount,currency:t.plan.currency,color:t.account.theme_color,charge_callback:t.chargeCallback},on:{success:t.paymentSuccessful,error:t.paymentError}}),t._v(" "),n("v-row",{attrs:{justify:"center"}},[n("v-col",{attrs:{cols:"12",md:"8",lg:"6"}},[n("h4",[t._v("Subscriptions")]),t._v(" "),t.account.is_unlimited?[n("v-alert",{attrs:{icon:"info",prominent:"",text:"",type:"info"}},[t._v("\n                        You are currently on an unlimited plan\n                    ")])]:t.account.subscription?t._e():[n("v-alert",{attrs:{icon:"info",prominent:"",text:"",type:"info"}},[t._v("\n                        You are currently on the Pay As You Go Plan. Each course upload cost "+t._s(t._f("money")(t.payg.amount,t.payg.currency))+"\n                    ")])],t._v(" "),t.account.is_unlimited?t._e():n("v-expansion-panels",{attrs:{popout:"",focusable:""}},t._l(t.plans,(function(e){return n("v-expansion-panel",{key:e.id},[n("v-expansion-panel-header",[t._v("\n                        "+t._s(e.name)+"\n                        "),n("v-spacer"),t._v(" "),t.isSubscribed(e)&&!t.account.subscription.expired?n("v-icon",{attrs:{color:"success",title:"Currently subscribed"}},[t._v("check_circle")]):t.isSubscribed(e)&&t.account.subscription.expired?n("v-icon",{attrs:{color:"red",title:"Subscription expired"}},[t._v("report_problem")]):t._e()],1),t._v(" "),n("v-expansion-panel-content",[n("div",{staticClass:"m-3 text-center"},[t._v("\n                            "+t._s(e.description)+"\n                            "),n("div",[n("h1",[t._v(t._s(t._f("money")(e.amount,e.currency)))])]),t._v(" "),t.isSubscribed(e)?[t.account.subscription.expired?n("div",[n("v-alert",{attrs:{icon:"report_problem",prominent:"",text:"",type:"error","my-2":""}},[t._v("\n                                        Subscription expired\n                                    ")])],1):n("div",[n("v-alert",{attrs:{icon:"check_circle",prominent:"",text:"",type:"success","my-2":""}},[t._v("\n                                        You are currently subscribed\n                                    ")]),t._v("\n                                    "+t._s(t.account.subscription.start_time)+" - "+t._s(t.account.subscription.end_time)+", "+t._s(t.account.subscription.expiring_time)+" days remaining\n                                ")],1)]:t._e(),t._v(" "),!t.account.is_unlimited&&(!t.account.subscription||t.account.subscription&&t.account.subscription.expired)?[n("div",[n("v-btn",{attrs:{color:t.account.theme_color,dark:""},on:{click:function(n){return t.subscribe(e)}}},[t._v("Subscribe")])],1)]:t._e()],2)])],1)})),1)],2)],1)],1)],1)}),[],!1,null,null,null);e.default=p.exports}}]);
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[17],{
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Course/Components/PaymentGateways.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Domain/Course/Components/PaymentGateways.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "PaymentGateways",
+  data: function data() {
+    return {
+      gateway: null,
+      dialog: false
+    };
+  },
+  props: {
+    gateways: Array,
+    account: Object,
+    show: Boolean
+  },
+  watch: {
+    show: {
+      immediate: true,
+      handler: function handler(show) {
+        this.dialog = show;
+      }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Course/Components/PaymentGateways.vue?vue&type=template&id=aa34d47a&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Domain/Course/Components/PaymentGateways.vue?vue&type=template&id=aa34d47a& ***!
+  \********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-row",
+    { attrs: { justify: "center" } },
+    [
+      _c(
+        "v-dialog",
+        {
+          attrs: { scrollable: "", "max-width": "300px" },
+          model: {
+            value: _vm.dialog,
+            callback: function($$v) {
+              _vm.dialog = $$v
+            },
+            expression: "dialog"
+          }
+        },
+        [
+          _c(
+            "v-card",
+            [
+              _c("v-card-title", [_vm._v("Payment method")]),
+              _vm._v(" "),
+              _c("v-divider"),
+              _vm._v(" "),
+              _c(
+                "v-card-text",
+                { staticStyle: { height: "300px" } },
+                [
+                  _vm.gateways.length
+                    ? _c(
+                        "v-radio-group",
+                        {
+                          attrs: { column: "" },
+                          model: {
+                            value: _vm.gateway,
+                            callback: function($$v) {
+                              _vm.gateway = $$v
+                            },
+                            expression: "gateway"
+                          }
+                        },
+                        _vm._l(_vm.gateways, function(g) {
+                          return _c("v-radio", {
+                            key: g.gateway,
+                            attrs: { label: g.gateway, value: g.gateway }
+                          })
+                        }),
+                        1
+                      )
+                    : _c("div", { staticClass: "text-muted text-center" }, [
+                        _c("small", [
+                          _vm._v("No payment gateway available yet")
+                        ])
+                      ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-divider"),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "red", text: "" },
+                      on: {
+                        click: function($event) {
+                          return _vm.$emit("cancel")
+                        }
+                      }
+                    },
+                    [_vm._v("Cancel")]
+                  ),
+                  _vm._v(" "),
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _vm.gateway !== null
+                    ? _c(
+                        "v-btn",
+                        {
+                          attrs: { color: _vm.account.theme_color, dark: "" },
+                          on: {
+                            click: function($event) {
+                              return _vm.$emit("continue", _vm.gateway)
+                            }
+                          }
+                        },
+                        [_vm._v("Continue")]
+                      )
+                    : _vm._e()
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./resources/js/Domain/Course/Components/PaymentGateways.vue":
+/*!*******************************************************************!*\
+  !*** ./resources/js/Domain/Course/Components/PaymentGateways.vue ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PaymentGateways_vue_vue_type_template_id_aa34d47a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PaymentGateways.vue?vue&type=template&id=aa34d47a& */ "./resources/js/Domain/Course/Components/PaymentGateways.vue?vue&type=template&id=aa34d47a&");
+/* harmony import */ var _PaymentGateways_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PaymentGateways.vue?vue&type=script&lang=js& */ "./resources/js/Domain/Course/Components/PaymentGateways.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _PaymentGateways_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PaymentGateways_vue_vue_type_template_id_aa34d47a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PaymentGateways_vue_vue_type_template_id_aa34d47a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Domain/Course/Components/PaymentGateways.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Domain/Course/Components/PaymentGateways.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/Domain/Course/Components/PaymentGateways.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PaymentGateways_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PaymentGateways.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Course/Components/PaymentGateways.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PaymentGateways_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Domain/Course/Components/PaymentGateways.vue?vue&type=template&id=aa34d47a&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/Domain/Course/Components/PaymentGateways.vue?vue&type=template&id=aa34d47a& ***!
+  \**************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PaymentGateways_vue_vue_type_template_id_aa34d47a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PaymentGateways.vue?vue&type=template&id=aa34d47a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Course/Components/PaymentGateways.vue?vue&type=template&id=aa34d47a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PaymentGateways_vue_vue_type_template_id_aa34d47a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PaymentGateways_vue_vue_type_template_id_aa34d47a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ })
+
+}]);

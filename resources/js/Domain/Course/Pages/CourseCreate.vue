@@ -66,6 +66,7 @@
             account: Object,
             course: Object,
             payg: Object,
+            instructors: Array,
             stripe_pk: String,
         },
         methods: {
