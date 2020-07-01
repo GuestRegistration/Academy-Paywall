@@ -6,7 +6,7 @@ use Domain\Course\Events\Enrolled;
 use Domain\Auth\Events\Authenticated;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
-use Domain\Account\Listeners\CheckAccount;
+use Domain\User\Listeners\CheckProfile;
 use Domain\Course\Listeners\SendInstructions;
 use Domain\Auth\Listeners\UpdateUserLastLogin;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -25,7 +25,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         Authenticated::class => [
             UpdateUserLastLogin::class,
-            CheckAccount::class,
+            CheckProfile::class,
         ],
 
         Enrolled::class => [

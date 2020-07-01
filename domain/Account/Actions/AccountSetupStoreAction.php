@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Auth\Actions;
+namespace Domain\Account\Actions;
 
 use Inertia\Inertia;
 use App\Http\Controllers\Controller;
@@ -14,7 +14,12 @@ class AccountSetupStoreAction extends Controller
 
     public function __invoke(AccountUpdateRequest $request)
     {
-        $this->user()->account->update($request->data());
+        if($this->user()->account){
+            $this->user()->account->update($request->data());
+        }else{
+            $this->user()->account()->create($request->data());
+        }
+        
         return redirect()->route('account.show', $this->user()->account->username)->with('success', 'Account updated');
     }
 

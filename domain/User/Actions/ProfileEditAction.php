@@ -18,7 +18,7 @@ class ProfileEditAction extends Controller
 
     public function __invoke(Profile $profile)
     {
-
+        return Inertia::render('Domain/User/Pages/ProfileEdit', compact('profile'));
     }
 
 }

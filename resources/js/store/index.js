@@ -13,7 +13,7 @@ export default new Vuex.Store({
     },
     mutations: {
         setAuth(state, auth) {
-            state.auth = auth ? auth.account || {} : {};
+            state.auth = auth ?? {};
             state.authenticated = auth ? true : false;
         },
         setFrame(state){
@@ -50,11 +50,18 @@ export default new Vuex.Store({
         },
         isMyAccount: state => account => {
             if(!state.authenticated) return false;
-            return state.auth.id === account.id ? true : false;
+            if(!state.auth.account) return false;
+            return state.auth.account.id === account.id ? true : false;
         },
+        isMyProfile: state => profile => {
+            if(!state.authenticated) return false;
+            return state.auth.profile.id === profile.id ? true : false;
+        },
+
         isOnMyAccount: state => resource => {
             if(!state.authenticated) return false;
-            return state.auth.id === resource.account_id ? true : false;
+            if(!state.auth.account) return false;
+            return state.auth.account.id === resource.account_id ? true : false;
         }
     },
     

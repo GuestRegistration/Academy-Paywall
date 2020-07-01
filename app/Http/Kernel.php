@@ -2,7 +2,7 @@
 
 namespace App\Http;
 
-use Domain\Auth\Middleware\SetUpAccount;
+use Domain\Auth\Middleware\SetUpProfile;
 use App\Http\Middleware\RestrictIPsInDev;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -39,7 +39,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            SetUpAccount::class,
+            SetUpProfile::class,
         ],
 
         'api' => [

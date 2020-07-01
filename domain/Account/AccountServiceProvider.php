@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 
 class AccountServiceProvider extends ServiceProvider
 {
-    public const PREFIX = '@{account:username}';
+    public const PREFIX = '';
 
     /**
      * Register services.
@@ -33,7 +33,7 @@ class AccountServiceProvider extends ServiceProvider
     protected function mapRoute()
     {
         Route::middleware('web')
-            ->prefix(self::PREFIX)
+            // ->prefix(self::PREFIX)
             ->group(dirname(__FILE__). DIRECTORY_SEPARATOR. 'route.php');
     }
 }

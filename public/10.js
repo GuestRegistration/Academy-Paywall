@@ -110,7 +110,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   metaInfo: function metaInfo() {
     return {
-      title: "Account Edit ".concat(this.account.at_username),
+      title: 'Academy account set up',
       titleTemplate: '%s - AcadaApp'
     };
   },
@@ -121,7 +121,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   props: {
-    account: Object,
+    account: {
+      type: Object,
+      "default": function _default() {
+        return {
+          theme_color: '#3F51B5'
+        };
+      }
+    },
     new_account: {
       type: Boolean,
       "default": function _default() {
@@ -200,7 +207,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   mounted: function mounted() {
-    this.form = _objectSpread({}, this.account);
+    if (this.account) {
+      this.form = _objectSpread({}, this.account);
+    }
   }
 });
 
@@ -241,7 +250,7 @@ var render = function() {
               "v-col",
               { attrs: { cols: "12", md: "6" } },
               [
-                _c("h4", [_vm._v("Personal Information")]),
+                _c("h4", [_vm._v("Academy Information")]),
                 _vm._v(" "),
                 _c("v-divider"),
                 _vm._v(" "),
@@ -250,7 +259,7 @@ var render = function() {
                     errors: _vm.errors,
                     name: "name",
                     type: "text",
-                    label: "Account name",
+                    label: "Academy name",
                     prependInnerIcon: "account_box"
                   },
                   model: {

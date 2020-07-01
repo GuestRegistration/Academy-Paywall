@@ -11,9 +11,7 @@ class HomeController extends Controller
         if(!Auth::check()){
             return \redirect()->route('signin');
         }else{
-            return Auth::user()->account->profile_complete ? 
-                    redirect()->route('account.course.list', Auth::user()->account->username ) :
-                    redirect()->route('account.setup');
+            return redirect()->route('profile.show', Auth::user()->profile->username );
         }
 
         // return Inertia::render('Pages/Home');

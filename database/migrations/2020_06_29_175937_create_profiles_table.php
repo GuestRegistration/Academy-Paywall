@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\User;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateProfilesTable extends Migration
 {
@@ -15,18 +16,20 @@ class CreateProfilesTable extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('user_id')->index();           
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('phone')->nullable();
+            $table->uuid('user_id')->index()->nullable();           
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('phone')->unique()->nullable();
             $table->string('email')->unique();
-            $table->string('username')->nullable()->unique();
+            $table->string('username')->unique()->nullable();
             $table->text('avatar')->nullable();
             $table->mediumText('bio')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
+        
+        $this->createExistingProfile();
     }
 
     /**
@@ -37,5 +40,16 @@ class CreateProfilesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('profiles');
+    }
+
+    public function createExistingProfile(){
+        User::all()->each(function($user){
+            if(!$user->profile){
+                $user->profile()->create([
+                    'email' => $user->email
+                ]);
+            }
+            
+        });
     }
 }

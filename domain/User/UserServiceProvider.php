@@ -4,7 +4,7 @@ namespace Domain\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
-class AccountServiceProvider extends ServiceProvider
+class UserServiceProvider extends ServiceProvider
 {
     public const PREFIX = 'instructor';
 

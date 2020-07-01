@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Classes\UUID;
+use Domain\User\Models\Profile;
 use Domain\Course\Models\Course;
 use Domain\Account\Models\Account;
 use Illuminate\Notifications\Notifiable;
@@ -17,7 +18,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['email', 'signin_token', 'signin_token_expires_at'];
+    protected $fillable = ['email', 'signin_token', 'last_login_at', 'signin_token_expires_at'];
 
     /**
      * The attributes that should be hidden for arrays.

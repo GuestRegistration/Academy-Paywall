@@ -3,9 +3,9 @@
         <form @submit.prevent="submit">
             <v-row justify="center" align="center">
                 <v-col cols="12" md="6">
-                    <h4>Personal Information</h4>
+                    <h4>Academy Information</h4>
                     <v-divider></v-divider>
-                    <x-input :errors="errors" name="name" type="text" v-model="form.name" label="Account name"  prependInnerIcon="account_box" />
+                    <x-input :errors="errors" name="name" type="text" v-model="form.name" label="Academy name"  prependInnerIcon="account_box" />
                     <x-input :errors="errors" name="username" type="text" v-model="form.username" label="Username" prependInnerIcon="alternate_email" />
                     <x-input :errors="errors" name="email" type="email" v-model="form.email" label="Email"  prependInnerIcon="email"/>
                     <x-input :errors="errors" name="phone" type="tel" v-model="form.phone" label="Phone"  prependInnerIcon="call" />
@@ -84,7 +84,7 @@
         metaInfo()
          {
              return{
-                title: `Account Edit ${this.account.at_username}`,
+                title: 'Academy account set up',
                 titleTemplate: '%s - AcadaApp',
              }
         },
@@ -96,7 +96,12 @@
             }
         },
         props: {
-            account: Object,
+            account: {
+                type: Object,
+                default: () => ({
+                    theme_color: '#3F51B5'
+                })
+            },
             new_account: {
                 type: Boolean,
                 default: () => false,
@@ -146,7 +151,9 @@
         },
 
         mounted(){
-            this.form = {...this.account};
+            if(this.account){
+                this.form = {...this.account};
+            }
         }
     }
 </script>

@@ -19,7 +19,6 @@ class AccountUpdateAction extends Controller
     public function __invoke(AccountUpdateRequest $request, Account $account)
     {
         $account->update($request->data());
-        $account->user->update($request->only('email'));
 
         return redirect()->route('account.edit', $account->username)->with('success', 'Account updated');
     }

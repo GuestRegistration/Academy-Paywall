@@ -21,13 +21,13 @@
       
       <v-toolbar-title dark >
         <inertia-link :href="route('account.show', {account: account.username})" class="prevent-default" style="color: #fff">
-          <avatar :src="account.avatar" :color="account.theme_color" size="30" /> {{ account.name }}
+          <avatar :src="account.avatar" :color="account.theme_color" size="30"  icon="school"/> {{ account.name }}
         </inertia-link>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
-      <inertia-link v-if="authenticated && !isMyAccount" :href="auth.username ? route('account.show', {account: auth.username}) : '#'" class="prevent-default mx-1">
-         <avatar :src="auth.avatar" :color="auth.theme_color" size="40" />
+      <inertia-link v-if="authenticated && auth.account && !isMyAccount(account)" :href="auth.account.username ? route('account.show', {account: auth.account.username}) : '#'" class="prevent-default mx-1">
+         <avatar :src="auth.account.avatar" :color="auth.account.theme_color" size="40" icon="school" />
       </inertia-link>
 
       <v-menu v-if="isMyAccount(account)" origin="center center"  transition="scale-transition">
@@ -64,9 +64,9 @@
     <div id="scrolling-techniques-5"  class="overflow-y-auto" style="max-height: 100vh;">
         <v-parallax height="200" :src="account.cover_image" :color="account.theme_color">
             <div class="p-3" style="background-color: rgba(0,0,0, .2)">
-                <div v-if="!account.show_caption" class="d-flex align-center justify-content-center mb-2">
+                <div v-if="!account.show_caption" class="d-flex align-center mb-2">
                     <div class="mr-2">
-                        <avatar :src="account.avatar" :color="account.theme_color" size="100" />
+                        <avatar :src="account.avatar" :color="account.theme_color" size="100" iconSize="50" icon="school" />
                     </div>
                     <div>
                         <h4>{{ account.name }}</h4>
