@@ -59,6 +59,10 @@ class Account extends Model
         return $this->subscription && $unlimited_plan && $this->subscription->subscription_plan_id == $unlimited_plan->id;
     }
 
+    public function getInstructorsAttribute(){
+        return collect([$this->user->load(['profile'])])->merge($this->users()->with(['profile'])->get());
+    }
+
     public function user(){
         return $this->belongsTo(User::class);
     }

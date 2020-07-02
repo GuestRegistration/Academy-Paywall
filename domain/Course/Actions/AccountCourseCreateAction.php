@@ -24,8 +24,7 @@ class AccountCourseCreateAction extends Controller
         $account->load('subscription.payment');
         $payg = SubscriptionPlan::PLAN_PAYG;
         $stripe_pk = env('STRIPE_PK');
-        $instructors = $account->users->merge(\collect([$account->user]));
-        
+        $instructors = $account->instructors;
         $payment = Cache::has($account->getKey().'-payg') ? Payment::find(Cache::get($account->getKey().'-payg')) : null;
 
         return Inertia::render('Domain/Course/Pages/CourseCreate', compact('account', 'payg', 'stripe_pk', 'payment', 'instructors'));

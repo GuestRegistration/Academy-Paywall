@@ -19,7 +19,10 @@ class AccountCourseEditAction extends Controller
 
     public function __invoke(Account $account, Course $course)
     {
-        return Inertia::render('Domain/Course/Pages/CourseEdit', compact('account', 'course'));
+        $instructors = $account->instructors;
+        $course->load(['users']);
+        
+        return Inertia::render('Domain/Course/Pages/CourseEdit', compact('account', 'course', 'instructors'));
     }
 
 }

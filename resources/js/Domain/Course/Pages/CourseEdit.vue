@@ -21,7 +21,7 @@
                 <template v-else>
                     <h4> {{ 'Edit course: '+course.title }} </h4>
                     <hr>
-                    <course-form @submit="submit" :course="course" :loading="loading" :color="account.theme_color" />
+                    <course-form @submit="submit" :course="course" :loading="loading" :color="account.theme_color"  :instructors="instructors" />
                 </template>
             </v-col>
         </v-row>
@@ -54,8 +54,7 @@
         props:{
             account: Object,
             course: Object,
-            payg: Object,
-            stripe_pk: String,
+            instructors: Array,
         },
         methods: {
             async submit(formData){

@@ -6,7 +6,7 @@
       </div>
       <v-row v-else>
           <v-col cols="12" md="6" lg="4"  v-for="user in data" :key="user.id">
-              <profile-card :account="account" :profile="user" />
+              <profile-card :account="account" :instructor="user" />
           </v-col>
       </v-row>    
      

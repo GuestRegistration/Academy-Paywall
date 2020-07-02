@@ -13,7 +13,7 @@
                     <v-alert v-else-if="account.subscription && !account.subscription.expired"  icon="info" prominent text type="info">
                         You are adding this course with your subscription
                     </v-alert>
-                    <course-form @submit="submit" :loading="loading" :color="account.theme_color" />
+                    <course-form @submit="submit" :loading="loading" :color="account.theme_color" :instructors="instructors" />
                 </template>
                 <template v-else-if="account.subscription && account.subscription.expired">
                     <v-alert  icon="info" prominent text type="info">

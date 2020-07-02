@@ -3,7 +3,7 @@
         <v-row justify="center">
          <v-col cols="12">
            <div class="text-center">
-            <label v-if="label" >{{ label }}</label><label v-if="label" >{{ label }}</label>
+            <label v-if="label" >{{ label }}</label>
            </div>
          </v-col>
          <v-col cols="12">
