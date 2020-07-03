@@ -37,6 +37,5 @@
             courses: Object,
         },
        
-
     }
 </script>

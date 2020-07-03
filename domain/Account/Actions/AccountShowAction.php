@@ -16,7 +16,8 @@ class AccountShowAction extends Controller
 
     public function __invoke(Account $account)
     {
-        $courses = $account->courses()->latest()->paginate();
+        $courses = $account->courses()->with('users.profile')->latest()->paginate();
+
         return Inertia::render('Domain/Account/Pages/AccountShow', compact('account', 'courses'));
     }
 

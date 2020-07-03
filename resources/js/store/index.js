@@ -22,23 +22,7 @@ export default new Vuex.Store({
             state.inFrame = window.location.search.split('?')[1].includes("frame=true");
         },
         setNavDrawer(state, open){
-            const isMobile = [
-                /Android/i,
-                /webOS/i,
-                /iPhone/i,
-                /iPad/i,
-                /iPod/i,
-                /BlackBerry/i,
-                /Windows Phone/i
-            ].some((toMatchItem) => {
-                return navigator.userAgent.match(toMatchItem);
-            });
-            if(isMobile){
-                state.navDrawer = open;
-            }else{
-                state.navDrawer = true;
-            }
-            
+            state.navDrawer = open;
         }
     },
     getters: {

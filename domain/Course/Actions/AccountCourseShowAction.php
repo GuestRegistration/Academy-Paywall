@@ -17,6 +17,7 @@ class AccountCourseShowAction extends Controller
 
     public function __invoke(Account $account, Course $course)
     {
+        $course->load('users.profile');
         return Inertia::render('Domain/Course/Pages/CourseShow', compact('account', 'course'));
     }
 

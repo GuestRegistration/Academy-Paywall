@@ -27,7 +27,6 @@
                         </v-btn>
                     </template>
                     <v-list>
-
                         <v-list-item @click="$inertia.visit(route('account.course.edit', {account: account.username, course: course.slug}))">
                             <v-list-item-icon>
                             <v-icon>edit</v-icon>
@@ -46,6 +45,18 @@
         <div>
             {{course.description}}
         </div>
+        <v-container v-if="course.users" class="mt-4">
+            <h2>Instructors ({{course.users.length}}) </h2>
+            <v-divider></v-divider>
+            <div v-if="!course.users.length" >
+                <p class="text-muted">No instructor yet</p>
+            </div>
+             <v-row v-else>
+                <v-col cols="12" md="6" v-for="user in course.users" :key="user.id">
+                    <profile-card :account="account" :instructor="user"></profile-card>
+                </v-col>
+            </v-row>    
+        </v-container>
         <slot />
         <v-btn fixed dark fab bottom right large :color="account.theme_color" :title="`Enroll for ${course.title}`" @click="enroll">
             <v-icon>arrow_forward</v-icon>
@@ -57,13 +68,14 @@
 <script>
     import {mapGetters} from "vuex";
     import AccountLayout from '@/Domain/Account/Layout';
+     import ProfileCard from '@/Domain/User/Components/ProfileCard';
     import CourseStatus from './../Components/CourseStatus';
 
     export default {
         name: "CourseShow",
         layout: (h, page) => h(AccountLayout, [page]),
         components: {
-            CourseStatus
+            CourseStatus, ProfileCard
         },
          metaInfo()
          {

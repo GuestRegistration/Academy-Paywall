@@ -40,25 +40,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ProfileCard",
@@ -103,13 +84,13 @@ var render = function() {
               attrs: {
                 src: _vm.instructor.profile.avatar,
                 color: "" + (_vm.account ? _vm.account.theme_color : "primary"),
-                size: "100",
+                size: "70",
                 text: _vm.instructor.profile.initials,
                 headline: "yes"
               }
             }),
             _vm._v(" "),
-            _c("h4", [_vm._v(_vm._s(_vm.instructor.profile.fullname))]),
+            _c("h5", [_vm._v(_vm._s(_vm.instructor.profile.fullname))]),
             _vm._v(" "),
             _c(
               "v-row",
@@ -117,7 +98,7 @@ var render = function() {
               [
                 _c(
                   "v-col",
-                  { attrs: { cols: "10" } },
+                  { staticClass: "text-center", attrs: { cols: "10" } },
                   [
                     _c(
                       "inertia-link",
@@ -151,81 +132,7 @@ var render = function() {
                   1
                 ),
                 _vm._v(" "),
-                _vm.isMyAccount(_vm.account)
-                  ? _c(
-                      "v-col",
-                      { attrs: { cols: "2" } },
-                      [
-                        _c(
-                          "v-menu",
-                          {
-                            attrs: {
-                              origin: "center center",
-                              transition: "scale-transition"
-                            },
-                            scopedSlots: _vm._u(
-                              [
-                                {
-                                  key: "activator",
-                                  fn: function(ref) {
-                                    var on = ref.on
-                                    return [
-                                      _c(
-                                        "v-btn",
-                                        _vm._g({ attrs: { icon: "" } }, on),
-                                        [
-                                          _c("v-icon", [
-                                            _vm._v("mdi-dots-vertical")
-                                          ])
-                                        ],
-                                        1
-                                      )
-                                    ]
-                                  }
-                                }
-                              ],
-                              null,
-                              false,
-                              2097855828
-                            )
-                          },
-                          [
-                            _vm._v(" "),
-                            _c(
-                              "v-list",
-                              [
-                                _c(
-                                  "v-list-item",
-                                  { on: { click: function() {} } },
-                                  [
-                                    _c(
-                                      "v-list-item-icon",
-                                      [_c("v-icon", [_vm._v("delete")])],
-                                      1
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "v-list-item-content",
-                                      [
-                                        _c("v-list-item-title", [
-                                          _vm._v("Remove")
-                                        ])
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  : _vm._e()
+                _c("v-col", { attrs: { cols: "2" } }, [_vm._t("options")], 2)
               ],
               1
             )

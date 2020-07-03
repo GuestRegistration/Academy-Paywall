@@ -12,7 +12,7 @@ class ProfileShowAction extends Controller
 
     public function __invoke(Profile $profile)
     {
-        $courses = $profile->user->courses()->with('account')->paginate();
+        $courses = $profile->user->courses()->with(['account', 'users.profile'])->paginate();
         $affiliations = \collect([]);
         if($profile->user->account){
             $affiliations->push($profile->user->account);

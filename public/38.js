@@ -1,212 +1,16 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[38],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Course/Components/StudentsTable.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Domain/Course/Components/StudentsTable.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Account/Pages/AccountSubscription.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Domain/Account/Pages/AccountSubscription.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: "StudentsTable",
-  layout: function layout(h, page) {
-    return h(App, [page]);
-  },
-  metaInfo: function metaInfo() {
-    return {
-      title: "Students (".concat(this.students.length, ")"),
-      titleTemplate: '%s - AcadaApp'
-    };
-  },
-  data: function data() {
-    return {
-      search: '',
-      headers: [{
-        text: 'Student',
-        align: 'start',
-        sortable: false,
-        value: 'fullname'
-      }, {
-        text: 'Email',
-        value: 'email'
-      }, {
-        text: 'phone',
-        value: 'phone'
-      }, {
-        text: 'Course',
-        value: 'course'
-      }, {
-        text: 'Payment Gateway',
-        value: 'payment_gateway'
-      }, {
-        text: 'Payment Ref',
-        value: 'payment_ref'
-      }, {
-        text: 'Registered',
-        value: 'register_time'
-      }],
-      items: [],
-      expanded: []
-    };
-  },
-  props: {
-    account: Object,
-    course: Object,
-    students: {
-      type: Array,
-      "default": function _default() {
-        return [];
-      }
-    }
-  },
-  watch: {
-    students: {
-      immediate: true,
-      handler: function handler(students) {
-        var _this = this;
-
-        this.items = students.map(function (student) {
-          var _student$payment_ref;
-
-          return {
-            fullname: student.fullname,
-            email: student.email,
-            phone: student.phone,
-            course: student.course ? student.course.title : _this.course ? _this.course.title : 'Nil',
-            payment_gateway: student.payment_gateway ? student.payment_gateway.gateway : 'Nil',
-            payment_ref: (_student$payment_ref = student.payment_ref) !== null && _student$payment_ref !== void 0 ? _student$payment_ref : 'Nil',
-            register_time: student.registered_time,
-            registered_time_diff: student.registered_time_diff
-          };
-        });
-      }
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Course/Pages/StudentList.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Domain/Course/Pages/StudentList.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _layouts_App__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/layouts/App */ "./resources/js/layouts/App.vue");
-/* harmony import */ var _Components_StudentsTable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../Components/StudentsTable */ "./resources/js/Domain/Course/Components/StudentsTable.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: "StudentList",
-  layout: function layout(h, page) {
-    return h(_layouts_App__WEBPACK_IMPORTED_MODULE_0__["default"], [page]);
-  },
-  components: {
-    StudentsTable: _Components_StudentsTable__WEBPACK_IMPORTED_MODULE_1__["default"]
-  },
-  metaInfo: function metaInfo() {
-    return {
-      title: "Students (".concat(this.students.length, ") ").concat(this.course ? this.course.title : ''),
-      titleTemplate: '%s - AcadaApp'
-    };
-  },
-  data: function data() {
-    return {
-      search: '',
-      headers: [{
-        text: 'Student',
-        align: 'start',
-        sortable: false,
-        value: 'fullname'
-      }, {
-        text: 'Email',
-        value: 'email'
-      }, {
-        text: 'phone',
-        value: 'phone'
-      }, {
-        text: 'Course',
-        value: 'course'
-      }, {
-        text: 'Payment Gateway',
-        value: 'payment_gateway'
-      }, {
-        text: 'Payment Ref',
-        value: 'payment_ref'
-      }]
-    };
-  },
-  props: {
-    account: Object,
-    students: Array,
-    course: Object
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/layouts/App.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/layouts/App.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _layouts_App__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/layouts/App */ "./resources/js/layouts/App.vue");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -299,135 +103,111 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'LayoutApp',
-  data: function data() {
+  name: "AccounSubscription",
+  layout: function layout(h, page) {
+    return h(_layouts_App__WEBPACK_IMPORTED_MODULE_1__["default"], [page]);
+  },
+  metaInfo: function metaInfo() {
     return {
-      active: 0,
-      drawer: false
+      title: "Subsription ".concat(this.account.at_username),
+      titleTemplate: '%s - AcadaApp'
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(['auth', 'authenticated', 'navDrawer'])),
-  methods: {
-    navItems: function navItems() {
-      if (this.authenticated) {
-        var _this$auth$profile$us;
-
-        return [// {
-        //   route: 'home',
-        //   title: 'Home',
-        //   icon: 'home',
-        // },
-        {
-          route: 'account.show',
-          param: {
-            account: this.auth.account ? this.auth.account.username : '#'
-          },
-          title: 'Academy',
-          icon: 'school',
-          render: this.auth.account ? true : false
-        }, {
-          route: this.auth.profile.username ? 'profile.show' : 'profile.edit.alt',
-          param: {
-            profile: (_this$auth$profile$us = this.auth.profile.username) !== null && _this$auth$profile$us !== void 0 ? _this$auth$profile$us : this.auth.profile.id
-          },
-          title: 'My profile',
-          icon: 'account_circle',
-          render: true
-        }, {
-          route: 'account.edit',
-          param: {
-            account: this.auth.account ? this.auth.account.username : '#'
-          },
-          title: 'Edit Account',
-          icon: 'edit',
-          render: this.auth.account ? true : false
-        }, {
-          route: 'account.course.create',
-          param: {
-            account: this.auth.account ? this.auth.account.username : '#'
-          },
-          title: 'New course',
-          icon: 'add_circle',
-          render: this.auth.account ? true : false
-        }, {
-          route: 'account.course.list',
-          param: {
-            account: this.auth.account ? this.auth.account.username : '#'
-          },
-          title: 'Courses',
-          icon: 'library_books',
-          render: this.auth.account ? true : false
-        }, {
-          route: 'account.student.list',
-          param: {
-            account: this.auth.account ? this.auth.account.username : '#'
-          },
-          title: 'Students',
-          icon: 'people',
-          render: this.auth.account ? true : false
-        }, {
-          route: 'account.payment.gateway',
-          param: {
-            account: this.auth.account ? this.auth.account.username : '#'
-          },
-          title: 'Payment',
-          icon: 'local_atm',
-          render: this.auth.account ? true : false
-        }, {
-          route: 'account.subscription.show',
-          param: {
-            account: this.auth.account ? this.auth.account.username : '#'
-          },
-          title: 'Subscription',
-          icon: 'account_balance',
-          render: this.auth.account ? true : false
-        }];
-      } else {
-        return [{
-          route: 'home',
-          title: 'Home',
-          icon: 'home',
-          render: true
-        }];
-      }
+  data: function data() {
+    return {
+      plan: {}
+    };
+  },
+  props: {
+    account: Object,
+    plans: Array,
+    payg: Object,
+    stripe_pk: String
+  },
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
+    auth: function auth(state) {
+      return state.auth;
     },
-    signout: function signout() {
+    authenticated: function authenticated(state) {
+      return state.authenticated;
+    }
+  })), {}, {
+    processing: function processing() {
+      return this.process === '' ? false : true;
+    },
+    errors: function errors() {
+      return this.$page.errors;
+    }
+  }),
+  methods: {
+    isSubscribed: function isSubscribed(plan) {
+      if (!this.account.subscription) return false;
+      return plan.id === this.account.subscription.subscription_plan_id ? true : false;
+    },
+    subscribe: function subscribe(plan) {
+      this.plan = plan;
+      this.$refs.stripeGateway.open();
+    },
+    chargeCallback: function chargeCallback(token) {
       var _this = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return _this.$inertia.post(route('signout'));
+      return new Promise(function (resolve, reject) {
+        axios.post(_this.route('subscription.subscribe', {
+          account: _this.account.username
+        }), {
+          token: token,
+          plan: _this.plan.id
+        }).then(function (response) {
+          resolve(response);
+        })["catch"](function (e) {
+          reject(e);
+        });
+      });
+    },
+    paymentSuccessful: function paymentSuccessful(response) {
+      if (response.data.subscription) {
+        toastr.success("Subscription was successfull");
+        this.account.subscription = response.data.subscription;
+      } else {
+        toastr.error("Subscription was not successfull");
+      }
 
-              case 2:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
+      this.closeGateway();
+    },
+    paymentError: function paymentError(error) {
+      toastr.error("There was an error " + error.message);
+      this.closeGateway();
+    },
+    closeGateway: function closeGateway() {
+      this.plan = {};
+      this.$refs.stripeGateway.close();
     }
-  },
-  mounted: function mounted() {
-    var _this2 = this;
-
-    this.active = this.navItems().findIndex(function (item) {
-      return item.route == _this2.route().current();
-    });
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Course/Components/StudentsTable.vue?vue&type=template&id=7e98dd04&":
-/*!******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Domain/Course/Components/StudentsTable.vue?vue&type=template&id=7e98dd04& ***!
-  \******************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/layouts/App.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/layouts/App.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\xampp\\htdocs\\academia\\resources\\js\\layouts\\App.vue: Unexpected token, expected \",\" (51:4)\n\n\u001b[0m \u001b[90m 49 | \u001b[39m    name\u001b[33m:\u001b[39m \u001b[32m'LayoutApp'\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 50 | \u001b[39m    com\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 51 | \u001b[39m    computed\u001b[33m:\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 52 | \u001b[39m        \u001b[33m...\u001b[39mmapState([\u001b[0m\n\u001b[0m \u001b[90m 53 | \u001b[39m          \u001b[32m'auth'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'authenticated'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'navDrawer'\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 54 | \u001b[39m        ])\u001b[0m\n    at Parser._raise (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:742:17)\n    at Parser.raiseWithData (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:735:17)\n    at Parser.raise (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:729:17)\n    at Parser.unexpected (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:8779:16)\n    at Parser.expect (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:8765:28)\n    at Parser.parseObj (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:10387:14)\n    at Parser.parseExprAtom (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:10017:28)\n    at Parser.parseExprSubscripts (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:9624:23)\n    at Parser.parseMaybeUnary (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:9604:21)\n    at Parser.parseExprOps (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:9474:23)\n    at Parser.parseMaybeConditional (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:9447:23)\n    at Parser.parseMaybeAssign (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:9402:21)\n    at Parser.parseExportDefaultExpression (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:12306:24)\n    at Parser.parseExport (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:12208:31)\n    at Parser.parseStatementContent (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:11208:27)\n    at Parser.parseStatement (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:11104:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:11679:25)\n    at Parser.parseBlockBody (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:11665:10)\n    at Parser.parseTopLevel (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:11035:10)\n    at Parser.parse (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:12671:10)\n    at parse (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\parser\\lib\\index.js:12722:38)\n    at parser (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\core\\lib\\parser\\index.js:54:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:93:38)\n    at normalizeFile.next (<anonymous>)\n    at run (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\core\\lib\\transformation\\index.js:31:50)\n    at run.next (<anonymous>)\n    at Function.transform (C:\\xampp\\htdocs\\academia\\node_modules\\@babel\\core\\lib\\transform.js:27:41)\n    at transform.next (<anonymous>)\n    at step (C:\\xampp\\htdocs\\academia\\node_modules\\gensync\\index.js:254:32)\n    at C:\\xampp\\htdocs\\academia\\node_modules\\gensync\\index.js:266:13\n    at async.call.result.err.err (C:\\xampp\\htdocs\\academia\\node_modules\\gensync\\index.js:216:11)");
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Account/Pages/AccountSubscription.vue?vue&type=template&id=17db3320&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Domain/Account/Pages/AccountSubscription.vue?vue&type=template&id=17db3320& ***!
+  \********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -440,117 +220,273 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-card",
+    "div",
     [
       _c(
-        "v-card-title",
+        "v-container",
         [
-          _vm._t("header"),
-          _vm._v(" "),
-          _c("v-spacer"),
-          _vm._v(" "),
-          _c("v-text-field", {
+          _c("stripe-gateway", {
+            ref: "stripeGateway",
             attrs: {
-              "append-icon": "mdi-magnify",
-              label: "Search",
-              "single-line": "",
-              "hide-details": ""
+              pk: _vm.stripe_pk,
+              amount: _vm.plan.amount,
+              currency: _vm.plan.currency,
+              color: _vm.account.theme_color,
+              charge_callback: _vm.chargeCallback
             },
-            model: {
-              value: _vm.search,
-              callback: function($$v) {
-                _vm.search = $$v
-              },
-              expression: "search"
-            }
-          })
+            on: { success: _vm.paymentSuccessful, error: _vm.paymentError }
+          }),
+          _vm._v(" "),
+          _c(
+            "v-row",
+            { attrs: { justify: "center" } },
+            [
+              _c(
+                "v-col",
+                { attrs: { cols: "12", md: "8", lg: "6" } },
+                [
+                  _c("h4", [_vm._v("Subscriptions")]),
+                  _vm._v(" "),
+                  _vm.account.is_unlimited
+                    ? [
+                        _c(
+                          "v-alert",
+                          {
+                            attrs: {
+                              icon: "info",
+                              prominent: "",
+                              text: "",
+                              type: "info"
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                        You are currently on an unlimited plan\n                    "
+                            )
+                          ]
+                        )
+                      ]
+                    : !_vm.account.subscription
+                    ? [
+                        _c(
+                          "v-alert",
+                          {
+                            attrs: {
+                              icon: "info",
+                              prominent: "",
+                              text: "",
+                              type: "info"
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                        You are currently on the Pay As You Go Plan. Each course upload cost " +
+                                _vm._s(
+                                  _vm._f("money")(
+                                    _vm.payg.amount,
+                                    _vm.payg.currency
+                                  )
+                                ) +
+                                "\n                    "
+                            )
+                          ]
+                        )
+                      ]
+                    : _vm._e(),
+                  _vm._v(" "),
+                  !_vm.account.is_unlimited
+                    ? _c(
+                        "v-expansion-panels",
+                        { attrs: { popout: "", focusable: "" } },
+                        _vm._l(_vm.plans, function(plan) {
+                          return _c(
+                            "v-expansion-panel",
+                            { key: plan.id },
+                            [
+                              _c(
+                                "v-expansion-panel-header",
+                                [
+                                  _vm._v(
+                                    "\n                        " +
+                                      _vm._s(plan.name) +
+                                      "\n                        "
+                                  ),
+                                  _c("v-spacer"),
+                                  _vm._v(" "),
+                                  _vm.isSubscribed(plan) &&
+                                  !_vm.account.subscription.expired
+                                    ? _c(
+                                        "v-icon",
+                                        {
+                                          attrs: {
+                                            color: "success",
+                                            title: "Currently subscribed"
+                                          }
+                                        },
+                                        [_vm._v("check_circle")]
+                                      )
+                                    : _vm.isSubscribed(plan) &&
+                                      _vm.account.subscription.expired
+                                    ? _c(
+                                        "v-icon",
+                                        {
+                                          attrs: {
+                                            color: "red",
+                                            title: "Subscription expired"
+                                          }
+                                        },
+                                        [_vm._v("report_problem")]
+                                      )
+                                    : _vm._e()
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("v-expansion-panel-content", [
+                                _c(
+                                  "div",
+                                  { staticClass: "m-3 text-center" },
+                                  [
+                                    _vm._v(
+                                      "\n                            " +
+                                        _vm._s(plan.description) +
+                                        "\n                            "
+                                    ),
+                                    _c("div", [
+                                      _c("h1", [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm._f("money")(
+                                              plan.amount,
+                                              plan.currency
+                                            )
+                                          )
+                                        )
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _vm.isSubscribed(plan)
+                                      ? [
+                                          !_vm.account.subscription.expired
+                                            ? _c(
+                                                "div",
+                                                [
+                                                  _c(
+                                                    "v-alert",
+                                                    {
+                                                      attrs: {
+                                                        icon: "check_circle",
+                                                        prominent: "",
+                                                        text: "",
+                                                        type: "success",
+                                                        "my-2": ""
+                                                      }
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                                        You are currently subscribed\n                                    "
+                                                      )
+                                                    ]
+                                                  ),
+                                                  _vm._v(
+                                                    "\n                                    " +
+                                                      _vm._s(
+                                                        _vm.account.subscription
+                                                          .start_time
+                                                      ) +
+                                                      " - " +
+                                                      _vm._s(
+                                                        _vm.account.subscription
+                                                          .end_time
+                                                      ) +
+                                                      ", " +
+                                                      _vm._s(
+                                                        _vm.account.subscription
+                                                          .expiring_time
+                                                      ) +
+                                                      " days remaining\n                                "
+                                                  )
+                                                ],
+                                                1
+                                              )
+                                            : _c(
+                                                "div",
+                                                [
+                                                  _c(
+                                                    "v-alert",
+                                                    {
+                                                      attrs: {
+                                                        icon: "report_problem",
+                                                        prominent: "",
+                                                        text: "",
+                                                        type: "error",
+                                                        "my-2": ""
+                                                      }
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                                        Subscription expired\n                                    "
+                                                      )
+                                                    ]
+                                                  )
+                                                ],
+                                                1
+                                              )
+                                        ]
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    !_vm.account.is_unlimited &&
+                                    (!_vm.account.subscription ||
+                                      (_vm.account.subscription &&
+                                        _vm.account.subscription.expired))
+                                      ? [
+                                          _c(
+                                            "div",
+                                            [
+                                              _c(
+                                                "v-btn",
+                                                {
+                                                  attrs: {
+                                                    color:
+                                                      _vm.account.theme_color,
+                                                    dark: ""
+                                                  },
+                                                  on: {
+                                                    click: function($event) {
+                                                      return _vm.subscribe(plan)
+                                                    }
+                                                  }
+                                                },
+                                                [_vm._v("Subscribe")]
+                                              )
+                                            ],
+                                            1
+                                          )
+                                        ]
+                                      : _vm._e()
+                                  ],
+                                  2
+                                )
+                              ])
+                            ],
+                            1
+                          )
+                        }),
+                        1
+                      )
+                    : _vm._e()
+                ],
+                2
+              )
+            ],
+            1
+          )
         ],
-        2
-      ),
-      _vm._v(" "),
-      _c("v-data-table", {
-        staticClass: "elevation-1",
-        attrs: {
-          headers: _vm.headers,
-          items: _vm.items,
-          search: _vm.search,
-          "show-expand": "",
-          "item-key": "payment_ref",
-          "single-expand": true,
-          expanded: _vm.expanded
-        },
-        on: {
-          "update:expanded": function($event) {
-            _vm.expanded = $event
-          }
-        },
-        scopedSlots: _vm._u([
-          {
-            key: "expanded-item",
-            fn: function(ref) {
-              var headers = ref.headers
-              var item = ref.item
-              return [
-                _c("td", { attrs: { colspan: headers.length } }, [
-                  _vm._v("Registered " + _vm._s(item.registered_time_diff))
-                ])
-              ]
-            }
-          }
-        ])
-      })
+        1
+      )
     ],
     1
   )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Course/Pages/StudentList.vue?vue&type=template&id=29f22252&":
-/*!***********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Domain/Course/Pages/StudentList.vue?vue&type=template&id=29f22252& ***!
-  \***********************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("students-table", {
-    attrs: { account: _vm.account, students: _vm.students, course: _vm.course },
-    scopedSlots: _vm._u([
-      {
-        key: "header",
-        fn: function() {
-          return [
-            _vm.course
-              ? _c("h4", [
-                  _vm._v(
-                    '"' +
-                      _vm._s(_vm.course.title) +
-                      '" students (' +
-                      _vm._s(_vm.students.length) +
-                      ")"
-                  )
-                ])
-              : _c("h4", [
-                  _vm._v("All students (" + _vm._s(_vm.students.length) + ")")
-                ])
-          ]
-        },
-        proxy: true
-      }
-    ])
-  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -570,24 +506,158 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {}
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-app",
+    [
+      _c(
+        "v-app-bar",
+        {
+          attrs: {
+            app: "",
+            color:
+              _vm.authenticated && _vm.auth.account
+                ? _vm.auth.account.theme_color
+                : "primary",
+            dark: ""
+          }
+        },
+        [
+          _c("v-app-bar-nav-icon", {
+            on: {
+              click: function($event) {
+                _vm.$store.state.navDrawer = !_vm.$store.state.navDrawer
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "inertia-link",
+            {
+              staticClass: "white--text",
+              staticStyle: { "text-decoration": "none" },
+              attrs: { href: _vm.route("home") }
+            },
+            [
+              _c("v-toolbar-title", { attrs: { dark: "" } }, [
+                _vm._v("AcadaApp")
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("v-spacer"),
+          _vm._v(" "),
+          _vm.authenticated
+            ? [
+                _vm.auth.account
+                  ? _c(
+                      "inertia-link",
+                      {
+                        staticClass: "prevent-default mx-1",
+                        attrs: {
+                          href: _vm.route("account.show", {
+                            account: _vm.auth.account.username
+                          })
+                        }
+                      },
+                      [
+                        _c("avatar", {
+                          attrs: {
+                            src: _vm.auth.account.avatar,
+                            color: _vm.auth.account
+                              ? _vm.auth.account.theme_color
+                              : "primary",
+                            size: "40"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  : _c(
+                      "inertia-link",
+                      {
+                        staticClass: "prevent-default mx-1",
+                        attrs: {
+                          href: _vm.route("account.setup"),
+                          title: "Create your academy account"
+                        }
+                      },
+                      [
+                        _c(
+                          "v-btn",
+                          { attrs: { icon: "" } },
+                          [_c("v-icon", [_vm._v("add")])],
+                          1
+                        )
+                      ],
+                      1
+                    )
+              ]
+            : !_vm.route().current("signin")
+            ? [
+                _c(
+                  "inertia-link",
+                  { attrs: { href: _vm.route("signin") } },
+                  [
+                    _c("v-btn", { attrs: { dark: "", color: "primary" } }, [
+                      _vm._v("Sign in")
+                    ])
+                  ],
+                  1
+                )
+              ]
+            : _vm._e()
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c(
+        "v-content",
+        [_c("v-container", { attrs: { fluid: "" } }, [_vm._t("default")], 2)],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-footer",
+        { attrs: { app: "" } },
+        [
+          _c("v-spacer"),
+          _vm._v(" "),
+          _c("small", [
+            _vm._v("Need help ? "),
+            _c("a", { attrs: { href: "mailto: support@acadaapp.com" } }, [
+              _vm._v("support@acadaapp.com")
+            ])
+          ])
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
 var staticRenderFns = []
+render._withStripped = true
 
 
 
 /***/ }),
 
-/***/ "./resources/js/Domain/Course/Components/StudentsTable.vue":
-/*!*****************************************************************!*\
-  !*** ./resources/js/Domain/Course/Components/StudentsTable.vue ***!
-  \*****************************************************************/
+/***/ "./resources/js/Domain/Account/Pages/AccountSubscription.vue":
+/*!*******************************************************************!*\
+  !*** ./resources/js/Domain/Account/Pages/AccountSubscription.vue ***!
+  \*******************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _StudentsTable_vue_vue_type_template_id_7e98dd04___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StudentsTable.vue?vue&type=template&id=7e98dd04& */ "./resources/js/Domain/Course/Components/StudentsTable.vue?vue&type=template&id=7e98dd04&");
-/* harmony import */ var _StudentsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StudentsTable.vue?vue&type=script&lang=js& */ "./resources/js/Domain/Course/Components/StudentsTable.vue?vue&type=script&lang=js&");
+/* harmony import */ var _AccountSubscription_vue_vue_type_template_id_17db3320___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AccountSubscription.vue?vue&type=template&id=17db3320& */ "./resources/js/Domain/Account/Pages/AccountSubscription.vue?vue&type=template&id=17db3320&");
+/* harmony import */ var _AccountSubscription_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AccountSubscription.vue?vue&type=script&lang=js& */ "./resources/js/Domain/Account/Pages/AccountSubscription.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -597,9 +667,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _StudentsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _StudentsTable_vue_vue_type_template_id_7e98dd04___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _StudentsTable_vue_vue_type_template_id_7e98dd04___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _AccountSubscription_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AccountSubscription_vue_vue_type_template_id_17db3320___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AccountSubscription_vue_vue_type_template_id_17db3320___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -609,107 +679,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/Domain/Course/Components/StudentsTable.vue"
+component.options.__file = "resources/js/Domain/Account/Pages/AccountSubscription.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/Domain/Course/Components/StudentsTable.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/Domain/Course/Components/StudentsTable.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************/
+/***/ "./resources/js/Domain/Account/Pages/AccountSubscription.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/Domain/Account/Pages/AccountSubscription.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./StudentsTable.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Course/Components/StudentsTable.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountSubscription_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AccountSubscription.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Account/Pages/AccountSubscription.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountSubscription_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/Domain/Course/Components/StudentsTable.vue?vue&type=template&id=7e98dd04&":
-/*!************************************************************************************************!*\
-  !*** ./resources/js/Domain/Course/Components/StudentsTable.vue?vue&type=template&id=7e98dd04& ***!
-  \************************************************************************************************/
+/***/ "./resources/js/Domain/Account/Pages/AccountSubscription.vue?vue&type=template&id=17db3320&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/Domain/Account/Pages/AccountSubscription.vue?vue&type=template&id=17db3320& ***!
+  \**************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentsTable_vue_vue_type_template_id_7e98dd04___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./StudentsTable.vue?vue&type=template&id=7e98dd04& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Course/Components/StudentsTable.vue?vue&type=template&id=7e98dd04&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentsTable_vue_vue_type_template_id_7e98dd04___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountSubscription_vue_vue_type_template_id_17db3320___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AccountSubscription.vue?vue&type=template&id=17db3320& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Account/Pages/AccountSubscription.vue?vue&type=template&id=17db3320&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountSubscription_vue_vue_type_template_id_17db3320___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentsTable_vue_vue_type_template_id_7e98dd04___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/Domain/Course/Pages/StudentList.vue":
-/*!**********************************************************!*\
-  !*** ./resources/js/Domain/Course/Pages/StudentList.vue ***!
-  \**********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _StudentList_vue_vue_type_template_id_29f22252___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StudentList.vue?vue&type=template&id=29f22252& */ "./resources/js/Domain/Course/Pages/StudentList.vue?vue&type=template&id=29f22252&");
-/* harmony import */ var _StudentList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StudentList.vue?vue&type=script&lang=js& */ "./resources/js/Domain/Course/Pages/StudentList.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _StudentList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _StudentList_vue_vue_type_template_id_29f22252___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _StudentList_vue_vue_type_template_id_29f22252___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/Domain/Course/Pages/StudentList.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/Domain/Course/Pages/StudentList.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************!*\
-  !*** ./resources/js/Domain/Course/Pages/StudentList.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./StudentList.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Course/Pages/StudentList.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/Domain/Course/Pages/StudentList.vue?vue&type=template&id=29f22252&":
-/*!*****************************************************************************************!*\
-  !*** ./resources/js/Domain/Course/Pages/StudentList.vue?vue&type=template&id=29f22252& ***!
-  \*****************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentList_vue_vue_type_template_id_29f22252___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./StudentList.vue?vue&type=template&id=29f22252& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Course/Pages/StudentList.vue?vue&type=template&id=29f22252&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentList_vue_vue_type_template_id_29f22252___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentList_vue_vue_type_template_id_29f22252___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountSubscription_vue_vue_type_template_id_17db3320___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

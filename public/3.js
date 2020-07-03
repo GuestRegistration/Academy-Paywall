@@ -1,15 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[3],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Account/Components/CoursesQuickEnroll.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Domain/Account/Components/CoursesQuickEnroll.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Course/Components/CourseForm.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Domain/Course/Components/CourseForm.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Domain_Course_Components_CourseCard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Domain/Course/Components/CourseCard */ "./resources/js/Domain/Course/Components/CourseCard.vue");
 //
 //
 //
@@ -60,45 +59,109 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "CoursesQuickEnroll",
-  components: {
-    CourseCard: _Domain_Course_Components_CourseCard__WEBPACK_IMPORTED_MODULE_0__["default"]
+  name: "CourseForm",
+  props: {
+    course: Object,
+    loading: Boolean,
+    color: String,
+    instructors: Array
   },
   data: function data() {
     return {
-      dialog: false,
-      course_index: null
+      form: {},
+      course_types: ['Zoom', 'Google classroom'],
+      selectedInstructors: []
     };
   },
-  props: {
-    courses: {
-      type: Array,
-      "default": function _default() {
-        return [];
-      }
+  computed: {
+    errors: function errors() {
+      return this.$page.errors;
     },
-    account: {
-      type: Object,
-      "default": function _default() {
-        return {};
-      }
+    instructorIds: function instructorIds() {
+      return this.instructors.map(function (instructor) {
+        return instructor.id;
+      });
     }
   },
-  computed: {
-    course: function course() {
-      return this.course_index === null ? null : this.courses[this.course_index];
+  methods: {
+    getInstructor: function getInstructor(id) {
+      return this.instructors.find(function (instructor) {
+        return instructor.id === id;
+      });
+    },
+    submit: function submit() {
+      this.$emit('submit', this.formData());
+    },
+    formData: function formData() {
+      var _this = this;
+
+      var form = new FormData();
+      this.form.instructors = JSON.stringify(this.selectedInstructors);
+      Object.keys(this.form).forEach(function (key) {
+        if (_this.form[key] != null && _this.form[key] != "null") {
+          form.append(key, _this.form[key]);
+        }
+      });
+      return form;
+    }
+  },
+  mounted: function mounted() {
+    if (this.course) {
+      this.form = this.course;
+      this.form.start_date = this.course.raw_dates.start;
+      this.form.end_date = this.course.raw_dates.end;
+      this.selectedInstructors = this.course.users.map(function (user) {
+        return user.id;
+      });
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Account/Components/CoursesQuickEnroll.vue?vue&type=template&id=676cb045&":
-/*!************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Domain/Account/Components/CoursesQuickEnroll.vue?vue&type=template&id=676cb045& ***!
-  \************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Course/Components/CourseForm.vue?vue&type=template&id=7683b3fe&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Domain/Course/Components/CourseForm.vue?vue&type=template&id=7683b3fe& ***!
+  \***************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -110,237 +173,399 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.courses
-    ? _c(
-        "v-row",
-        { attrs: { justify: "center" } },
+  return _c(
+    "form",
+    {
+      on: {
+        submit: function($event) {
+          $event.preventDefault()
+          return _vm.submit($event)
+        }
+      }
+    },
+    [
+      _c(
+        "v-container",
+        { staticStyle: { overflow: "auto" }, attrs: { fluid: "" } },
         [
           _c(
-            "v-dialog",
-            {
-              attrs: {
-                scrollable: "",
-                "max-width": "" + (_vm.course !== null ? "800px" : "300px")
-              },
-              scopedSlots: _vm._u(
-                [
-                  {
-                    key: "activator",
-                    fn: function(ref) {
-                      var on = ref.on
-                      return [
-                        _c(
-                          "v-btn",
-                          _vm._g(
-                            {
-                              attrs: {
-                                color: _vm.account.theme_color,
-                                dark: "",
-                                large: ""
-                              }
-                            },
-                            on
-                          ),
-                          [
-                            _vm._v("Enroll for a course "),
-                            _c("v-icon", [_vm._v("arrow_forward")])
-                          ],
-                          1
-                        )
-                      ]
-                    }
-                  }
-                ],
-                null,
-                false,
-                3487011881
-              ),
-              model: {
-                value: _vm.dialog,
-                callback: function($$v) {
-                  _vm.dialog = $$v
-                },
-                expression: "dialog"
-              }
-            },
+            "v-row",
+            { attrs: { justify: "center", align: "center" } },
             [
-              _vm._v(" "),
               _c(
-                "v-card",
+                "v-col",
+                { attrs: { cols: "12" } },
                 [
-                  _c("v-card-title", [_vm._v("Courses available")]),
+                  _c("x-input", {
+                    attrs: {
+                      errors: _vm.errors,
+                      name: "title",
+                      type: "text",
+                      label: "Course title"
+                    },
+                    model: {
+                      value: _vm.form.title,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form, "title", $$v)
+                      },
+                      expression: "form.title"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("x-textarea", {
+                    attrs: {
+                      errors: _vm.errors,
+                      name: "description",
+                      label: "Course description"
+                    },
+                    model: {
+                      value: _vm.form.description,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form, "description", $$v)
+                      },
+                      expression: "form.description"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("x-input", {
+                    attrs: {
+                      errors: _vm.errors,
+                      name: "price",
+                      type: "number",
+                      label: "Price"
+                    },
+                    model: {
+                      value: _vm.form.price,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form, "price", $$v)
+                      },
+                      expression: "form.price"
+                    }
+                  }),
                   _vm._v(" "),
                   _c(
-                    "v-card-text",
-                    {
-                      staticClass: "px-0",
-                      staticStyle: { "max-height": "500px" }
-                    },
+                    "v-row",
                     [
-                      !_vm.courses.length
-                        ? [
+                      _c(
+                        "v-col",
+                        { attrs: { cols: "12", lg: "6" } },
+                        [
+                          _c("x-date-picker", {
+                            attrs: {
+                              errors: _vm.errors,
+                              label: "Starting date",
+                              name: "start_date",
+                              current: _vm.form.start_date
+                            },
+                            on: {
+                              change: function(date) {
+                                return (_vm.form.start_date = date)
+                              }
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-col",
+                        { attrs: { cols: "12", lg: "6" } },
+                        [
+                          _c("x-date-picker", {
+                            attrs: {
+                              errors: _vm.errors,
+                              label: "Ending date",
+                              name: "end_date",
+                              current: _vm.form.end_date
+                            },
+                            on: {
+                              change: function(date) {
+                                return (_vm.form.end_date = date)
+                              }
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("x-select", {
+                    attrs: {
+                      errors: _vm.errors,
+                      value: _vm.form.course_type,
+                      label: "Course type",
+                      name: "course_type",
+                      items: _vm.course_types,
+                      outlined: ""
+                    },
+                    on: {
+                      change: function(selected) {
+                        return (_vm.form.course_type = selected)
+                      }
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-col",
+                { attrs: { cols: "12" } },
+                [
+                  _c("x-file-input", {
+                    attrs: {
+                      errors: _vm.errors,
+                      src: _vm.form.cover_image,
+                      name: "cover_image",
+                      label: "Cover image"
+                    },
+                    on: {
+                      change: function(files) {
+                        return (_vm.form.cover_image = files[0])
+                      }
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-col",
+                { attrs: { cols: "12" } },
+                [
+                  _c("v-combobox", {
+                    attrs: {
+                      items: _vm.instructorIds,
+                      label: "Instructors",
+                      multiple: "",
+                      "deletable-chips": "",
+                      counter: "",
+                      error:
+                        _vm.errors &&
+                        _vm.errors.instructors &&
+                        _vm.errors.instructors.length
+                          ? true
+                          : false,
+                      "error-messages":
+                        _vm.errors &&
+                        _vm.errors.instructors &&
+                        _vm.errors.instructors.length
+                          ? _vm.errors.instructors[0]
+                          : "",
+                      filter: function(item, queryText, itemText) {
+                        return true
+                      }
+                    },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "item",
+                        fn: function(data) {
+                          return [
                             _c(
                               "div",
-                              { staticClass: "text-center text-muted" },
+                              { staticClass: "d-flex align-items-center" },
                               [
-                                _c("small", [
+                                _c(
+                                  "div",
+                                  { staticClass: "mr-3" },
+                                  [
+                                    _c(
+                                      "v-icon",
+                                      {
+                                        attrs: {
+                                          color:
+                                            "" +
+                                            (_vm.selectedInstructors.includes(
+                                              data.item
+                                            )
+                                              ? _vm.color
+                                              : "grey")
+                                        }
+                                      },
+                                      [_vm._v("check_circle")]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "mr-2" },
+                                  [
+                                    _c("avatar", {
+                                      attrs: {
+                                        src: _vm.getInstructor(data.item)
+                                          .avatar,
+                                        color: _vm.color,
+                                        size: "40",
+                                        text: _vm.getInstructor(data.item)
+                                          .profile.initials
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c("div", [
                                   _vm._v(
-                                    "No course is available for now. You can check back."
+                                    _vm._s(
+                                      _vm.getInstructor(data.item).profile
+                                        .fullname
+                                    )
                                   )
                                 ])
                               ]
                             )
                           ]
-                        : [
+                        }
+                      },
+                      {
+                        key: "selection",
+                        fn: function(data) {
+                          return [
                             _c(
-                              "v-container",
-                              { attrs: { fluid: "" } },
+                              "v-chip",
+                              _vm._b(
+                                {
+                                  key: data.item,
+                                  attrs: {
+                                    "input-value": data.selected,
+                                    disabled: data.disabled,
+                                    close: ""
+                                  },
+                                  on: {
+                                    "click:close": function($event) {
+                                      return data.parent.selectItem(data.item)
+                                    }
+                                  }
+                                },
+                                "v-chip",
+                                data.attrs,
+                                false
+                              ),
                               [
-                                _c(
-                                  "v-row",
-                                  [
-                                    _c(
-                                      "v-col",
-                                      {
-                                        attrs: {
-                                          cols: "12",
-                                          md:
-                                            "" +
-                                            (_vm.course !== null ? "6" : "12")
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "v-list",
-                                          { attrs: { flat: "" } },
-                                          [
-                                            _c(
-                                              "v-list-item-group",
-                                              {
-                                                attrs: {
-                                                  color: _vm.account.theme_color
-                                                },
-                                                model: {
-                                                  value: _vm.course_index,
-                                                  callback: function($$v) {
-                                                    _vm.course_index = $$v
-                                                  },
-                                                  expression: "course_index"
-                                                }
-                                              },
-                                              _vm._l(_vm.courses, function(
-                                                course,
-                                                i
-                                              ) {
-                                                return _c(
-                                                  "v-list-item",
-                                                  { key: i },
-                                                  [
-                                                    _c(
-                                                      "v-list-item-icon",
-                                                      [
-                                                        _c("v-icon", [
-                                                          _vm._v(
-                                                            "library_books"
-                                                          )
-                                                        ])
-                                                      ],
-                                                      1
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "v-list-item-content",
-                                                      [
-                                                        _c(
-                                                          "v-list-item-title",
-                                                          {
-                                                            domProps: {
-                                                              textContent: _vm._s(
-                                                                course.title
-                                                              )
-                                                            }
-                                                          }
-                                                        )
-                                                      ],
-                                                      1
-                                                    )
-                                                  ],
-                                                  1
-                                                )
-                                              }),
-                                              1
-                                            )
-                                          ],
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    ),
-                                    _vm._v(" "),
-                                    _vm.course !== null
-                                      ? _c(
-                                          "v-col",
-                                          {
-                                            staticStyle: {
-                                              "max-height": "500px"
-                                            },
-                                            attrs: { cols: "12", md: "6" }
-                                          },
-                                          [
-                                            _c("course-card", {
-                                              attrs: {
-                                                course: _vm.course,
-                                                account: _vm.account,
-                                                showInstructor: false,
-                                                display: "grid",
-                                                showStatus: true
-                                              }
-                                            })
-                                          ],
-                                          1
-                                        )
-                                      : _vm._e()
-                                  ],
-                                  1
-                                )
+                                _c("avatar", {
+                                  attrs: {
+                                    src: _vm.getInstructor(data.item).profile
+                                      .avatar,
+                                    color: _vm.color,
+                                    size: "30",
+                                    text: _vm.getInstructor(data.item).profile
+                                      .initials
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("span", { staticClass: "ml-2" }, [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.getInstructor(data.item).profile
+                                        .fullname
+                                    )
+                                  )
+                                ])
                               ],
                               1
                             )
                           ]
-                    ],
-                    2
-                  ),
+                        }
+                      }
+                    ]),
+                    model: {
+                      value: _vm.selectedInstructors,
+                      callback: function($$v) {
+                        _vm.selectedInstructors = $$v
+                      },
+                      expression: "selectedInstructors"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-col",
+                { attrs: { cols: "12" } },
+                [
+                  _c("v-switch", {
+                    attrs: { label: "Send instruction after enrollment" },
+                    model: {
+                      value: _vm.form.send_instructions,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form, "send_instructions", $$v)
+                      },
+                      expression: "form.send_instructions"
+                    }
+                  }),
                   _vm._v(" "),
-                  _c("v-divider"),
-                  _vm._v(" "),
-                  _c(
-                    "v-card-actions",
-                    [
-                      _c(
-                        "v-btn",
-                        {
-                          attrs: { color: "red", text: "" },
-                          on: {
-                            click: function($event) {
-                              _vm.dialog = false
-                            }
-                          }
-                        },
-                        [_vm._v("Cancel")]
+                  _c("div", [
+                    _c("small", [
+                      _vm._v(
+                        "Send a mail to your student after a successful enrollment. This could be an instruction on how to proceed with the course or a welcoming message"
                       )
-                    ],
-                    1
-                  )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm.form.send_instructions
+                    ? _c(
+                        "div",
+                        { staticStyle: { overflow: "auto" } },
+                        [
+                          _c("label", [_vm._v("Message")]),
+                          _vm._v(" "),
+                          _c("wysiwyg", {
+                            model: {
+                              value: _vm.form.instructions,
+                              callback: function($$v) {
+                                _vm.$set(_vm.form, "instructions", $$v)
+                              },
+                              expression: "form.instructions"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.errors &&
+                          _vm.errors["instructions"] &&
+                          _vm.errors["instructions"].length
+                            ? _c("div", { staticClass: "text-danger" }, [
+                                _vm._v(_vm._s(_vm.errors["instructions"][0]))
+                              ])
+                            : _vm._e()
+                        ],
+                        1
+                      )
+                    : _vm._e()
                 ],
                 1
               )
             ],
             1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              attrs: {
+                fixed: "",
+                dark: "",
+                fab: "",
+                bottom: "",
+                right: "",
+                "x-large": "",
+                loading: _vm.loading,
+                type: "submit",
+                color: _vm.color
+              }
+            },
+            [_c("v-icon", [_vm._v("mdi-check")])],
+            1
           )
         ],
         1
       )
-    : _vm._e()
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -349,17 +574,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/Domain/Account/Components/CoursesQuickEnroll.vue":
-/*!***********************************************************************!*\
-  !*** ./resources/js/Domain/Account/Components/CoursesQuickEnroll.vue ***!
-  \***********************************************************************/
+/***/ "./resources/js/Domain/Course/Components/CourseForm.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/Domain/Course/Components/CourseForm.vue ***!
+  \**************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CoursesQuickEnroll_vue_vue_type_template_id_676cb045___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CoursesQuickEnroll.vue?vue&type=template&id=676cb045& */ "./resources/js/Domain/Account/Components/CoursesQuickEnroll.vue?vue&type=template&id=676cb045&");
-/* harmony import */ var _CoursesQuickEnroll_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CoursesQuickEnroll.vue?vue&type=script&lang=js& */ "./resources/js/Domain/Account/Components/CoursesQuickEnroll.vue?vue&type=script&lang=js&");
+/* harmony import */ var _CourseForm_vue_vue_type_template_id_7683b3fe___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CourseForm.vue?vue&type=template&id=7683b3fe& */ "./resources/js/Domain/Course/Components/CourseForm.vue?vue&type=template&id=7683b3fe&");
+/* harmony import */ var _CourseForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CourseForm.vue?vue&type=script&lang=js& */ "./resources/js/Domain/Course/Components/CourseForm.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -369,9 +594,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _CoursesQuickEnroll_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _CoursesQuickEnroll_vue_vue_type_template_id_676cb045___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _CoursesQuickEnroll_vue_vue_type_template_id_676cb045___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _CourseForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CourseForm_vue_vue_type_template_id_7683b3fe___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CourseForm_vue_vue_type_template_id_7683b3fe___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -381,38 +606,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/Domain/Account/Components/CoursesQuickEnroll.vue"
+component.options.__file = "resources/js/Domain/Course/Components/CourseForm.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/Domain/Account/Components/CoursesQuickEnroll.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************!*\
-  !*** ./resources/js/Domain/Account/Components/CoursesQuickEnroll.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************/
+/***/ "./resources/js/Domain/Course/Components/CourseForm.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/Domain/Course/Components/CourseForm.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CoursesQuickEnroll_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./CoursesQuickEnroll.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Account/Components/CoursesQuickEnroll.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CoursesQuickEnroll_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CourseForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./CourseForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Course/Components/CourseForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CourseForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/Domain/Account/Components/CoursesQuickEnroll.vue?vue&type=template&id=676cb045&":
-/*!******************************************************************************************************!*\
-  !*** ./resources/js/Domain/Account/Components/CoursesQuickEnroll.vue?vue&type=template&id=676cb045& ***!
-  \******************************************************************************************************/
+/***/ "./resources/js/Domain/Course/Components/CourseForm.vue?vue&type=template&id=7683b3fe&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/Domain/Course/Components/CourseForm.vue?vue&type=template&id=7683b3fe& ***!
+  \*********************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CoursesQuickEnroll_vue_vue_type_template_id_676cb045___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./CoursesQuickEnroll.vue?vue&type=template&id=676cb045& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Account/Components/CoursesQuickEnroll.vue?vue&type=template&id=676cb045&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CoursesQuickEnroll_vue_vue_type_template_id_676cb045___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CourseForm_vue_vue_type_template_id_7683b3fe___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./CourseForm.vue?vue&type=template&id=7683b3fe& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Course/Components/CourseForm.vue?vue&type=template&id=7683b3fe&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CourseForm_vue_vue_type_template_id_7683b3fe___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CoursesQuickEnroll_vue_vue_type_template_id_676cb045___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CourseForm_vue_vue_type_template_id_7683b3fe___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

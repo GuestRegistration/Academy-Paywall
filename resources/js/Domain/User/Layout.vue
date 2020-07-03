@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <nav-drawer v-if="authenticated" />
     <v-app-bar
       absolute
       color="primary"
@@ -9,6 +10,10 @@
       inverted-scroll
       class="d-md-none"
     >
+    <v-app-bar-nav-icon v-if="authenticated" @click="$store.state.navDrawer = !$store.state.navDrawer"></v-app-bar-nav-icon>
+      <v-btn v-else @click="$inertia.visit(route('home'))" icon>
+      <v-icon>home</v-icon>
+    </v-btn>
       
       <v-toolbar-title dark >
         <inertia-link :href="route('profile.show', {profile: profile.username})" class="prevent-default" style="color: #fff">
@@ -47,11 +52,15 @@
                     class="d-none d-md-block"
                   >
                     <v-toolbar-title dark >
-                      <inertia-link :href="route('home')" class="prevent-default" style="color: #fff">
+                      <v-app-bar-nav-icon v-if="authenticated" @click="$store.state.navDrawer = !$store.state.navDrawer"></v-app-bar-nav-icon>
+                      <v-btn v-else @click="$inertia.visit(route('home'))" icon>
                         <v-icon>home</v-icon>
-                      </inertia-link>
+                      </v-btn>
                     </v-toolbar-title>
                     <v-spacer></v-spacer>
+                     <v-btn icon v-if="$store.state.navDrawer" @click="$store.state.navDrawer = false" ref="navBarCloser">
+                      <v-icon>keyboard_backspace</v-icon>
+                    </v-btn>
                     <v-menu v-if="isMyProfile(profile)" origin="center center"  transition="scale-transition">
                       <template v-slot:activator="{ on }">
                         <v-btn icon v-on="on">
@@ -149,9 +158,13 @@
 </template>
 
 <script>
-    import {mapGetters, mapState} from "vuex";
+    import {mapGetters, mapState, mapMutations} from "vuex";
+    import NavDrawer from '@/components/NavDrawer';
     export default {
         name: 'ProfileLayout',
+        components: {
+          NavDrawer
+        },
         computed:{
             ...mapState({
               inFrame: (state) => state.inFrame
@@ -168,6 +181,12 @@
               return this.$page.affiliations
             },
 
+        },
+        methods: {
+          ...mapMutations(['setNavDrawer']),
+        },
+        created(){
+          this.setNavDrawer(false);
         },
         mounted(){
             $('html').attr('no-scroll', 'no-scroll');

@@ -63,8 +63,21 @@ new Vue({
         store.commit('setAuth', props.auth);
         store.commit('response/setErrors', props.errors);
         store.commit('setFrame');
+        const isMobile = [
+          /Android/i,
+          /webOS/i,
+          /iPhone/i,
+          /iPad/i,
+          /iPod/i,
+          /BlackBerry/i,
+          /Windows Phone/i
+      ].some((toMatchItem) => {
+          return navigator.userAgent.match(toMatchItem);
+      });
+      // close navigation on every page transition on mobile
+      if(isMobile){
         store.commit('setNavDrawer', false);
-        
+      }        
         toastr.options = {
           "closeButton": true,
           "debug": false,

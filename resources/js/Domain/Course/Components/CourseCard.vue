@@ -24,6 +24,15 @@
           <div class="text-muted">
             <v-icon :color="course.account.theme_color">date_range</v-icon> {{course.start_date}} - {{course.end_date}}
           </div>
+          <v-divider></v-divider>
+          <v-chip-group v-if="course.users">
+            <inertia-link v-for="instructor in course.users" :key="instructor.id" :href="route('profile.show', {profile: instructor.profile.username})" class="prevent-default">
+              <v-chip  outlined>
+                <avatar :src="instructor.profile.avatar" :color="course.account.color" size="80" :text="instructor.profile.initials" />
+                <span class="ml-2">{{ instructor.profile.fullname}}</span>
+              </v-chip>
+            </inertia-link>
+          </v-chip-group>
         </v-card-text>
 
         <v-card-actions>

@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 
 class UserServiceProvider extends ServiceProvider
 {
-    public const PREFIX = 'instructor';
+    public const PREFIX = 'i';
 
     /**
      * Register services.
