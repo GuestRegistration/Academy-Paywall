@@ -185,7 +185,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 6:
                 _context.next = 8;
                 return _this2.$inertia.post(_this2.route('account.update', {
-                  account: _this2.auth.username
+                  account: _this2.auth.account.username
                 }), _this2.formData());
 
               case 8:

@@ -489,7 +489,7 @@ var render = function() {
                 { attrs: { cols: "12" } },
                 [
                   _c("v-switch", {
-                    attrs: { label: "Send instruction after enrollment" },
+                    attrs: { label: "Send welcome email" },
                     model: {
                       value: _vm.form.send_instructions,
                       callback: function($$v) {

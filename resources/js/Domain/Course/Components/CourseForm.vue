@@ -62,7 +62,7 @@
                 </v-col>
 
                 <v-col cols="12">
-                    <v-switch v-model="form.send_instructions" label="Send instruction after enrollment" ></v-switch>
+                    <v-switch v-model="form.send_instructions" label="Send welcome email" ></v-switch>
                     <div>
                         <small>Send a mail to your student after a successful enrollment. This could be an instruction on how to proceed with the course or a welcoming message</small>
                     </div>

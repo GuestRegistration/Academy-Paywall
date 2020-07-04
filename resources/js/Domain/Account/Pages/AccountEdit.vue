@@ -134,7 +134,7 @@
                if(this.new_account){
                    await this.$inertia.post(this.route('account.setup.store'), this.formData());
                }else{
-                    await this.$inertia.post(this.route('account.update', {account: this.auth.username}), this.formData());
+                    await this.$inertia.post(this.route('account.update', {account: this.auth.account.username}), this.formData());
                }
                
                this.loading = false;
