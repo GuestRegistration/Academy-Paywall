@@ -40,7 +40,7 @@
       </template>
 
       <v-list dense>
-        <v-list-item-group v-model="navItemActive" >
+        <v-list-item-group v-model="active" >
           <template v-for="(item, i) in navItems()">
             <inertia-link v-if="item.render" :href="route(item.route, item.param)"  class="prevent-default" :key="i">
               <v-list-item :color="authenticated && auth.account ? auth.account.theme_color : 'primary'" >
@@ -87,12 +87,6 @@
              ...mapState([
               'auth', 'authenticated', 'navDrawer'
             ]),
-            navItemActive(){
-              return this.navItems().findIndex(item => item.route == this.route().current())
-            },
-            prependNavItemActive(){
-               return this.prependNavItems().findIndex(item => item.route == this.route().current() && item.canActive)
-            }
         },
         methods:{
           prependNavItems(){
@@ -202,5 +196,8 @@
            await this.$inertia.post(route('signout'));
           }
         },
+        mounted(){
+          this.active = this.navItems().findIndex(item => item.route == this.route().current());
+        }
     }
 </script>

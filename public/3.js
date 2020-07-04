@@ -397,7 +397,7 @@ var render = function() {
                                     _c("avatar", {
                                       attrs: {
                                         src: _vm.getInstructor(data.item)
-                                          .avatar,
+                                          .profile.avatar,
                                         color: _vm.color,
                                         size: "40",
                                         text: _vm.getInstructor(data.item)

@@ -1,13 +1,22 @@
 <template>
     <div>
-      <h4>Instructors ({{ data.length }})</h4>
+      <h4>Instructors ({{ data.length }})<v-btn icon class="ml-5" @click="$refs.inviteUserDialog.set(true)"><v-icon>person_add</v-icon></v-btn></h4>
+      <v-alert
+          v-if="$page.status"
+          icon="info"
+          prominent
+          text
+          type="info"
+          >
+          {{$page.status}}
+      </v-alert>
       <div class="text-center text-muted my-5" v-if="!data.length">
                 No instructor
       </div>
       <v-row v-else>
           <v-col cols="12" md="6" lg="4"  v-for="user in data" :key="user.id">
               <profile-card :account="account" :instructor="user">
-                <template v-slot:options v-if="isMyAccount(account)">
+                <!-- <template v-slot:options v-if="isMyAccount(account)">
                   <v-menu origin="center center"  transition="scale-transition">
                       <template v-slot:activator="{ on }">
                           <v-btn icon v-on="on">
@@ -15,7 +24,6 @@
                           </v-btn>
                       </template>
                       <v-list>
-
                           <v-list-item @click="() => {}">
                               <v-list-item-icon>
                               <v-icon>delete</v-icon>
@@ -26,11 +34,11 @@
                           </v-list-item>
                       </v-list>
                     </v-menu>
-                </template>
+                </template> -->
               </profile-card>
           </v-col>
       </v-row>    
-     
+     <invite-user-dialog ref="inviteUserDialog" />
     </div>
 </template>
 
@@ -38,12 +46,13 @@
  import {mapGetters} from "vuex";
  import App from '@/layouts/App';
  import ProfileCard from '@/Domain/User/Components/ProfileCard';
+ import InviteUserDialog from '../Components/InviteUserDialog';
 
   export default {
     name: "AccountInstructorList",
     layout: (h, page) => h(App, [page]),
     components: {
-        ProfileCard
+        ProfileCard, InviteUserDialog
     },
 
     metaInfo()

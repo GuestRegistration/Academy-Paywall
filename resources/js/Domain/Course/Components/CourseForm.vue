@@ -39,7 +39,7 @@
                                 <v-icon  :color="`${selectedInstructors.includes(data.item) ? color : 'grey'}`">check_circle</v-icon>
                             </div>
                              <div class="mr-2">
-                                <avatar :src="getInstructor(data.item).avatar" :color="color" size="40" :text="getInstructor(data.item).profile.initials" />
+                                <avatar :src="getInstructor(data.item).profile.avatar" :color="color" size="40" :text="getInstructor(data.item).profile.initials" />
                              </div>
                             <div>{{getInstructor(data.item).profile.fullname }}</div>
                          </div>

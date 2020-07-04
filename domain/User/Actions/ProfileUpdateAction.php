@@ -22,7 +22,7 @@ class ProfileUpdateAction extends Controller
         $profile->update($request->data());
         $profile->user->update($request->only('email'));
 
-        return redirect()->route('profile.edit', $profile->username)->with('success', 'Profile updated');
+        return redirect()->route('profile.show', $profile->username)->with('success', 'Profile updated');
     }
 
 }

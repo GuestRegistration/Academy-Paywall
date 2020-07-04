@@ -2594,22 +2594,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       active: 0
     };
   },
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(['auth', 'authenticated', 'navDrawer'])), {}, {
-    navItemActive: function navItemActive() {
-      var _this = this;
-
-      return this.navItems().findIndex(function (item) {
-        return item.route == _this.route().current();
-      });
-    },
-    prependNavItemActive: function prependNavItemActive() {
-      var _this2 = this;
-
-      return this.prependNavItems().findIndex(function (item) {
-        return item.route == _this2.route().current() && item.canActive;
-      });
-    }
-  }),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(['auth', 'authenticated', 'navDrawer'])),
   methods: {
     prependNavItems: function prependNavItems() {
       var _this$auth$profile$us;
@@ -2705,7 +2690,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     signout: function signout() {
-      var _this3 = this;
+      var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
@@ -2713,7 +2698,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return _this3.$inertia.post(route('signout'));
+                return _this.$inertia.post(route('signout'));
 
               case 2:
               case "end":
@@ -2723,6 +2708,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee);
       }))();
     }
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    this.active = this.navItems().findIndex(function (item) {
+      return item.route == _this2.route().current();
+    });
   }
 });
 
@@ -41556,11 +41548,11 @@ var render = function() {
             "v-list-item-group",
             {
               model: {
-                value: _vm.navItemActive,
+                value: _vm.active,
                 callback: function($$v) {
-                  _vm.navItemActive = $$v
+                  _vm.active = $$v
                 },
-                expression: "navItemActive"
+                expression: "active"
               }
             },
             [
@@ -95420,6 +95412,16 @@ var map = {
 		0,
 		1
 	],
+	"./Domain/Account/Components/InviteUserDialog": [
+		"./resources/js/Domain/Account/Components/InviteUserDialog.vue",
+		9,
+		31
+	],
+	"./Domain/Account/Components/InviteUserDialog.vue": [
+		"./resources/js/Domain/Account/Components/InviteUserDialog.vue",
+		9,
+		31
+	],
 	"./Domain/Account/Layout": [
 		"./resources/js/Domain/Account/Layout.vue",
 		9,
@@ -95447,12 +95449,14 @@ var map = {
 	"./Domain/Account/Pages/AccountInstructorList": [
 		"./resources/js/Domain/Account/Pages/AccountInstructorList.vue",
 		9,
-		6
+		31,
+		32
 	],
 	"./Domain/Account/Pages/AccountInstructorList.vue": [
 		"./resources/js/Domain/Account/Pages/AccountInstructorList.vue",
 		9,
-		6
+		31,
+		32
 	],
 	"./Domain/Account/Pages/AccountPayment": [
 		"./resources/js/Domain/Account/Pages/AccountPayment.vue",
