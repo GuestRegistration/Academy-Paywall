@@ -21,7 +21,7 @@ class AccountSubscriptionPageAction extends Controller
     {
         $account->load('subscription');
         $subscription_plans = SubscriptionPlan::all();
-        $plans =  $subscription_plans->where('name', '!=', SubscriptionPlan::PLAN_UNLIMITED['name']);
+        $plans =  $subscription_plans->where('name', '!=', SubscriptionPlan::PLAN_UNLIMITED['name'])->toArray();
         $payg = SubscriptionPlan::PLAN_PAYG;
         $stripe_pk = env('STRIPE_PK');
 

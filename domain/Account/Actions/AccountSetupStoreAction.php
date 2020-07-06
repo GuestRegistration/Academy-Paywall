@@ -19,6 +19,8 @@ class AccountSetupStoreAction extends Controller
         }else{
             $this->user()->account()->create($request->data());
         }
+
+        $this->user()->load('account');
         
         return redirect()->route('account.show', $this->user()->account->username)->with('success', 'Account updated');
     }

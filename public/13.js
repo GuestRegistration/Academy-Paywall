@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[13],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Account/Pages/AccountSubscription.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Domain/Account/Pages/AccountSubscription.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Account/Pages/AccountPayment.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Domain/Account/Pages/AccountPayment.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -58,77 +58,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "AccounSubscription",
+  name: "AccountPayment",
   layout: function layout(h, page) {
     return h(_layouts_App__WEBPACK_IMPORTED_MODULE_1__["default"], [page]);
   },
   metaInfo: function metaInfo() {
     return {
-      title: "Subsription ".concat(this.account.at_username),
+      title: "Payment setup ".concat(this.account.at_username),
       titleTemplate: '%s - AcadaApp'
     };
   },
   data: function data() {
     return {
-      plan: {}
+      loading: null,
+      form: {}
     };
   },
   props: {
     account: Object,
-    plans: Array,
-    payg: Object,
-    stripe_pk: String
+    gateways: Array
   },
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
     auth: function auth(state) {
@@ -138,57 +89,33 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return state.authenticated;
     }
   })), {}, {
-    processing: function processing() {
-      return this.process === '' ? false : true;
-    },
     errors: function errors() {
       return this.$page.errors;
     }
   }),
   methods: {
-    isSubscribed: function isSubscribed(plan) {
-      if (!this.account.subscription) return false;
-      return plan.id === this.account.subscription.subscription_plan_id ? true : false;
-    },
-    subscribe: function subscribe(plan) {
-      this.plan = plan;
-      this.$refs.stripeGateway.open();
-    },
-    chargeCallback: function chargeCallback(token) {
+    saveGateway: function saveGateway(i) {
       var _this = this;
 
-      return new Promise(function (resolve, reject) {
-        axios.post(_this.route('subscription.subscribe', {
-          account: _this.account.username
-        }), {
-          token: token,
-          plan: _this.plan.id
-        }).then(function (response) {
-          resolve(response);
-        })["catch"](function (e) {
-          reject(e);
-        });
-      });
-    },
-    paymentSuccessful: function paymentSuccessful(response) {
-      if (response.data.subscription) {
-        toastr.success("Subscription was successfull");
-        this.account.subscription = response.data.subscription;
-      } else {
-        toastr.error("Subscription was not successfull");
-      }
+      this.loading = i;
 
-      this.closeGateway();
-    },
-    paymentError: function paymentError(error) {
-      toastr.error("There was an error " + error.message);
-      this.closeGateway();
-    },
-    closeGateway: function closeGateway() {
-      this.plan = {};
-      this.$refs.stripeGateway.close();
+      var data = _objectSpread({
+        gateway: this.gateways[i].gateway
+      }, this.gateways[i].data);
+
+      axios.post(this.route('account.payment.gateway.store', {
+        account: this.account.username
+      }), data).then(function (response) {
+        _this.gateways[i].data = response.data;
+        toastr.success("".concat(_this.gateways[i].gateway_name, " settings saved"));
+      })["catch"](function (e) {
+        toastr.error("".concat(_this.gateways[i].gateway_name, " settings not saved"));
+      })["finally"](function () {
+        _this.loading = null;
+      });
     }
-  }
+  },
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -264,10 +191,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Account/Pages/AccountSubscription.vue?vue&type=template&id=17db3320&":
-/*!********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Domain/Account/Pages/AccountSubscription.vue?vue&type=template&id=17db3320& ***!
-  \********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Account/Pages/AccountPayment.vue?vue&type=template&id=294c2783&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Domain/Account/Pages/AccountPayment.vue?vue&type=template&id=294c2783& ***!
+  \***************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -280,263 +207,144 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "v-container",
     [
       _c(
-        "v-container",
+        "v-row",
+        { attrs: { justify: "center" } },
         [
-          _c("stripe-gateway", {
-            ref: "stripeGateway",
-            attrs: {
-              pk: _vm.stripe_pk,
-              amount: _vm.plan.amount,
-              currency: _vm.plan.currency,
-              color: _vm.account.theme_color,
-              charge_callback: _vm.chargeCallback
-            },
-            on: { success: _vm.paymentSuccessful, error: _vm.paymentError }
-          }),
-          _vm._v(" "),
           _c(
-            "v-row",
-            { attrs: { justify: "center" } },
+            "v-col",
+            { attrs: { cols: "12", md: "8", lg: "6" } },
             [
+              _c("h4", [_vm._v("Payment Gateways")]),
+              _vm._v(" "),
               _c(
-                "v-col",
-                { attrs: { cols: "12", md: "8", lg: "6" } },
-                [
-                  _c("h4", [_vm._v("Subscriptions")]),
-                  _vm._v(" "),
-                  _vm.account.is_unlimited
-                    ? [
-                        _c(
-                          "v-alert",
-                          {
-                            attrs: {
-                              icon: "info",
-                              prominent: "",
-                              text: "",
-                              type: "info"
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                        You are currently on an unlimited plan\n                    "
-                            )
-                          ]
-                        )
-                      ]
-                    : !_vm.account.subscription
-                    ? [
-                        _c(
-                          "v-alert",
-                          {
-                            attrs: {
-                              icon: "info",
-                              prominent: "",
-                              text: "",
-                              type: "info"
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                        You are currently on the Pay As You Go Plan. Each course upload cost " +
-                                _vm._s(
-                                  _vm._f("money")(
-                                    _vm.payg.amount,
-                                    _vm.payg.currency
-                                  )
-                                ) +
-                                "\n                    "
-                            )
-                          ]
-                        )
-                      ]
-                    : _vm._e(),
-                  _vm._v(" "),
-                  !_vm.account.is_unlimited
-                    ? _c(
-                        "v-expansion-panels",
-                        { attrs: { popout: "", focusable: "" } },
-                        _vm._l(_vm.plans, function(plan) {
-                          return _c(
-                            "v-expansion-panel",
-                            { key: plan.id },
-                            [
-                              _c(
-                                "v-expansion-panel-header",
-                                [
-                                  _vm._v(
-                                    "\n                        " +
-                                      _vm._s(plan.name) +
-                                      "\n                        "
-                                  ),
-                                  _c("v-spacer"),
-                                  _vm._v(" "),
-                                  _vm.isSubscribed(plan) &&
-                                  !_vm.account.subscription.expired
-                                    ? _c(
-                                        "v-icon",
-                                        {
-                                          attrs: {
-                                            color: "success",
-                                            title: "Currently subscribed"
-                                          }
-                                        },
-                                        [_vm._v("check_circle")]
-                                      )
-                                    : _vm.isSubscribed(plan) &&
-                                      _vm.account.subscription.expired
-                                    ? _c(
-                                        "v-icon",
-                                        {
-                                          attrs: {
-                                            color: "red",
-                                            title: "Subscription expired"
-                                          }
-                                        },
-                                        [_vm._v("report_problem")]
-                                      )
-                                    : _vm._e()
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c("v-expansion-panel-content", [
-                                _c(
-                                  "div",
-                                  { staticClass: "m-3 text-center" },
-                                  [
-                                    _vm._v(
-                                      "\n                            " +
-                                        _vm._s(plan.description) +
-                                        "\n                            "
-                                    ),
-                                    _c("div", [
-                                      _c("h1", [
-                                        _vm._v(
-                                          _vm._s(
-                                            _vm._f("money")(
-                                              plan.amount,
-                                              plan.currency
-                                            )
-                                          )
-                                        )
-                                      ])
-                                    ]),
-                                    _vm._v(" "),
-                                    _vm.isSubscribed(plan)
-                                      ? [
-                                          !_vm.account.subscription.expired
-                                            ? _c(
-                                                "div",
-                                                [
-                                                  _c(
-                                                    "v-alert",
-                                                    {
-                                                      attrs: {
-                                                        icon: "check_circle",
-                                                        prominent: "",
-                                                        text: "",
-                                                        type: "success",
-                                                        "my-2": ""
-                                                      }
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        "\n                                        You are currently subscribed\n                                    "
-                                                      )
-                                                    ]
-                                                  ),
-                                                  _vm._v(
-                                                    "\n                                    " +
-                                                      _vm._s(
-                                                        _vm.account.subscription
-                                                          .start_time
-                                                      ) +
-                                                      " - " +
-                                                      _vm._s(
-                                                        _vm.account.subscription
-                                                          .end_time
-                                                      ) +
-                                                      ", " +
-                                                      _vm._s(
-                                                        _vm.account.subscription
-                                                          .expiring_time
-                                                      ) +
-                                                      " days remaining\n                                "
-                                                  )
-                                                ],
-                                                1
-                                              )
-                                            : _c(
-                                                "div",
-                                                [
-                                                  _c(
-                                                    "v-alert",
-                                                    {
-                                                      attrs: {
-                                                        icon: "report_problem",
-                                                        prominent: "",
-                                                        text: "",
-                                                        type: "error",
-                                                        "my-2": ""
-                                                      }
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        "\n                                        Subscription expired\n                                    "
-                                                      )
-                                                    ]
-                                                  )
-                                                ],
-                                                1
-                                              )
-                                        ]
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    !_vm.account.is_unlimited &&
-                                    (!_vm.account.subscription ||
-                                      (_vm.account.subscription &&
-                                        _vm.account.subscription.expired))
-                                      ? [
-                                          _c(
-                                            "div",
-                                            [
-                                              _c(
-                                                "v-btn",
-                                                {
-                                                  attrs: {
-                                                    color:
-                                                      _vm.account.theme_color,
-                                                    dark: ""
-                                                  },
-                                                  on: {
-                                                    click: function($event) {
-                                                      return _vm.subscribe(plan)
-                                                    }
-                                                  }
-                                                },
-                                                [_vm._v("Subscribe")]
-                                              )
-                                            ],
-                                            1
-                                          )
-                                        ]
-                                      : _vm._e()
-                                  ],
-                                  2
-                                )
-                              ])
-                            ],
-                            1
-                          )
-                        }),
+                "v-expansion-panels",
+                { attrs: { popout: "", focusable: "" } },
+                _vm._l(_vm.gateways, function(gateway, g) {
+                  return _c(
+                    "v-expansion-panel",
+                    { key: g },
+                    [
+                      _c(
+                        "v-expansion-panel-header",
+                        [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(gateway.gateway_name) +
+                              "\n                    "
+                          ),
+                          _c("v-spacer"),
+                          _vm._v(" "),
+                          gateway.data.credentials_complete
+                            ? _c(
+                                "v-icon",
+                                {
+                                  attrs: {
+                                    color: "success",
+                                    title: "Credentials complete"
+                                  }
+                                },
+                                [_vm._v("check_circle")]
+                              )
+                            : _c(
+                                "v-icon",
+                                {
+                                  attrs: {
+                                    color: "red",
+                                    title: "Some credentials are missing"
+                                  }
+                                },
+                                [_vm._v("report_problem")]
+                              )
+                        ],
                         1
-                      )
-                    : _vm._e()
-                ],
-                2
+                      ),
+                      _vm._v(" "),
+                      _c("v-expansion-panel-content", [
+                        _c("div", { staticClass: "my-3" }, [
+                          _c(
+                            "form",
+                            {
+                              on: {
+                                submit: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.saveGateway(g)
+                                }
+                              }
+                            },
+                            [
+                              _c("v-switch", {
+                                attrs: {
+                                  label: "Activate " + gateway.gateway_name
+                                },
+                                model: {
+                                  value: gateway.data.active,
+                                  callback: function($$v) {
+                                    _vm.$set(gateway.data, "active", $$v)
+                                  },
+                                  expression: "gateway.data.active"
+                                }
+                              }),
+                              _vm._v(" "),
+                              gateway.data.active
+                                ? [
+                                    _vm._l(gateway.credentials, function(
+                                      credential,
+                                      c
+                                    ) {
+                                      return [
+                                        _c("x-input", {
+                                          key: c,
+                                          attrs: {
+                                            errors: _vm.errors,
+                                            name: credential.slug,
+                                            label: credential.name
+                                          },
+                                          model: {
+                                            value:
+                                              gateway.data.credentials[
+                                                credential.slug
+                                              ],
+                                            callback: function($$v) {
+                                              _vm.$set(
+                                                gateway.data.credentials,
+                                                credential.slug,
+                                                $$v
+                                              )
+                                            },
+                                            expression:
+                                              "gateway.data.credentials[credential.slug]"
+                                          }
+                                        })
+                                      ]
+                                    })
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c(
+                                "x-button",
+                                {
+                                  attrs: {
+                                    type: "sumbit",
+                                    loading: _vm.loading == g,
+                                    color: _vm.account.theme_color,
+                                    dark: ""
+                                  }
+                                },
+                                [_vm._v("Save")]
+                              )
+                            ],
+                            2
+                          )
+                        ])
+                      ])
+                    ],
+                    1
+                  )
+                }),
+                1
               )
             ],
             1
@@ -709,17 +517,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/Domain/Account/Pages/AccountSubscription.vue":
-/*!*******************************************************************!*\
-  !*** ./resources/js/Domain/Account/Pages/AccountSubscription.vue ***!
-  \*******************************************************************/
+/***/ "./resources/js/Domain/Account/Pages/AccountPayment.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/Domain/Account/Pages/AccountPayment.vue ***!
+  \**************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AccountSubscription_vue_vue_type_template_id_17db3320___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AccountSubscription.vue?vue&type=template&id=17db3320& */ "./resources/js/Domain/Account/Pages/AccountSubscription.vue?vue&type=template&id=17db3320&");
-/* harmony import */ var _AccountSubscription_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AccountSubscription.vue?vue&type=script&lang=js& */ "./resources/js/Domain/Account/Pages/AccountSubscription.vue?vue&type=script&lang=js&");
+/* harmony import */ var _AccountPayment_vue_vue_type_template_id_294c2783___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AccountPayment.vue?vue&type=template&id=294c2783& */ "./resources/js/Domain/Account/Pages/AccountPayment.vue?vue&type=template&id=294c2783&");
+/* harmony import */ var _AccountPayment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AccountPayment.vue?vue&type=script&lang=js& */ "./resources/js/Domain/Account/Pages/AccountPayment.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -729,9 +537,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _AccountSubscription_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _AccountSubscription_vue_vue_type_template_id_17db3320___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _AccountSubscription_vue_vue_type_template_id_17db3320___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _AccountPayment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AccountPayment_vue_vue_type_template_id_294c2783___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AccountPayment_vue_vue_type_template_id_294c2783___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -741,38 +549,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/Domain/Account/Pages/AccountSubscription.vue"
+component.options.__file = "resources/js/Domain/Account/Pages/AccountPayment.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/Domain/Account/Pages/AccountSubscription.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************!*\
-  !*** ./resources/js/Domain/Account/Pages/AccountSubscription.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************/
+/***/ "./resources/js/Domain/Account/Pages/AccountPayment.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/Domain/Account/Pages/AccountPayment.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountSubscription_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AccountSubscription.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Account/Pages/AccountSubscription.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountSubscription_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountPayment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AccountPayment.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Account/Pages/AccountPayment.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountPayment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/Domain/Account/Pages/AccountSubscription.vue?vue&type=template&id=17db3320&":
-/*!**************************************************************************************************!*\
-  !*** ./resources/js/Domain/Account/Pages/AccountSubscription.vue?vue&type=template&id=17db3320& ***!
-  \**************************************************************************************************/
+/***/ "./resources/js/Domain/Account/Pages/AccountPayment.vue?vue&type=template&id=294c2783&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/Domain/Account/Pages/AccountPayment.vue?vue&type=template&id=294c2783& ***!
+  \*********************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountSubscription_vue_vue_type_template_id_17db3320___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AccountSubscription.vue?vue&type=template&id=17db3320& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Account/Pages/AccountSubscription.vue?vue&type=template&id=17db3320&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountSubscription_vue_vue_type_template_id_17db3320___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountPayment_vue_vue_type_template_id_294c2783___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AccountPayment.vue?vue&type=template&id=294c2783& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Domain/Account/Pages/AccountPayment.vue?vue&type=template&id=294c2783&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountPayment_vue_vue_type_template_id_294c2783___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountSubscription_vue_vue_type_template_id_17db3320___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountPayment_vue_vue_type_template_id_294c2783___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
