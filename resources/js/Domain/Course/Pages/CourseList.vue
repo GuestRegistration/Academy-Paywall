@@ -34,7 +34,7 @@
                               </v-list-item-content>
                           </v-list-item>
 
-                          <v-list-item >
+                          <v-list-item @click="deleteCourse(course)">
                               <v-list-item-icon>
                               <v-icon>delete</v-icon>
                               </v-list-item-icon>
@@ -48,7 +48,10 @@
                 </template>
               </course-card>
           </v-col>
-      </v-row>    
+          <course-delete :account="account" ref="courseDelete" />
+          
+      </v-row> 
+    
       <v-btn
           :color="account.theme_color"
           dark
@@ -68,13 +71,14 @@
 <script>
  import {mapGetters} from "vuex";
  import App from '@/layouts/App';
- import CourseCard from './../Components/CourseCard'
+ import CourseCard from './../Components/CourseCard';
+ import CourseDelete from './../Components/CourseDelete';
 
   export default {
     name: "CourseList",
     layout: (h, page) => h(App, [page]),
     components: {
-        CourseCard
+        CourseCard, CourseDelete
     },
 
     metaInfo()
@@ -87,7 +91,7 @@
 
     data(){
       return {
-        data: []
+        data: [],
       }
     },
 
@@ -100,6 +104,12 @@
       ...mapGetters([
           'auth', 'authenticated', 'isMyAccount', 'isOnMyAccount'
       ]),
+    },
+
+    methods: {
+      deleteCourse(course){
+        this.$refs.courseDelete.show(course);
+      }
     },
 
     watch: {

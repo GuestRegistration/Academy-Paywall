@@ -11,8 +11,8 @@
             <div>
                 <h1>{{ course.price | money }}</h1>
             </div>
-            <div class="ml-auto" @click="enroll">
-                <v-btn dark large :color="account.theme_color">
+            <div class="ml-auto" >
+                <v-btn @click="enroll" dark large :color="account.theme_color" :disabled="isOnMyAccount(course)">
                     Enroll Now <v-icon>arrow_forward</v-icon>
                 </v-btn>
 
@@ -33,9 +33,27 @@
                             </v-list-item-content>
                         </v-list-item>
 
+                        <v-list-item @click="$inertia.visit(route('account.course.student.list', {account: account.username, course: course.slug}))">
+                            <v-list-item-icon>
+                            <v-icon>people</v-icon>
+                            </v-list-item-icon>
+                            <v-list-item-content>
+                            <v-list-item-title>View students</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+
+                        <v-list-item @click="deleteCourse(course)">
+                              <v-list-item-icon>
+                              <v-icon>delete</v-icon>
+                              </v-list-item-icon>
+                              <v-list-item-content>
+                              <v-list-item-title>Delete</v-list-item-title>
+                              </v-list-item-content>
+                          </v-list-item>
+
                     </v-list>
                 </v-menu>
-                
+                <course-delete :account="account" ref="courseDelete" />
             </div>
         </div>
         <v-divider></v-divider>
@@ -53,6 +71,7 @@
 <script>
     import {mapGetters} from "vuex";
     import AccountLayout from '@/Domain/Account/Layout';
+    import CourseDelete from './../Components/CourseDelete';
 
     export default {
         name: "CourseShow",
@@ -63,6 +82,9 @@
                 title: `${this.course.title} ${this.account.at_username}`,
                 titleTemplate: '%s - AcadaApp',
              }
+        },
+        components: {
+            CourseDelete
         },
         computed: {
             ...mapGetters([
@@ -79,7 +101,12 @@
         methods: {
             enroll(){
                 this.$inertia.visit(this.route('account.course.enroll', { account: this.account.username, course: this.course.slug }));
+            },
+
+            deleteCourse(course){
+                this.$refs.courseDelete.show(course);
             }
+
         }
 
     }

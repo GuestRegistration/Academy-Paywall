@@ -58,7 +58,7 @@
           { text: 'Registered', value: 'register_time' },
         ],
         items: [],
-        expanded: {},
+        expanded: [],
       }
     },
 
