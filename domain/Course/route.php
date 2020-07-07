@@ -7,6 +7,7 @@ use Domain\Course\Actions\AccountCourseListAction;
 use Domain\Course\Actions\AccountCourseShowAction;
 use Domain\Course\Actions\AccountCourseStoreAction;
 use Domain\Course\Actions\AccountCourseCreateAction;
+use Domain\Course\Actions\AccountCourseDeleteAction;
 use Domain\Course\Actions\AccountCourseEnrollAction;
 use Domain\Course\Actions\AccountCourseUpdateAction;
 use Domain\Course\Actions\AccountCourseRegisterAction;
@@ -23,4 +24,5 @@ Route::prefix('@{account:username}')->group(function(){
     Route::post('/course/create', AccountCourseStoreAction::class)->name('account.course.store');
     Route::post('/{course:slug}/edit', AccountCourseUpdateAction::class)->name('account.course.update');
     Route::post('/{course:slug}/enroll', AccountCourseRegisterAction::class)->name('account.course.register');
+    Route::delete('/{course:slug}/delete', AccountCourseDeleteAction::class)->name('account.course.delete');
 });
