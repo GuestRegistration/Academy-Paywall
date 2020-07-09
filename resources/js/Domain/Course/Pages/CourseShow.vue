@@ -86,7 +86,7 @@
 <script>
     import {mapGetters} from "vuex";
     import AccountLayout from '@/Domain/Account/Layout';
-     import ProfileCard from '@/Domain/User/Components/ProfileCard';
+    import ProfileCard from '@/Domain/User/Components/ProfileCard';
     import CourseStatus from './../Components/CourseStatus';
     import CourseDelete from './../Components/CourseDelete';
 
@@ -94,7 +94,7 @@
         name: "CourseShow",
         layout: (h, page) => h(AccountLayout, [page]),
         components: {
-            CourseStatus, ProfileCard
+            CourseStatus, ProfileCard, CourseDelete
         },
          metaInfo()
          {
@@ -102,9 +102,6 @@
                 title: `${this.course.title} ${this.account.at_username}`,
                 titleTemplate: '%s - AcadaApp',
              }
-        },
-        components: {
-            CourseDelete
         },
         computed: {
             ...mapGetters([
