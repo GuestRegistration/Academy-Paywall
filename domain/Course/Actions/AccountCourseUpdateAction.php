@@ -24,7 +24,7 @@ class AccountCourseUpdateAction extends Controller
             return redirect()->back()->with('error', 'You can no longer edit this course because it has started');
         }
         $course->update($request->updateData());
-        $course->users()->sync(json_decode($request->instructors));
+        $course->users()->sync(json_decode($request->get('instructors')));
         return redirect()->route('account.course.show', [$account->username, $course->slug])->with('success', $course->title." updated successfully");
     }
 

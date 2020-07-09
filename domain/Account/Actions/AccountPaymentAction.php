@@ -20,6 +20,8 @@ class AccountPaymentAction extends Controller
     public function __invoke(Account $account)
     {
         $gateway = $account->paymentGateway;
+        $gateway = isset(PaymentGatewaySupport::GATEWAYS[$gateway->gateway]) ? $gateway : null;
+
         $currencies = collect(array_keys(PaymentGatewaySupport::CURRENCIES))->map(function($currency){
            return [
                 'currency' => $currency,

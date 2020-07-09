@@ -25,18 +25,20 @@ class CourseRegisterRequest extends FormRequest
      */
     public function rules()
     {
+        $course = $this->route('course');
         return [
             'first_name' => ['required'],
             'last_name' => ['required'],
             'email' => ['required', 'email'],
             'phone' => ['required'],
-            'payment_ref' => [Rule::requiredIf($this->for_real)],
-            'payment_gateway_id' => [Rule::requiredIf($this->for_real), 'exists:payment_gateways,id']
+            'payment_ref' => [Rule::requiredIf($this->for_real && $course->payment['require'])],
+            'currency' => [Rule::requiredIf($this->for_real && $course->payment['require'])],
+            'amount' => [Rule::requiredIf($this->for_real && $course->payment['require'])],
         ];
     }
 
     public function data()
     {
-        return $this->only('first_name', 'last_name', 'email', 'phone', 'payment_ref', 'payment_gateway_id');
+        return $this->only('first_name', 'last_name', 'email', 'phone', 'payment_gateway', 'payment_ref', 'currency', 'amount');
     }
 }

@@ -23,29 +23,7 @@
     </v-dialog>
 
     <v-dialog v-model="dialog" scrollable  persistent max-width="600px">
-        <form  v-if="!course.ended" @submit.prevent="submit">
-          <v-card>
-            <v-card-title>
-              <span class="headline">Enroll for "{{course.title}}"</span>
-              <v-spacer></v-spacer>
-              <h4 :style="`color: ${account.theme_color}`">{{ course.price | money }}</h4>
-            </v-card-title>
-            <v-divider></v-divider>
-            <v-card-text>
-                <x-input :errors="errors" name="first_name" type="text" v-model="student.first_name" label="First name*" />
-                <x-input :errors="errors" name="last_name" type="text" v-model="student.last_name" label="Last name*" />
-                <x-input :errors="errors" name="email" type="text" v-model="student.email" label="Email*" />
-                <x-input :errors="errors" name="phone" type="text" v-model="student.phone" label="Phone*" />
-                <small color="red">*indicates required field</small>
-            </v-card-text>
-            <v-card-actions>
-              <v-btn type="button" color="red darken-1" text @click="$inertia.visit(route('account.course.show', {account: account.username, course: course.slug}))">Cancel</v-btn>
-              <v-spacer></v-spacer>
-              <v-btn type="submit" :loading="loading" :color="account.theme_color" dark >Proceed to payment  <v-icon>arrow_forward</v-icon></v-btn>
-            </v-card-actions>
-          </v-card>
-        </form>
-        <div v-else>
+        <div v-if="course.ended">
           <v-card>
             <v-card-text>
               <div class="text-center">
@@ -56,18 +34,94 @@
             </v-card-text>
           </v-card>
         </div>
-    </v-dialog>
-    <payment-gateways :account="account" :gateways="payment_gateways" :show="selectPaymentGateway" @continue="initializeGateway" @cancel="selectPaymentGateway = false; freeProcess()" />
-    <student-enrollment  :account="account"  :student="student" :show="showEnrollment" @close="$inertia.visit(route('account.show', {account: account.username}))" />
+        <div v-else-if="course.payment.require && (!course.payment.gateway_active || !course.payment.gateway_clear)">
+          <v-card>
+            <v-card-text>
+              <div class="text-center">
+                  <h1>Ooops!</h1>
+                  Enrollment for this course requires payment but payment gateway is currently not available
+                <v-divider></v-divider>
+                <v-btn type="button" color="red darken-1" text @click="$inertia.visit(route('account.course.show', {account: account.username, course: course.slug}))">Go back</v-btn>
+              </div>
+            </v-card-text>
+          </v-card>
+        </div>
+        <form v-else @submit.prevent="submit">
+          <v-card>
+            <v-card-title>
+              <span class="headline">Enrollment</span>
+            </v-card-title>
+            <v-divider></v-divider>
+            <v-card-text>
+                <div class="d-flex mb-5">
+                  <div>
+                    <div>
+                       Course: {{ course.title }}
+                    </div>
+                    <div>
+                      Organizer: {{ account.name }}
+                    </div>
+                  </div>
+                  <v-spacer></v-spacer>
+                  <div>
+                    <h4 v-if="course.payment.require">{{course.price | money(course.payment.currency)}}</h4>
+                    <h4 v-else>FREE</h4>
+                  </div>
+                </div>               
+                <x-input :errors="errors" name="first_name" type="text" v-model="student.first_name" label="First name*" />
+                <x-input :errors="errors" name="last_name" type="text" v-model="student.last_name" label="Last name*" />
+                <x-input :errors="errors" name="email" type="text" v-model="student.email" label="Email*" />
+                <x-input :errors="errors" name="phone" type="text" v-model="student.phone" label="Phone*" />
+                <small color="red">*indicates required field</small>
+            </v-card-text>
+            <v-card-actions>
+              <v-btn type="button" color="red darken-1" text @click="$inertia.visit(route('account.course.show', {account: account.username, course: course.slug}))">Cancel</v-btn>
+              <v-spacer></v-spacer>
 
+              <v-btn v-if="course.payment.require" type="submit" :loading="loading" :color="account.theme_color" dark >Proceed to payment  <v-icon>arrow_forward</v-icon></v-btn>
+              <v-btn v-else type="submit" :loading="loading" :color="account.theme_color" dark >Submit <v-icon>arrow_forward</v-icon></v-btn>
+            </v-card-actions>
+          </v-card>
+        </form>
+        
+    </v-dialog>
+    
+    <paystack-gateway ref="paystack" :public-key="payment_gateway.credentials.public_key" 
+      :email="student.email" 
+      :amount="course.price * 100" 
+      :currency="course.payment.currency"
+      :charge_callback="paystackCallBack"   
+      :data="{
+        ref: student.id,
+        firstname: student.first_name,
+        lastname:  student.last_name,
+        metadata: {
+          custom_fields: [
+              {
+                  course: course.title,
+              }
+          ]
+        },
+      }" 
+      @process="(p) => { process = p }"
+      @success="registrationSuccessfull"
+      @error="registrationFailed"
+    >
+    </paystack-gateway>
+
+    <student-enrollment 
+      :account="account"  
+      :student="student" 
+      :show="showEnrollment" 
+      @close="$inertia.visit(route('account.show', {account: account.username}))" />
   </v-row>
 </template>
 
 <script>
     import AccountLayout from '@/Domain/Account/Layout';
     import CourseShow from './CourseShow';
-    import StudentEnrollment from './../Components/StudentEnrollment'
-    import PaymentGateways from './../Components/PaymentGateways'
+    import StudentEnrollment from './../Components/StudentEnrollment';
+    import PaystackGateway from '@/components/PaystackGateway';
 
     export default {
         name: 'CourseEnroll',
@@ -83,7 +137,7 @@
                               h(CourseShow, [page])
                             ]),
         components: {
-            StudentEnrollment, PaymentGateways
+            StudentEnrollment, PaystackGateway
         },
 
         data(){
@@ -100,7 +154,7 @@
 
         computed: {
           processing(){
-            return this.process === '' ? false : true;
+            return !this.process || this.process === '' ? false : true;
           }
         },
 
@@ -114,9 +168,9 @@
                 default: () => ({}),
             },
 
-            payment_gateways: {
-              type: Array,
-              default: () => []
+            payment_gateway: {
+              type: Object,
+              default: () => ({})
             }
         },
 
@@ -132,17 +186,20 @@
 
           submit(){
             this.loading = true;
-            this.process = `Validating your information...`;
+            this.process = `Hold on...`;
             this.register({
                     ...this.student,
                     raw: true,
-                    for_real: false,
+                    for_real: !this.course.payment.require,
             })
             .then(response => {
                this.errors = null;
-               this.selectPaymentGateway = true; 
-               this.process = '';
-             
+               this.process = null;
+               if(this.course.payment.require){
+                this.initializeGateway(this.course.payment.gateway);
+               }else{
+                 this.registrationSuccessfull(response);
+               }
             })
             .catch(e => {
                 this.errors = e.response ? e.response.data.errors : [];
@@ -150,12 +207,10 @@
             })
           },
 
-          initializeGateway(selectedGateway){
-            this.selectPaymentGateway = false;
-            const gateway = this.payment_gateways.find(g => g.gateway == selectedGateway);
-            switch(selectedGateway){
+          initializeGateway(gateway){
+            switch(gateway){
               case 'paystack':
-                this.initializePaystack(gateway);
+                this.$refs.paystack.open();
               break;
 
               default:
@@ -165,73 +220,37 @@
             }
           },
 
-          initializePaystack(gateway){
-            this.process = `Initializing payment gateway...`;
-             let paystackScript = document.createElement('script')
-              paystackScript.setAttribute('src', 'https://js.paystack.co/v1/inline.js');
-              document.head.appendChild(paystackScript);
-
-              paystackScript.onload = (e) => {
-                this.init_payment = false;
-                toastr.success('Payment gateway initialized');
-                this.paystackPayment(gateway);
-              };
-
-              paystackScript.onerror = (e) => {
-                 this.init_payment = false;
-                 toastr.error('Payment gateway initialization failed');
-                 this.freeProcess()
-              };
+          paystackCallBack(paystackResponse){
+            return new Promise((resolve, reject) => {
+                this.process = `Registering you as ${this.student.first_name} ${this.student.last_name}`;
+                this.register({
+                  ...this.student,
+                  payment_ref: paystackResponse.reference,
+                  raw: true,
+                  for_real: true,
+                  payment_gateway: this.course.payment.gateway,
+                  currency: this.course.payment.currency,
+                  amount: this.course.price
+                })
+                .then(response => {
+                  resolve(response);
+                })
+                .catch(e => {
+                  reject(e);
+                })
+              })
           },
 
-          paystackPayment(gateway){
-            const handler = PaystackPop.setup({
-              key: gateway.credentials.public_key,
-              email: this.student.email,
-              amount: this.course.price * 100,
-              currency: "NGN",
-              ref: this.student.id,
-              firstname: this.student.first_name,
-              lastname:  this.student.first_name,
-              metadata: {
-                custom_fields: [
-                    {
-                        course: this.course.title,
-                    }
-                ]
-              },
-              callback: (response) => {
-                  toastr.success(`Payment successful`);
-                  this.process = `Registering you as ${this.student.first_name} ${this.student.last_name}`;
-                  // console.log(response);
-                  this.register({
-                    ...this.student,
-                    payment_ref: response.reference,
-                    raw: true,
-                    for_real: true,
-                    payment_gateway_id: gateway.id
-                  })
-                  .then(response => {
-                    this.student = response.data;
-                    this.loading = false;
-                    this.showEnrollment = true;
-                  })
-                  .catch(e => {
-                    toastr.error(`Registration failed: ${e.message}`)
-                  })
-                  .finally(() => {
-                      this.freeProcess();
-                  })
-                  
-              },
-              onClose: () => {
-                  toastr.warning(`Enrollment aborted`);
-                  this.freeProcess()
-              }
-            });
-            this.process = '';
-            handler.openIframe();
+          registrationSuccessfull(response){
+              this.freeProcess();
+              this.student = response.data;
+              this.showEnrollment = true;
           },
+
+          registrationFailed(e){
+              toastr.error(`Registration failed: ${e.message}`);
+          }
+
         }
 
     }

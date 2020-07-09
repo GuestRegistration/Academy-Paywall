@@ -21,7 +21,7 @@ class AccountCourseStoreAction extends Controller
     public function __invoke(CourseSaveRequest $request, Account $account)
     {
         $course = $account->courses()->create($request->storeData());
-        $course->users()->attach(json_decode($request->instructors));
+        $course->users()->attach(json_decode($request->get('instructors')));
 
         if(Cache::has($account->getKey().'-payg')){
             Cache::forget($account->getKey().'-payg');

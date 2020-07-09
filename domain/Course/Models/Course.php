@@ -27,7 +27,7 @@ class Course extends Model
     protected $appends = [
         'is_published', 'published_time', 'snippet',
         'start_date', 'end_date', 'started', 'ended', 'ongoing',
-        'raw_dates',
+        'raw_dates', 'payment'
     ];
 
     public function account(){
@@ -85,4 +85,16 @@ class Course extends Model
         $length = self::MIN_DESCRIPTION_CHARACTER;
         return strlen($this->description)  > $length ? \substr($this->description, 0, 200).'..' : $this->description;
     }
+
+    public function getPaymentAttribute(){
+        return [
+            'require' => $this->price ? true : false,
+            'currency' => $this->account->paymentGateway->currency,
+            'gateway' => $this->account->paymentGateway->gateway,
+            'gateway_active' => $this->account->paymentGateway->active,
+            'gateway_clear' => $this->account->paymentGateway->credentials_complete,
+        ];
+    }
+
+
 }

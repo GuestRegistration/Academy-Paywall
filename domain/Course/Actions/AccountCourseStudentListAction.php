@@ -19,7 +19,7 @@ class AccountCourseStudentListAction extends Controller
 
     public function __invoke(Account $account, Course $course)
     {
-        $students = $course->students()->with('paymentGateway')->get();
+        $students = $course->students;
 
         return Inertia::render('Domain/Course/Pages/StudentList', compact('account', 'course', 'students'));
     }

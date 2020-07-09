@@ -21,7 +21,7 @@ class AccountStudentListAction extends Controller
 
         foreach ($account->courses as $course)
         {
-            $students = $students->merge($course->students()->with('course', 'paymentGateway')->get());
+            $students = $students->merge($course->students()->with('course')->get());
         }
 
         return Inertia::render('Domain/Course/Pages/StudentList', compact('account', 'students'));

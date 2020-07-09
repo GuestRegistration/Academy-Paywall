@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use Domain\Account\Models\Account;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
+use App\Classes\PaymentGatewaySupport;
 use Domain\Subscription\Models\Payment;
 use Domain\Subscription\Models\SubscriptionPlan;
 
@@ -27,7 +28,10 @@ class AccountCourseCreateAction extends Controller
         $instructors = $account->instructors;
         $payment = Cache::has($account->getKey().'-payg') ? Payment::find(Cache::get($account->getKey().'-payg')) : null;
 
-        return Inertia::render('Domain/Course/Pages/CourseCreate', compact('account', 'payg', 'stripe_pk', 'payment', 'instructors'));
+        $payment_gateway = $account->paymentGateway ? $account->paymentGateway->only(['active', 'gateway', 'currency']) : null;
+        $payment_gateway = isset(PaymentGatewaySupport::GATEWAYS[$payment_gateway['gateway']]) ? $payment_gateway : null;
+
+        return Inertia::render('Domain/Course/Pages/CourseCreate', compact('account', 'payg', 'stripe_pk', 'payment', 'instructors', 'payment_gateway'));
     }
 
 }

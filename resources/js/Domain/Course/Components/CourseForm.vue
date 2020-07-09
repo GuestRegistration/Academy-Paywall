@@ -5,13 +5,32 @@
                 <v-col cols="12">
                     <x-input :errors="errors" name="title" type="text" v-model="form.title" label="Course title" />
                     <x-textarea :errors="errors" name="description" v-model="form.description" label="Course description" />
-                    <x-input :errors="errors" name="price" type="number" v-model="form.price" label="Price" />
+                    <v-switch v-model="form.requires_payment" label="Require payment for enrollment" :color="account.theme_color" ></v-switch>
+                    <template v-if="form.requires_payment">
+                        <div v-if="paymentGateway && paymentGateway.active">
+                             <v-alert icon="info" prominent text type="info">
+                                Payment would will be received in <strong>{{paymentGateway.currency}}</strong> via {{paymentGateway.gateway}}
+                            </v-alert>
+                            <div class="text-right">
+                                <inertia-link :href="route('account.payment.gateway', {account: account.username})">Payment method settings</inertia-link>
+                            </div>
+                             <x-input  :errors="errors" name="price" type="number" v-model="form.price" label="Price" />
+                        </div>
+                        <div v-else>
+                             <v-alert icon="report_problem" prominent text type="error">
+                               You do not have any payment method enabled yet.
+                            </v-alert>
+                            <div class="text-right">
+                                <inertia-link :href="route('account.payment.gateway', {account: account.username})">Payment method settings</inertia-link>
+                            </div>
+                        </div>
+                    </template>
                     <v-row>
                         <v-col cols="12" lg="6">
-                            <x-date-picker :errors="errors" label="Starting date" name="start_date" :current="form.start_date" @change="(date) => form.start_date = date" />
+                            <x-date-picker :errors="errors" label="Starting date" name="start_date" :current="form.start_date" @change="(date) => form.start_date = date"  :color="account.theme_color"/>
                         </v-col>
                         <v-col cols="12" lg="6">
-                            <x-date-picker :errors="errors" label="Ending date" name="end_date" :current="form.end_date" @change="(date) => form.end_date = date" />
+                            <x-date-picker :errors="errors" label="Ending date" name="end_date" :current="form.end_date" @change="(date) => form.end_date = date" :color="account.theme_color" />
                         </v-col>
                     </v-row>
                     <x-select :errors="errors" :value="form.course_type" label="Course type" name="course_type" :items="course_types" outlined @change="(selected) => form.course_type = selected" />
@@ -23,6 +42,7 @@
 
                 <v-col cols="12">
                     <v-combobox
+                    outlined
                     v-model="selectedInstructors"
                     :items="instructorIds"
                     label="Instructors"
@@ -36,10 +56,10 @@
                      <template v-slot:item="data" >
                          <div class="d-flex align-items-center">
                              <div class="mr-3">
-                                <v-icon  :color="`${selectedInstructors.includes(data.item) ? color : 'grey'}`">check_circle</v-icon>
+                                <v-icon  :color="`${selectedInstructors.includes(data.item) ? account.theme_color : 'grey'}`">check_circle</v-icon>
                             </div>
                              <div class="mr-2">
-                                <avatar :src="getInstructor(data.item).profile.avatar" :color="color" size="40" :text="getInstructor(data.item).profile.initials" />
+                                <avatar :src="getInstructor(data.item).profile.avatar" :color="account.theme_color" size="40" :text="getInstructor(data.item).profile.initials" />
                              </div>
                             <div>{{getInstructor(data.item).profile.fullname }}</div>
                          </div>
@@ -53,16 +73,17 @@
                             @click:close="data.parent.selectItem(data.item)"
                             close
                         >
-                            <avatar :src="getInstructor(data.item).profile.avatar" :color="color" size="30" :text="getInstructor(data.item).profile.initials" />
+                            <avatar :src="getInstructor(data.item).profile.avatar" :color="account.theme_color" size="30" :text="getInstructor(data.item).profile.initials" />
                             <span class="ml-2">{{ getInstructor(data.item).profile.fullname}}</span>
 
                         </v-chip>
                     </template>
                     </v-combobox>
+
                 </v-col>
 
                 <v-col cols="12">
-                    <v-switch v-model="form.send_instructions" label="Send welcome email" ></v-switch>
+                    <v-switch v-model="form.send_instructions" :color="account.theme_color" label="Send welcome email" ></v-switch>
                     <div>
                         <small>Send a mail to your student after a successful enrollment. This could be an instruction on how to proceed with the course or a welcoming message</small>
                     </div>
@@ -79,7 +100,7 @@
             </v-row>
             <v-btn fixed dark fab bottom right x-large
                 :loading="loading" type="submit"
-                :color="color">
+                :color="account.theme_color">
                 <v-icon>mdi-check</v-icon>
             </v-btn>
         </v-container>
@@ -110,6 +131,12 @@
             },
             instructorIds(){
                 return this.instructors.map(instructor => instructor.id);
+            },
+            paymentGateway(){
+                return this.$page.payment_gateway;
+            },
+            account(){
+                return this.$page.account
             }
         },
 
@@ -135,9 +162,12 @@
         },
         mounted(){
             if(this.course){
-                this.form = this.course;
-                this.form.start_date = this.course.raw_dates.start;
-                this.form.end_date = this.course.raw_dates.end;
+                this.form = {
+                    ...this.course,
+                    requires_payment: this.course.payment.require,
+                    start_date: this.course.raw_dates.start,
+                    end_date : this.course.raw_dates.end,
+                };
                 this.selectedInstructors = this.course.users.map(user => user.id);
             }
         }

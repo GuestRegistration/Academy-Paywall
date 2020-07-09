@@ -13,7 +13,8 @@
         <v-divider></v-divider>
         <div class="d-flex">
             <div>
-                <h1>{{ course.price | money }}</h1>
+                <h2 v-if="course.payment.require">{{course.price | money(course.payment.currency)}}</h2>
+                <h2 v-else>FREE</h2>
             </div>
             <div class="ml-auto" >
                 <v-btn @click="enroll" dark large :color="account.theme_color" :disabled="isOnMyAccount(course)">
@@ -76,8 +77,11 @@
             </v-row>    
         </v-container>
         <slot />
-        <v-btn fixed dark fab bottom right large :color="account.theme_color" :title="`Enroll for ${course.title}`" @click="enroll">
+        <v-btn v-if="!isOnMyAccount(course)" fixed dark fab bottom right large :color="account.theme_color" :title="`Enroll for ${course.title}`" @click="enroll" >
             <v-icon>arrow_forward</v-icon>
+        </v-btn>
+         <v-btn v-else fixed dark fab bottom right large :color="account.theme_color" :title="`Edit ${course.title}`" @click="$inertia.visit(route('account.course.edit', {account: account.username, course: course.slug}))" >
+            <v-icon>edit</v-icon>
         </v-btn>
     </div>
     

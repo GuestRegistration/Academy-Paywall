@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use Domain\Course\Models\Course;
 use Domain\Account\Models\Account;
 use App\Http\Controllers\Controller;
+use App\Classes\PaymentGatewaySupport;
 
 class AccountCourseEditAction extends Controller
 {
@@ -21,8 +22,11 @@ class AccountCourseEditAction extends Controller
     {
         $instructors = $account->instructors;
         $course->load(['users']);
-        
-        return Inertia::render('Domain/Course/Pages/CourseEdit', compact('account', 'course', 'instructors'));
+
+        $payment_gateway = $account->paymentGateway ? $account->paymentGateway->only(['active', 'gateway', 'currency']) : null;
+        $payment_gateway = isset(PaymentGatewaySupport::GATEWAYS[$payment_gateway['gateway']]) ? $payment_gateway : null;
+
+        return Inertia::render('Domain/Course/Pages/CourseEdit', compact('account', 'course', 'instructors', 'payment_gateway'));
     }
 
 }

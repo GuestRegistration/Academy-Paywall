@@ -31,7 +31,7 @@ class AccountPaymentGatewaySaveRequest extends FormRequest
                 'credentials' => ['required', 'array']
             ];
             foreach($this->credentialKeys() as $key){
-                $rules["credentials.{$key}"] = ['required'];
+                $rules["credentials.{$key}"] = [Rule::requiredIf($this->active)];
             }
         return  $rules;       
     }

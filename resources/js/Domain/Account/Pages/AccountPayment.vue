@@ -10,12 +10,12 @@
                         <v-card outlined >
                             <v-card-text v-if="gateways.length">
                                 <v-radio-group v-model="form.gateway">
-                                        <v-radio v-for="(gateway, g) in gateways" :key="g" :label="gateway.label" :value="gateway.name"></v-radio>
+                                        <v-radio v-for="(gateway, g) in gateways" :key="g" :label="gateway.label" :value="gateway.name" :color="account.theme_color"></v-radio>
                                     </v-radio-group>
                                     <template v-if="form.gateway">
                                         <h5 class="text-center">{{gateways.find(g=>g.name==form.gateway).label}} Setup</h5>
-                                        <x-input v-for="(credential, c) in credentials" :key="c" :errors="errors" :name="`credentials.${credential.slug}`" :label="credential.name" v-model="form.credentials[credential.slug]" />
-                                        <v-switch v-model="form.active" label="Enable" ></v-switch>
+                                        <x-input v-for="(credential, c) in credentials" :key="c" :errors="errors" :name="`credentials.${credential.slug}`" :label="credential.name" v-model="form.credentials[credential.slug]" :disabled="!form.active" />
+                                        <v-switch v-model="form.active" label="Enable" :color="account.theme_color" ></v-switch>
                                         <x-button type="sumbit" :loading="loading"  :color="account.theme_color" dark>Save</x-button>
                                     </template>
                             </v-card-text>
@@ -75,7 +75,8 @@
             },
 
             credentials(){
-                return this.form.gateway ? this.gateways.find(gateway => gateway.name == this.form.gateway).credentials || [] : [];
+                const gateway = this.form.gateway ? this.gateways.find(gateway => gateway.name == this.form.gateway) : null;
+                return gateway ? gateway.credentials : [];
             }
 
         },
