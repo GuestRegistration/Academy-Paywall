@@ -45,7 +45,7 @@
               <v-icon>edit</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title>Edit account</v-list-item-title>
+              <v-list-item-title>Edit Organization</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
 
@@ -54,7 +54,7 @@
               <v-icon>add</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title>Add new course</v-list-item-title>
+              <v-list-item-title>Add Course</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
 

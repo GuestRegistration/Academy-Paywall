@@ -1,76 +1,98 @@
 <template>
     <v-container>
-        <form @submit.prevent="submit">
-            <v-row justify="center" align="center">
-                <v-col cols="12" md="6">
-                    <h4>Organization Information</h4>
-                    <v-divider></v-divider>
-                    <x-input :errors="errors" name="name" type="text" v-model="form.name" label="Organization name"  prependInnerIcon="account_box" />
-                    <x-input :errors="errors" name="username" type="text" v-model="form.username" label="Alias" prependInnerIcon="alternate_email" />
-                    <x-input :errors="errors" name="email" type="email" v-model="form.email" label="Email"  prependInnerIcon="email"/>
-                    <x-input :errors="errors" name="phone" type="tel" v-model="form.phone" label="Phone"  prependInnerIcon="call" />
-                    <x-textarea :errors="errors" name="bio" v-model="form.bio" label="Bio" />
-                </v-col>
-                <v-col cols="12" md="6"> 
-                    <h4>Socials</h4>
-                    <v-divider></v-divider>
-                    <x-input :errors="errors" name="facebook_url" type="url" v-model="form.facebook_url" label="Facebook" prependInnerIcon="link" />
-                    <x-input :errors="errors" name="instagram_url" type="url" v-model="form.instagram_url" label="Instagram" prependInnerIcon="link" />
-                    <x-input :errors="errors" name="twitter_url" type="url" v-model="form.twitter_url" label="Twitter" prependInnerIcon="link" />
-                    <x-input :errors="errors" name="linkedin_url" type="url" v-model="form.linkedin_url" label="LinkedIn" prependInnerIcon="link" />
-                    <x-input :errors="errors" name="youtube_url" type="url" v-model="form.youtube_url" label="Youtube" prependInnerIcon="link" />
-                    <x-input :errors="errors" name="website" type="url" v-model="form.website" label="Website" prependInnerIcon="link" />
-                </v-col>
-            </v-row>
+        <v-row justify="center">
+            <v-col cols="12" md="6">
+                <form @submit.prevent="submit">
+                    <v-expansion-panels
+                        popout
+                        focusable
+                        >
+                            <v-expansion-panel>
+                                <v-expansion-panel-header>
+                                    <h4>
+                                        <v-icon v-if="Object.keys(errors).some(error => ['name', 'username', 'email', 'phone', 'bio'].includes(error))" color="red" class="mr-3" title="There is error in this section">report_problem</v-icon>
+                                        Organization Information
+                                    </h4>
+                                </v-expansion-panel-header>
+                                <v-expansion-panel-content class="py-3">
+                                    <x-input :errors="errors" name="name" type="text" v-model="form.name" label="Organization name"  prependInnerIcon="account_box" />
+                                    <x-input :errors="errors" name="username" type="text" v-model="form.username" label="Alias" prependInnerIcon="alternate_email" />
+                                    <x-input :errors="errors" name="email" type="email" v-model="form.email" label="Email"  prependInnerIcon="email"/>
+                                    <x-input :errors="errors" name="phone" type="tel" v-model="form.phone" label="Phone"  prependInnerIcon="call" />
+                                    <x-textarea :errors="errors" name="bio" v-model="form.bio" label="Bio" />
+                                </v-expansion-panel-content>
+                            </v-expansion-panel>
 
-            <v-row>
-                <v-col cols="12">
-                    <h4>Header</h4>
-                    <v-switch v-model="form.show_caption" label="Use headline caption" ></v-switch>
-                    <v-divider></v-divider>
-                    <v-row v-if="form.show_caption">
-                        <v-col cols="12" md="6">
-                            <x-textarea :errors="errors" name="caption" v-model="form.caption" label="Headline caption" />
-                        </v-col>
-                        <v-col>
-                            <x-textarea :errors="errors" name="subcaption" v-model="form.subcaption" label="Headline subcaption" />
-                        </v-col>
-                    </v-row>
-                </v-col>
-            </v-row>
+                            <v-expansion-panel>
+                                <v-expansion-panel-header>
+                                    <h4>
+                                        <v-icon v-if="Object.keys(errors).some(error => ['theme_color', 'avatar', 'cover_image'].includes(error))" color="red" class="mr-3" title="There is error in this section">report_problem</v-icon>
+                                        Appearance
+                                    </h4>
+                                </v-expansion-panel-header>
+                                <v-expansion-panel-content class="py-3">
+                                    <div class="text-center">
+                                        <div class="my-2">
+                                            <h5>Theme color</h5>
+                                            <v-color-picker width="100%" hide-canvas v-model="form.theme_color"></v-color-picker>
+                                        </div>
+                                    
+                                        <div class="my-2" >
+                                            <h5>Avatar</h5>
+                                            <x-file-input :errors="errors" name="avatar" label="Avatar" :src="account.avatar" :color="account.theme_color" :isAvatar="true" @change="getAvatar" />
+                                        </div>
+                                        <div class="my-2">
+                                            <h5>Cover image</h5>
+                                            <x-file-input :errors="errors" name="cover_image" label="Cover image" :src="account.cover_image" @change="getCoverImage" />
+                                        </div>
+                                    </div>
+                                    
+                                </v-expansion-panel-content>
+                            </v-expansion-panel>
 
-            <v-row>
-                <v-col cols="12">
-                    <h4>Appearance</h4>
-                    <v-divider></v-divider>
-                    <v-row>
-                        <v-col cols="12" md="4">
-                            <h5>Theme color</h5>
-                            <v-color-picker class="ma-2" v-model="form.theme_color"></v-color-picker>
-                        </v-col>
+                            <v-expansion-panel>
+                                <v-expansion-panel-header>
+                                    <h4>
+                                        <v-icon v-if="Object.keys(errors).some(error => ['caption', 'subcaption'].includes(error))" color="red" class="mr-3" title="There is error in this section">report_problem</v-icon>
+                                        Header
+                                    </h4>
+                                </v-expansion-panel-header>
+                                <v-expansion-panel-content class="py-3">
+                                    <v-switch v-model="form.show_caption" label="Use headline caption" ></v-switch>
+                                    <div v-if="form.show_caption">
+                                        <x-textarea :errors="errors" name="caption" v-model="form.caption" label="Headline caption" />
+                                        <x-textarea :errors="errors" name="subcaption" v-model="form.subcaption" label="Headline subcaption" />
+                                    </div>
+                                </v-expansion-panel-content>
+                            </v-expansion-panel>
 
-                        <v-col cols="12" md="4">
-                            <div class="text-center mb-3" >
-                                <h5>Avatar</h5>
-                                <x-file-input :errors="errors" name="avatar" label="Avatar" :src="account.avatar" :color="account.theme_color" :isAvatar="true" @change="getAvatar" />
-                            </div>
-                        </v-col>
+                            <v-expansion-panel>
+                                <v-expansion-panel-header>
+                                   <h4>
+                                        <v-icon v-if="Object.keys(errors).some(error => ['facebook_url', 'instagram_url', 'twitter_url', 'linkedin_url', 'youtube_url', 'website'].includes(error))" color="red" class="mr-3" title="There is error in this section">report_problem</v-icon>
+                                        Links
+                                    </h4>
+                                </v-expansion-panel-header>
+                                <v-expansion-panel-content class="my-3">
+                                    <x-input :errors="errors" name="facebook_url" type="url" v-model="form.facebook_url" label="Facebook" prependInnerIcon="link" />
+                                    <x-input :errors="errors" name="instagram_url" type="url" v-model="form.instagram_url" label="Instagram" prependInnerIcon="link" />
+                                    <x-input :errors="errors" name="twitter_url" type="url" v-model="form.twitter_url" label="Twitter" prependInnerIcon="link" />
+                                    <x-input :errors="errors" name="linkedin_url" type="url" v-model="form.linkedin_url" label="LinkedIn" prependInnerIcon="link" />
+                                    <x-input :errors="errors" name="youtube_url" type="url" v-model="form.youtube_url" label="Youtube" prependInnerIcon="link" />
+                                    <x-input :errors="errors" name="website" type="url" v-model="form.website" label="Website" prependInnerIcon="link" />
+                                </v-expansion-panel-content>
+                            </v-expansion-panel>
+                        </v-expansion-panels>
 
-                        <v-col cols="12" md="4">
-                            <div class="text-center">
-                                <h5>Cover image</h5>
-                                <x-file-input :errors="errors" name="cover_image" label="Cover image" :src="account.cover_image" @change="getCoverImage" />
-                            </div>
-                        </v-col>
-                    </v-row>
-                </v-col>
-            </v-row>
-            <v-btn fixed dark fab bottom right x-large=""
-                :loading="loading" type="submit"
-                :color="form.theme_color">
-                <v-icon>mdi-check</v-icon>
-            </v-btn>
-        </form>
+                        <v-btn fixed dark fab bottom right x-large=""
+                            :loading="loading" type="submit"
+                            :color="form.theme_color">
+                            <v-icon>mdi-check</v-icon>
+                        </v-btn>
+                </form>
+            </v-col>
+        </v-row>
+        
     </v-container>
 </template>
 
