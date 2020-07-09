@@ -2,38 +2,29 @@
     <v-container>
         <v-row justify="center">
             <v-col cols="12" md="8" lg="6">
-                <h4>Payment Gateways</h4>
-                <v-expansion-panels
-                popout
-                focusable
-                >
-                <v-expansion-panel
-                    v-for="(gateway, g) in gateways"
-                    :key="g"
-                >
-                    <v-expansion-panel-header>
-                        {{ gateway.gateway_name }}
-                        <v-spacer></v-spacer>
-                        <v-icon v-if="gateway.data.credentials_complete" color="success" title="Credentials complete">check_circle</v-icon>
-                        <v-icon v-else color="red" title="Some credentials are missing">report_problem</v-icon>
-                    </v-expansion-panel-header>
-                    <v-expansion-panel-content>
-                        <div class="my-3">
-                            <form @submit.prevent="saveGateway(g)" >
-                                <v-switch v-model="gateway.data.active" :label="`Activate ${gateway.gateway_name}`" ></v-switch>
-                                <template v-if="gateway.data.active">
-                                    <template v-for="(credential, c) in gateway.credentials">
-                                        <x-input :key="c" :errors="errors" :name="credential.slug" :label="credential.name" v-model="gateway.data.credentials[credential.slug]" />
+                <h4 class="text-center">Payment Gateways</h4>
+                 <form @submit.prevent="saveGateway" >
+                    <x-select :errors="errors" :value="form.currency" label="Currency" name="currency" :items="availableCurrencies" outlined @change="currencyChanged" />
+                     <template v-if="form.currency"> 
+                        <h5>Available gateway for {{form.currency}}</h5>
+                        <v-card outlined >
+                            <v-card-text v-if="gateways.length">
+                                <v-radio-group v-model="form.gateway">
+                                        <v-radio v-for="(gateway, g) in gateways" :key="g" :label="gateway.label" :value="gateway.name"></v-radio>
+                                    </v-radio-group>
+                                    <template v-if="form.gateway">
+                                        <h5 class="text-center">{{gateways.find(g=>g.name==form.gateway).label}} Setup</h5>
+                                        <x-input v-for="(credential, c) in credentials" :key="c" :errors="errors" :name="`credentials.${credential.slug}`" :label="credential.name" v-model="form.credentials[credential.slug]" />
+                                        <v-switch v-model="form.active" label="Enable" ></v-switch>
+                                        <x-button type="sumbit" :loading="loading"  :color="account.theme_color" dark>Save</x-button>
                                     </template>
-                                </template>
-
-                                <x-button type="sumbit" :loading="loading == g"  :color="account.theme_color" dark>Save</x-button>
-                            </form> 
-                    </div>
-                    
-                    </v-expansion-panel-content>
-                </v-expansion-panel>
-                </v-expansion-panels>
+                            </v-card-text>
+                            <v-card-text v-else class="text-muted text-center">
+                                <p class="text-muted">No supported gateway support for {{form.currency}}  yet</p>
+                            </v-card-text>
+                        </v-card>
+                     </template>
+                </form> 
             </v-col>
         </v-row>
     </v-container>
@@ -62,7 +53,8 @@
         },
         props: {
             account: Object,
-            gateways: Array,
+            gateway: Object,
+            currencies: Array,
         },
         computed: {
             ...mapState({
@@ -73,31 +65,48 @@
             errors(){
                 return this.$page.errors;
             },
+
+            availableCurrencies(){
+                return this.currencies.map((currency) => currency.currency.toUpperCase());
+            },
+
+            gateways(){
+                return this.form.currency ? this.currencies.find(currency => currency.currency == this.form.currency).gateways || [] : [];
+            },
+
+            credentials(){
+                return this.form.gateway ? this.gateways.find(gateway => gateway.name == this.form.gateway).credentials || [] : [];
+            }
+
         },
 
         methods: {
-            saveGateway(i){
-                this.loading = i;
-                const data = {
-                    gateway: this.gateways[i].gateway,
-                    ...this.gateways[i].data,
+            currencyChanged(currency){
+                if(this.gateway && currency == this.gateway.currency){
+                    this.form = { ...this.gateway };
+                    return;
                 }
-                axios.post(this.route('account.payment.gateway.store', { account: this.account.username }), data)
-                .then(response => {
-                   this.gateways[i].data = response.data
-                    toastr.success(`${this.gateways[i].gateway_name} settings saved`)
-                })
-                .catch(e => {
-                    toastr.error(`${this.gateways[i].gateway_name} settings not saved`)
-                })
-                .finally(() => {
-                    this.loading = null
-                })
+                this.form =  {
+                    currency,
+                    active: false,
+                    gateway: undefined,
+                    credentials: {}
+                }
+            },
+            
+           async saveGateway(){
+                this.loading = true;
+                await this.$inertia.post(this.route('account.payment.gateway.store', { account: this.account.username }), this.form);
+                this.loading = false;
             }
         },
 
         mounted(){
-
+            if(this.gateway){
+                this.form = {
+                    ...this.gateway
+                }
+            }
         }
     }
 </script>

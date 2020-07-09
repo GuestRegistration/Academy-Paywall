@@ -5,7 +5,6 @@ namespace Domain\Account\Actions;
 use Inertia\Inertia;
 use Domain\Account\Models\Account;
 use App\Http\Controllers\Controller;
-use Domain\Account\Models\PaymentGateway;
 use Domain\Account\Requests\AccountPaymentGatewaySaveRequest;
 
 class AccountPaymentStoreAction extends Controller
@@ -20,11 +19,11 @@ class AccountPaymentStoreAction extends Controller
 
     public function __invoke(AccountPaymentGatewaySaveRequest $request, Account $account)
     {
-        $existingGateway = $account->paymentGateways()->where('gateway', $request->get('gateway'))->first();
-        $gateway = $existingGateway ? $existingGateway : new PaymentGateway;
-        $gateway->fill($request->data())->save();
+        $gateway =  $account->paymentGateway;
         
-        return response($gateway);
+        $gateway ? $gateway->update($request->data()) : $account->paymentGateway()->create($request->data());
+
+        return redirect()->back()->with('success', 'Payment gateway saved');
     }
 
 }

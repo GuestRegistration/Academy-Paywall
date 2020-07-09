@@ -5,7 +5,7 @@ namespace Domain\Account\Actions;
 use Inertia\Inertia;
 use Domain\Account\Models\Account;
 use App\Http\Controllers\Controller;
-use Domain\Account\Models\PaymentGateway;
+use App\Classes\PaymentGatewaySupport;
 
 class AccountPaymentAction extends Controller
 {
@@ -19,20 +19,21 @@ class AccountPaymentAction extends Controller
 
     public function __invoke(Account $account)
     {
-        $gateways = [];
+        $gateway = $account->paymentGateway;
+        $currencies = collect(array_keys(PaymentGatewaySupport::CURRENCIES))->map(function($currency){
+           return [
+                'currency' => $currency,
+                'gateways' => collect(PaymentGatewaySupport::CURRENCIES[$currency])->map(function($gateway){
+                    return [
+                        'label' => PaymentGatewaySupport::GATEWAYS[$gateway]['name'],
+                        'name' => $gateway, 
+                        'credentials' => PaymentGatewaySupport::credentials($gateway)
+                    ];
+                    })
+                ]; 
+            });
 
-        $allMyGateways = $account->paymentGateways;
-
-        foreach (PaymentGateway::GATEWAYS as $key => $gateway) {
-            array_push($gateways, [
-                'gateway_name' => $gateway['name'],
-                'gateway' => $key,
-                'credentials' => PaymentGateway::getCredentials($key),
-                'data' => $allMyGateways->where('gateway', $key)->first() ??  ['credentials' => (object) []],
-            ]);
-        }
-
-        return Inertia::render('Domain/Account/Pages/AccountPayment', compact('account', 'gateways'));
+        return Inertia::render('Domain/Account/Pages/AccountPayment', compact('account', 'gateway', 'currencies'));
     }
 
 }

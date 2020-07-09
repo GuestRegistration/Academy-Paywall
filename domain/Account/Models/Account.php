@@ -75,8 +75,8 @@ class Account extends Model
         return $this->hasMany(Course::class);
     }
 
-    public function paymentGateways(){
-        return $this->hasMany(PaymentGateway::class);
+    public function paymentGateway(){
+        return $this->hasOne(PaymentGateway::class);
     }
 
     public function subscription(){

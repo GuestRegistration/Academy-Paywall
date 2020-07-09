@@ -2,8 +2,8 @@
 
 namespace Domain\Account\Requests;
 
-use App\Classes\FileUpload;
 use Illuminate\Validation\Rule;
+use App\Classes\PaymentGatewaySupport;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AccountPaymentGatewaySaveRequest extends FormRequest
@@ -25,15 +25,30 @@ class AccountPaymentGatewaySaveRequest extends FormRequest
      */
     public function rules()
     {
-        return [];
+        $rules = [
+                'currency' => ['required', Rule::in(array_keys(PaymentGatewaySupport::CURRENCIES))],
+                'gateway' => $this->currency ? ['required', Rule::in(PaymentGatewaySupport::CURRENCIES[$this->currency])] : [],
+                'credentials' => ['required', 'array']
+            ];
+            foreach($this->credentialKeys() as $key){
+                $rules["credentials.{$key}"] = ['required'];
+            }
+        return  $rules;       
     }
 
-    public function data(){
+
+    public function data()
+    {
+
         return $this->merge([
             'active' => (Bool) $this->active,
-            'account_id' => $this->route('account')->getKey()
         ])->only([
-            'account_id','gateway', 'active', 'credentials'
+            'currency', 'gateway', 'active', 'credentials'
         ]);
     }
+
+    protected function credentialKeys(){
+        return collect(PaymentGatewaySupport::credentials($this->gateway))->pluck('slug');
+    }
+
 }
