@@ -104,20 +104,37 @@
                         render: true,
                       },
                       {
-                        route: 'account.show',
+                        route: this.auth.profile.username ? 'profile.edit' : 'profile.edit.alt',
                         param: {
-                          account: this.auth.account ? this.auth.account.username : '#'
+                          profile: this.auth.profile.username ?? this.auth.profile.id
                         },
-                        title: 'Academy',
+                        title: 'Edit Profile',
                         icon: 'school',
-                        render: this.auth.account ? true : false,
+                        render: true,
                       },
                     ]
-            
           },
           navItems(){
             if(this.authenticated){
               return [
+                        {
+                          route: 'account.show',
+                          param: {
+                            account: this.auth.account ? this.auth.account.username : '#'
+                          },
+                          title: 'My Organization',
+                          icon: 'school',
+                          render: this.auth.account ? true : false,
+                        },
+                        {
+                          route: 'account.edit',
+                          param: {
+                            account: this.auth.account ? this.auth.account.username : '#'
+                          },
+                          title: 'Edit Organization',
+                          icon: 'edit',
+                          render: this.auth.account ? true : false,
+                        },
                         {
                           route: 'account.instructor.list',
                           param: {
@@ -128,30 +145,21 @@
                           render: this.auth.account ? true : false,
                         },
                         {
-                          route: 'account.edit',
-                          param: {
-                            account: this.auth.account ? this.auth.account.username : '#'
-                          },
-                          title: 'Edit Account',
-                          icon: 'edit',
-                          render: this.auth.account ? true : false,
-                        },
-                        {
-                          route: 'account.course.create',
-                          param: {
-                            account: this.auth.account ? this.auth.account.username : '#'
-                          },
-                          title: 'New course',
-                          icon: 'add_circle',
-                          render: this.auth.account ? true : false,
-                        },
-                        {
                           route: 'account.course.list',
                           param: {
                             account: this.auth.account ? this.auth.account.username : '#'
                           },
                           title: 'Courses',
                           icon: 'library_books',
+                          render: this.auth.account ? true : false,
+                        },
+                         {
+                          route: 'account.course.create',
+                          param: {
+                            account: this.auth.account ? this.auth.account.username : '#'
+                          },
+                          title: 'Add Course',
+                          icon: 'add_circle',
                           render: this.auth.account ? true : false,
                         },
                         {
@@ -168,7 +176,7 @@
                           param: {
                             account: this.auth.account ? this.auth.account.username : '#'
                           },
-                          title: 'Payment',
+                          title: 'Payment Settings',
                           icon: 'local_atm',
                           render: this.auth.account ? true : false,
                         },

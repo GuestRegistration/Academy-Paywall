@@ -3,10 +3,10 @@
         <form @submit.prevent="submit">
             <v-row justify="center" align="center">
                 <v-col cols="12" md="6">
-                    <h4>Academy Information</h4>
+                    <h4>Organization Information</h4>
                     <v-divider></v-divider>
-                    <x-input :errors="errors" name="name" type="text" v-model="form.name" label="Academy name"  prependInnerIcon="account_box" />
-                    <x-input :errors="errors" name="username" type="text" v-model="form.username" label="Username" prependInnerIcon="alternate_email" />
+                    <x-input :errors="errors" name="name" type="text" v-model="form.name" label="Organization name"  prependInnerIcon="account_box" />
+                    <x-input :errors="errors" name="username" type="text" v-model="form.username" label="Alias" prependInnerIcon="alternate_email" />
                     <x-input :errors="errors" name="email" type="email" v-model="form.email" label="Email"  prependInnerIcon="email"/>
                     <x-input :errors="errors" name="phone" type="tel" v-model="form.phone" label="Phone"  prependInnerIcon="call" />
                     <x-textarea :errors="errors" name="bio" v-model="form.bio" label="Bio" />
@@ -84,7 +84,7 @@
         metaInfo()
          {
              return{
-                title: 'Academy account set up',
+                title: 'Organization account set up',
                 titleTemplate: '%s - AcadaApp',
              }
         },
