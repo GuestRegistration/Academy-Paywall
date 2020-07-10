@@ -3,7 +3,7 @@
             <form  @submit.prevent="submit">
                 <v-card>
                     <v-card-title>
-                        <span class="headline"><v-icon>person_add</v-icon> Invite instructor to {{auth.account.name}}</span>
+                        <span class="headline"><v-icon>person_add</v-icon> Invite instructor to {{account.name}}</span>
                     </v-card-title>
                     <v-divider></v-divider>
                     <v-card-text>
@@ -28,8 +28,9 @@
                                     v-bind="data.attrs"
                                     :input-value="data.selected"
                                     :disabled="data.disabled"
-                                    :color="errors && errors[`emails.${selected.findIndex(s => s == data.item)}`] ? 'red' : 'primary'"
+                                    :color="errors && errors[`emails.${selected.findIndex(s => s == data.item)}`] ? 'red' : account.theme_color"
                                     @click:close="data.parent.selectItem(data.item)"
+                                    dark
                                     close
                                 >
                                     {{data.item}}
@@ -61,7 +62,7 @@
                     <v-card-actions>
                         <v-btn type="button" color="red darken-1" text @click="set(false)">Cancel</v-btn>
                         <v-spacer></v-spacer>
-                        <v-btn type="submit" v-if="selected.length" :loading="loading" :color="auth.account.theme_color" dark >Invite {{selected.length}} user<span v-if="selected.length > 1">s</span></v-btn>
+                        <v-btn type="submit" v-if="selected.length" :loading="loading" :color="account.theme_color" dark >Invite {{selected.length}} user<span v-if="selected.length > 1">s</span></v-btn>
                     </v-card-actions>
                 </v-card>
             </form>
@@ -90,6 +91,10 @@ import { mapGetters } from 'vuex'
 
             errors(){
                 return this.$page.errors;
+            },
+
+            account(){
+                return this.$page.account;
             }
         },
         methods: {
@@ -98,7 +103,7 @@ import { mapGetters } from 'vuex'
             },
             async submit(){
                 this.loading = true;
-                await this.$inertia.post(this.route('account.instructor.invite.send', {account: this.auth.account.username}), {
+                await this.$inertia.post(this.route('account.instructor.invite.send', {account: this.account.username}), {
                     emails: this.selected
                 });
                 this.loading = false;

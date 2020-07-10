@@ -5,8 +5,8 @@
     <v-app-bar app :color="authenticated && auth.account ? auth.account.theme_color : 'primary'" dark >
       <v-app-bar-nav-icon @click="$store.state.navDrawer = !$store.state.navDrawer"></v-app-bar-nav-icon>
        <inertia-link :href="route('home')" class="white--text" style="text-decoration: none">
-        <v-toolbar-title dark>AcadaApp</v-toolbar-title>
-      </inertia-link>
+        <v-toolbar-title dark>{{$page.config.app_name}}</v-toolbar-title>
+        </inertia-link>
       <v-spacer></v-spacer>
         
       <template v-if="authenticated">

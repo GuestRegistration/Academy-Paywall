@@ -1,6 +1,8 @@
 <template>
   <v-app>
     <nav-drawer v-if="authenticated" />
+
+    <!-- sm app bar -->
     <v-app-bar
       absolute
       color="primary"
@@ -45,6 +47,7 @@
         <v-container style="min-height: 110vh" fluid>
             <v-row>
                 <v-col cols="12" md="4" id="lhs">
+                  <!-- md app bar -->
                   <v-app-bar
                     absolute
                     color="primary"
@@ -56,6 +59,7 @@
                       <v-btn v-else @click="$inertia.visit(route('home'))" icon>
                         <v-icon>home</v-icon>
                       </v-btn>
+                      {{$page.config.app_name}}
                     </v-toolbar-title>
                     <v-spacer></v-spacer>
                      <v-btn icon v-if="$store.state.navDrawer" @click="$store.state.navDrawer = false" ref="navBarCloser">

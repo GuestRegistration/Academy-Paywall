@@ -58,7 +58,7 @@
                                     </h4>
                                 </v-expansion-panel-header>
                                 <v-expansion-panel-content class="py-3">
-                                    <v-switch v-model="form.show_caption" label="Use headline caption" ></v-switch>
+                                    <v-switch v-model="form.show_caption" label="Use headline caption" :color="form.theme_color"></v-switch>
                                     <div v-if="form.show_caption">
                                         <x-textarea :errors="errors" name="caption" v-model="form.caption" label="Headline caption" />
                                         <x-textarea :errors="errors" name="subcaption" v-model="form.subcaption" label="Headline subcaption" />

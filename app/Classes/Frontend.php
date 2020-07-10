@@ -12,6 +12,10 @@ class Frontend
     public static function share()
     {
         Inertia::share([
+            'config' => [
+                'app_name' => config('app.name'),
+                'default_theme_color' => config('custom.default_theme_color')
+            ],
             'errors' => function () {
                 return self::errors();
             },

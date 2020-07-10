@@ -47,7 +47,7 @@ class Account extends Model
     }
 
     public function getThemeColorAttribute($value){
-        return $value ?? '#3F51B5';
+        return $value ?? config('custom.default_theme_color');
     }
 
     public function getCoverImageAttribute($value){
