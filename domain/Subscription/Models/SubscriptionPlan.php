@@ -12,16 +12,16 @@ class SubscriptionPlan extends Model
 
     const PLAN_PAYG = [
             'name' => 'Pay As You Go',
-            'amount' => 500,
-            'currency' => 'NGN',
+            'amount' => 1,
+            'currency' => 'USD',
             'month_duration' => null,
-            'description' => 'Each course cost 500'
+            'description' => 'Each course cost 1 USD'
     ];
 
     const PLAN_PROFESSIONAL = [
             'name' => 'Professional',
-            'amount' => 10000,
-            'currency' => 'NGN',
+            'amount' => 100,
+            'currency' => 'USD',
             'month_duration' => 6,
             'description' => 'Enjoy unlimited courses for 6 months'
         ];
