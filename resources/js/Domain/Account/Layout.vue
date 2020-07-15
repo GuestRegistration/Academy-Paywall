@@ -99,6 +99,7 @@
                           <v-divider></v-divider>
                         {{account.bio}}
                       </template>
+                      <h2>Contact</h2>
                       <v-card outlined>
                         <v-card outlined dark :color="account.theme_color">
                           <v-row>
