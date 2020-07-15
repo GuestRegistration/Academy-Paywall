@@ -106,6 +106,7 @@
       @process="(p) => { process = p }"
       @success="registrationSuccessfull"
       @error="registrationFailed"
+      @aborted="freeProcess"
     >
     </paystack-gateway>
 

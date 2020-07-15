@@ -27,8 +27,10 @@
                 <v-btn @click="enroll" dark large :color="account.theme_color" :disabled="isOnMyAccount(course)">
                     Enroll Now <v-icon>arrow_forward</v-icon>
                 </v-btn>
-
-                <v-menu v-if="isOnMyAccount(course)" origin="center center"  transition="scale-transition">
+                <v-btn icon @click="shareCourse(course)" :title="`Share ${course.title}`">
+                    <v-icon>share</v-icon>
+                </v-btn>
+                <v-menu origin="center center"  transition="scale-transition" v-if="isOnMyAccount(course)" >
                     <template v-slot:activator="{ on }">
                         <v-btn icon v-on="on">
                             <v-icon>mdi-dots-vertical</v-icon>
@@ -61,9 +63,9 @@
                               <v-list-item-title>Delete</v-list-item-title>
                               </v-list-item-content>
                           </v-list-item>
-
                     </v-list>
                 </v-menu>
+                <course-share :account="account" ref="courseShare" />
                 <course-delete :account="account" ref="courseDelete" />
             </div>
         </div>
@@ -118,13 +120,14 @@
     import AccountLayout from '@/Domain/Account/Layout';
     import ProfileCard from '@/Domain/User/Components/ProfileCard';
     import CourseStatus from './../Components/CourseStatus';
+    import CourseShare from './../Components/CourseShare';
     import CourseDelete from './../Components/CourseDelete';
 
     export default {
         name: "CourseShow",
         layout: (h, page) => h(AccountLayout, [page]),
         components: {
-            CourseStatus, ProfileCard, CourseDelete
+            CourseStatus, ProfileCard, CourseShare, CourseDelete
         },
          metaInfo()
          {
@@ -148,6 +151,10 @@
         methods: {
             enroll(){
                 this.$inertia.visit(this.route('account.course.enroll', { account: this.account.username, course: this.course.slug }));
+            },
+
+            shareCourse(course){
+                this.$refs.courseShare.show(course);
             },
 
             deleteCourse(course){

@@ -1,7 +1,7 @@
 <template>
     <v-dialog
         v-model="dialog"
-        max-width="290"
+        max-width="400"
     >
     <v-card> 
         <v-card-title class="headline red--text"><v-icon class="red--text">delete</v-icon> Delete course</v-card-title>
