@@ -27,7 +27,7 @@ class Course extends Model
     protected $appends = [
         'is_published', 'published_time', 'snippet',
         'start_date', 'end_date', 'started', 'ended', 'ongoing',
-        'raw_dates', 'payment'
+        'raw_dates', 'payment', 'course_duration'
     ];
 
     public function account(){
@@ -51,18 +51,50 @@ class Course extends Model
     }
 
     public function getStartDateAttribute(){
-        return optional($this->start_at)->format('F d, Y');
+        return optional($this->start_at)->format('F d, Y h:i a');
+    }
+
+    public function getEndDateAttribute(){
+        return optional($this->end_at)->format('F d, Y h:i a');
+    }
+
+    public function getCourseDurationAttribute(){
+        $diff = $this->start_at->diff($this->end_at);
+        $duration = '';
+        if($diff->y > 0){
+            $duration .= "{$diff->y}yr.";
+        } 
+        if($diff->m > 0) {
+            $duration = \str_replace('.', ', ', $duration);
+            $duration .= "{$diff->m}mth.";
+        }
+        if($diff->d > 0) {
+            $duration = \str_replace('.', ', ', $duration);
+            $duration .= "{$diff->d}d.";
+        }
+        if($diff->h > 0) {
+            $duration = \str_replace('.', ', ', $duration);
+            $duration .= "{$diff->h}hr.";
+        }
+        if($diff->i > 0) {
+            $duration = \str_replace('.', ', ', $duration);
+            $duration .= "{$diff->i}min."; 
+        }
+
+        return $duration;
     }
 
     public function getRawDatesAttribute(){
         return [
-            'start' =>  optional($this->start_at)->format('Y-m-d'),
-            'end' =>  optional($this->end_at)->format('Y-m-d'),
+            'start' => [
+                'date' => optional($this->start_at)->format('Y-m-d'),
+                'time' =>  optional($this->start_at)->format('h:i'),
+            ],
+            'end' => [
+                'date' => optional($this->end_at)->format('Y-m-d'),
+                'time' =>  optional($this->end_at)->format('h:i'),
+            ]
         ];
-    }
-
-    public function getEndDateAttribute(){
-        return optional($this->end_at)->format('F d, Y');
     }
 
     public function getStartedAttribute(){
@@ -83,7 +115,8 @@ class Course extends Model
 
     public function getSnippetAttribute(){
         $length = self::MIN_DESCRIPTION_CHARACTER;
-        return strlen($this->description)  > $length ? \substr($this->description, 0, 200).'..' : $this->description;
+        $description = \strip_tags($this->description);
+        return strlen($description)  > $length ? \substr($description, 0, 200).'..' : $description;
     }
 
     public function getPaymentAttribute(){

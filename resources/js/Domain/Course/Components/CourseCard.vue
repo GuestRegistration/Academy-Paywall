@@ -22,7 +22,7 @@
           {{ course.snippet }}
           <v-divider></v-divider>
           <div class="text-muted">
-            <v-icon :color="course.account.theme_color">date_range</v-icon> {{course.start_date}} - {{course.end_date}}
+            <v-icon :color="course.account.theme_color">date_range</v-icon> {{course.start_date}} - {{course.end_date}} ({{course.course_duration}})
           </div>
           <v-divider></v-divider>
           <v-chip-group v-if="course.users">

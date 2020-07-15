@@ -8,7 +8,7 @@
          </v-col>
          <v-col cols="12">
            <div class="text-center">
-            <v-date-picker :color="$attrs.color" v-model="picker" :show-current="selected" @change="(date) => $emit('change', date)"></v-date-picker>
+            <v-time-picker :color="$attrs.color" v-model="picker" @input="(time) => $emit('input', time)"></v-time-picker>
            </div>
          </v-col>
         </v-row>
@@ -22,17 +22,16 @@
   import {mapGetters} from 'vuex';
 
   export default {
-    name: 'XDatePicker',
+    name: 'XTimePicker',
     data () {
       return {
         picker: null,
-        selected: false,
       }
     },
     props: {
         errors: null,
         label: String,
-        current: String,
+        value: String,
     },
     computed: {
         ...mapGetters([
@@ -48,14 +47,10 @@
     },
 
     watch:{
-      current: {
+      value: {
         immediate: true,
-        handler(date){
-          if(!date){
-            this.picker = new Date().toISOString().substr(0, 10);
-            return;
-          }
-          this.picker = date;
+        handler(time){
+           this.picker = time;
         }
       }
     }

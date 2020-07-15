@@ -4,8 +4,15 @@
         <v-img :src="course.cover_image" ></v-img>
         <div class="d-flex">
             <div class="text-muted mt-3">
-                <v-icon :color="account.theme_color">date_range</v-icon> {{course.start_date}} - {{course.end_date}}
-                <v-icon :color="account.theme_color">info</v-icon> {{course.course_type}}
+                <div>
+                    <v-icon :color="account.theme_color">date_range</v-icon> {{course.start_date}} - {{course.end_date}} 
+                </div>
+                <div>
+                    <v-icon :color="account.theme_color">schedule</v-icon>  {{course.course_duration}}
+                </div>
+                <div>
+                    <v-icon :color="account.theme_color">info</v-icon> {{course.course_type}}
+                </div>                
             </div>
             <v-spacer></v-spacer>
             <course-status :course="course" />
@@ -61,8 +68,7 @@
             </div>
         </div>
         <v-divider></v-divider>
-        <div>
-            {{course.description}}
+        <div v-html="course.description">
         </div>
         <v-container v-if="course.users" class="mt-4">
             <h2>Instructors ({{course.users.length}}) </h2>
@@ -72,7 +78,27 @@
             </div>
              <v-row v-else>
                 <v-col cols="12" md="6" v-for="user in course.users" :key="user.id">
-                    <profile-card :account="account" :instructor="user"></profile-card>
+                    <profile-card :account="account" :instructor="user">
+                        <template v-slot:options v-if="isMyAccount(account)">
+                            <v-menu origin="center center"  transition="scale-transition">
+                                <template v-slot:activator="{ on }">
+                                    <v-btn icon v-on="on">
+                                        <v-icon>mdi-dots-vertical</v-icon>
+                                    </v-btn>
+                                </template>
+                                <v-list>
+                                    <v-list-item @click="$inertia.visit(route('profile.show', {profile: user.profile.username}))">
+                                        <v-list-item-icon>
+                                        <v-icon>account_circle</v-icon>
+                                        </v-list-item-icon>
+                                        <v-list-item-content>
+                                        <v-list-item-title>View profile</v-list-item-title>
+                                        </v-list-item-content>
+                                    </v-list-item>
+                                </v-list>
+                            </v-menu>
+                        </template>
+                    </profile-card>
                 </v-col>
             </v-row>    
         </v-container>
