@@ -177,10 +177,10 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Domain\Auth\AuthServiceProvider::class,
+        Domain\User\UserServiceProvider::class,
         Domain\Account\AccountServiceProvider::class,
         Domain\Subscription\SubscriptionServiceProvider::class,
         Domain\Course\CourseServiceProvider::class,
-        Domain\User\UserServiceProvider::class,
     ],
 
     /*

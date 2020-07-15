@@ -17,7 +17,7 @@ Route::get('account/{account}', AccountShowAction::class)->name('account.show.id
 Route::get('/account', AccountSetupAction::class)->name('account.setup');
 Route::post('/account', AccountSetupStoreAction::class)->name('account.setup.store');
 
-Route::prefix('@{account:username}')->group(function(){
+Route::prefix('{account:username}')->group(function(){
     Route::get('/', AccountShowAction::class)->name('account.show');
     Route::get('/edit', AccountEditAction::class)->name('account.edit');
     Route::get('/payment', AccountPaymentAction::class)->name('account.payment.gateway');

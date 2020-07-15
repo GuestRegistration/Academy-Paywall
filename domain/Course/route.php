@@ -15,7 +15,7 @@ use Domain\Course\Actions\AccountCourseStudentListAction;
 
 Route::get('/courses', CourseListAction::class)->name('course.list');
 
-Route::prefix('@{account:username}')->group(function(){
+Route::prefix('{account:username}')->group(function(){
     Route::get('/course/create', AccountCourseCreateAction::class)->name('account.course.create');
     Route::get('/{course:slug}', AccountCourseShowAction::class)->name('account.course.show');
     Route::get('/{course:slug}/edit', AccountCourseEditAction::class)->name('account.course.edit');
