@@ -29,7 +29,8 @@ class AccountCourseCreateAction extends Controller
         $payment = Cache::has($account->getKey().'-payg') ? Payment::find(Cache::get($account->getKey().'-payg')) : null;
 
         $payment_gateway = $account->paymentGateway ? $account->paymentGateway->only(['active', 'gateway', 'currency']) : null;
-        $payment_gateway = isset(PaymentGatewaySupport::GATEWAYS[$payment_gateway['gateway']]) ? $payment_gateway : null;
+
+        $payment_gateway = $payment_gateway && isset(PaymentGatewaySupport::GATEWAYS[$payment_gateway['gateway']]) ? $payment_gateway : null;
 
         return Inertia::render('Domain/Course/Pages/CourseCreate', compact('account', 'payg', 'stripe_pk', 'payment', 'instructors', 'payment_gateway'));
     }
