@@ -46,7 +46,8 @@
 </template>
 
 <script>
-    import  moment from 'moment-timezone';
+    import  jstz from 'jstz';
+    
     export default {
         name: 'SigninPage',
          metaInfo()
@@ -79,12 +80,11 @@
             async submit() {
                 this.ui.loading = true;
                 await this.$inertia.post(this.route('signin.magic.link'), this.form)
-
                 this.ui.loading = false;
             },
         },
         created(){
-            this.form.timezone = moment.tz.guess();
+            this.form.timezone = jstz.determine().name();
         }
     }
 </script>
