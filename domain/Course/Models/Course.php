@@ -123,10 +123,10 @@ class Course extends Model
     public function getPaymentAttribute(){
         return [
             'require' => $this->price ? true : false,
-            'currency' => $this->account->paymentGateway->currency,
-            'gateway' => $this->account->paymentGateway->gateway,
-            'gateway_active' => $this->account->paymentGateway->active,
-            'gateway_clear' => $this->account->paymentGateway->credentials_complete,
+            'currency' => optional($this->account->paymentGateway)->currency,
+            'gateway' =>  optional($this->account->paymentGateway)->gateway,
+            'gateway_active' =>  optional($this->account->paymentGateway)->active,
+            'gateway_clear' =>  optional($this->account->paymentGateway)->credentials_complete,
         ];
     }
 
