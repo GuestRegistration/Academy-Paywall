@@ -24,4 +24,12 @@ class CoursePolicy
         return $user->account->getKey() === $course->account->getKey();
     }
 
+    public function viewStudents(User $user, Course $course)
+    {
+        if($user->account->getKey() === $course->account->getKey()) return true;
+        if($course->users()->find($user->getKey())) return true;
+
+        return false;
+    }
+
 }

@@ -30,14 +30,14 @@
                 <v-btn icon @click="shareCourse(course)" :title="`Share ${course.title}`">
                     <v-icon>share</v-icon>
                 </v-btn>
-                <v-menu origin="center center"  transition="scale-transition" v-if="isOnMyAccount(course)" >
+                <v-menu origin="center center"  transition="scale-transition" v-if="isOnMyAccount(course) || affiliated" >
                     <template v-slot:activator="{ on }">
                         <v-btn icon v-on="on">
                             <v-icon>mdi-dots-vertical</v-icon>
                         </v-btn>
                     </template>
                     <v-list>
-                        <v-list-item @click="$inertia.visit(route('account.course.edit', {account: account.username, course: course.slug}))">
+                        <v-list-item v-if="isOnMyAccount(course)" @click="$inertia.visit(route('account.course.edit', {account: account.username, course: course.slug}))">
                             <v-list-item-icon>
                             <v-icon>edit</v-icon>
                             </v-list-item-icon>
@@ -46,7 +46,7 @@
                             </v-list-item-content>
                         </v-list-item>
 
-                        <v-list-item @click="$inertia.visit(route('account.course.student.list', {account: account.username, course: course.slug}))">
+                        <v-list-item v-if="isOnMyAccount(course) || affiliated " @click="$inertia.visit(route('account.course.student.list', {account: account.username, course: course.slug}))">
                             <v-list-item-icon>
                             <v-icon>people</v-icon>
                             </v-list-item-icon>
@@ -55,7 +55,7 @@
                             </v-list-item-content>
                         </v-list-item>
 
-                        <v-list-item @click="deleteCourse(course)">
+                        <v-list-item v-if="isOnMyAccount(course)" @click="deleteCourse(course)">
                               <v-list-item-icon>
                               <v-icon>delete</v-icon>
                               </v-list-item-icon>
@@ -145,6 +145,9 @@
             },
             course(){
                 return this.$page.course;
+            },
+            affiliated(){
+                return this.course.users.find(user => user.id == this.auth.id) ? true : false;
             }
         },
 
