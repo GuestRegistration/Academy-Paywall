@@ -5,7 +5,7 @@
         <div class="d-flex">
             <div class="text-muted mt-3">
                 <div>
-                    <v-icon :color="account.theme_color">date_range</v-icon> {{course.start_date}} - {{course.end_date}} 
+                    <v-icon :color="account.theme_color">date_range</v-icon> {{course.start_date}} - {{course.end_date}} ({{course.account.user.timezone}})
                 </div>
                 <div>
                     <v-icon :color="account.theme_color">schedule</v-icon>  {{course.course_duration}}
@@ -20,11 +20,11 @@
         <v-divider></v-divider>
         <div class="d-flex">
             <div>
-                <h2 v-if="course.payment.require">{{course.price | money(course.payment.currency)}}</h2>
-                <h2 v-else>FREE</h2>
+                <h4 v-if="course.payment.require">{{course.price | money(course.payment.currency)}}</h4>
+                <h4 v-else>FREE</h4>
             </div>
-            <div class="ml-auto" >
-                <v-btn @click="enroll" dark large :color="account.theme_color" :disabled="isOnMyAccount(course)">
+            <div class="ml-auto text-right" >
+                <v-btn @click="enroll" dark small :color="account.theme_color" :disabled="isOnMyAccount(course)">
                     Enroll Now <v-icon>arrow_forward</v-icon>
                 </v-btn>
                 <v-btn icon @click="shareCourse(course)" :title="`Share ${course.title}`">

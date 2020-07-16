@@ -2,8 +2,6 @@
 
 namespace App\Http;
 
-use Domain\Auth\Middleware\SetUpProfile;
-use App\Http\Middleware\RestrictIPsInDev;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -16,7 +14,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
-        RestrictIPsInDev::class,
+        \App\Http\Middleware\RestrictIPsInDev::class,
         \App\Http\Middleware\TrustProxies::class,
         \Fruitcake\Cors\HandleCors::class,
         \App\Http\Middleware\CheckForMaintenanceMode::class,
@@ -39,7 +37,8 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            SetUpProfile::class,
+            \App\Http\Middleware\LogUserOutIfNoTimezoneSetYet::class,
+            \Domain\Auth\Middleware\SetUpProfile::class,
         ],
 
         'api' => [

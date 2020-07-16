@@ -4,12 +4,13 @@ namespace Domain\Course\Models;
 
 use App\User;
 use App\Classes\UUID;
+use App\Traits\HasLocalDates;
 use Domain\Account\Models\Account;
 use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
-    use UUID;
+    use UUID, HasLocalDates;
 
     const MIN_DESCRIPTION_CHARACTER = 120;
     
@@ -51,11 +52,11 @@ class Course extends Model
     }
 
     public function getStartDateAttribute(){
-        return optional($this->start_at)->format('F d, Y h:i a');
+        return optional($this->localize('start_at', $this->account->user->timezone))->format('F d, Y h:i a');
     }
 
     public function getEndDateAttribute(){
-        return optional($this->end_at)->format('F d, Y h:i a');
+        return optional($this->localize('end_at', $this->account->user->timezone))->format('F d, Y h:i a');
     }
 
     public function getCourseDurationAttribute(){
@@ -87,22 +88,22 @@ class Course extends Model
     public function getRawDatesAttribute(){
         return [
             'start' => [
-                'date' => optional($this->start_at)->format('Y-m-d'),
-                'time' =>  optional($this->start_at)->format('h:i'),
+                'date' => optional($this->localize('start_at', $this->account->user->timezone))->format('Y-m-d'),
+                'time' =>  optional($this->localize('start_at', $this->account->user->timezone))->format('h:i'),
             ],
             'end' => [
-                'date' => optional($this->end_at)->format('Y-m-d'),
-                'time' =>  optional($this->end_at)->format('h:i'),
+                'date' => optional($this->localize('end_at', $this->account->user->timezone))->format('Y-m-d'),
+                'time' =>  optional($this->localize('end_at', $this->account->user->timezone))->format('h:i'),
             ]
         ];
     }
 
     public function getStartedAttribute(){
-        return $this->start_at < now() ;
+        return $this->localize('start_at', $this->account->user->timezone) < $this->localTimeNow() ;
     }
 
     public function getEndedAttribute(){
-        return $this->end_at < now() ;
+        return $this->localize('end_at', $this->account->user->timezone) < $this->localTimeNow() ;
     }
 
     public function getOngoingAttribute(){

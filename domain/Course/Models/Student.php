@@ -3,11 +3,12 @@
 namespace Domain\Course\Models;
 
 use App\Classes\UUID;
+use App\Traits\HasLocalDates;
 use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
 {
-  use UUID;
+  use UUID, HasLocalDates;
 
   protected $fillable = [
       'first_name', 'last_name', 'email', 'phone', 'course_id', 'payment_ref', 'payment_gateway_id',
@@ -27,11 +28,11 @@ class Student extends Model
   }
 
   public function getRegisteredTimeAttribute(){
-    return $this->created_at->format('D d F, Y h:i a');
+    return $this->localize('created_at')->format('D d F, Y h:i a');
   }
 
   public function getRegisteredTimeDiffAttribute(){
-    return $this->created_at->diffForHumans();
+    return $this->localize('created_at')->diffForHumans();
   }
 
 }

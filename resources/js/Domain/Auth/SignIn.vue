@@ -46,7 +46,7 @@
 </template>
 
 <script>
-
+    import  moment from 'moment-timezone';
     export default {
         name: 'SigninPage',
          metaInfo()
@@ -83,5 +83,8 @@
                 this.ui.loading = false;
             },
         },
+        created(){
+            this.form.timezone = moment.tz.guess();
+        }
     }
 </script>

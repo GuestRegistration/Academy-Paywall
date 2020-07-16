@@ -3,11 +3,12 @@
 namespace Domain\Subscription\Models;
 
 use App\Classes\UUID;
+use App\Traits\HasLocalDates;
 use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model
 {
-    use UUID;
+    use UUID, HasLocalDates ;
 
     protected $fillable = [
         'account_id', 'amount', 'currency', 'gateway', 'transaction_ref'
@@ -18,7 +19,7 @@ class Payment extends Model
     ];
 
     public function getTimeAttribute(){
-        return $this->created_at->format('d F, Y h:i a');
+        return $this->localize('created_at')->format('d F, Y h:i a');
     }
     
     public function account(){
