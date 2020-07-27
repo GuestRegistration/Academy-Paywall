@@ -1,7 +1,6 @@
 <template>
     <div>
-        
-        <h2 class="font-weight-bold display-3 basil--text text-center">Courses</h2>
+        <h2>Courses</h2>
         <v-tabs
         v-model="tab"
         :background-color="account.theme_color"
@@ -25,6 +24,39 @@
                 </v-col>
             </v-row>
         </div>
+
+        <v-container v-if="instructors" class="mt-4">
+            <h2>Instructors ({{instructors.length}}) </h2>
+            <v-divider></v-divider>
+            <div v-if="!instructors.length">
+                <p class="text-muted">No instructor</p>
+            </div>
+             <v-row v-else>
+                <v-col cols="12" md="6" v-for="user in instructors" :key="user.id">
+                    <profile-card :account="account" :instructor="user">
+                        <template v-slot:options v-if="isMyAccount(account)">
+                            <v-menu origin="center center"  transition="scale-transition">
+                                <template v-slot:activator="{ on }">
+                                    <v-btn icon v-on="on">
+                                        <v-icon>mdi-dots-vertical</v-icon>
+                                    </v-btn>
+                                </template>
+                                <v-list>
+                                    <v-list-item @click="$inertia.visit(route('profile.show', {profile: user.profile.username}))">
+                                        <v-list-item-icon>
+                                        <v-icon>account_circle</v-icon>
+                                        </v-list-item-icon>
+                                        <v-list-item-content>
+                                        <v-list-item-title>View profile</v-list-item-title>
+                                        </v-list-item-content>
+                                    </v-list-item>
+                                </v-list>
+                            </v-menu>
+                        </template>
+                    </profile-card>
+                </v-col>
+            </v-row>    
+        </v-container>
     </div>
 </template>
 
@@ -32,6 +64,7 @@
     import {mapGetters} from "vuex";
     import AccountLayout from './../Layout';
     import CourseCard from '@/Domain/Course/Components/CourseCard';
+    import ProfileCard from '@/Domain/User/Components/ProfileCard';
     
     export default {
         name: "AccountShow",
@@ -62,11 +95,12 @@
             ],
         }
         },
-        components: { CourseCard },
+        components: { CourseCard, ProfileCard },
         props: {
             account: Object,
             courses: Object,
             status: String,
+            instructors: Array,
         },
         computed: {
             ...mapGetters([
