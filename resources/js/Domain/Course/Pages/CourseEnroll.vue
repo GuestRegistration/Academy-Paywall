@@ -86,7 +86,8 @@
         
     </v-dialog>
     
-    <paystack-gateway ref="paystack" :public-key="payment_gateway.credentials.public_key" 
+    <paystack-gateway ref="paystack" v-if="course.payment.require && course.payment.gateway == 'paystack'"
+      :public-key="payment_gateway.credentials.public_key"
       :email="student.email" 
       :amount="course.price * 100" 
       :currency="course.payment.currency"

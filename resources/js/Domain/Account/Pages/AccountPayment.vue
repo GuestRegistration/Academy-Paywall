@@ -14,8 +14,8 @@
                                     </v-radio-group>
                                     <template v-if="form.gateway">
                                         <h5 class="text-center">{{gateways.find(g=>g.name==form.gateway).label}} Setup</h5>
-                                        <x-input v-for="(credential, c) in credentials" :key="c" :errors="errors" :name="`credentials.${credential.slug}`" :label="credential.name" v-model="form.credentials[credential.slug]" :disabled="!form.active" />
                                         <v-switch v-model="form.active" label="Enable" :color="account.theme_color" ></v-switch>
+                                        <x-input v-for="(credential, c) in credentials" :key="c" :errors="errors" :name="`credentials.${credential.slug}`" :label="credential.name" v-model="form.credentials[credential.slug]" :disabled="!form.active" />
                                         <x-button type="sumbit" :loading="loading"  :color="account.theme_color" dark>Save</x-button>
                                     </template>
                             </v-card-text>
