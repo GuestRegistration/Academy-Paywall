@@ -32,7 +32,7 @@ class AccountShowAction extends Controller
         }
 
         $courses = $courses->latest()->paginate();
-        $instructors = $account->users()->with('profile')->get();
+        $instructors = $account->instructors;
 
         return Inertia::render('Domain/Account/Pages/AccountShow', compact('account', 'courses', 'status', 'instructors'));
     }
