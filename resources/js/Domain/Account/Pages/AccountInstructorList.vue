@@ -32,6 +32,14 @@
                               <v-list-item-title>view profile</v-list-item-title>
                               </v-list-item-content>
                           </v-list-item>
+                          <v-list-item v-if="user.id !== auth.id" @click="removeInstructor(user)">
+                              <v-list-item-icon>
+                              <v-icon class="red--text">delete</v-icon>
+                              </v-list-item-icon>
+                              <v-list-item-content>
+                              <v-list-item-title>Remove</v-list-item-title>
+                              </v-list-item-content>
+                          </v-list-item> 
                       </v-list>
                     </v-menu>
                 </template>
@@ -39,6 +47,7 @@
           </v-col>
       </v-row>    
      <invite-user-dialog ref="inviteUserDialog" />
+     <remove-user-dialog ref="removeUserDialog" :account="account" />
     </div>
 </template>
 
@@ -47,12 +56,14 @@
  import App from '@/layouts/App';
  import ProfileCard from '@/Domain/User/Components/ProfileCard';
  import InviteUserDialog from '../Components/InviteUserDialog';
+ import RemoveUserDialog from '../Components/RemoveUserDialog';
 
   export default {
     name: "AccountInstructorList",
     layout: (h, page) => h(App, [page]),
+    
     components: {
-        ProfileCard, InviteUserDialog
+        ProfileCard, InviteUserDialog, RemoveUserDialog
     },
 
     metaInfo()
@@ -78,6 +89,12 @@
       ...mapGetters([
           'auth', 'authenticated', 'isMyAccount', 'isOnMyAccount'
       ]),
+    },
+
+    methods: {
+      removeInstructor(user){
+        this.$refs.removeUserDialog.show(user);
+      }
     },
 
     watch: {
