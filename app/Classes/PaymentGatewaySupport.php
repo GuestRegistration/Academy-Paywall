@@ -17,6 +17,13 @@ class PaymentGatewaySupport {
                 'Public Key',
             ],
         ],
+        'stripe' => [
+            'name' => 'Stripe',
+            'credentials' => [
+                'Publishable Key',
+                'Secret Key'
+            ],
+        ],
     ];
 
     /**
@@ -27,8 +34,11 @@ class PaymentGatewaySupport {
     const CURRENCIES = [
         'NGN' => [
             'paystack',
+            'stripe'
         ],
-        'USD' => []
+        'USD' => [
+            'stripe'
+        ]
 
     ];
 

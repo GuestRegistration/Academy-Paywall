@@ -3,9 +3,9 @@ use Illuminate\Support\Facades\Route;
 use Domain\Course\Actions\CourseListAction;
 
 use Domain\Course\Actions\AccountCourseEditAction;
-use Domain\Course\Actions\AccountCourseListAction;
 use Domain\Course\Actions\AccountCourseShowAction;
 use Domain\Course\Actions\AccountCourseStoreAction;
+use Domain\Course\Actions\CourseStripeChargeAction;
 use Domain\Course\Actions\AccountCourseCreateAction;
 use Domain\Course\Actions\AccountCourseDeleteAction;
 use Domain\Course\Actions\AccountCourseEnrollAction;
@@ -26,3 +26,4 @@ Route::prefix('{account:username}')->group(function(){
     Route::post('/{course:slug}/enroll', AccountCourseRegisterAction::class)->name('account.course.register');
     Route::delete('/{course:slug}/delete', AccountCourseDeleteAction::class)->name('account.course.delete');
 });
+Route::post('/{course:slug}/charge', CourseStripeChargeAction::class)->name('course.stripe.charge');

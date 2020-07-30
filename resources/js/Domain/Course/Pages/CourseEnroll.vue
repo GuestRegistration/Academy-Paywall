@@ -86,7 +86,7 @@
         
     </v-dialog>
     
-    <paystack-gateway ref="paystack" v-if="course.payment.require && course.payment.gateway == 'paystack'"
+    <paystack-gateway ref="paystackGateway" v-if="course.payment.require && course.payment.gateway == 'paystack'"
       :public-key="payment_gateway.credentials.public_key"
       :email="student.email" 
       :amount="course.price * 100" 
@@ -107,15 +107,24 @@
       @process="(p) => { process = p }"
       @success="registrationSuccessfull"
       @error="registrationFailed"
-      @aborted="freeProcess"
-    >
-    </paystack-gateway>
+      @aborted="freeProcess" />
+
+    <stripe-gateway ref="stripeGateway" v-else-if="course.payment.require && course.payment.gateway == 'stripe'"
+      :publishable-key="payment_gateway.credentials.publishable_key" 
+      :amount="course.price" 
+      :currency="course.payment.currency" 
+      :color="account.theme_color" 
+      :charge_callback="stripeCallBack" 
+      @success="registrationSuccessfull" 
+      @error="registrationFailed"
+      @aborted="freeProcess" />
 
     <student-enrollment 
       :account="account"  
       :student="student" 
       :show="showEnrollment" 
       @close="$inertia.visit(route('account.show', {account: account.username}))" />
+
   </v-row>
 </template>
 
@@ -212,7 +221,11 @@
           initializeGateway(gateway){
             switch(gateway){
               case 'paystack':
-                this.$refs.paystack.open();
+                this.$refs.paystackGateway.open();
+              break;
+
+              case 'stripe':
+                this.$refs.stripeGateway.open();
               break;
 
               default:
@@ -243,10 +256,38 @@
               })
           },
 
+          stripeCallBack(token){
+            return new Promise((resolve, reject) => {
+                axios.post(this.route('course.stripe.charge', {course: this.course.slug}), {
+                    token,
+                    secret_key: this.payment_gateway.credentials.secret_key,
+                    receipt_email: this.student.email
+                })
+                .then(response => {
+                  this.process = `Registering you as ${this.student.first_name} ${this.student.last_name}`;
+                  return this.register({
+                      ...this.student,
+                      payment_ref: response.data.charge.id,
+                      raw: true,
+                      for_real: true,
+                      payment_gateway: this.course.payment.gateway,
+                      currency: this.course.payment.currency,
+                      amount: this.course.price
+                    })
+                })
+                .then(response => {
+                  resolve(response);
+                })
+                .catch(e => {
+                    reject(e);
+                })
+            })
+          },
+
           registrationSuccessfull(response){
-              this.freeProcess();
-              this.student = response.data;
-              this.showEnrollment = true;
+            this.freeProcess();
+            this.student = response.data;
+            this.showEnrollment = true;
           },
 
           registrationFailed(e){

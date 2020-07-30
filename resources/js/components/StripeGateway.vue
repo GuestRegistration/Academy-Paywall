@@ -54,7 +54,7 @@
             }
         },
         props: {
-            pk: String,
+            publishableKey: String,
             amount: Number,
             currency: String,
             charge_callback: Function,
@@ -102,7 +102,7 @@
                 return new Promise((resolve, reject) => {
 
                     if(document.querySelector("[data-stripe='true']") !== null){
-                        this.stripe = Stripe(this.pk);
+                        this.stripe = Stripe(this.publishableKey);
                         this.$emit('gateway-initailized');
                         resolve();
                         return;
@@ -116,7 +116,7 @@
                         stripeScript.setAttribute('data-stripe', 'true');
                         toastr.success('Payment gateway initialized');
                         this.process = '';
-                        this.stripe = Stripe(this.pk);
+                        this.stripe = Stripe(this.publishableKey);
                         resolve();
                     };
                     stripeScript.onerror = (e) => {

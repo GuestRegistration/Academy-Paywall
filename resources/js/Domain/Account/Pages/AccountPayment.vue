@@ -9,15 +9,15 @@
                         <h5>Available gateway for {{form.currency}}</h5>
                         <v-card outlined >
                             <v-card-text v-if="gateways.length">
-                                <v-radio-group v-model="form.gateway">
-                                        <v-radio v-for="(gateway, g) in gateways" :key="g" :label="gateway.label" :value="gateway.name" :color="account.theme_color"></v-radio>
-                                    </v-radio-group>
-                                    <template v-if="form.gateway">
-                                        <h5 class="text-center">{{gateways.find(g=>g.name==form.gateway).label}} Setup</h5>
-                                        <v-switch v-model="form.active" label="Enable" :color="account.theme_color" ></v-switch>
-                                        <x-input v-for="(credential, c) in credentials" :key="c" :errors="errors" :name="`credentials.${credential.slug}`" :label="credential.name" v-model="form.credentials[credential.slug]" :disabled="!form.active" />
-                                        <x-button type="sumbit" :loading="loading"  :color="account.theme_color" dark>Save</x-button>
-                                    </template>
+                                <v-radio-group v-model="form.gateway" @change="gatewayChanged">
+                                    <v-radio v-for="(gateway, g) in gateways" :key="g" :label="gateway.label" :value="gateway.name" :color="account.theme_color"></v-radio>
+                                </v-radio-group>
+                                <template v-if="form.gateway">
+                                    <h5 class="text-center">{{gateways.find(g=>g.name==form.gateway).label}} Setup</h5>
+                                    <v-switch v-model="form.active" label="Enable" :color="account.theme_color" ></v-switch>
+                                    <x-input v-for="(credential, c) in credentials" :key="c" :errors="errors" :name="`credentials.${credential.slug}`" :label="credential.name" v-model="form.credentials[credential.slug]" :disabled="!form.active" />
+                                    <x-button type="sumbit" :loading="loading"  :color="account.theme_color" dark>Save</x-button>
+                                </template>
                             </v-card-text>
                             <v-card-text v-else class="text-muted text-center">
                                 <p class="text-muted">No supported gateway support for {{form.currency}}  yet</p>
@@ -92,6 +92,16 @@
                     active: false,
                     gateway: undefined,
                     credentials: {}
+                }
+            },
+
+            gatewayChanged(gateway){
+                if(gateway !== this.gateway.gateway){
+                    this.form.active = false;
+                    this.form.credentials = {}
+                }else{
+                    this.form.active = this.gateway.active;
+                    this.form.credentials = this.gateway.credentials;
                 }
             },
             

@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-container>
-            <stripe-gateway ref="stripeGateway" :pk="stripe_pk" :amount="plan.amount" :currency="plan.currency" :color="account.theme_color" :charge_callback="chargeCallback" @success="paymentSuccessful" @error="paymentError" />
+            <stripe-gateway ref="stripeGateway" :publishable-key="stripe_pk" :amount="plan.amount" :currency="plan.currency" :color="account.theme_color" :charge_callback="chargeCallback" @success="paymentSuccessful" @error="paymentError" />
             <v-row justify="center">
                 <v-col cols="12" md="8" lg="6">
                     <h4>Subscriptions</h4>
