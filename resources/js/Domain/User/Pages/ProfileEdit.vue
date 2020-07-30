@@ -11,7 +11,7 @@
                     </div>
                     <x-input :errors="errors" name="first_name" type="text" v-model="form.first_name" label="First name"  prependInnerIcon="account_box" />
                     <x-input :errors="errors" name="last_name" type="text" v-model="form.last_name" label="Last name"  prependInnerIcon="account_box" />
-                    <x-input :errors="errors" name="username" type="text" v-model="form.username" label="Username" prependInnerIcon="alternate_email" />
+                    <x-input :errors="errors" name="username" type="text" v-model="form.username" @input="usernameInput" label="Username" prependInnerIcon="alternate_email" />
                     <x-input :errors="errors" name="email" type="email" v-model="form.email" label="Email"  prependInnerIcon="email"/>
                     <x-input :errors="errors" name="phone" type="tel" v-model="form.phone" label="Phone"  prependInnerIcon="call" />
                     <x-textarea :errors="errors" name="bio" v-model="form.bio" label="Bio" />
@@ -64,6 +64,10 @@
         },
 
         methods: {
+            usernameInput(value){
+                this.form.username = value.trim().toLowerCase().replace(/[^a-zA-Z0-9]/g,'_').trim();
+            },
+
             formData() {
                 const form = new FormData;
                 Object.keys(this.form).forEach(key => {

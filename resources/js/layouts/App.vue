@@ -2,7 +2,7 @@
       <!-- App.vue -->
   <v-app>
     <nav-drawer />
-    <v-app-bar app :color="authenticated && auth.account ? auth.account.theme_color : 'primary'" dark >
+    <v-app-bar app :color="authenticated && auth.account && route().current('account.*') ? auth.account.theme_color : 'primary'" dark >
       <v-app-bar-nav-icon @click="$store.state.navDrawer = !$store.state.navDrawer"></v-app-bar-nav-icon>
        <inertia-link :href="route('home')" class="white--text" style="text-decoration: none">
         <v-toolbar-title dark>{{$page.config.app_name}}</v-toolbar-title>

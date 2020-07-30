@@ -16,7 +16,7 @@
                                 </v-expansion-panel-header>
                                 <v-expansion-panel-content class="py-3">
                                     <x-input :errors="errors" name="name" type="text" v-model="form.name" label="Organization name"  prependInnerIcon="account_box" />
-                                    <x-input :errors="errors" name="username" type="text" v-model="form.username" label="Alias" prependInnerIcon="alternate_email" />
+                                    <x-input :errors="errors" name="username" type="text" v-model="form.username" @input="aliasInput" label="Alias" prependInnerIcon="alternate_email" />
                                     <x-input :errors="errors" name="email" type="email" v-model="form.email" label="Email"  prependInnerIcon="email"/>
                                     <x-input :errors="errors" name="phone" type="tel" v-model="form.phone" label="Phone"  prependInnerIcon="call" />
                                     <x-textarea :errors="errors" name="bio" v-model="form.bio" label="Bio" />
@@ -141,6 +141,10 @@
         },
 
         methods: {
+            aliasInput(value){
+                this.form.username = value.trim().toLowerCase().replace(/[^a-zA-Z0-9]/g,'_').trim();
+            },
+
             formData() {
                 const form = new FormData;
                 Object.keys(this.form).forEach(key => {
