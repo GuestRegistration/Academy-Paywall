@@ -4,39 +4,39 @@
       v-model="$store.state.navDrawer"
       >
       <template v-slot:prepend>
-            <v-list-item v-if="auth.profile.profile_complete" >
-              <v-list-item-avatar>
-                <avatar :src="auth.profile.avatar" color="primary" size="70" :text="auth.profile.initials" />
-              </v-list-item-avatar>
+        <v-list-item v-if="auth.profile.profile_complete" >
+          <v-list-item-avatar>
+            <avatar :src="auth.profile.avatar" color="primary" size="70" :text="auth.profile.initials" />
+          </v-list-item-avatar>
+          <v-list-item-content>
+            <v-list-item-title v-html="auth.profile.fullname"></v-list-item-title>
+            <v-list-item-subtitle v-html="auth.profile.at_username"></v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list dense>
+          <template v-for="(item, i) in prependNavItems()">
+            <inertia-link v-if="item.render" :href="route(item.route, item.param)"  class="prevent-default" :key="i">
+              <v-list-item :color="authenticated && auth.account ? auth.account.theme_color : 'primary'" >
+                <v-list-item-icon>
+                  <v-icon v-text="item.icon"></v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title v-text="item.title"></v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </inertia-link>
+            <v-list-item v-else disabled :key="i">
+              <v-list-item-icon>
+                <v-icon v-text="item.icon"></v-icon>
+              </v-list-item-icon>
               <v-list-item-content>
-                <v-list-item-title v-html="auth.profile.fullname"></v-list-item-title>
-                <v-list-item-subtitle v-html="auth.profile.at_username"></v-list-item-subtitle>
+                <v-list-item-title v-text="item.title"></v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-
-            <v-list dense>
-                <template v-for="(item, i) in prependNavItems()">
-                  <inertia-link v-if="item.render" :href="route(item.route, item.param)"  class="prevent-default" :key="i">
-                    <v-list-item :color="authenticated && auth.account ? auth.account.theme_color : 'primary'" >
-                    <v-list-item-icon>
-                      <v-icon v-text="item.icon"></v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-content>
-                      <v-list-item-title v-text="item.title"></v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
-                </inertia-link>
-                <v-list-item v-else disabled :key="i">
-                    <v-list-item-icon>
-                      <v-icon v-text="item.icon"></v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-content>
-                      <v-list-item-title v-text="item.title"></v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
-                </template>
-            </v-list>
-            <v-divider></v-divider>
+          </template>
+        </v-list>
+        <v-divider></v-divider>
       </template>
 
       <v-list dense>
@@ -90,10 +90,17 @@
         },
         methods:{
           prependNavItems(){
-            if(!this.authenticated){
-              return [];
-            }
-            return [
+            let nav = [
+              {
+                route: 'home',
+                title: 'Home',
+                icon: 'home',
+                render: true,
+              },
+            ];
+
+            if(this.authenticated){
+              nav = nav.concat([
                       {
                         route: this.auth.profile.username ? 'profile.show' : 'profile.edit.alt',
                         param: {
@@ -109,10 +116,13 @@
                           profile: this.auth.profile.username ?? this.auth.profile.id
                         },
                         title: 'Edit Profile',
-                        icon: 'school',
+                        icon: 'edit',
                         render: true,
                       },
-                    ]
+                    ]);
+            }
+
+            return nav;
           },
           navItems(){
             if(this.authenticated){

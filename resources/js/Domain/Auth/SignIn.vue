@@ -7,7 +7,7 @@
                         <div class="text-center">
                             <h1>
                                 <inertia-link :href="route('home')" class="prevent-default">
-                                    AcadaApp
+                                    {{ $page.config.app_name }}
                                 </inertia-link>
                             </h1>
                         </div>
@@ -17,25 +17,9 @@
                                  <h2 class="text-center my-3">
                                     Sign in
                                 </h2>
-                                 <v-alert
-                                    v-if="status"
-                                    icon="info"
-                                    prominent
-                                    text
-                                    type="info"
-                                    >
-                                   {{status}}
-                                </v-alert>
-                                <!-- Form -->
-                                <form @submit.prevent="submit">
-                                    <div  class="tab-content py-3">
-                                        <x-input :errors="errors" name="email" type="email" v-model="form.email" label="Email" />
-                                        <!-- Submit -->
-                                        <x-button :loading="ui.loading" type="submit"  dark color="accent-4" class="primary" block>
-                                            Sign in
-                                        </x-button>
-                                    </div>
-                                </form>
+
+                                <signin-form />
+
                             </v-card-text>
                         </v-card>
                     </div>
@@ -46,10 +30,11 @@
 </template>
 
 <script>
-    import  jstz from 'jstz';
-    
+    import SigninForm from '@/components/SigninForm';
+
     export default {
         name: 'SigninPage',
+        components: { SigninForm },
          metaInfo()
          {
              return{
@@ -58,33 +43,5 @@
              }
         },
 
-        props: {
-            errors: Object,
-        },
-        data() {
-            return {
-                form: {},
-                ui: {
-                    loading: false,
-                },
-            };
-        },
-
-        computed: {
-            status(){
-                return this.$page.status
-            }
-        },
-        
-        methods: {
-            async submit() {
-                this.ui.loading = true;
-                await this.$inertia.post(this.route('signin.magic.link'), this.form)
-                this.ui.loading = false;
-            },
-        },
-        created(){
-            this.form.timezone = jstz.determine().name();
-        }
     }
 </script>

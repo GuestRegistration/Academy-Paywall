@@ -56,10 +56,7 @@
                   >
                     <v-toolbar-title dark >
                       <v-app-bar-nav-icon v-if="authenticated" @click="$store.state.navDrawer = !$store.state.navDrawer"></v-app-bar-nav-icon>
-                      <v-btn v-else @click="$inertia.visit(route('home'))" icon>
-                        <v-icon>home</v-icon>
-                      </v-btn>
-                      {{$page.config.app_name}}
+                      <inertia-link :href="route('home')" class="prevent-default white--text">{{$page.config.app_name}}</inertia-link>
                     </v-toolbar-title>
                     <v-spacer></v-spacer>
                      <v-btn icon v-if="$store.state.navDrawer" @click="$store.state.navDrawer = false" ref="navBarCloser">
