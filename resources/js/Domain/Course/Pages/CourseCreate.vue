@@ -1,6 +1,6 @@
 <template>
     <v-container class="p-0">
-        <stripe-gateway ref="stripeGateway" :pk="stripe_pk" :amount="payg.amount" :currency="payg.currency" :color="account.theme_color" :charge_callback="paymentCallback" @success="paymentSuccessful" @error="paymentError" />
+        <stripe-gateway ref="stripeGateway" :publishable-key="stripe_pk" :amount="payg.amount" :currency="payg.currency" :color="account.theme_color" :charge_callback="paymentCallback" @success="paymentSuccessful" @error="paymentError" />
         
         <v-row justify="center">
             <v-col cols="12" md="8">

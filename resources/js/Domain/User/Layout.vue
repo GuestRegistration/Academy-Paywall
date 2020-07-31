@@ -138,7 +138,7 @@
                         type="error"
                         elevation="2"
                       >
-                      Not affiliated to any academy account
+                      Not affiliated to any organization
                       </v-alert>
                     </div>
 
