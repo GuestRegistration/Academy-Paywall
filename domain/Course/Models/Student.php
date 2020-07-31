@@ -1,14 +1,15 @@
 <?php
-
 namespace Domain\Course\Models;
 
 use App\Classes\UUID;
 use App\Traits\HasLocalDates;
+use Domain\Course\Models\Course;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Student extends Model
 {
-  use UUID, HasLocalDates;
+  use UUID, Notifiable, HasLocalDates;
 
   protected $fillable = [
       'first_name', 'last_name', 'email', 'phone', 'course_id', 'payment_ref', 'payment_gateway_id',
