@@ -11,7 +11,6 @@ import store from './store';
 import toastr from 'toastr';
 import wysiwyg from "vue-wysiwyg";
 
-
 window.Vue = Vue;
 window.toastr = toastr;
 
@@ -24,7 +23,11 @@ Vue.mixin({
     },
 });
 
-Vue.filter('money', (value, currency = null) => `${currency ?? ''} ${new Intl.NumberFormat().format(value)}`);
+Vue.filter('money', (value, currency = null) => {
+  const currencies = require('../assets/currencies.json');
+  const symbol = currencies[currency] ? currencies[currency].symbol_native : currency;
+  return `${symbol}${new Intl.NumberFormat().format(value)}`;
+});
 
 /**
  * The following block of code may be used to automatically register your
