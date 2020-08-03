@@ -11,6 +11,7 @@
                     <course-card :course="course" :showInstructor="false" display="list" :showStatus="true" />
                 </v-col>
             </v-row>
+             <pagination :resource="courses"/>
         </div>
     </div>
 </template>

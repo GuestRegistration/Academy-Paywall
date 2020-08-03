@@ -1,28 +1,17 @@
 <template>
-    <div>
+
+    <account-layout>
         <h2>Courses</h2>
-        <v-tabs
-        v-model="tab"
-        :background-color="account.theme_color"
-        dark
-        >
-            <v-tab
-            v-for="(tab, i) in tabs"
-            :key="i"
-            @click="$inertia.visit(tab.route)"
-            >
-                {{ tab.heading }}
-            </v-tab>
-        </v-tabs>
-        <div class="text-center text-muted py-5" v-if="!courses.total">
-            <h5>No <span style="text-transform: capitalize">{{status}}</span> Course</h5>
+        <div class="text-center text-muted py-5" v-if="!current_courses.total">
+            <h5>No course yet</h5>
         </div>
         <div v-else>
             <v-row>
-                <v-col cols="12" v-for="course in courses.data" :key="course.id">
+                <v-col cols="12" v-for="course in current_courses.data" :key="course.id">
                     <course-card :course="course" :account="account" :showInstructor="false" display="list" :showStatus="true" />
                 </v-col>
             </v-row>
+            <pagination :resource="current_courses" :color="account.theme_color"/>
         </div>
 
         <v-container v-if="instructors" class="mt-4">
@@ -57,7 +46,29 @@
                 </v-col>
             </v-row>    
         </v-container>
-    </div>
+
+        <template v-slot:after-contact>
+            <div class="p-3">
+                <h5>Past Courses</h5>
+                <v-divider></v-divider>
+                <div v-if="!past_courses.length" class="text-muted my-2">
+                    No past course
+                </div>
+                <v-list v-else>
+                    <v-list-item v-for="course in past_courses" :key="course.id">
+                        <v-list-item-content>
+                            <inertia-link :href="route('account.course.show', {account: account.username, course: course.slug})">
+                                <v-list-item-title v-text="course.title"></v-list-item-title>
+                            </inertia-link>
+                            <small>Ended {{course.end_date}}</small>
+                        </v-list-item-content>
+                    </v-list-item>
+                </v-list>
+            </div>
+            
+        </template>
+
+    </account-layout>
 </template>
 
 <script>
@@ -68,7 +79,6 @@
     
     export default {
         name: "AccountShow",
-        layout: (h, page) => h(AccountLayout, [page]),
         metaInfo()
          {
              return{
@@ -95,11 +105,11 @@
             ],
         }
         },
-        components: { CourseCard, ProfileCard },
+        components: { CourseCard, ProfileCard, AccountLayout },
         props: {
             account: Object,
-            courses: Object,
-            status: String,
+            current_courses: Object,
+            past_courses: Array,
             instructors: Array,
         },
         computed: {

@@ -93,6 +93,9 @@
                       <slot />
                   </v-col>
                   <v-col cols="12" md="4">
+
+                      <slot name="before-bio" />
+
                       <template v-if="account.bio">
                         <v-divider></v-divider>
                           <h4 >About {{account.name}}</h4>
@@ -124,6 +127,8 @@
                           </v-row>
                         </v-card>
 
+                         <slot name="after-contact" />
+
                         <v-list v-if="anySocial()">
                           <div class="mx-3"><h4>Socials</h4></div>
                           <v-divider></v-divider>
@@ -143,6 +148,7 @@
                           </v-list-item-group>
                         </v-list>
                       </v-card>
+
                   </v-col>
               </v-row>
           </v-container>
