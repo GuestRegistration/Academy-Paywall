@@ -19,17 +19,17 @@ class SubscriptionPlan extends Model
     ];
 
     const PLAN_PROFESSIONAL = [
-            'name' => 'Professional',
+            'name' => 'Bundle',
             'amount' => 100,
             'currency' => 'USD',
-            'month_duration' => 6,
-            'description' => 'Enjoy unlimited courses for 6 months'
+            'month_duration' => 12,
+            'description' => 'Enjoy unlimited courses for 12 months'
         ];
 
     const PLAN_UNLIMITED = [
-            'name' => 'Unlimited',
+            'name' => 'Enterprise',
             'amount' => 0,
-            'currency' => 'NGN',
+            'currency' => 'USD',
             'month_duration' => null,
             'description' => "You do not need to worry about subscription. You are already covered"
         ];
@@ -45,6 +45,10 @@ class SubscriptionPlan extends Model
 
     public function accounts(){
         return $this->hasMany(Account::class);
+    }
+
+    public function scopeRegularPlans($query){
+        return $query->where('name', '!=', self::PLAN_UNLIMITED['name']);
     }
 
     public function subscriptions(){

@@ -20,8 +20,7 @@ class AccountSubscriptionPageAction extends Controller
     public function __invoke(Account $account)
     {
         $account->load('subscription');
-        $subscription_plans = SubscriptionPlan::all();
-        $plans =  $subscription_plans->where('name', '!=', SubscriptionPlan::PLAN_UNLIMITED['name'])->toArray();
+        $plans =  SubscriptionPlan::regularPlans()->get();
         $payg = SubscriptionPlan::PLAN_PAYG;
         $stripe_pk = env('STRIPE_PK');
 
