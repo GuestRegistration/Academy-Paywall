@@ -14,10 +14,6 @@ class PaymentGateway extends Model
         'account_id', 'currency', 'gateway', 'active', 'credentials', 
     ];
 
-    protected $casts = [
-        'credentials' => 'array'
-    ];
-
     protected $appends = [
         'credentials_complete'
     ];
@@ -27,13 +23,18 @@ class PaymentGateway extends Model
     ];
 
 
+    public function getCredentialsAttribute($value)
+    {
+        return json_decode(decrypt($value));
+    }
+
     public function getCredentialsCompleteAttribute(){
         $complete = true;
         if(!isset(PaymentGatewaySupport::GATEWAYS[$this->gateway])) return false;
 
         $neededCredentials = PaymentGatewaySupport::credentials($this->gateway);
     
-        $submittedCredentials = $this->credentials;
+        $submittedCredentials = (array) $this->credentials;
         foreach($neededCredentials as $cred){
             if(!isset($submittedCredentials[$cred['slug']]) || $submittedCredentials[$cred['slug']] == null || $submittedCredentials[$cred['slug']] == ''){
                 $complete = false;

@@ -42,6 +42,7 @@ class AccountPaymentGatewaySaveRequest extends FormRequest
 
         return $this->merge([
             'active' => (Bool) $this->active,
+            'credentials' => \encrypt(json_encode($this->get('credentials')))
         ])->only([
             'currency', 'gateway', 'active', 'credentials'
         ]);
