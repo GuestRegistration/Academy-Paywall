@@ -20,7 +20,7 @@ class EncryptPaymentGatewaysCredentials extends Migration
 
         PaymentGateway::all()->each(function($gateway){
             $gateway->update([
-                'credentials' => encrypt($gateway->credentials)
+                'credentials' => encrypt(json_encode($gateway->credentials))
             ]);
         });
     }
@@ -38,7 +38,7 @@ class EncryptPaymentGatewaysCredentials extends Migration
 
         PaymentGateway::all()->each(function($gateway){
             $gateway->update([
-                'credentials' => decrypt($gateway->credentials)
+                'credentials' => json_decode(decrypt($gateway->credentials))
             ]);
         });
 
