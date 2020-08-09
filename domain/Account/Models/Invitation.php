@@ -17,13 +17,15 @@ class Invitation extends Model
         'account_id', 'email'
     ];
 
-    protected $casts = [
-        'credentials' => 'array'
-    ];
+    protected $appends = ['sent_time'];
 
     public function account(){
         return $this->belongsTo(Account::class);
     }
 
+    public function getSentTimeAttribute()
+    {
+        return "{$this->created_at->format('d/m/Y h:i a')}, {$this->created_at->diffForHumans()}";
+    }
 
 }

@@ -18,8 +18,9 @@ class AccountInstructorListAction extends Controller
     public function __invoke(Account $account)
     {
         $instructors = $account->instructors;
-
-        return Inertia::render('Domain/Account/Pages/AccountInstructorList', compact('account', 'instructors'));
+        $invitations = $account->invitations()->latest()->get();
+        
+        return Inertia::render('Domain/Account/Pages/AccountInstructorList', compact('account', 'instructors', 'invitations'));
     }
 
 }

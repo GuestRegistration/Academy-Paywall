@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto">
+  <v-card class="mx-auto" outlined>
         <v-card-text>
            <div class="text-center">
                 <avatar :src="instructor.profile.avatar" :color="`${account ? account.theme_color : 'primary'}`" size="70" :text="instructor.profile.initials" headline="yes" />
