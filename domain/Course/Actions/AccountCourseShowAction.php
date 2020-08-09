@@ -18,6 +18,13 @@ class AccountCourseShowAction extends Controller
     public function __invoke(Account $account, Course $course)
     {
         $course->load('users.profile');
+
+        $course->users->each(function($user) use($account, $course){
+            if(!$account->users()->find($user->getKey()) && !$user->is($account->user)){
+                $course->users()->sync(array_diff($course->users->pluck('id')->toArray(), [$user->getKey()]));
+            }
+        });
+
         return Inertia::render('Domain/Course/Pages/CourseShow', compact('account', 'course'));
     }
 
