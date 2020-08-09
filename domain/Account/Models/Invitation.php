@@ -3,13 +3,14 @@
 namespace Domain\Account\Models;
 
 use App\Classes\UUID;
+use App\Traits\HasLocalDates;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Invitation extends Model
 {
-    use UUID, Notifiable, SoftDeletes;
+    use UUID, Notifiable, SoftDeletes, HasLocalDates;
 
    
 
@@ -25,7 +26,7 @@ class Invitation extends Model
 
     public function getSentTimeAttribute()
     {
-        return "{$this->created_at->format('d/m/Y h:i a')}, {$this->created_at->diffForHumans()}";
+        return "{$this->localize('created_at')->format('d/m/Y h:i a')}, {$this->created_at->diffForHumans()}";
     }
 
 }
