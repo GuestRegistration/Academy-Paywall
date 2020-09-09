@@ -35,8 +35,8 @@
                         <h1>CREATE A WEBSITE</h1>
                         <h1>FOR YOUR COURSES IN MINUTES</h1>
                         <button v-if="!authenticated" class="btn bg-custom-primary" @click.prevent="$refs.SigninModal.open('GET STARTED')">GET STARTED</button>
-                        <a v-if="authenticated && auth.account.username" :href="route('account.show', {account: auth.account.username})" class="btn bg-custom-primary m-2"> <v-icon color="#fff">school</v-icon> My Organization</a>
-                        <a v-if="authenticated && auth.profile.username" :href="route('profile.show', {profile: auth.profile.username})" class="btn bg-custom-primary m-2"><v-icon color="#fff">account_circle</v-icon> My Profile</a>
+                        <a v-if="authenticated && auth.account && auth.account.username" :href="route('account.show', {account: auth.account.username})" class="btn bg-custom-primary m-2"> <v-icon color="#fff">school</v-icon> My Organization</a>
+                        <a v-if="authenticated && auth.profile && auth.profile.username" :href="route('profile.show', {profile: auth.profile.username})" class="btn bg-custom-primary m-2"><v-icon color="#fff">account_circle</v-icon> My Profile</a>
                     </div>
                 </div>
             </div>
