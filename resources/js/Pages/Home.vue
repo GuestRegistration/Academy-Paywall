@@ -1,20 +1,42 @@
 <template>
-    <app>
-        <template v-slot:before-container>
-            <div id="banner" style="background-image: url('images/Online-Tutoring.jpg');">
-                <div id="banner-overlay">
-                    <div class="banner-content">
-                        <div class="text-center banner-text">
-                            <h1>CREATE A WEBSITE</h1>
-                            <h1>FOR YOUR COURSES IN MINUTES</h1>
-                            <div class="mt-3">
-                                <template v-if="authenticated">
-                                    <v-btn v-if="auth.account" class="ma-2 white--text" color="primary" @click="$inertia.visit(route('account.show', {account: auth.account.username}))"> <v-icon class="mr-2">school</v-icon> My Organization</v-btn>
-                                    <v-btn v-else class="ma-2 white--text" color="primary" @click="$inertia.visit(route('account.setup'))"> <v-icon class="mr-2">add</v-icon> Create Organization</v-btn>
-                                </template>
-                                <v-btn v-else class="white--text" color="primary" @click.prevent="$refs.SigninModal.open('GET STARTED')">GET STARTED <v-icon>arrow_forward</v-icon></v-btn>
-                            </div>
-                        </div>
+    <div>
+        <div id="banner" style="background-image: url('images/Online-Tutoring.jpg');">
+            <div id="banner-overlay">
+                <nav class="navbar navbar-expand-lg navbar-dark">
+                    <a class="navbar-brand" :href="route('home')">ACADA</a>
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <!-- Right Side Of Navbar -->
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item ">
+                                <a href="#pricing" class="nav-link" >
+                                    PRICING
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a href="#features" class="nav-link" >
+                                    FEATURES
+                                </a>
+                            </li>
+                            <li class="nav-item" v-if="!authenticated">
+                                <a href="#" class="nav-link btn bg-custom-primary" @click.prevent="$refs.SigninModal.open()">
+                                    LOGIN
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <div class="main">
+                    <div class="text-center banner-text">
+                        <h1>CREATE A WEBSITE</h1>
+                        <h1>FOR YOUR COURSES IN MINUTES</h1>
+                        <button v-if="!authenticated" class="btn bg-custom-primary" @click.prevent="$refs.SigninModal.open('GET STARTED')">GET STARTED</button>
+                        <a v-if="authenticated && auth.account && auth.account.username" :href="route('account.show', {account: auth.account.username})" class="btn bg-custom-primary m-2"> <v-icon color="#fff">school</v-icon> My Organization</a>
+                        <a v-if="authenticated && auth.profile && auth.profile.username" :href="route('profile.show', {profile: auth.profile.username})" class="btn bg-custom-primary m-2"><v-icon color="#fff">account_circle</v-icon> My Profile</a>
                     </div>
                 </div>
             </div>
