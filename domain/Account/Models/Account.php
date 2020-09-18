@@ -23,7 +23,7 @@ class Account extends Model
         'name', 'email', 'phone', 'username', 'bio',
         'facebook_url', 'twitter_url', 'instagram_url', 'linkedin_url', 
         'youtube_url', 'website', 'avatar', 'cover_image', 'theme_color',
-        'caption', 'subcaption', 'show_caption'
+        'caption', 'subcaption', 'show_caption', 'google_tag_manager', 'gtm_events'
     ];
 
     protected $essentials = [
@@ -32,6 +32,10 @@ class Account extends Model
 
     protected $appends = [
         'at_username', 'profile_complete', 'is_unlimited'
+    ];
+
+    protected $casts = [
+        'gtm_events' => 'array'
     ];
 
     public function getProfileCompleteAttribute(){
@@ -51,7 +55,7 @@ class Account extends Model
     }
 
     public function getCoverImageAttribute($value){
-        return $value ?? asset('images/default-account-cover.jpg');
+        return $value ?? asset('images/default-account-cover.png');
     }
 
     public function getIsUnlimitedAttribute(){

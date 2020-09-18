@@ -72,11 +72,13 @@
 </template>
 
 <script>
-    import {mapGetters} from "vuex";
+    import {mapActions, mapGetters} from "vuex";
     import AccountLayout from './../Layout';
     import CourseCard from '@/Domain/Course/Components/CourseCard';
     import ProfileCard from '@/Domain/User/Components/ProfileCard';
     
+    const EVENT = 'organization_page_visit';
+
     export default {
         name: "AccountShow",
         metaInfo()
@@ -88,21 +90,21 @@
         },
         data(){
         return {
-            tab: null,
-            tabs: [
-                { 
-                    heading: 'Ongoing',
-                    route: this.route('account.show', {account: this.account.username, course: 'ongoing'}) 
-                },
-                { 
-                    heading: 'Upcoming',
-                    route: this.route('account.show', {account: this.account.username, course: 'upcoming'}) 
-                },
-                { 
-                    heading: 'Past',
-                    route: this.route('account.show', {account: this.account.username, course: 'past'}) 
-                },
-            ],
+            // tab: null,
+            // tabs: [
+            //     { 
+            //         heading: 'Ongoing',
+            //         route: this.route('account.show', {account: this.account.username, course: 'ongoing'}) 
+            //     },
+            //     { 
+            //         heading: 'Upcoming',
+            //         route: this.route('account.show', {account: this.account.username, course: 'upcoming'}) 
+            //     },
+            //     { 
+            //         heading: 'Past',
+            //         route: this.route('account.show', {account: this.account.username, course: 'past'}) 
+            //     },
+            // ],
         }
         },
         components: { CourseCard, ProfileCard, AccountLayout },
@@ -118,8 +120,22 @@
             ]),
         },
 
+        methods: {
+            ...mapActions([
+                'pushGTMEvent'
+            ])
+        },
+
         mounted(){
-            this.tab = this.tabs.findIndex(tab => tab.heading.toLowerCase() == this.status);
+            // this.tab = this.tabs.findIndex(tab => tab.heading.toLowerCase() == this.status);
+
+            const event =  this.$page.account.gtm_events.find(e => e.slug == EVENT);
+            if(this.$page.account.google_tag_manager && event){
+                this.pushGTMEvent({
+                    id: this.$page.account.google_tag_manager, 
+                    events: event.triggers
+                })
+            }
         }
     }
 </script>

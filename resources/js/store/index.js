@@ -50,6 +50,15 @@ export default new Vuex.Store({
     },
     
     actions: {
+        pushGTMEvent: ({}, { id, events }) => {
+            console.log(events, ' will be fired in ', id);
+            VueTagManager.initialize({
+                gtmId: id
+            });
+            events.forEach(trigger => {
+                window.TagManager.push({event: trigger})
+            });
+        }
     },
     modules: {
         response,

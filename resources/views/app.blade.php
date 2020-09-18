@@ -15,6 +15,7 @@
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
+    <script src="https://unpkg.com/vue-tag-manager@x.x.x/lib/TagManager.js"></script>
 
     @routes
 </head>

@@ -25,12 +25,12 @@
     </v-app-bar>
     
     <!-- Sizes your content based upon application components -->
-    <v-content>
+    <v-main>
       <!-- Provides the application the proper gutter -->
       <v-container fluid>
         <slot />
       </v-container>
-    </v-content>
+    </v-main>
 
     <v-footer app>
       <v-spacer></v-spacer>

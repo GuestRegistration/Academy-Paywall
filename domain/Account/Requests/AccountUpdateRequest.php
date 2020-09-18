@@ -25,6 +25,7 @@ class AccountUpdateRequest extends FormRequest
      */
     public function rules()
     {
+       
         return [
             'name' => ['required'],
             'email' => ['required', 'email', 'string', Rule::unique('accounts')->ignore(optional($this->user()->account)->id)],
@@ -44,11 +45,17 @@ class AccountUpdateRequest extends FormRequest
     public function data(){
         return $this->only([
             'name', 'email', 'phone', 'username', 'bio', 'theme_color', 'caption', 'subcaption',
-            'facebook_url', 'instagram_url', 'twitter_url', 'linkedin_url', 'youtube_url', 'website',
+            'facebook_url', 'instagram_url', 'twitter_url', 'linkedin_url', 'youtube_url', 'website', 'google_tag_manager'
         ]) + [
             'show_caption' => (Bool) $this->show_caption,
             'avatar' => FileUpload::storeFile($this, 'avatar', 'account/avatar'),
             'cover_image' => FileUpload::storeFile($this, 'cover_image', 'account/covers'),
+            'gtm_events' => collect(json_decode($this->get('gtm_events')))->map(function($event){
+                $event->triggers = array_map(function($trigger){
+                    return trim($trigger);
+                }, explode(',', $event->triggers));
+                return $event;
+            })
         ];
     }
 }

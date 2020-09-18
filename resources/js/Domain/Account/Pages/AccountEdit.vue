@@ -44,13 +44,14 @@
                                         <div class="my-2">
                                             <h5>Cover image</h5>
                                             <x-file-input :errors="errors" name="cover_image" label="Cover image" :src="account.cover_image" @change="getCoverImage" />
+                                            <small>Recommended Aspect Ratio: 8:1</small>
                                         </div>
                                     </div>
                                     
                                 </v-expansion-panel-content>
                             </v-expansion-panel>
 
-                            <v-expansion-panel>
+                            <!-- <v-expansion-panel>
                                 <v-expansion-panel-header>
                                     <h4>
                                         <v-icon v-if="Object.keys(errors).some(error => ['caption', 'subcaption'].includes(error))" color="red" class="mr-3" title="There is error in this section">report_problem</v-icon>
@@ -64,7 +65,7 @@
                                         <x-textarea :errors="errors" name="subcaption" v-model="form.subcaption" label="Headline subcaption" />
                                     </div>
                                 </v-expansion-panel-content>
-                            </v-expansion-panel>
+                            </v-expansion-panel> -->
 
                             <v-expansion-panel>
                                 <v-expansion-panel-header>
@@ -82,6 +83,45 @@
                                     <x-input :errors="errors" name="website" type="url" v-model="form.website" label="Website" prependInnerIcon="link" />
                                 </v-expansion-panel-content>
                             </v-expansion-panel>
+
+                            <v-expansion-panel>
+                                <v-expansion-panel-header>
+                                   <h4>
+                                        <v-icon v-if="Object.keys(errors).some(error => ['facebook_url', 'instagram_url', 'twitter_url', 'linkedin_url', 'youtube_url', 'website'].includes(error))" color="red" class="mr-3" title="There is error in this section">report_problem</v-icon>
+                                        Google Tag Manager
+                                    </h4>
+                                </v-expansion-panel-header>
+                                <v-expansion-panel-content class="my-3">
+                                    <x-input :errors="errors" name="google_tag_manager" type="text" v-model="form.google_tag_manager" label="Google Tag Manager" placeholder="GTM-xxxxxx" />
+                                    <h5>Event Tracking</h5>
+                                    <v-divider></v-divider>
+                                     <div>
+                                        <v-simple-table
+                                        :dense="true"
+                                        :fixed-header="true"
+                                        :height="300"
+                                        >
+                                            <template v-slot:default>
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-left">Native Events</th>
+                                                        <th class="text-left">GTM Triggers</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr v-for="(event, i) in form.gtm_events" :key="event.slug">
+                                                        <td>{{ event.name }}</td>
+                                                        <td class="pt-5">
+                                                            <x-input type="text" v-model="form.gtm_events[i].triggers" label="Triggers seperated by comma (,)" />
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </template>
+                                        </v-simple-table>
+
+                                    </div>
+                                </v-expansion-panel-content>
+                            </v-expansion-panel>
                         </v-expansion-panels>
 
                         <v-btn fixed dark fab bottom right x-large=""
@@ -89,6 +129,7 @@
                             :color="form.theme_color">
                             <v-icon>mdi-check</v-icon>
                         </v-btn>
+
                 </form>
             </v-col>
         </v-row>
@@ -148,7 +189,9 @@
             formData() {
                 const form = new FormData;
                 Object.keys(this.form).forEach(key => {
-                    if(this.form[key]){
+                    if(this.form[key] instanceof Object){
+                        form.append(key, JSON.stringify(this.form[key]))
+                    }else{
                         form.append(key, this.form[key]);
                     }
                 });
@@ -179,6 +222,17 @@
         mounted(){
             if(this.account){
                 this.form = {...this.account};
+                this.form.gtm_events = this.$page.events.map(event => {
+                    const gtmEvent = {
+                        name: event.name,
+                        slug: event.slug,
+                    }
+                    if(this.account.gtm_events){
+                        let e = this.account.gtm_events.find( e => e.slug == event.slug);
+                        gtmEvent.triggers = e ? e.triggers.join(',') : ''
+                    }
+                    return gtmEvent;
+                })
             }
         }
     }

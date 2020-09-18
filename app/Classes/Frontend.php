@@ -3,9 +3,10 @@
 
 namespace App\Classes;
 
+use Inertia\Inertia;
+use App\Classes\GTMSupport;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
-use Inertia\Inertia;
 
 class Frontend
 {
@@ -36,6 +37,18 @@ class Frontend
             'auth' => function () {
                 return optional(Request::user())->load(['account', 'profile']);
             },
+
+            'events' => function () {
+                return GTMSupport::events();
+            },
+
+            'gtm' => function() {
+                return [
+                    'id' => config('services.gtm.id'),
+                    'triggers' =>  config('services.gtm.triggers')
+                ];
+            }
+
         ]);
     }
 

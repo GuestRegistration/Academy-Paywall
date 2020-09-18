@@ -129,10 +129,14 @@
 </template>
 
 <script>
+
+    import {mapActions} from "vuex";
     import AccountLayout from '@/Domain/Account/Layout';
     import CourseShow from './CourseShow';
     import StudentEnrollment from './../Components/StudentEnrollment';
     import PaystackGateway from '@/components/PaystackGateway';
+
+    const EVENT = 'open_enrollment_form';
 
     export default {
         name: 'CourseEnroll',
@@ -186,6 +190,10 @@
         },
 
         methods: {
+          ...mapActions([
+                'pushGTMEvent'
+          ]),
+
           freeProcess(){
             this.process = '';
             this.loading = false;
@@ -294,6 +302,17 @@
               toastr.error(`Registration failed: ${e.message}`);
           }
 
+        },
+
+        mounted(){
+            const event =  this.$page.account.gtm_events.find(e => e.slug == EVENT);
+
+            if(this.$page.account.google_tag_manager && event){
+              this.pushGTMEvent({
+                  id: this.$page.account.google_tag_manager, 
+                  events: event.triggers
+              })
+            }
         }
 
     }

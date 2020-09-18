@@ -3,7 +3,7 @@
         <v-container mb-2>
             <template v-if="!fileSelected && src">
                 <avatar v-if="isAvatar" :src="src" :color="$attrs.color" size="100" />
-                <v-img v-else :src="src" aspect-ratio="1.7"></v-img>
+                <v-img v-else :src="src" aspect-ratio="6.1"></v-img>
             </template>
             <template v-else v-for="(file, i) in files">
                 <template  v-if="file.type == 'image'">

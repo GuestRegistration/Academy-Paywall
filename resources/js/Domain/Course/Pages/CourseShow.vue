@@ -116,12 +116,14 @@
 </template>
 
 <script>
-    import {mapGetters} from "vuex";
+    import {mapActions, mapGetters} from "vuex";
     import AccountLayout from '@/Domain/Account/Layout';
     import ProfileCard from '@/Domain/User/Components/ProfileCard';
     import CourseStatus from './../Components/CourseStatus';
     import CourseShare from './../Components/CourseShare';
     import CourseDelete from './../Components/CourseDelete';
+
+    const EVENT = 'course_page_visit';
 
     export default {
         name: "CourseShow",
@@ -152,6 +154,10 @@
         },
 
         methods: {
+            ...mapActions([
+                'pushGTMEvent'
+            ]),
+
             enroll(){
                 this.$inertia.visit(this.route('account.course.enroll', { account: this.account.username, course: this.course.slug }));
             },
@@ -164,6 +170,16 @@
                 this.$refs.courseDelete.show(course);
             }
 
+        },
+
+        mounted(){
+            const event =  this.$page.account.gtm_events.find(e => e.slug == EVENT);
+            if(this.$page.account.google_tag_manager && event){
+                 this.pushGTMEvent({
+                    id: this.$page.account.google_tag_manager, 
+                    events: event.triggers
+                })
+            }
         }
 
     }

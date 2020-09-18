@@ -10,6 +10,7 @@ import VueMeta from 'vue-meta'
 import store from './store';
 import toastr from 'toastr';
 import wysiwyg from "vue-wysiwyg";
+import VueTagManager from "vue-tag-manager";
 
 window.Vue = Vue;
 window.toastr = toastr;
@@ -54,29 +55,32 @@ Vue.use(VueMeta, {
 });
 Vue.use(wysiwyg, {});
 
-const app = document.getElementById('app')
+const app = document.getElementById('app');
+
+const isMobile = [
+  /Android/i,
+  /webOS/i,
+  /iPhone/i,
+  /iPad/i,
+  /iPod/i,
+  /BlackBerry/i,
+  /Windows Phone/i
+].some((toMatchItem) => {
+  return navigator.userAgent.match(toMatchItem);
+});
+
 
 new Vue({
   render: h => h(InertiaApp, {
     props: {
       initialPage: JSON.parse(app.dataset.page),
       resolveComponent: name => import(`./${name}`).then(module => module.default),
-      transformProps: props => {
+      transformProps: (props) => {
         
         store.commit('setAuth', props.auth);
         store.commit('response/setErrors', props.errors);
         store.commit('setFrame');
-        const isMobile = [
-          /Android/i,
-          /webOS/i,
-          /iPhone/i,
-          /iPad/i,
-          /iPod/i,
-          /BlackBerry/i,
-          /Windows Phone/i
-      ].some((toMatchItem) => {
-          return navigator.userAgent.match(toMatchItem);
-      });
+        
       // close navigation on every page transition on mobile
       if(isMobile){
         store.commit('setNavDrawer', false);
@@ -111,7 +115,7 @@ new Vue({
             toastr.info(props.alerts.info);
         }
         return props;
-        },
+      },
     },
   }),
   store,
