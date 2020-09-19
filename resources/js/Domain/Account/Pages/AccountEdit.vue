@@ -226,12 +226,14 @@
                     const gtmEvent = {
                         name: event.name,
                         slug: event.slug,
+                        triggers: ''
                     }
                     if(this.account.gtm_events){
                         let e = this.account.gtm_events.find( e => e.slug == event.slug);
                         gtmEvent.triggers = e ? e.triggers.join(',') : ''
                     }
                     return gtmEvent;
+                    
                 })
             }
         }
