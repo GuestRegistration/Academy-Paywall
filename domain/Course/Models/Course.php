@@ -28,7 +28,7 @@ class Course extends Model
     protected $appends = [
         'is_published', 'published_time', 'snippet',
         'start_date', 'end_date', 'started', 'ended', 'ongoing',
-        'raw_dates', 'payment', 'course_duration'
+        'raw_dates', 'payment', 'course_duration', 'status_time'
     ];
 
     public function account(){
@@ -59,8 +59,8 @@ class Course extends Model
         return optional($this->localize('end_at', $this->account->user->timezone))->format('F d, Y h:i a');
     }
 
-    public function getCourseDurationAttribute(){
-        $diff = $this->start_at->diff($this->end_at);
+    public function getTimeDiffDuration($start, $end){
+        $diff = $start->diff($end);
         $duration = '';
         if($diff->y > 0){
             $duration .= "{$diff->y}yr.";
@@ -84,16 +84,23 @@ class Course extends Model
 
         return $duration;
     }
+    
+    public function getCourseDurationAttribute(){
+        return $this->getTimeDiffDuration($this->start_at, $this->end_at);
+    }
+
 
     public function getRawDatesAttribute(){
         return [
             'start' => [
                 'date' => optional($this->localize('start_at', $this->account->user->timezone))->format('Y-m-d'),
-                'time' =>  optional($this->localize('start_at', $this->account->user->timezone))->format('h:i'),
+                'time' =>  optional($this->localize('start_at', $this->account->user->timezone))->format('H:i'),
+                'timestamp' => $this->start_at->timestamp
             ],
             'end' => [
                 'date' => optional($this->localize('end_at', $this->account->user->timezone))->format('Y-m-d'),
-                'time' =>  optional($this->localize('end_at', $this->account->user->timezone))->format('h:i'),
+                'time' =>  optional($this->localize('end_at', $this->account->user->timezone))->format('H:i'),
+                'timestamp' => $this->end_at->timestamp
             ]
         ];
     }
@@ -108,6 +115,21 @@ class Course extends Model
 
     public function getOngoingAttribute(){
         return ($this->started && !$this->ended);
+    }
+
+    public function getStatusTimeAttribute(){
+        if(!$this->started)
+        {
+            return 'Starting '.$this->start_at->diffForHumans();
+        }
+        if($this->ongoing)
+        {
+            return 'Started '.$this->start_at->diffForHumans().', Ending '.$this->end_at->diffForHumans();
+        }
+        if($this->ended){
+            return 'Ended '.$this->end_at->diffForHumans();
+        }
+        return $this->getTimeDiffDuration($this->start_at, $this->end_at);
     }
 
     public function getPublishedTimeAttribute(){

@@ -2,14 +2,18 @@
 
 namespace Domain\Course\Requests;
 
+use Carbon\Carbon;
 use App\Classes\FileUpload;
 use Illuminate\Support\Str;
+use App\Traits\HasLocalDates;
 use Illuminate\Validation\Rule;
 use Domain\Course\Models\Course;
 use Illuminate\Foundation\Http\FormRequest;
 
+
 class CourseSaveRequest extends FormRequest
 {
+    use HasLocalDates;
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -41,11 +45,14 @@ class CourseSaveRequest extends FormRequest
     }
 
     public function storeData()
-    {
+    {        
+        $date = new Carbon($this->start_date);
+        dd($date->timezone(auth()->user()->timezone)->timezone('UTC')->format('Y-m-d H:i'));
+
         return $this->merge([
             'account_id' => $this->user()->account->id,
-            'start_at' => $this->start_date,
-            'end_at' => $this->end_date,
+            'start_at' => $this->date($this->start_date),
+            'end_at' => $this->date($this->end_date),
             'send_instructions' => $this->get('send_instructions') == "true" ? 1 : 0,
         ])->only('title', 'description', 'price', 'user_id', 'start_at', 'end_at', 'course_type', 'send_instructions', 'instructions') + [
             'cover_image' => FileUpload::storeFile($this, 'cover_image', 'course/cover'),
@@ -55,15 +62,21 @@ class CourseSaveRequest extends FormRequest
     }
 
     public function updateData(){
+        // dd($this->date($this->start_date));
         return $this->merge([
             'account_id' => $this->user()->account->id,
-            'start_at' => $this->start_date,
-            'end_at' => $this->end_date,
+            'start_at' => $this->date($this->start_date),
+            'end_at' => $this->date($this->end_date),
             'send_instructions' => $this->get('send_instructions') == "true" ? 1 : 0,
             'price' => $this->get('requires_payment') == "true" ? $this->price : null,
         ])->only('title', 'description', 'price', 'user_id', 'start_at', 'end_at', 'course_type', 'send_instructions', 'instructions') + [
             'cover_image' => FileUpload::storeFile($this, 'cover_image', 'course/cover'),
             'preview_video' => FileUpload::storeFile($this, 'preview_video', 'course/video'),
         ];
+    }
+
+    private function date($value){
+        return Carbon::parse($value, auth()->user()->timezone)
+                    ->setTimezone('UTC')->format('Y-m-d H:i');
     }
 }

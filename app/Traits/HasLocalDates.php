@@ -38,7 +38,10 @@ trait HasLocalDates {
      */
     private function inUsersTimezone($dateValue, $timezone = null): Carbon
     {
-        $timezone = $timezone ? $timezone : (optional(auth()->user())->timezone ?? config('app.timezone'));
+        $user = auth()->user();
+        
+        $timezone = $timezone ? $timezone : (optional($user)->timezone ?? config('app.timezone'));
         return $this->asDateTime($dateValue)->timezone($timezone);
     }
+
 }

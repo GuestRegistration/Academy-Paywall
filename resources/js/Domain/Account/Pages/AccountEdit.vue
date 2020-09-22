@@ -124,10 +124,11 @@
                             </v-expansion-panel>
                         </v-expansion-panels>
 
-                        <v-btn fixed dark fab bottom right x-large=""
+                        <v-btn fixed dark bottom right x-large
+                            style="z-index:100; bottom: 40px"
                             :loading="loading" type="submit"
                             :color="form.theme_color">
-                            <v-icon>mdi-check</v-icon>
+                            <v-icon>mdi-check</v-icon> Save
                         </v-btn>
 
                 </form>

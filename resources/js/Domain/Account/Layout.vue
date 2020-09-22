@@ -97,11 +97,11 @@
 
                       <slot name="before-bio" />
 
-                      <template v-if="account.bio">
+                      <template v-if="account.bio && account.bio !== 'null'" >
                         <v-divider></v-divider>
                           <h4 >About {{account.name}}</h4>
                           <v-divider></v-divider>
-                        {{account.bio}}
+                         {{account.bio}}
                       </template>
                       <h2>Contact</h2>
                       <v-card outlined>

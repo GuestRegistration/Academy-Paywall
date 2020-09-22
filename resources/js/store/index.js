@@ -1,3 +1,4 @@
+import { data } from 'jquery';
 import Vue from 'vue';
 import Vuex from 'vuex';
 import response from './response';
@@ -32,6 +33,13 @@ export default new Vuex.Store({
         authenticated: state => {
             return state.authenticated;
         },
+        
+        localDate: state => timestamp => {
+            let date = new Date(timestamp*1000);
+            let padZero = (value) => value < 10 ? `0${value}` : value;
+            return `${padZero(date.getDate())}/${padZero(date.getMonth()+1)}/${date.getFullYear()} ${date.getHours()}:${padZero(date.getMinutes())}`
+        },
+
         isMyAccount: state => account => {
             if(!state.authenticated) return false;
             if(!state.auth.account) return false;
@@ -51,7 +59,7 @@ export default new Vuex.Store({
     
     actions: {
         pushGTMEvent: ({}, { id, events }) => {
-            console.log(events, ' will be fired in ', id);
+            // console.log(events, ' will be fired in ', id);
             VueTagManager.initialize({
                 gtmId: id
             });

@@ -2,21 +2,27 @@
     <div>
         <h4>{{course.title}}</h4>
         <v-img :src="course.cover_image" ></v-img>
-        <div class="d-flex">
+        <div>
             <div class="text-muted mt-3">
-                <div>
-                    <v-icon :color="account.theme_color">date_range</v-icon> {{course.start_date}} - {{course.end_date}} ({{course.account.user.timezone}})
+                <div class="d-flex align-items-center">
+                    <div><v-icon :color="account.theme_color" size="50">date_range</v-icon></div>
+                    <div class="ml-2">
+                        <div> Start: {{course.start_date}} ({{course.account.user.timezone}})</div>
+                        <div>End: {{course.end_date}} ({{course.account.user.timezone}}) </div>
+                        <div>{{ localDate(course.raw_dates.start.timestamp)}} - {{ localDate(course.raw_dates.end.timestamp) }} in your local time</div>
+                        <div><v-icon :color="account.theme_color" size="20">schedule</v-icon>{{course.course_duration}}</div>
+                    </div>
                 </div>
-                <div>
-                    <v-icon :color="account.theme_color">schedule</v-icon>  {{course.course_duration}}
-                </div>
-                <div>
-                    <v-icon :color="account.theme_color">info</v-icon> {{course.course_type}}
-                </div>                
+            </div>
+        </div>
+        <div class="d-flex align-items-center">
+            <div>
+                <v-icon :color="account.theme_color">info</v-icon> {{course.course_type}}
             </div>
             <v-spacer></v-spacer>
             <course-status :course="course" />
         </div>
+
         <v-divider></v-divider>
         <div class="d-flex">
             <div>
@@ -105,8 +111,8 @@
             </v-row>    
         </v-container>
         <slot />
-        <v-btn v-if="!isOnMyAccount(course)" fixed dark fab bottom right large :color="account.theme_color" :title="`Enroll for ${course.title}`" @click="enroll" >
-            <v-icon>arrow_forward</v-icon>
+        <v-btn v-if="!isOnMyAccount(course)" fixed dark bottom right large style="z-index: 100; right: 30px" :color="account.theme_color" :title="`Enroll for ${course.title}`" @click="enroll" >
+            <v-icon>arrow_forward</v-icon> Enroll
         </v-btn>
          <v-btn v-else fixed dark fab bottom right large :color="account.theme_color" :title="`Edit ${course.title}`" @click="$inertia.visit(route('account.course.edit', {account: account.username, course: course.slug}))" >
             <v-icon>edit</v-icon>
@@ -140,7 +146,7 @@
         },
         computed: {
             ...mapGetters([
-                'auth', 'authenticated', 'isMyAccount', 'isOnMyAccount'
+                'auth', 'authenticated', 'isMyAccount', 'isOnMyAccount', 'localDate'
             ]),
             account(){
                 return this.$page.account;

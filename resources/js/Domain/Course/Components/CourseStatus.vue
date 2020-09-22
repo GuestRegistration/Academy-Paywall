@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="m-2">
         <v-chip v-if="!course.started"
             class="ma-2"
             color="orange"
@@ -24,6 +24,9 @@
             <v-icon left>schedule</v-icon>
             Ended
         </v-chip>
+        <div class="text-muted">
+            {{ course.status_time }}
+        </div>
     </div>
 </template>
 

@@ -53,7 +53,7 @@ class AccountUpdateRequest extends FormRequest
             'gtm_events' => collect(json_decode($this->get('gtm_events')))->map(function($event){
                 $event->triggers = array_map(function($trigger){
                     return trim($trigger);
-                }, explode(',', $event->triggers));
+                }, explode(',', property_exists($event, 'triggers') ? $event->triggers : ''));
                 return $event;
             })
         ];
