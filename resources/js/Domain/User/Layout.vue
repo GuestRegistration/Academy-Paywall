@@ -1,22 +1,15 @@
 <template>
   <v-app>
-    <nav-drawer v-if="authenticated" />
+    <nav-drawer />
 
     <!-- sm app bar -->
     <v-app-bar
-      absolute
       color="primary"
       dark
-      fade-img-on-scroll
-      scroll-target="#scrolling-techniques-5"
-      inverted-scroll
       class="d-md-none"
     >
-    <v-btn v-if="authenticated" @click="$store.state.navDrawer = !$store.state.navDrawer" icon>
+    <v-btn  @click="$store.state.navDrawer = !$store.state.navDrawer" icon>
       <v-icon>menu</v-icon>
-    </v-btn>
-    <v-btn v-else @click="$inertia.visit(route('home'))" icon>
-      <v-icon>home</v-icon>
     </v-btn>
       
       <v-toolbar-title dark >
@@ -57,7 +50,7 @@
                     class="d-none d-md-block"
                   >
                     <v-toolbar-title dark >
-                      <v-btn v-if="authenticated" @click="$store.state.navDrawer = !$store.state.navDrawer" icon>
+                      <v-btn @click="$store.state.navDrawer = !$store.state.navDrawer" icon>
                         <v-icon>menu</v-icon>
                       </v-btn>
                       <inertia-link :href="route('home')" class="prevent-default white--text">{{$page.config.app_name}}</inertia-link>
@@ -205,7 +198,7 @@
 
 <style lang="scss">
  
-  @media (min-width: 768px)
+  @media (min-width: 960px)
     {
        #lhs{
       background-color: #f7f7f7;

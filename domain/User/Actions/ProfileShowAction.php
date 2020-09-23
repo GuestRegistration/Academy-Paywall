@@ -9,6 +9,11 @@ use App\Http\Controllers\Controller;
 
 class ProfileShowAction extends Controller
 {
+    
+    public function __construct()
+    {
+        $this->middleware('inertia-conflict');
+    }
 
     public function __invoke(Profile $profile)
     {

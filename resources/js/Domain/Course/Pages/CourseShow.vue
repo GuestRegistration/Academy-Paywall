@@ -33,7 +33,7 @@
                 <h4 v-else>FREE</h4>
             </div>
             <div class="ml-auto text-right" >
-                <v-btn @click="enroll" dark small :color="account.theme_color" :disabled="isOnMyAccount(course)">
+                <v-btn @click="enroll" dark :color="account.theme_color" :disabled="isOnMyAccount(course)">
                     Enroll Now <v-icon>arrow_forward</v-icon>
                 </v-btn>
                 <v-btn icon @click="shareCourse(course)" :title="`Share ${course.title}`">
@@ -89,7 +89,7 @@
              <v-row v-else>
                 <v-col cols="12" md="6" v-for="user in course.users" :key="user.id">
                     <profile-card :account="account" :instructor="user">
-                        <template v-slot:options v-if="isMyAccount(account)">
+                        <template v-slot:options >
                             <v-menu origin="center center"  transition="scale-transition">
                                 <template v-slot:activator="{ on }">
                                     <v-btn icon v-on="on">

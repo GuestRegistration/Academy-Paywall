@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <nav-drawer v-if="authenticated" />
+    <nav-drawer />
     <v-app-bar
       app
       :color="account.theme_color"
@@ -10,12 +10,10 @@
       scroll-target="#scrolling-techniques-5"
       inverted-scroll
     >
-      <v-btn v-if="authenticated" @click="$store.state.navDrawer = !$store.state.navDrawer" icon>
+      <v-btn @click="$store.state.navDrawer = !$store.state.navDrawer" icon>
         <v-icon>menu</v-icon>
       </v-btn>
-      <v-btn v-else @click="$inertia.visit(route('home'))" icon>
-        <v-icon>home</v-icon>
-      </v-btn>
+
       <template v-slot:img="{ props }">
         <v-img
           v-bind="props"

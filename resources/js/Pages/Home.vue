@@ -3,7 +3,7 @@
         <template v-slot:before-container>
             <div id="banner" style="background-image: url('images/Online-Tutoring.jpg');">
                 <div id="banner-overlay">
-                    <div class="main">
+                    <div class="banner-content">
                         <div class="text-center banner-text">
                             <h1>CREATE A WEBSITE</h1>
                             <h1>FOR YOUR COURSES IN MINUTES</h1>
@@ -328,32 +328,15 @@
         background-color: rgba(0, 0, 0, 0.65)
     }
 
-    .navbar-brand
+    .banner-content
     {
-        font-size: 20px;
-    }
-
-    .nav-link
-    {
-        color: #fff !important;
-    }
-
-    .main
-    {
-        padding-top: 10%;
+        padding-top: 40%;
     }
 
     .banner-text
     {
         font-weight: bolder;
         color: #fff
-    }
-
-    .btn
-    {
-        color: #fff;
-        border-radius: 15px;
-        padding: 0.375rem 1rem !important;
     }
 
     .section-head
@@ -431,6 +414,12 @@
     }
 
     @media (min-width: 768px){
+        .banner-content
+        {
+            padding-top: 15%;
+        }
+
+
         #features .info-box
         {
             min-height: 300px;

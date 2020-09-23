@@ -23,7 +23,7 @@
              <v-row v-else>
                 <v-col cols="12" md="6" v-for="user in instructors" :key="user.id">
                     <profile-card :account="account" :instructor="user">
-                        <template v-slot:options v-if="isMyAccount(account)">
+                        <template v-slot:options>
                             <v-menu origin="center center"  transition="scale-transition">
                                 <template v-slot:activator="{ on }">
                                     <v-btn icon v-on="on">
