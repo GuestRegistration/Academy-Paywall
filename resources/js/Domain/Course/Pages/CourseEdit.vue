@@ -19,8 +19,8 @@
                     </div>
                 </template>
                 <template v-else>
-                    <h4> {{ 'Edit course: '+course.title }} </h4>
-                    <hr>
+                    <h3 class="mb-3"> {{ 'Edit course: '+course.title }} </h3>
+                    <v-divider></v-divider>
                     <course-form @submit="submit" :course="course" :loading="loading" :color="account.theme_color"  :instructors="instructors" />
                 </template>
             </v-col>

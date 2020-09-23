@@ -25,7 +25,6 @@ class AccountUpdateRequest extends FormRequest
      */
     public function rules()
     {
-       
         return [
             'name' => ['required'],
             'email' => ['required', 'email', 'string', Rule::unique('accounts')->ignore(optional($this->user()->account)->id)],

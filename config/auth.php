@@ -114,4 +114,6 @@ return [
 
     'password_timeout' => 10800,
 
+    'token_expire' => env('SIGNIN_TOKEN_EXPIRE', 5)
+
 ];

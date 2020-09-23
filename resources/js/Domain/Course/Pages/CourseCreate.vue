@@ -5,9 +5,9 @@
         <v-row justify="center">
             <v-col cols="12" md="8">
                 <template v-if="payment || (account.subscription && !account.subscription.expired)">
-                    <h4>New Course</h4>
-                    <hr>
-                    <v-alert v-if="payment"  icon="info" prominent text type="info">
+                    <h4 class="my-2">New Course</h4>
+                    <v-divider></v-divider>
+                    <v-alert v-if="payment"  icon="info" prominent text type="info" class="my-2">
                         You are adding this course with the "Pay As You Go" payment of {{payment.amount | money(payment.currency)}} on {{payment.time}}
                     </v-alert>
                     <v-alert v-else-if="account.subscription && !account.subscription.expired"  icon="info" prominent text type="info">

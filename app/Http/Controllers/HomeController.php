@@ -9,7 +9,6 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('inertia-conflict');
-
     }
     
     public function __invoke(){

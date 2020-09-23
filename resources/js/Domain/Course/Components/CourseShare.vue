@@ -8,8 +8,8 @@
         <v-card-title class="headline" :color="account.theme_color"><v-icon>share</v-icon> <span class="ml-3">Share course</span></v-card-title>
         <v-divider></v-divider>
         <v-card-text>
-        <div class="text-center">
-            <h4 >{{course.title}}</h4>
+        <div class="text-center my-5">
+            <h2>{{course.title}}</h2>
         </div>
         <div class="text-center">
             <v-text-field
@@ -28,6 +28,7 @@
         <v-spacer></v-spacer>
         <v-btn
             text
+            class="red--text"
             @click="close"
         >
             close

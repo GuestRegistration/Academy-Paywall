@@ -12,8 +12,10 @@
       inverted-scroll
       class="d-md-none"
     >
-    <v-app-bar-nav-icon v-if="authenticated" @click="$store.state.navDrawer = !$store.state.navDrawer"></v-app-bar-nav-icon>
-      <v-btn v-else @click="$inertia.visit(route('home'))" icon>
+    <v-btn v-if="authenticated" @click="$store.state.navDrawer = !$store.state.navDrawer" icon>
+      <v-icon>menu</v-icon>
+    </v-btn>
+    <v-btn v-else @click="$inertia.visit(route('home'))" icon>
       <v-icon>home</v-icon>
     </v-btn>
       
@@ -55,17 +57,19 @@
                     class="d-none d-md-block"
                   >
                     <v-toolbar-title dark >
-                      <v-app-bar-nav-icon v-if="authenticated" @click="$store.state.navDrawer = !$store.state.navDrawer"></v-app-bar-nav-icon>
+                      <v-btn v-if="authenticated" @click="$store.state.navDrawer = !$store.state.navDrawer" icon>
+                        <v-icon>menu</v-icon>
+                      </v-btn>
                       <inertia-link :href="route('home')" class="prevent-default white--text">{{$page.config.app_name}}</inertia-link>
                     </v-toolbar-title>
                     <v-spacer></v-spacer>
                      <v-btn icon v-if="$store.state.navDrawer" @click="$store.state.navDrawer = false" ref="navBarCloser">
-                      <v-icon>keyboard_backspace</v-icon>
+                      <v-icon>menu_open</v-icon>
                     </v-btn>
                     <v-menu v-if="isMyProfile(profile)" origin="center center"  transition="scale-transition">
                       <template v-slot:activator="{ on }">
                         <v-btn icon v-on="on">
-                          <v-icon>mdi-dots-vertical</v-icon>
+                          <v-icon>more_vert</v-icon>
                         </v-btn>
                       </template>
                       <v-list>
@@ -112,7 +116,7 @@
                       </v-row>
                     </v-card>
                     <v-divider></v-divider>
-                    <h4>Affiliations</h4>
+                    <h4 class="mt-3">Affiliations</h4>
                     <v-list v-if="affiliations.length">
                       <v-list-item
                         v-for="affiliation in affiliations" :key="affiliation.id"
@@ -190,10 +194,10 @@
           this.setNavDrawer(false);
         },
         mounted(){
-            $('html').attr('no-scroll', 'no-scroll');
+          document.querySelector('html').setAttribute('no-scroll', 'no-scroll');
         },
         destroyed(){
-            $('html').removeAttr('no-scroll');
+          document.querySelector('html').removeAttribute('no-scroll');
         }
         
     }
@@ -212,7 +216,8 @@
       overflow: auto;
   }
   #rhs{
-    left: 33.3333333333%
+    left: 33.3333333333%;
+    position: relative;
   }
   .lhs-body{
     margin-top: 60px;

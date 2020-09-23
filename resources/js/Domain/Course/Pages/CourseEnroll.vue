@@ -61,6 +61,7 @@
                     <div>
                       Organizer: {{ account.name }}
                     </div>
+                    <course-status :course="course" />
                   </div>
                   <v-spacer></v-spacer>
                   <div>
@@ -131,10 +132,11 @@
 <script>
 
     import {mapActions} from "vuex";
-    import AccountLayout from '@/Domain/Account/Layout';
-    import CourseShow from './CourseShow';
-    import StudentEnrollment from './../Components/StudentEnrollment';
-    import PaystackGateway from '@/components/PaystackGateway';
+    import AccountLayout from '@/Domain/Account/Layout.vue';
+    import CourseShow from './CourseShow.vue';
+    import CourseStatus from '../Components/CourseStatus.vue'
+    import StudentEnrollment from './../Components/StudentEnrollment.vue';
+    import PaystackGateway from '@/components/PaystackGateway.vue';
 
     const EVENT = 'open_enrollment_form';
 
@@ -152,7 +154,7 @@
                               h(CourseShow, [page])
                             ]),
         components: {
-            StudentEnrollment, PaystackGateway
+            StudentEnrollment, PaystackGateway, CourseStatus
         },
 
         data(){

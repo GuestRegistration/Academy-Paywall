@@ -18,10 +18,11 @@
                 </v-col>
                 
             </v-row>
-            <v-btn fixed dark fab bottom right x-large=""
+            <v-btn fixed dark bottom right x-large
                 :loading="loading" type="submit"
+                style="bottom: 40px"
                 color="primary">
-                <v-icon>mdi-check</v-icon>
+                <v-icon>done</v-icon> Save
             </v-btn>
         </form>
     </v-container>

@@ -21,8 +21,11 @@
           <h4>{{ course.title }}</h4>
           {{ course.snippet }}
           <v-divider></v-divider>
-          <div class="text-muted">
-            <v-icon :color="course.account.theme_color">date_range</v-icon> {{course.start_date}} - {{course.end_date}} ({{course.course_duration}})
+          <div class="text-muted my-3">
+            <div class="d-flex align-center">
+              <div><v-icon :color="course.account.theme_color">date_range</v-icon></div>
+              <div class="mr-2">{{course.start_date}} - {{course.end_date}} ({{course.course_duration}})</div>
+            </div>
           </div>
           <v-divider></v-divider>
           <v-chip-group v-if="course.users">

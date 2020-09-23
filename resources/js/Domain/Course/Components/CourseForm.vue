@@ -188,7 +188,7 @@
                 style="z-index:100; bottom: 40px"
                 :loading="loading" type="submit"
                 :color="account.theme_color">
-                <v-icon>mdi-check</v-icon> Save
+                <v-icon>done</v-icon> Save
             </v-btn>
            
         </v-container>

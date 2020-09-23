@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h4><v-icon>library_books</v-icon> Courses</h4>
+        <h4 class="my-2"><v-icon>library_books</v-icon> Courses</h4>
         <v-divider></v-divider>
         <div class="text-center text-muted" v-if="!courses.total">
             <h5>No course yet</h5>

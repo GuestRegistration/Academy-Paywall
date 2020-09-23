@@ -1,46 +1,20 @@
 <template>
-    <div>
-        <div id="banner" style="background-image: url('images/Online-Tutoring.jpg');">
-            <div id="banner-overlay">
-                <nav class="navbar navbar-expand-lg navbar-dark">
-                    <a class="navbar-brand" :href="route('home')">ACADA</a>
-
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <!-- Right Side Of Navbar -->
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item ">
-                                <a href="#pricing" class="nav-link" >
-                                    PRICING
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a href="#features" class="nav-link" >
-                                    FEATURES
-                                </a>
-                            </li>
-                            <li class="nav-item" v-if="!authenticated">
-                                <a href="#" class="nav-link btn bg-custom-primary" @click.prevent="$refs.SigninModal.open()">
-                                    LOGIN
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-                <div class="main">
-                    <div class="text-center banner-text">
-                        <h1>CREATE A WEBSITE</h1>
-                        <h1>FOR YOUR COURSES IN MINUTES</h1>
-                        <button v-if="!authenticated" class="btn bg-custom-primary" @click.prevent="$refs.SigninModal.open('GET STARTED')">GET STARTED</button>
-                        <a v-if="authenticated && auth.account.username" :href="route('account.show', {account: auth.account.username})" class="btn bg-custom-primary m-2"> <v-icon color="#fff">school</v-icon> My Organization</a>
-                        <a v-if="authenticated && auth.profile.username" :href="route('profile.show', {profile: auth.profile.username})" class="btn bg-custom-primary m-2"><v-icon color="#fff">account_circle</v-icon> My Profile</a>
+    <app>
+        <template v-slot:before-container>
+            <div id="banner" style="background-image: url('images/Online-Tutoring.jpg');">
+                <div id="banner-overlay">
+                    <div class="main">
+                        <div class="text-center banner-text">
+                            <h1>CREATE A WEBSITE</h1>
+                            <h1>FOR YOUR COURSES IN MINUTES</h1>
+                            <v-btn v-if="!authenticated" class="bg-custom-primary white--text" @click.prevent="$refs.SigninModal.open('GET STARTED')">GET STARTED</v-btn>
+                            <v-btn v-if="authenticated && auth.account.username" class="bg-custom-primary m-2 white--text" @click="$inertia.visit(route('account.show', {account: auth.account.username}))"> <v-icon class="mr-2">school</v-icon> My Organization</v-btn>
+                            <!-- <v-btn v-if="authenticated && auth.profile.username" class="bg-custom-primary m-2 white--text" @click="$inertia.visit(route('profile.show', {profile: auth.profile.username}))"><v-icon class="mr-2">account_circle</v-icon> My Profile</v-btn> -->
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </template>
 
         <section class="page-section" id="how-it-work">
             <div class="section-head">
@@ -65,7 +39,6 @@
                 </div>
             </div>
         </section>
-
 
         <section class="page-section" id="features">
             <div class="section-head">
@@ -97,7 +70,7 @@
         <section class="page-section" id="pricing">
             <div class="bg-custom-primary text-center mb-3" style="height: 200px">
                 <img src="/images/arrow-divider2.PNG" width="100%">
-                <h2 class="text-white">Pricing</h2>
+                <h2 class="white--text">Pricing</h2>
             </div>
             <div class="pricing-container">
                 <div class="container">
@@ -114,7 +87,7 @@
                                 </div>
 
                                 <div class="plan-action">   
-                                    <a href="#" class="btn bg-custom-primary" @click.prevent="$refs.SigninModal.open()">Get Started</a>
+                                    <v-btn class="bg-custom-primary white--text" @click.prevent="$refs.SigninModal.open()">Get Started</v-btn>
                                 </div>
                             </div>
                         </div>
@@ -133,7 +106,7 @@
                                 </div>
 
                                 <div class="plan-action">   
-                                    <a href="#" class="btn bg-custom-primary" @click.prevent="$refs.SigninModal.open()">Get Started</a>
+                                    <v-btn class="bg-custom-primary white--text" @click.prevent="$refs.SigninModal.open()">Get Started</v-btn>
                                 </div>
                             </div>
                         </div>
@@ -153,7 +126,7 @@
                                 </div>
 
                                 <div class="plan-action">   
-                                    <a href="#" class="btn bg-custom-primary" @click.prevent="$refs.SigninModal.open()">Get Started</a>
+                                    <v-btn class="bg-custom-primary white--text" @click.prevent="$refs.SigninModal.open()">Get Started</v-btn>
                                 </div>
                             </div>
                         </div>
@@ -162,7 +135,7 @@
             </div>
         </section>
 
-       <section class="page-section" id="community">
+        <section class="page-section" id="community">
             <div class="section-head">
                 <h2>our Community</h2>
                 <hr class="bg-custom-primary">
@@ -186,26 +159,30 @@
             </div>
         </section>
 
-        <section class="bg-custom-primary" id="footer">
-           <div class="text-center text-white">
-               <p>&copy; 2020 ACADA</p>
-               <a href="mailto: support@acadaapp.com" style="color: #fff">support@acadaapp.com</a>
-           </div>
-        </section>
-
+        <template v-slot:after-container>
+            <section id="footer">
+            <div class="text-center text--primary">
+                <p>&copy; 2020 ACADA</p>
+                <a href="mailto: support@acadaapp.com" >support@acadaapp.com</a>
+            </div>
+            </section>        
+        </template>
+        
         <signin-modal ref="SigninModal" />
-    </div>
-
+    </app>
 </template>
 
 
 <script>
     import {mapGetters} from "vuex";
-    import SigninModal from '@/components/SigninModal';
+    import App from '@/layouts/App.vue';
+    import SigninModal from '@/Domain/Auth/Components/SigninModal';
+    import NavDrawer from '@/components/NavDrawer';
+
     export default {
         name: "HomePage",
         components: {
-            SigninModal
+            App, SigninModal, NavDrawer
         },
         metaInfo()
          {

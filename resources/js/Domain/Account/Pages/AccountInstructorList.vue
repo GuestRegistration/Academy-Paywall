@@ -28,7 +28,7 @@
                       <v-menu origin="center center"  transition="scale-transition">
                           <template v-slot:activator="{ on }">
                               <v-btn icon v-on="on">
-                                  <v-icon>mdi-dots-vertical</v-icon>
+                                  <v-icon>more_vert</v-icon>
                               </v-btn>
                           </template>
                           <v-list>

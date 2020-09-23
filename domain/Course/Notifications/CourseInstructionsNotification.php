@@ -3,9 +3,10 @@
 namespace Domain\Course\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\HtmlString;
+use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
 
 class CourseInstructionsNotification extends Notification
 {
@@ -43,7 +44,7 @@ class CourseInstructionsNotification extends Notification
     {
         return (new MailMessage)
                     ->subject('Your enrollment for '.$this->student->course->title.' was successful')
-                    ->view('mail.enrollment', ['student' => $this->student, 'course' => $this->student->course]);
+                    ->line(new HtmlString($this->student->course->instructions));
     }
 
     /**

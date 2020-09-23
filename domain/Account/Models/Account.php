@@ -46,6 +46,31 @@ class Account extends Model
             });
     }
 
+    public function getFacebookUrlAttribute($value)
+    {
+        return $value == 'null' ? null : $value;
+    }
+    public function getInstagramUrlAttribute($value)
+    {
+        return $value == 'null' ? null : $value;
+    }
+    public function getTwitterUrlAttribute($value)
+    {
+        return $value == 'null' ? null : $value;
+    }
+    public function getLinkedinUrlAttribute($value)
+    {
+        return $value == 'null' ? null : $value;
+    }
+    public function getYoutubeUrlAttribute($value)
+    {
+        return $value == 'null' ? null : $value;
+    }
+    public function getWebsiteAttribute($value)
+    {
+        return $value == 'null' ? null : $value;
+    }
+
     public function getAtUsernameAttribute($value){
         return "@$this->username";
     }

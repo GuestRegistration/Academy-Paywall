@@ -10,7 +10,7 @@ import VueMeta from 'vue-meta'
 import store from './store';
 import toastr from 'toastr';
 import wysiwyg from "vue-wysiwyg";
-import VueTagManager from "vue-tag-manager";
+// import VueTagManager from "vue-tag-manager";
 
 window.Vue = Vue;
 window.toastr = toastr;

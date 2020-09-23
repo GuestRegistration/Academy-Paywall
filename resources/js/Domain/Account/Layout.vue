@@ -10,7 +10,9 @@
       scroll-target="#scrolling-techniques-5"
       inverted-scroll
     >
-      <v-app-bar-nav-icon v-if="authenticated" @click="$store.state.navDrawer = !$store.state.navDrawer"></v-app-bar-nav-icon>
+      <v-btn v-if="authenticated" @click="$store.state.navDrawer = !$store.state.navDrawer" icon>
+        <v-icon>menu</v-icon>
+      </v-btn>
       <v-btn v-else @click="$inertia.visit(route('home'))" icon>
         <v-icon>home</v-icon>
       </v-btn>
@@ -35,7 +37,7 @@
       <v-menu v-if="isMyAccount(account)" origin="center center"  transition="scale-transition">
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on">
-            <v-icon>mdi-dots-vertical</v-icon>
+            <v-icon>more_vert</v-icon>
           </v-btn>
         </template>
         <v-list>
@@ -67,28 +69,28 @@
       <div id="scrolling-techniques-5"  class="overflow-y-auto" style="max-height: 100vh;">
           <v-img :src="account.cover_image" aspect-ratio="8.1"></v-img>
           <div :style="`background-color: ${account.theme_color}; color: #fff`" id="account-banner">
-              <div class="p-3" style="background-color: rgba(0,0,0, .2)">
-                  <div v-if="!account.show_caption" class="d-flex align-center mb-2">
-                    <div class="mr-2">
-                        <avatar :src="account.avatar" :color="account.theme_color" size="100" iconSize="50" icon="school" />
+            <div class="pa-3" style="background-color: rgba(0,0,0, .2)">
+              <div v-if="!account.show_caption" class="d-flex align-center mb-2">
+                <div class="mr-2">
+                    <avatar :src="account.avatar" :color="account.theme_color" size="100" iconSize="50" icon="school" />
+                </div>
+                <div style="margin-top: 50px">
+                    <h4>{{ account.name }}</h4>
+                    <div>
+                        <small>{{account.username}}</small>
                     </div>
-                    <div style="margin-top: 50px">
-                        <h4>{{ account.name }}</h4>
-                        <div>
-                            <small>{{account.username}}</small>
-                        </div>
-                    </div>
-                  </div>
-                  <div v-else class="text-center mb-2" style="margin-top: 50px">
-                      <h1>{{account.caption}}</h1>
-                      <h4>{{account.subcaption}}</h4>
-                  </div>
-                  <template v-if="courses">
-                    <courses-quick-enroll :account="account" :courses="courses" />
-                  </template>
+                </div>
+              </div>
+              <div v-else class="text-center mb-2" style="margin-top: 50px">
+                  <h1>{{account.caption}}</h1>
+                  <h4>{{account.subcaption}}</h4>
+              </div>
+              <template v-if="courses">
+                <courses-quick-enroll :account="account" :courses="courses" />
+              </template>
             </div>
           </div>
-          <v-container style="min-height: 100vh" fluid>
+          <v-container>
               <v-row>
                   <v-col cols="12" md="8">
                       <slot />
@@ -235,11 +237,11 @@
         },
 
         mounted(){
-            $('html').attr('no-scroll', 'no-scroll');            
+          document.querySelector('html').setAttribute('no-scroll', 'no-scroll');
         },
 
         destroyed(){
-            $('html').removeAttr('no-scroll');
+          document.querySelector('html').removeAttribute('no-scroll');
         }
         
     }

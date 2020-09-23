@@ -43,7 +43,7 @@
                                         </div>
                                         <div class="my-2">
                                             <h5>Cover image</h5>
-                                            <x-file-input :errors="errors" name="cover_image" label="Cover image" :src="account.cover_image" @change="getCoverImage" />
+                                            <x-file-input :errors="errors" name="cover_image" label="Cover image" :src="account.cover_image" aspect-ratio="8.1" @change="getCoverImage" />
                                             <small>Recommended Aspect Ratio: 8:1</small>
                                         </div>
                                     </div>
@@ -128,7 +128,7 @@
                             style="z-index:100; bottom: 40px"
                             :loading="loading" type="submit"
                             :color="form.theme_color">
-                            <v-icon>mdi-check</v-icon> Save
+                            <v-icon>done</v-icon> Save
                         </v-btn>
 
                 </form>
@@ -189,8 +189,11 @@
 
             formData() {
                 const form = new FormData;
+
+                const fileKeys = ['avatar', 'cover_image'];
+
                 Object.keys(this.form).forEach(key => {
-                    if(this.form[key] instanceof Object){
+                    if(this.form[key] instanceof Object && !fileKeys.includes(key)){
                         form.append(key, JSON.stringify(this.form[key]))
                     }else{
                         form.append(key, this.form[key]);

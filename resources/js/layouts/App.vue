@@ -2,8 +2,11 @@
       <!-- App.vue -->
   <v-app>
     <nav-drawer />
+   
     <v-app-bar app :color="authenticated && auth.account && route().current('account.*') ? auth.account.theme_color : 'primary'" dark >
-      <v-app-bar-nav-icon @click="$store.state.navDrawer = !$store.state.navDrawer"></v-app-bar-nav-icon>
+      <v-btn @click="$store.state.navDrawer = !$store.state.navDrawer" icon>
+        <v-icon>menu</v-icon>
+      </v-btn>
        <inertia-link :href="route('home')" class="white--text" style="text-decoration: none">
         <v-toolbar-title dark>{{$page.config.app_name}}</v-toolbar-title>
         </inertia-link>
@@ -17,6 +20,7 @@
           <v-btn icon><v-icon>add</v-icon></v-btn>
         </inertia-link>
       </template>
+
       <template  v-else-if="!route().current('signin')">
          <inertia-link  :href="route('signin')">
         <v-btn dark color="primary">Sign in</v-btn>
@@ -26,10 +30,15 @@
     
     <!-- Sizes your content based upon application components -->
     <v-main>
+      <slot name="before-container" />
+
       <!-- Provides the application the proper gutter -->
       <v-container fluid>
         <slot />
       </v-container>
+
+      <slot name="after-container" />
+
     </v-main>
 
     <v-footer app>
@@ -37,7 +46,7 @@
       <small>Need help ? <a href="mailto: support@acadaapp.com">support@acadaapp.com</a></small>
     </v-footer>
   </v-app>
-
+  
 </template>
 
 <script>
@@ -56,3 +65,7 @@
         },
     }
 </script>
+
+<style lang="scss">
+
+</style>

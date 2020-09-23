@@ -1,23 +1,22 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+// @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
 @import 'variables';
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+// @import '~bootstrap/scss/bootstrap';
 // vuetify
 @import '~vuetify/dist/vuetify.min.css';
-
 @import "~vue-wysiwyg/dist/vueWysiwyg.css";
 
 // material icon icons
-@import '~@mdi/font/css/materialdesignicons.css';
+// @import '~@mdi/font/css/materialdesignicons.css';
 @import '~material-design-icons-iconfont/dist/material-design-icons.css';
 
 @import 'toastr';
 
 @import 'ngprogress';
 
-@import 'custom';
+@import 'style';
 

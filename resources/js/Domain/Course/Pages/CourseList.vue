@@ -11,7 +11,7 @@
                   <v-menu v-if="isOnMyAccount(course)" origin="center center"  transition="scale-transition">
                       <template v-slot:activator="{ on }">
                           <v-btn icon v-on="on">
-                              <v-icon>mdi-dots-vertical</v-icon>
+                              <v-icon>more_vert</v-icon>
                           </v-btn>
                       </template>
                       <v-list>
@@ -63,7 +63,7 @@
           title="Create  course"
           @click="$inertia.visit(route('account.course.create', {account: account.username}))"
         >
-          <v-icon>mdi-plus</v-icon>
+          <v-icon>add</v-icon>
       </v-btn>
     </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-    <div class="m-2">
+    <div class="ma-2">
         <v-chip v-if="!course.started"
             class="ma-2"
             color="orange"

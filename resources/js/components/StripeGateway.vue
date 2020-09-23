@@ -1,12 +1,12 @@
 <template>
     <v-container>
         <v-row >
-            <v-dialog v-model="dialog" scrollable  persistent max-width="600px">
+            <v-dialog v-model="dialog" scrollable  persistent max-width="500px">
                 <form @submit.prevent="submit" action="/" method="post" class="payment-form">
                     <v-card>
                         <v-card-title>
                             <label :for="`card-element-${_uid}`">
-                                Credit or debit card
+                                <v-icon :color="color" size="30">credit_card</v-icon> Credit or debit card
                             </label>
                         </v-card-title>
                         <v-divider></v-divider>

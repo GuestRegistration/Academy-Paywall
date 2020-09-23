@@ -1,21 +1,24 @@
 <template>
     <div>
-        <h4>{{course.title}}</h4>
+        <h1>{{course.title}}</h1>
         <v-img :src="course.cover_image" ></v-img>
         <div>
             <div class="text-muted mt-3">
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-center">
                     <div><v-icon :color="account.theme_color" size="50">date_range</v-icon></div>
                     <div class="ml-2">
-                        <div> Start: {{course.start_date}} ({{course.account.user.timezone}})</div>
-                        <div>End: {{course.end_date}} ({{course.account.user.timezone}}) </div>
-                        <div>{{ localDate(course.raw_dates.start.timestamp)}} - {{ localDate(course.raw_dates.end.timestamp) }} in your local time</div>
-                        <div><v-icon :color="account.theme_color" size="20">schedule</v-icon>{{course.course_duration}}</div>
+                        <div class="my-2"> Start: {{course.start_date}} ({{course.account.user.timezone}})</div>
+                        <v-divider></v-divider>
+                        <div class="my-2">End: {{course.end_date}} ({{course.account.user.timezone}}) </div>
+                        <v-divider></v-divider>
+                        <div class="my-2">{{ localDate(course.raw_dates.start.timestamp)}} - {{ localDate(course.raw_dates.end.timestamp) }} in your local time</div>
+                        <v-divider></v-divider>
+                        <div class="my-2"><v-icon :color="account.theme_color" size="20" class="mr-2">schedule</v-icon>{{course.course_duration}}</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-center">
             <div>
                 <v-icon :color="account.theme_color">info</v-icon> {{course.course_type}}
             </div>
@@ -24,7 +27,7 @@
         </div>
 
         <v-divider></v-divider>
-        <div class="d-flex">
+        <div class="d-flex my-3">
             <div>
                 <h4 v-if="course.payment.require">{{course.price | money(course.payment.currency)}}</h4>
                 <h4 v-else>FREE</h4>
@@ -39,7 +42,7 @@
                 <v-menu origin="center center"  transition="scale-transition" v-if="isOnMyAccount(course) || affiliated" >
                     <template v-slot:activator="{ on }">
                         <v-btn icon v-on="on">
-                            <v-icon>mdi-dots-vertical</v-icon>
+                            <v-icon>more_vert</v-icon>
                         </v-btn>
                     </template>
                     <v-list>
@@ -76,8 +79,7 @@
             </div>
         </div>
         <v-divider></v-divider>
-        <div v-html="course.description">
-        </div>
+        <div v-html="course.description"></div>
         <v-container v-if="course.users" class="mt-4">
             <h2>Instructors ({{course.users.length}}) </h2>
             <v-divider></v-divider>
@@ -91,7 +93,7 @@
                             <v-menu origin="center center"  transition="scale-transition">
                                 <template v-slot:activator="{ on }">
                                     <v-btn icon v-on="on">
-                                        <v-icon>mdi-dots-vertical</v-icon>
+                                        <v-icon>more_vert</v-icon>
                                     </v-btn>
                                 </template>
                                 <v-list>

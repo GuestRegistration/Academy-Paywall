@@ -47,8 +47,8 @@ class NewSignin extends Notification
         return (new MailMessage)
                 ->subject('Sign in to '.config('app.name'))
                 ->line('Sign in to '.config('app.name').' with this link')
-                ->action("Sign in", URL::temporarySignedRoute('magic.signin', now()->addMinutes(5), ['token' => $this->user->signin_token]))
-                ->line('The link expires in 2 minutes');
+                ->action("SIGNIN NOW", URL::temporarySignedRoute('magic.signin', now()->addMinutes(config('auth.token_expire')), ['token' => $this->user->signin_token]))
+                ->line('The link expires in '.config('auth.token_expire').' minutes');
 
     }
 

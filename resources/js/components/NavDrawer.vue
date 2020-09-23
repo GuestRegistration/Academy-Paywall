@@ -4,7 +4,7 @@
       v-model="$store.state.navDrawer"
       >
       <template v-slot:prepend>
-        <v-list-item v-if="auth.profile.profile_complete" >
+        <v-list-item v-if="authenticated && auth.profile.profile_complete" >
           <v-list-item-avatar>
             <avatar :src="auth.profile.avatar" color="primary" size="70" :text="auth.profile.initials" />
           </v-list-item-avatar>
@@ -16,7 +16,7 @@
 
         <v-list dense>
           <template v-for="(item, i) in prependNavItems()">
-            <inertia-link v-if="item.render" :href="route(item.route, item.param)"  class="prevent-default" :key="i">
+            <inertia-link v-if="item.render" :href="`${route(item.route, item.param)}${item.anchor ? '#'+item.anchor : ''}`"  class="prevent-default" :key="i">
               <v-list-item :color="authenticated && auth.account ? auth.account.theme_color : 'primary'" >
                 <v-list-item-icon>
                   <v-icon v-text="item.icon"></v-icon>
@@ -42,7 +42,7 @@
       <v-list dense>
         <v-list-item-group v-model="active" >
           <template v-for="(item, i) in navItems()">
-            <inertia-link v-if="item.render" :href="route(item.route, item.param)"  class="prevent-default" :key="i">
+            <inertia-link v-if="item.render" :href="`${route(item.route, item.param)}${item.anchor ? '#'+item.anchor : ''}`"  class="prevent-default" :key="i">
               <v-list-item :color="authenticated && auth.account ? auth.account.theme_color : 'primary'" >
               <v-list-item-icon>
                 <v-icon v-text="item.icon"></v-icon>
@@ -66,11 +66,12 @@
 
       <template v-slot:append>
         <div class="pa-2">
-            <v-btn block dark class="red"  @click="signout">Signout</v-btn>
+            <v-btn v-if="authenticated" block dark class="red"  @click="signout">Signout</v-btn>
+            <v-btn v-else block dark class="primary"  @click="$inertia.visit(route('signin'))">Signin</v-btn>
         </div>
       </template>
-
     </v-navigation-drawer>
+    
 </template>
 
 <script>
@@ -96,6 +97,20 @@
                 title: 'Home',
                 icon: 'home',
                 render: true,
+              },
+              {
+                route: 'home',
+                title: 'Features',
+                icon: 'featured_play_list',
+                render: true,
+                anchor: 'features'
+              },
+              {
+                route: 'home',
+                title: 'Pricing',
+                icon: 'local_offer',
+                render: true,
+                anchor: 'pricing'
               },
             ];
 
@@ -200,16 +215,11 @@
                           render: this.auth.account ? true : false,
                         },
                       ]
-            }else{
-              return [{
-                          route: 'home',
-                          title: 'Home',
-                          icon: 'home',
-                          render: true,
-                        },
-                      ];
             }
+
+            return [];
           },
+
           async signout(){
            await this.$inertia.post(route('signout'));
           }

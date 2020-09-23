@@ -7,8 +7,8 @@
         <v-card-title class="headline red--text"><v-icon class="red--text">delete</v-icon> Delete course</v-card-title>
         <v-divider></v-divider>
         <v-card-text>
-        <div class="text-center">
-            <h4 >{{course.title}}</h4>
+        <div class="text-center my-3">
+            <h3 >{{course.title}}</h3>
         </div>
         <p>Deleting the course will also delete all students and payment records for the course and it's not reversible</p>
         </v-card-text>

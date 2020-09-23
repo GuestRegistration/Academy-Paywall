@@ -8,8 +8,8 @@
         <v-card-title class="headline red--text"><v-icon class="red--text">delete</v-icon> Remove Instructor</v-card-title>
         <v-divider></v-divider>
         <v-card-text>
-        <div class="text-center">
-            <h4 >{{user.profile.fullname}}</h4>
+        <div class="text-center mt-3">
+            <h2>{{user.profile.fullname}}</h2>
             <p>Remove instructor from your organization</p>
         </div>
         </v-card-text>

@@ -3,12 +3,12 @@
         <v-container mb-2>
             <template v-if="!fileSelected && src">
                 <avatar v-if="isAvatar" :src="src" :color="$attrs.color" size="100" />
-                <v-img v-else :src="src" aspect-ratio="6.1"></v-img>
+                <v-img v-else :src="src" :aspect-ratio="aspectRatio"></v-img>
             </template>
             <template v-else v-for="(file, i) in files">
                 <template  v-if="file.type == 'image'">
                     <avatar v-if="isAvatar" :src="file.src" size="100" :key="i" />
-                    <v-img v-else :src="file.src" aspect-ratio="1.7" :key="i"></v-img>
+                    <v-img v-else :src="file.src" :aspect-ratio="aspectRatio" :key="i"></v-img>
                 </template>
             </template>
         </v-container>
@@ -58,7 +58,11 @@
         isAvatar: {
             type: Boolean,
             default: () => false,
-        }
+        },
+        aspectRatio: {
+            type: Boolean,
+            default: () => '',
+        },
     },
     computed: {
         errorString() {

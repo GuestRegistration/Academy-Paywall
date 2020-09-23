@@ -27,7 +27,7 @@
                             <v-menu origin="center center"  transition="scale-transition">
                                 <template v-slot:activator="{ on }">
                                     <v-btn icon v-on="on">
-                                        <v-icon>mdi-dots-vertical</v-icon>
+                                        <v-icon>more_vert</v-icon>
                                     </v-btn>
                                 </template>
                                 <v-list>
@@ -48,8 +48,8 @@
         </v-container>
 
         <template v-slot:after-contact>
-            <div class="p-3">
-                <h5>Past Courses</h5>
+            <div class="pa-3">
+                <h4>Past Courses</h4>
                 <v-divider></v-divider>
                 <div v-if="!past_courses.length" class="text-muted my-2">
                     No past course

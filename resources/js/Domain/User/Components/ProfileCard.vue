@@ -3,7 +3,7 @@
         <v-card-text>
            <div class="text-center">
                 <avatar :src="instructor.profile.avatar" :color="`${account ? account.theme_color : 'primary'}`" size="70" :text="instructor.profile.initials" headline="yes" />
-                <h5>{{instructor.profile.fullname}}</h5>
+                <h4>{{instructor.profile.fullname}}</h4>
                 <v-row justify="center">
                   <v-col cols="10" class="text-center">
                     <inertia-link :href="route('profile.show', {profile: instructor.profile.username})" class="prevent-default">

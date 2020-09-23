@@ -3,6 +3,7 @@
 namespace Domain\Auth\Actions;
 
 use App\User;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Domain\Auth\Requests\SignInRequest;
 use Domain\Auth\Notifications\NewSignin;
@@ -24,18 +25,28 @@ class MagicLinkAction extends Controller
         $email = $request->get('email');
         $token = sha1($email.time());
 
-        $user = $model::where('email', $email)->first();
-        $user = $user ? $user : new User;
-        $user->fill([
-            'email' => $email,
-            'signin_token' => $token,
-            'signin_token_expires_at' => now()->addMinutes(5),
-            'timezone' => $request->get('timezone'),
-        ])->save();
+        DB::beginTransaction();
+        try {			
+            $user = $model::where('email', $email)->first();
+            $user = $user ? $user : new User;
+            $user->fill([
+                'email' => $email,
+                'signin_token' => $token,
+                'signin_token_expires_at' => now()->addMinutes(config('auth.token_expire')),
+                'timezone' => $request->get('timezone'),
+            ])->save();
+    
+            Notification::send($user, new NewSignin($user));
+            
+            DB::commit();
 
-        Notification::send($user, new NewSignin($user));
+        }catch (Exception $exception) {
+            DB::rollBack();
 
-        return redirect()->back()->with('status', "Signin link has been sent to $email . Follow the link to sign in");
+            throw $exception;
+        }   
+        
+        return response("Signin link has been sent to $email . Follow the link to sign in");
     }
 
 }

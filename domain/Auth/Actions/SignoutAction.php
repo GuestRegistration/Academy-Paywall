@@ -23,7 +23,8 @@ class SignoutAction extends Controller
      */
     public function __invoke(Request $request)
     {
-        $user = $request->user();
+        $user = auth()->user();
+        
         $user->update([
             'signin_token' => null,
             'signin_token_expires_at' => null,

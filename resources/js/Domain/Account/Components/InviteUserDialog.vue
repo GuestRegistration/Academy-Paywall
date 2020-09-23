@@ -3,10 +3,11 @@
             <form  @submit.prevent="submit">
                 <v-card>
                     <v-card-title>
-                        <span class="headline"><v-icon>person_add</v-icon> Invite instructor to {{account.name}}</span>
+                        <span class="headline"><v-icon>person_add</v-icon> Invite instructor</span>
                     </v-card-title>
                     <v-divider></v-divider>
                     <v-card-text>
+                        <p class="text-muted">Invite instructor to {{account.name}}</p>
                         <v-combobox
                             v-model="selected"
                             :items="items"

@@ -1,39 +1,33 @@
 <template>
-<v-app light>
-        <div class="d-flex align-items-center border-top border-top-5 border-primary bg-gray-700">
-            <div class="container mt-lg-5">
-                <div class="row justify-content-center">
-                    <div class="col-12 col-sm-9 col-md-6 col-lg-4 my-5">
-                        <div class="text-center">
-                            <h1>
-                                <inertia-link :href="route('home')" class="prevent-default">
-                                    {{ $page.config.app_name }}
-                                </inertia-link>
-                            </h1>
-                        </div>
-                        
-                        <v-card outlined class="py-5">
-                            <v-card-text>
-                                 <h2 class="text-center my-3">
-                                    Sign in
-                                </h2>
-
-                                <signin-form />
-
-                            </v-card-text>
-                        </v-card>
-                    </div>
-                </div> <!-- / .row -->
-            </div>
-        </div>
-        </v-app>
+    <v-container>
+        <v-row justify="center">
+            <v-col cols="12" md="4">
+                <div class="text-center mb-3">
+                    <h1>
+                        <inertia-link :href="route('home')" class="prevent-default">
+                            {{ $page.config.app_name }}
+                        </inertia-link>
+                    </h1>
+                    <p class="text-muted"> Sign in</p>
+                </div>
+                <v-card outlined class="py-2">
+                    <v-card-text>
+                        <signin-form />
+                    </v-card-text>
+                </v-card>
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 
 <script>
-    import SigninForm from '@/components/SigninForm';
+    import App from '@/layouts/App.vue';
+    import SigninForm from './Components/SigninForm.vue';
 
     export default {
         name: 'SigninPage',
+        layout: (h, page) => h(App, [page]),
+
         components: { SigninForm },
          metaInfo()
          {
@@ -42,6 +36,5 @@
                 titleTemplate: '%s - AcadaApp',
              }
         },
-
     }
 </script>
