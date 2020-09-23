@@ -46,8 +46,6 @@ class CourseSaveRequest extends FormRequest
 
     public function storeData()
     {        
-        $date = new Carbon($this->start_date);
-        dd($date->timezone(auth()->user()->timezone)->timezone('UTC')->format('Y-m-d H:i'));
 
         return $this->merge([
             'account_id' => $this->user()->account->id,
@@ -62,7 +60,6 @@ class CourseSaveRequest extends FormRequest
     }
 
     public function updateData(){
-        // dd($this->date($this->start_date));
         return $this->merge([
             'account_id' => $this->user()->account->id,
             'start_at' => $this->date($this->start_date),
