@@ -14,7 +14,7 @@
         
       <template v-if="authenticated">
          <inertia-link v-if="auth.account" :href="route('account.show', {account: auth.account.username})" class="prevent-default mx-1">
-         <avatar :src="auth.account.avatar" :color="auth.account ? auth.account.theme_color : 'primary'" size="40" />
+           <avatar :src="auth.account.avatar" :color="auth.account ? auth.account.theme_color : 'primary'" size="40" />
         </inertia-link>
         <inertia-link v-else :href="route('account.setup')" class="prevent-default mx-1" title="Create your academy account">
           <v-btn icon><v-icon>add</v-icon></v-btn>
@@ -66,6 +66,4 @@
     }
 </script>
 
-<style lang="scss">
 
-</style>

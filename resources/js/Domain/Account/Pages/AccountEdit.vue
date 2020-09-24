@@ -162,9 +162,11 @@
         props: {
             account: {
                 type: Object,
-                default: () => ({
-                    theme_color: '#3F51B5'
-                })
+                default: function(){
+                    return {
+                        theme_color: this.$vuetify.theme.themes.light.primary
+                    }
+                }
             },
             new_account: {
                 type: Boolean,

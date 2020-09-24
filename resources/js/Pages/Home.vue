@@ -7,9 +7,11 @@
                         <div class="text-center banner-text">
                             <h1>CREATE A WEBSITE</h1>
                             <h1>FOR YOUR COURSES IN MINUTES</h1>
-                            <v-btn v-if="!authenticated" class="bg-custom-primary white--text" @click.prevent="$refs.SigninModal.open('GET STARTED')">GET STARTED</v-btn>
-                            <v-btn v-if="authenticated && auth.account.username" class="bg-custom-primary m-2 white--text" @click="$inertia.visit(route('account.show', {account: auth.account.username}))"> <v-icon class="mr-2">school</v-icon> My Organization</v-btn>
-                            <!-- <v-btn v-if="authenticated && auth.profile.username" class="bg-custom-primary m-2 white--text" @click="$inertia.visit(route('profile.show', {profile: auth.profile.username}))"><v-icon class="mr-2">account_circle</v-icon> My Profile</v-btn> -->
+                            <template v-if="authenticated">
+                                <v-btn v-if="auth.account" class="bg-custom-primary m-2 white--text" @click="$inertia.visit(route('account.show', {account: auth.account.username}))"> <v-icon class="mr-2">school</v-icon> My Organization</v-btn>
+                                <v-btn v-else class="bg-custom-primary m-2 white--text" @click="$inertia.visit(route('account.setup'))"> <v-icon class="mr-2">school</v-icon> Create Organization</v-btn>
+                            </template>
+                            <v-btn v-else class="bg-custom-primary white--text" @click.prevent="$refs.SigninModal.open('GET STARTED')">GET STARTED</v-btn>
                         </div>
                     </div>
                 </div>
