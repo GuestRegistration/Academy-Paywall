@@ -3,10 +3,10 @@
         <form @submit.prevent="submit">
             <v-row justify="center" align="center">
                 <v-col cols="12" md="6">
-                    <h4>Personal Information</h4>
+                    <h2>Personal Information</h2>
                     <v-divider></v-divider>
-                     <div class="text-center mb-3" >
-                        <h5>Avatar</h5>
+                     <div class="text-center my-3" >
+                        <h4>Avatar</h4>
                         <x-file-input :errors="errors" name="avatar" label="Avatar" :src="auth.profile.avatar" color="primary" :isAvatar="true" @change="getAvatar" />
                     </div>
                     <x-input :errors="errors" name="first_name" type="text" v-model="form.first_name" label="First name"  prependInnerIcon="account_box" />
@@ -14,7 +14,7 @@
                     <x-input :errors="errors" name="username" type="text" v-model="form.username" @input="usernameInput" label="Username" prependInnerIcon="alternate_email" />
                     <x-input :errors="errors" name="email" type="email" v-model="form.email" label="Email"  prependInnerIcon="email"/>
                     <x-input :errors="errors" name="phone" type="tel" v-model="form.phone" label="Phone"  prependInnerIcon="call" />
-                    <x-textarea :errors="errors" name="bio" v-model="form.bio" label="Bio" />
+                    <x-textarea :errors="errors" name="bio" v-model="form.bio" label="About" />
                 </v-col>
                 
             </v-row>

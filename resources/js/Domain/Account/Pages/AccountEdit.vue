@@ -2,6 +2,10 @@
     <v-container>
         <v-row justify="center">
             <v-col cols="12" md="6">
+                <div class="mb-3">
+                    <h2>Organization Setup</h2>
+                    <v-divider></v-divider>
+                </div>
                 <form @submit.prevent="submit">
                     <v-expansion-panels
                         popout
@@ -9,26 +13,26 @@
                         >
                             <v-expansion-panel>
                                 <v-expansion-panel-header>
-                                    <h4>
+                                    <h3>
                                         <v-icon v-if="Object.keys(errors).some(error => ['name', 'username', 'email', 'phone', 'bio'].includes(error))" color="red" class="mr-3" title="There is error in this section">report_problem</v-icon>
                                         Organization Information
-                                    </h4>
+                                    </h3>
                                 </v-expansion-panel-header>
                                 <v-expansion-panel-content class="py-3">
                                     <x-input :errors="errors" name="name" type="text" v-model="form.name" label="Organization name"  prependInnerIcon="account_box" />
                                     <x-input :errors="errors" name="username" type="text" v-model="form.username" @input="aliasInput" label="Alias" prependInnerIcon="alternate_email" />
                                     <x-input :errors="errors" name="email" type="email" v-model="form.email" label="Email"  prependInnerIcon="email"/>
                                     <x-input :errors="errors" name="phone" type="tel" v-model="form.phone" label="Phone"  prependInnerIcon="call" />
-                                    <x-textarea :errors="errors" name="bio" v-model="form.bio" label="Bio" />
+                                    <x-textarea :errors="errors" name="bio" v-model="form.bio" label="About" />
                                 </v-expansion-panel-content>
                             </v-expansion-panel>
 
                             <v-expansion-panel>
                                 <v-expansion-panel-header>
-                                    <h4>
+                                    <h3>
                                         <v-icon v-if="Object.keys(errors).some(error => ['theme_color', 'avatar', 'cover_image'].includes(error))" color="red" class="mr-3" title="There is error in this section">report_problem</v-icon>
                                         Appearance
-                                    </h4>
+                                    </h3>
                                 </v-expansion-panel-header>
                                 <v-expansion-panel-content class="py-3">
                                     <div class="text-center">
@@ -53,10 +57,10 @@
 
                             <!-- <v-expansion-panel>
                                 <v-expansion-panel-header>
-                                    <h4>
+                                    <h3>
                                         <v-icon v-if="Object.keys(errors).some(error => ['caption', 'subcaption'].includes(error))" color="red" class="mr-3" title="There is error in this section">report_problem</v-icon>
                                         Header
-                                    </h4>
+                                    </h3>
                                 </v-expansion-panel-header>
                                 <v-expansion-panel-content class="py-3">
                                     <v-switch v-model="form.show_caption" label="Use headline caption" :color="form.theme_color"></v-switch>
@@ -69,10 +73,10 @@
 
                             <v-expansion-panel>
                                 <v-expansion-panel-header>
-                                   <h4>
+                                   <h3>
                                         <v-icon v-if="Object.keys(errors).some(error => ['facebook_url', 'instagram_url', 'twitter_url', 'linkedin_url', 'youtube_url', 'website'].includes(error))" color="red" class="mr-3" title="There is error in this section">report_problem</v-icon>
                                         Links
-                                    </h4>
+                                    </h3>
                                 </v-expansion-panel-header>
                                 <v-expansion-panel-content class="my-3">
                                     <x-input :errors="errors" name="facebook_url" type="url" v-model="form.facebook_url" label="Facebook" prependInnerIcon="link" />
@@ -86,10 +90,10 @@
 
                             <v-expansion-panel>
                                 <v-expansion-panel-header>
-                                   <h4>
+                                   <h3>
                                         <v-icon v-if="Object.keys(errors).some(error => ['facebook_url', 'instagram_url', 'twitter_url', 'linkedin_url', 'youtube_url', 'website'].includes(error))" color="red" class="mr-3" title="There is error in this section">report_problem</v-icon>
                                         Google Tag Manager
-                                    </h4>
+                                    </h3>
                                 </v-expansion-panel-header>
                                 <v-expansion-panel-content class="my-3">
                                     <x-input :errors="errors" name="google_tag_manager" type="text" v-model="form.google_tag_manager" label="Google Tag Manager" placeholder="GTM-xxxxxx" />
@@ -164,7 +168,7 @@
                 type: Object,
                 default: function(){
                     return {
-                        theme_color: this.$vuetify.theme.themes.light.primary
+                        theme_color: this.$vuetify.theme.themes.light.secondary
                     }
                 }
             },

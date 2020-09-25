@@ -126,8 +126,8 @@ new Vue({
     theme: {
       themes: {
         light: {
-          primary: '#002B36',
-          secondary: '#b0bec5',
+          primary: '#C51E5B',
+          secondary: '#002B36',
           accent: '#8c9eff',
           error: '#b71c1c',
         },

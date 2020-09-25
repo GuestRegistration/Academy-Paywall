@@ -4,7 +4,7 @@
 
     <!-- sm app bar -->
     <v-app-bar
-      color="primary"
+      color="secondary"
       dark
       class="d-md-none"
     >
@@ -45,15 +45,17 @@
                   <!-- md app bar -->
                   <v-app-bar
                     absolute
-                    color="primary"
+                    color="secondary"
                     dark
                     class="d-none d-md-block"
                   >
+                    <v-btn @click="$store.state.navDrawer = !$store.state.navDrawer" icon>
+                      <v-icon>menu</v-icon>
+                    </v-btn>
                     <v-toolbar-title dark >
-                      <v-btn @click="$store.state.navDrawer = !$store.state.navDrawer" icon>
-                        <v-icon>menu</v-icon>
-                      </v-btn>
-                      <inertia-link :href="route('home')" class="prevent-default white--text">{{$page.config.app_name}}</inertia-link>
+                      <inertia-link :href="route('home')">
+                         <v-img src="/images/acada-text-logo.png" width="120"></v-img>
+                      </inertia-link>
                     </v-toolbar-title>
                     <v-spacer></v-spacer>
                      <v-btn icon v-if="$store.state.navDrawer" @click="$store.state.navDrawer = false" ref="navBarCloser">

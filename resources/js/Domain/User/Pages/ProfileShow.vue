@@ -1,9 +1,9 @@
 <template>
     <div>
-        <h4 class="my-2"><v-icon>library_books</v-icon> Courses</h4>
+        <h2 class="my-2"><v-icon>library_books</v-icon> Courses</h2>
         <v-divider></v-divider>
-        <div class="text-center text-muted" v-if="!courses.total">
-            <h5>No course yet</h5>
+        <div class="text-center text-muted my-5" v-if="!courses.total">
+            <h3>No course yet</h3>
         </div>
         <div v-else>
              <v-row>

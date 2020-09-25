@@ -1,9 +1,9 @@
 <template>
 
     <account-layout>
-        <h2>Courses</h2>
+        <h2><v-icon>library_books</v-icon> Courses</h2>
         <div class="text-center text-muted py-5" v-if="!current_courses.total">
-            <h5>No course yet</h5>
+            <h3>No course yet</h3>
         </div>
         <div v-else>
             <v-row>
@@ -15,10 +15,10 @@
         </div>
 
         <v-container v-if="instructors" class="mt-4">
-            <h2>Instructors ({{instructors.length}}) </h2>
+            <h2><v-icon>group</v-icon> Instructors ({{instructors.length}}) </h2>
             <v-divider></v-divider>
             <div v-if="!instructors.length">
-                <p class="text-muted">No instructor</p>
+                <h3 class="text-muted ">No instructor</h3>
             </div>
              <v-row v-else>
                 <v-col cols="12" md="6" v-for="user in instructors" :key="user.id">

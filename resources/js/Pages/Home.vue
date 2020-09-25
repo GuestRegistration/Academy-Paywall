@@ -7,27 +7,28 @@
                         <div class="text-center banner-text">
                             <h1>CREATE A WEBSITE</h1>
                             <h1>FOR YOUR COURSES IN MINUTES</h1>
-                            <template v-if="authenticated">
-                                <v-btn v-if="auth.account" class="bg-custom-primary m-2 white--text" @click="$inertia.visit(route('account.show', {account: auth.account.username}))"> <v-icon class="mr-2">school</v-icon> My Organization</v-btn>
-                                <v-btn v-else class="bg-custom-primary m-2 white--text" @click="$inertia.visit(route('account.setup'))"> <v-icon class="mr-2">school</v-icon> Create Organization</v-btn>
-                            </template>
-                            <v-btn v-else class="bg-custom-primary white--text" @click.prevent="$refs.SigninModal.open('GET STARTED')">GET STARTED</v-btn>
+                            <div class="mt-3">
+                                <template v-if="authenticated">
+                                    <v-btn v-if="auth.account" class="ma-2 white--text" color="primary" @click="$inertia.visit(route('account.show', {account: auth.account.username}))"> <v-icon class="mr-2">school</v-icon> My Organization</v-btn>
+                                    <v-btn v-else class="ma-2 white--text" color="primary" @click="$inertia.visit(route('account.setup'))"> <v-icon class="mr-2">add</v-icon> Create Organization</v-btn>
+                                </template>
+                                <v-btn v-else class="white--text" color="primary" @click.prevent="$refs.SigninModal.open('GET STARTED')">GET STARTED <v-icon>arrow_forward</v-icon></v-btn>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </template>
 
         <section class="page-section" id="how-it-work">
             <div class="section-head">
-                <h2>HOW IT WORKS</h2>
+                <h1>HOW IT WORKS</h1>
                 <hr class="bg-custom-primary">
             </div>
             <div class="container">
                 <div class="row">
                     <div class="col-md-4" v-for="(hiw, i) in howItWork" :key="i">
                         <div class="info-box">
-                            <div class="box-icon text-center">
+                            <div class="box-icon text-center mb-5">
                                 <img :src="hiw.icon" width="100px">
                             </div>
                             <div class="box-heading">
@@ -44,17 +45,14 @@
 
         <section class="page-section" id="features">
             <div class="section-head">
-                <h2>FEATURES</h2>
+                <h1>FEATURES</h1>
                 <hr class="bg-custom-primary">
-                <div class="px-3">
-                    <img src="/images/arrow-divider.PNG" width="100%">
-                </div>
             </div>
             <div class="container">
                 <div class="row">
                     <div class="col-md-4" v-for="(feature, i) in features" :key="i">
                         <div class="info-box">
-                            <div class="box-icon text-center">
+                            <div class="box-icon text-center mb-5">
                                 <img :src="feature.icon" width="50x">
                             </div>
                             <div class="box-heading">
@@ -72,43 +70,73 @@
         <section class="page-section" id="pricing">
             <div class="bg-custom-primary text-center mb-3" style="height: 200px">
                 <img src="/images/arrow-divider2.PNG" width="100%">
-                <h2 class="white--text">Pricing</h2>
+                <h1 class="white--text">PRICING</h1>
             </div>
             <div class="pricing-container">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="pricing-box">
-                                <div class="plan-name">
+                                <div class="plan-name text-center">
                                     <h4>Basic</h4>
                                     <hr class="bg-custom-primary">
                                 </div>
-
                                 <div class="plan-info">
-                                    $1 per <br> course
+                                    <v-list style="background: inherit">
+                                        <v-list-item>
+                                            <v-list-item-icon color="primary" class="mr-2">
+                                                <v-icon class="text-custom-primary">monetization_on</v-icon>
+                                            </v-list-item-icon>
+                                            <v-list-item-content>
+                                                <v-list-item-title>1 USD per course</v-list-item-title>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </v-list>
                                 </div>
-
-                                <div class="plan-action">   
-                                    <v-btn class="bg-custom-primary white--text" @click.prevent="$refs.SigninModal.open()">Get Started</v-btn>
+                                <div class="plan-action text-center">   
+                                    <v-btn class="white--text" color="primary" @click.prevent="$refs.SigninModal.open('GET STARTED')">Get Started</v-btn>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <div class="pricing-box">
-                                <div class="plan-name">
+                                <div class="plan-name text-center">
                                     <h4>Bundle</h4>
                                     <hr class="bg-custom-primary">
                                 </div>
 
                                 <div class="plan-info">
-                                    $100 per year <br>
-                                    200 courses <br>
-                                    5 instructors
+                                    <v-list style="background: inherit">
+                                        <v-list-item>
+                                            <v-list-item-icon color="primary" class="mr-2">
+                                                <v-icon class="text-custom-primary">monetization_on</v-icon>
+                                            </v-list-item-icon>
+                                            <v-list-item-content>
+                                                <v-list-item-title>1 USD per course</v-list-item-title>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                        <v-list-item>
+                                            <v-list-item-icon color="primary" class="mr-2">
+                                                <v-icon class="text-custom-primary">library_books</v-icon>
+                                            </v-list-item-icon>
+                                            <v-list-item-content>
+                                                <v-list-item-title>200 courses</v-list-item-title>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                        <v-list-item>
+                                            <v-list-item-icon color="primary" class="mr-2">
+                                                <v-icon class="text-custom-primary">group</v-icon>
+                                            </v-list-item-icon>
+                                            <v-list-item-content>
+                                                <v-list-item-title>5 instructors</v-list-item-title>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </v-list>
                                 </div>
 
-                                <div class="plan-action">   
-                                    <v-btn class="bg-custom-primary white--text" @click.prevent="$refs.SigninModal.open()">Get Started</v-btn>
+                                <div class="plan-action text-center">   
+                                    <v-btn class="white--text"  color="primary"  @click.prevent="$refs.SigninModal.open('GET STARTED')">Get Started</v-btn>
                                 </div>
                             </div>
                         </div>
@@ -116,19 +144,41 @@
 
                         <div class="col-md-4">
                             <div class="pricing-box">
-                                <div class="plan-name">
+                                <div class="plan-name text-center">
                                     <h4>Enterprise</h4>
                                     <hr class="bg-custom-primary">
                                 </div>
-
                                 <div class="plan-info">
-                                    $1,000 per year <br>
-                                    unlimited instructors <br>
-                                    unlimited courses
+                                    <v-list style="background: inherit">
+                                        <v-list-item>
+                                            <v-list-item-icon color="primary" class="mr-2">
+                                                <v-icon class="text-custom-primary">monetization_on</v-icon>
+                                            </v-list-item-icon>
+                                            <v-list-item-content>
+                                                <v-list-item-title>1,000 USD per year</v-list-item-title>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                        <v-list-item>
+                                            <v-list-item-icon color="primary" class="mr-2">
+                                                <v-icon class="text-custom-primary">library_books</v-icon>
+                                            </v-list-item-icon>
+                                            <v-list-item-content>
+                                                <v-list-item-title>Unlimited Courses</v-list-item-title>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                        <v-list-item>
+                                            <v-list-item-icon color="primary" class="mr-2">
+                                                <v-icon class="text-custom-primary">group</v-icon>
+                                            </v-list-item-icon>
+                                            <v-list-item-content>
+                                                <v-list-item-title>Unlimited Instructors</v-list-item-title>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </v-list>
                                 </div>
 
-                                <div class="plan-action">   
-                                    <v-btn class="bg-custom-primary white--text" @click.prevent="$refs.SigninModal.open()">Get Started</v-btn>
+                                <div class="plan-action text-center">   
+                                    <v-btn class="white--text"  color="primary"  @click.prevent="$refs.SigninModal.open('GET STARTED')">Get Started</v-btn>
                                 </div>
                             </div>
                         </div>
@@ -139,18 +189,18 @@
 
         <section class="page-section" id="community">
             <div class="section-head">
-                <h2>our Community</h2>
+                <h1>OUR COMMUNITY</h1>
                 <hr class="bg-custom-primary">
             </div>
             <div class="container">
                 <div class="row">
                     <div class="col-md-4" v-for="(community, i) in communities" :key="i">
                         <div class="info-box">
-                            <div class="box-icon text-center">
-                                <img :src="community.icon" height="200x" style="max-width: 100%">
+                            <div class="box-icon text-center mb-5">
+                                <img :src="community.icon" height="100x" style="max-width: 60%">
                             </div>
-                            <div class="box-heading">
-                                <h2>{{ community.heading }}</h2>
+                            <div class="text-center">
+                                <h4>{{ community.heading }}</h4>
                             </div>
                             <div class="box-text">
                                 <p>{{ community.text }}</p>
@@ -160,12 +210,13 @@
                 </div>
             </div>
         </section>
+    </template>
+
 
         <template v-slot:after-container>
             <section id="footer">
             <div class="text-center text--primary">
                 <p>&copy; 2020 ACADA</p>
-                <a href="mailto: support@acadaapp.com" >support@acadaapp.com</a>
             </div>
             </section>        
         </template>
@@ -252,7 +303,7 @@
                     {
                         icon: 'images/unlimited-enrollment.PNG',
                         heading: 'Unlimited Enrollment',
-                        text: 'THE MORE THE MERRIER! As many people as enroll for your course. There arre no limit unless they are set by you.'
+                        text: 'THE MORE THE MERRIER! As many people as possible can enroll for your course. There are no limits unless they are set by you.'
                     },
                     {
                         icon: 'images/enterprise-version.PNG',
@@ -360,12 +411,13 @@
 
     .info-box .box-heading h2{
         font-weight: bolder;
+        margin-bottom: 10px;
     }
 
     .info-box .box-text
     {
         text-align: center;
-        font-size: 20px;
+        font-size: 16px;
     }
     
     #how-it-work .info-box
@@ -380,7 +432,6 @@
 
     .pricing-box
     {
-      text-align: center;
       background-color: #F5F2F3;
       border-radius: 10px;
       padding: 30px 10px;
@@ -394,8 +445,7 @@
 
     .plan-info
     {
-        height: 100px;
-        margin: 50px 0;
+        height: 200px;
     }
 
     #community
@@ -429,7 +479,7 @@
 
         #community .info-box
         {
-            min-height: 600px;
+            min-height: 400px;
         }
 
         .pricing-container
@@ -438,7 +488,7 @@
         }
         .pricing-box
         {
-            width: 80%;
+            margin: 0 20px;
         }
     }
 

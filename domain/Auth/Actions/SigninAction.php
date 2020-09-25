@@ -23,12 +23,12 @@ class SigninAction extends Controller
     public function __invoke(Request $request, $token)
     {
         if (!$request->hasValidSignature()) {
-           return redirect()->route('signin')->with('error', 'That signin link is no more valid');
+           return redirect()->route('signin')->with('error', 'Oops! the sign in link is no more valid, enter your email address again to receive a new link');
         }
         $user = User::where('signin_token', $token)->first();
         if(!$user) return redirect()->route('signin')->with('error', 'That signin link is not valid');
 
-        if($user->signin_token_expires_at->getTimestamp() < now()->getTimestamp()) redirect()->route('signin')->with('error', 'That signin link has expired');
+        if($user->signin_token_expires_at->getTimestamp() < now()->getTimestamp()) redirect()->route('signin')->with('error', 'Oops! the sign in link has expired, enter your email address again to receive a new link');
 
         Auth::login($user, true);
 
