@@ -9,7 +9,7 @@
       </v-btn>
        <inertia-link :href="route('home')" class="white--text" style="text-decoration: none">
           <v-toolbar-title dark>
-                <v-img src="/images/acada-text-logo.png" width="120"></v-img>
+                <v-img src="/images/acada-text-logo-white.png" width="120"></v-img>
           </v-toolbar-title>
         </inertia-link>
       <v-spacer></v-spacer>
