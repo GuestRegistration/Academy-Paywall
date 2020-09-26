@@ -3,6 +3,7 @@
 namespace Domain\Account\Actions;
 
 use Inertia\Inertia;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Domain\Account\Models\Account;
 use App\Http\Controllers\Controller;
@@ -28,7 +29,7 @@ class AccountUserInviteAction extends Controller
         ]);
         $emailsToInvite = collect($request->get('emails', []))->map(function($email) use($account){
             return [
-                'email' => $email !== Auth::user()->email && !$account->invitations()->where('email', $email)->exists() ? $email : null
+                'email' => $email !== Auth::user()->email && !$account->users()->where('email', $email)->exists() && !$account->invitations()->where('email', $email)->exists() ? $email : null
             ];
         })
         ->whereNotNull('email');
@@ -37,7 +38,7 @@ class AccountUserInviteAction extends Controller
         
         Notification::send($invitations, new UserInvitationToAccount);
         
-        return redirect()->back()->with('status', $invitations->count()." invitations sent");
+        return redirect()->back()->with('status', $invitations->count()." ".Str::plural('invitation', $invitations->count())." sent");
     }
 
 }

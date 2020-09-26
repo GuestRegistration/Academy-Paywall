@@ -89,7 +89,9 @@ class Account extends Model
     }
 
     public function getInstructorsAttribute(){
-        return collect([$this->user->load(['profile'])])->merge($this->users()->with(['profile'])->get());
+        return collect([$this->user->load(['profile'])])->merge($this->users()->with(['profile'])->get())->filter(function($user){
+            return $user->profile !== null;
+        });
     }
 
     public function user(){

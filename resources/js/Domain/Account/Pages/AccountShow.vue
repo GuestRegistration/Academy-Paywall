@@ -21,7 +21,7 @@
                 <h3 class="text-muted ">No instructor</h3>
             </div>
              <v-row v-else>
-                <v-col cols="12" md="6" v-for="user in instructors" :key="user.id">
+                <v-col cols="12" md="6" v-for="(user) in instructors" :key="user.id">
                     <profile-card :account="account" :instructor="user">
                         <template v-slot:options>
                             <v-menu origin="center center"  transition="scale-transition">

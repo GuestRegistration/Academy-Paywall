@@ -20,9 +20,9 @@ class ProfileShowAction extends Controller
         $courses = $profile->user->courses()->with(['account', 'users.profile'])->paginate(10);
         $affiliations = \collect([]);
         if($profile->user->account){
-            $affiliations->push($profile->user->account);
+            $affiliations->push($profile->user->account->load('user.profile'));
         }
-        $affiliations =  $affiliations->merge($profile->user->accounts);
+        $affiliations =  $affiliations->merge($profile->user->accounts()->with('user.profile')->get());
         return Inertia::render('Domain/User/Pages/ProfileShow', compact('profile', 'courses', 'affiliations'));
     }
 

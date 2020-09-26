@@ -54,14 +54,14 @@
                     </v-btn>
                     <v-toolbar-title dark >
                       <inertia-link :href="route('home')">
-                         <v-img src="/images/acada-text-logo.png" width="120"></v-img>
+                         <v-img src="/images/acada-text-logo-white.png" width="120"></v-img>
                       </inertia-link>
                     </v-toolbar-title>
                     <v-spacer></v-spacer>
                      <v-btn icon v-if="$store.state.navDrawer" @click="$store.state.navDrawer = false" ref="navBarCloser">
                       <v-icon>menu_open</v-icon>
                     </v-btn>
-                    <v-menu v-if="isMyProfile(profile)" origin="center center"  transition="scale-transition">
+                    <!-- <v-menu v-if="isMyProfile(profile)" origin="center center"  transition="scale-transition">
                       <template v-slot:activator="{ on }">
                         <v-btn icon v-on="on">
                           <v-icon>more_vert</v-icon>
@@ -78,7 +78,7 @@
                           </v-list-item-content>
                         </v-list-item>
                       </v-list>
-                    </v-menu>
+                    </v-menu> -->
                   </v-app-bar>
                   <v-container fluid class="lhs-body">
                     <div class="text-center">
@@ -111,7 +111,7 @@
                       </v-row>
                     </v-card>
                     <v-divider></v-divider>
-                    <h4 class="mt-3">Affiliations</h4>
+                    <h4 class="mt-3">Organizations</h4>
                     <v-list v-if="affiliations.length">
                       <v-list-item
                         v-for="affiliation in affiliations" :key="affiliation.id"
@@ -123,10 +123,11 @@
 
                         <v-list-item-content>
                           <v-list-item-title v-text="affiliation.name"></v-list-item-title>
+                          <v-list-item-subtitle v-if="affiliation.user.profile.id === profile.id">Owned by {{ affiliation.user.profile.fullname }}</v-list-item-subtitle>
                         </v-list-item-content>
 
-                        <!-- <v-list-item-icon>
-                          <v-icon :color="item.active ? 'deep-purple accent-4' : 'grey'">chat_bubble</v-icon>
+                        <!-- <v-list-item-icon v-if="affiliation.user.id === auth.id">
+                          <v-icon color="primary">chat_bubble</v-icon>
                         </v-list-item-icon> -->
                       </v-list-item>
                     </v-list>
@@ -141,7 +142,7 @@
                       </v-alert>
                     </div>
 
-                    <div class="text-right">
+                    <div class="text-right mt-4">
                       <inertia-link v-if="isMyProfile(profile) && !auth.account" :href="route('account.setup')" class="prevent-default mx-1" title="Create your academy account">
                         <v-btn fab><v-icon>add</v-icon></v-btn>
                       </inertia-link>
