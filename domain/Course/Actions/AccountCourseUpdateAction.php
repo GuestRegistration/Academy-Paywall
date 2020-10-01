@@ -24,6 +24,7 @@ class AccountCourseUpdateAction extends Controller
         }
         $course->update($request->updateData());
         $course->users()->sync(json_decode($request->get('instructors')));
+        
         return redirect()->route('account.course.show', [$account->username, $course->slug])->with('success', $course->title." updated successfully");
     }
 

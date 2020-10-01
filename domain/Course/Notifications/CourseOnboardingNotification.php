@@ -1,25 +1,26 @@
 <?php
-namespace Domain\Account\Notifications;
+
+namespace Domain\Course\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\HtmlString;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class UserInvitationToAccount extends Notification
+class CourseOnboardingNotification extends Notification
 {
     use Queueable;
 
+    public $student;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($student)
     {
-        //
+        $this->student = $student;
     }
 
     /**
@@ -41,13 +42,10 @@ class UserInvitationToAccount extends Notification
      */
     public function toMail($notifiable)
     {
-        
         return (new MailMessage)
-                    ->subject("Invitation to {$notifiable->account->name}")
-                    ->line(Auth::user()->profile->fullname." is inviting you to {$notifiable->account->name} as an instructor on acadaapp")
-                    ->line("Click on the button below to accept the invitation")
-                    ->action('Accept Invitation', URL::signedRoute('account.instructor.invitation', ['account' => $notifiable->account->getKey(), 'invitation' => $notifiable->getKey()]));
-        }
+                    ->subject('Your enrollment for '.$this->student->course->title.' was successful')
+                    ->line(new HtmlString($this->student->course->instructions));
+    }
 
     /**
      * Get the array representation of the notification.

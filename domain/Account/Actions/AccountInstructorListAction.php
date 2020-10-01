@@ -17,6 +17,7 @@ class AccountInstructorListAction extends Controller
 
     public function __invoke(Account $account)
     {
+        $account->load(['subscription.subscriptionPlan']);
         $instructors = $account->instructors;
         $invitations = $account->invitations()->latest()->get();
         

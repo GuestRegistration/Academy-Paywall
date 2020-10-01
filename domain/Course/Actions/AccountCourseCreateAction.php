@@ -22,6 +22,9 @@ class AccountCourseCreateAction extends Controller
 
     public function __invoke(Account $account)
     {
+
+        if(!$account->is_unlimited && !$account->courses_slot) return \redirect()->back()->with('error', 'Courses limit reached');
+
         $account->load('subscription.payment');
         $payg = SubscriptionPlan::PLAN_PAYG;
         $stripe_pk = env('STRIPE_PK');

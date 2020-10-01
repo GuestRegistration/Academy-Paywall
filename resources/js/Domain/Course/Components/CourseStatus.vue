@@ -1,7 +1,6 @@
 <template>
     <div class="ma-2">
         <v-chip v-if="!course.started"
-            class="ma-2"
             color="orange"
             text-color="white"
         >
@@ -9,7 +8,6 @@
             Upcoming
         </v-chip>
         <v-chip v-else-if="course.ongoing"
-            class="ma-2"
             color="success"
             text-color="white"
         >
@@ -17,7 +15,6 @@
             Ongoing
         </v-chip>
         <v-chip v-else
-            class="ma-2"
             color="red"
             text-color="white"
         >
@@ -25,7 +22,7 @@
             Ended
         </v-chip>
         <div class="text-muted">
-            {{ course.status_time }}
+            <small>{{ course.status_time }}</small> 
         </div>
     </div>
 </template>

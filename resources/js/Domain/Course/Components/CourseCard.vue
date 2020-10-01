@@ -19,7 +19,9 @@
       <v-col cols="12" :lg="col" class="pt-0">
         <v-card-text>
           <h4>{{ course.title }}</h4>
-          {{ course.snippet }}
+          <div class="my-3">
+            {{ course.snippet }}
+          </div>
           <v-divider></v-divider>
           <div class="text-muted my-3">
             <div class="d-flex align-center">

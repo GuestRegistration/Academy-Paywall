@@ -17,25 +17,6 @@
           <avatar :src="profile.avatar" color="primary" size="30"  /> {{ profile.fullname }}
         </inertia-link>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-menu v-if="isMyProfile(profile)" origin="center center"  transition="scale-transition">
-        <template v-slot:activator="{ on }">
-          <v-btn icon v-on="on">
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
-        </template>
-        <v-list>
-
-          <v-list-item @click="$inertia.visit(route('profile.edit', {profile: profile.username}))">
-            <v-list-item-icon>
-              <v-icon>edit</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>Edit profile</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-      </v-menu>
     </v-app-bar>
     
     <div id="scrolling-techniques-5"  class="overflow-y-auto" style="max-height: 100vh;">
@@ -61,54 +42,40 @@
                      <v-btn icon v-if="$store.state.navDrawer" @click="$store.state.navDrawer = false" ref="navBarCloser">
                       <v-icon>menu_open</v-icon>
                     </v-btn>
-                    <!-- <v-menu v-if="isMyProfile(profile)" origin="center center"  transition="scale-transition">
-                      <template v-slot:activator="{ on }">
-                        <v-btn icon v-on="on">
-                          <v-icon>more_vert</v-icon>
-                        </v-btn>
-                      </template>
-                      <v-list>
-
-                        <v-list-item @click="$inertia.visit(route('profile.edit', {profile: profile.username}))">
-                          <v-list-item-icon>
-                            <v-icon>edit</v-icon>
-                          </v-list-item-icon>
-                          <v-list-item-content>
-                            <v-list-item-title>Edit profile</v-list-item-title>
-                          </v-list-item-content>
-                        </v-list-item>
-                      </v-list>
-                    </v-menu> -->
                   </v-app-bar>
                   <v-container fluid class="lhs-body">
                     <div class="text-center">
                       <avatar :src="profile.avatar" color="primary" size="100" :text="profile.initials" headline="yes" />
-                      <h2>{{profile.fullname}}</h2>
+                      <h3 class="mt-3">{{profile.fullname}}</h3>
                     </div>
-                    <div  v-if="profile.bio" class="text-center p-3">
+                    <div  v-if="profile.bio" class="text-center pa-3">
                       {{profile.bio}}
                     </div>
                     <v-card outlined dark color="primary">
-                      <v-row>
-                        <v-col>
-                          <div class="text-center">
-                            <a :href="`tel: ${profile.phone}`" class="prevent-default">
-                              <v-btn icon large>
-                                <v-icon>call</v-icon>
-                              </v-btn>
-                            </a>
-                          </div>
-                        </v-col>
-                        <v-col>
-                          <div class="text-center">
-                            <a :href="`mailto: ${profile.email}`" class="prevent-default">
-                              <v-btn large icon>
-                                <v-icon>email</v-icon>
-                              </v-btn>
-                            </a>
-                          </div>
-                        </v-col>
-                      </v-row>
+                      <v-card-text>
+                        <v-row>
+                          <v-col class="text-truncate">
+                            <div class="text-center">
+                              <a :href="`tel: ${profile.phone}`" class="prevent-default">
+                                <v-btn icon large>
+                                  <v-icon>call</v-icon>
+                                </v-btn>
+                              </a>
+                              <div class="text-truncate">{{ profile.phone }}</div>
+                            </div>
+                          </v-col>
+                          <v-col class="text-truncate">
+                            <div class="text-center">
+                              <a :href="`mailto: ${profile.email}`" class="prevent-default">
+                                <v-btn large icon>
+                                  <v-icon>email</v-icon>
+                                </v-btn>
+                              </a>
+                              <div>{{ profile.email }}</div>
+                            </div>
+                          </v-col>
+                        </v-row>
+                      </v-card-text>
                     </v-card>
                     <v-divider></v-divider>
                     <h4 class="mt-3">Organizations</h4>

@@ -97,23 +97,8 @@
                 title: 'Home',
                 icon: 'home',
                 render: true,
-              },
-              {
-                route: 'home',
-                title: 'Features',
-                icon: 'featured_play_list',
-                render: true,
-                anchor: 'features'
-              },
-              {
-                route: 'home',
-                title: 'Pricing',
-                icon: 'local_offer',
-                render: true,
-                anchor: 'pricing'
-              },
+              }
             ];
-
             if(this.authenticated){
               nav = nav.concat([
                       {
@@ -121,7 +106,7 @@
                         param: {
                           profile: this.auth.profile.username ?? this.auth.profile.id
                         },
-                        title: 'My profile',
+                        title: 'My Account',
                         icon: 'account_circle',
                         render: true,
                       },
@@ -130,7 +115,7 @@
                         param: {
                           profile: this.auth.profile.username ?? this.auth.profile.id
                         },
-                        title: 'Edit Profile',
+                        title: 'Edit Account',
                         icon: 'edit',
                         render: true,
                       },

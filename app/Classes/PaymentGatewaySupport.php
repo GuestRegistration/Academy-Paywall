@@ -34,7 +34,7 @@ class PaymentGatewaySupport {
     const CURRENCIES = [
         'NGN' => [
             'paystack',
-            'stripe'
+            // 'stripe'
         ],
         'USD' => [
             'stripe'

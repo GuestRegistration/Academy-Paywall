@@ -113,7 +113,7 @@
                                                 <v-icon class="text-custom-primary">monetization_on</v-icon>
                                             </v-list-item-icon>
                                             <v-list-item-content>
-                                                <v-list-item-title>1 USD per course</v-list-item-title>
+                                                <v-list-item-title>100 USD per year</v-list-item-title>
                                             </v-list-item-content>
                                         </v-list-item>
                                         <v-list-item>
@@ -259,8 +259,8 @@
                     },
                     {
                         icon: 'images/get-paid.PNG',
-                        heading: 'Get Paid',
-                        text: 'You get paid every time someone registers for your course and you get to add the person to the conferencing or MS of choice'
+                        heading: 'Receive Payment',
+                        text: 'receive payment every time someone registers for your course and add your participants to the conferencing or LMS platform of choice.'
                     }
                 ],
 

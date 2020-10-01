@@ -22,8 +22,8 @@
             No instructor
           </div>
           <v-row v-else>
-              <v-col cols="12" :md="showPendingInvitations ? 12 : 6" :lg="showPendingInvitations ? 6 : 4"  v-for="user in data" :key="user.id">
-                  <profile-card :account="account" :instructor="user">
+              <v-col cols="6" md="3"  v-for="user in data" :key="user.id">
+                  <profile-card :account="account" :instructor="user" :has-options="true">
                     <template v-slot:options v-if="isMyAccount(account)">
                       <v-menu origin="center center"  transition="scale-transition">
                           <template v-slot:activator="{ on }">
@@ -57,7 +57,11 @@
         </v-col>
         <v-col v-if="showPendingInvitations" cols="12" md="4" id="invitations">
           <v-card>
-            <v-card-title class="text-center">Pending Invitations</v-card-title>
+            <v-card-title class="text-center">
+              Pending Invitations
+              <v-spacer></v-spacer>
+              <v-btn icon @click="showPendingInvitations = false" color="red"><v-icon>close</v-icon></v-btn>
+            </v-card-title>
             <v-divider></v-divider>
             <v-card-text>
               <div class="text-center text-muted my-5" v-if="!invitations.length">
@@ -67,8 +71,11 @@
                 <v-list-item v-for="invitation in invitations" :key="invitation.id">
                   <v-list-item-content>
                     <v-list-item-title v-text="invitation.email"></v-list-item-title>
-                    <small>Invited {{invitation.sent_time}}</small>
+                    <v-list-item-subtitle>Invited {{invitation.sent_time}}</v-list-item-subtitle>
                   </v-list-item-content>
+                  <v-list-item-icon>
+                    <v-btn icon @click="$refs.deleteInvitationDialog.show(invitation)"><v-icon color="red">delete</v-icon></v-btn>
+                  </v-list-item-icon>
                 </v-list-item>
               </v-list>
             </v-card-text>
@@ -81,22 +88,23 @@
 
      <invite-user-dialog ref="inviteUserDialog" />
      <remove-user-dialog ref="removeUserDialog" :account="account" />
+     <delete-invitation-dialog ref="deleteInvitationDialog" :account="account" />
     </div>
 </template>
 
 <script>
  import {mapGetters} from "vuex";
  import App from '@/layouts/App';
- import ProfileCard from '@/Domain/User/Components/ProfileCard';
- import InviteUserDialog from '../Components/InviteUserDialog';
- import RemoveUserDialog from '../Components/RemoveUserDialog';
-
+ import ProfileCard from '@/Domain/User/Components/ProfileCard.vue';
+ import InviteUserDialog from '../Components/InviteUserDialog.vue';
+ import RemoveUserDialog from '../Components/RemoveUserDialog.vue';
+ import DeleteInvitationDialog from '../Components/DeleteInvitationDialog.vue'
   export default {
     name: "AccountInstructorList",
     layout: (h, page) => h(App, [page]),
     
     components: {
-        ProfileCard, InviteUserDialog, RemoveUserDialog
+        ProfileCard, InviteUserDialog, RemoveUserDialog, DeleteInvitationDialog
     },
 
     metaInfo()
@@ -110,7 +118,7 @@
     data(){
       return {
         data: [],
-        showPendingInvitations: false
+        showPendingInvitations: true
       }
     },
 
@@ -129,6 +137,10 @@
     methods: {
       removeInstructor(user){
         this.$refs.removeUserDialog.show(user);
+      },
+
+      deleteInvitation(invitation){
+
       }
     },
 

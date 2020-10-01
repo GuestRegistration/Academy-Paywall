@@ -17,7 +17,7 @@
                     </v-expansion-panel-header>
                     <v-expansion-panel-content class="py-3">
                         <x-input :errors="errors" name="title" type="text" v-model="form.title" label="Course title" />
-                        <x-select :errors="errors" :value="form.course_type" label="Course type" name="course_type" :items="course_types" outlined @change="(selected) => form.course_type = selected" />
+                        <x-select :errors="errors" :value="form.course_type" label="Select your learning platform" name="course_type" :items="course_types" outlined @change="(selected) => form.course_type = selected" />
                         <div class="form-group" style="overflow: auto">
                             <label>Course description</label>
                             <wysiwyg v-model="form.description" />
@@ -34,7 +34,19 @@
                         </h4>
                     </v-expansion-panel-header>
                     <v-expansion-panel-content class="py-3">
-                        <v-switch v-model="form.requires_payment" label="Require payment for enrollment" :color="account.theme_color" ></v-switch>
+                        <v-switch v-model="form.requires_payment" label="Require payment for enrollment" :color="account.theme_color" :disabled="!paymentGateway || !paymentGateway.active  ? true : false" ></v-switch>
+                        
+                        <template v-if="!paymentGateway || !paymentGateway.active" >
+                            <v-alert icon="info" prominent text type="info">
+                                You need to set up your payment or activate it to charge for course
+                            </v-alert>
+                            <div class="text-right">
+                                <inertia-link :href="route('account.payment.gateway', {account: account.username})" class="prevent-default">
+                                    <v-icon>settings</v-icon> Payment method settings
+                                </inertia-link>
+                            </div>
+                        </template>
+                        
                         <template v-if="form.requires_payment">
                             <div v-if="paymentGateway && paymentGateway.active">
                                 <v-alert icon="info" prominent text type="info">
@@ -46,16 +58,6 @@
                                     </inertia-link>                                </div>
                                 <x-input  :errors="errors" name="price" type="number" v-model="form.price" label="Price" />
                             </div>
-                            <div v-else>
-                                <v-alert icon="report_problem" prominent text type="error">
-                                You do not have any payment method enabled yet.
-                                </v-alert>
-                                <div class="text-right">
-                                    <inertia-link :href="route('account.payment.gateway', {account: account.username})" class="prevent-default">
-                                        <v-icon>settings</v-icon> Payment method settings
-                                    </inertia-link>
-                                </div>
-                            </div>
                         </template>
                     </v-expansion-panel-content>
                 </v-expansion-panel>
@@ -64,11 +66,14 @@
                     <v-expansion-panel-header>
                         <h4>
                             <v-icon v-if="Object.keys(errors).some(error => ['start_date', 'start_time'].includes(error))" color="red" class="mr-3" title="There is error in this section">report_problem</v-icon>
-                            Starting Date and Time
+                            Start Date and Time
                         </h4>
                     </v-expansion-panel-header>
                     <v-expansion-panel-content class="py-3">
                         <v-row>
+                             <v-col cols="12" class="text-center">
+                                Timezone: {{ auth.timezone }}
+                            </v-col>
                             <v-col cols="12" lg="6">
                                 <x-date-picker :errors="errors" label="Date" name="start_date" :current="start_date" @change="(date) => {start_date = date; end_date = date}"  :color="account.theme_color" />
                             </v-col>
@@ -83,10 +88,13 @@
                     <v-expansion-panel-header>
                         <h4>
                             <v-icon v-if="Object.keys(errors).some(error => ['end_date','end_time'].includes(error))" color="red" class="mr-3" title="There is error in this section">report_problem</v-icon>
-                            Ending Date and Time
+                            End Date and Time
                         </h4>
                     </v-expansion-panel-header>
                     <v-expansion-panel-content class="py-3">
+                         <v-col cols="12" class="text-center">
+                            Timezone: {{ auth.timezone }}
+                        </v-col>
                         <v-row>
                             <v-col cols="12" lg="6">
                                 <x-date-picker :errors="errors" label="Date" name="end_date" :current="end_date" @change="(date) => end_date = date"  :color="account.theme_color" />
@@ -106,7 +114,7 @@
                         </h4>
                     </v-expansion-panel-header>
                     <v-expansion-panel-content class="py-3">
-                        <x-file-input :errors="errors" :src="form.cover_image" name="cover_image" label="Cover image" @change="(files) => form.cover_image = files[0]" />
+                        <x-file-input :errors="errors" :src="form.cover_image" name="cover_image" label="Cover image" :removable="true" @change="(files) => form.cover_image = files[0]" />
                         <!-- <v-col cols="12">
                             <x-file-input :errors="errors" name="preview_video" label="Preview video" @change="(files) => form.preview_video = files[0]" />
                         </v-col> -->
@@ -218,6 +226,9 @@
             }
         },
         computed: {
+            auth(){
+                return this.$page.auth;
+            },
             errors(){
                 return this.$page.errors;
             },

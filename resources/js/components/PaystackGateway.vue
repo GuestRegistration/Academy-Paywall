@@ -97,7 +97,6 @@
             this.$emit('process', null);
             handler.openIframe();
           },
-
         },
     }
 </script>

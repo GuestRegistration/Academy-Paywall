@@ -90,67 +90,69 @@
           </div>
           <v-container>
               <v-row>
-                  <v-col cols="12" md="8">
-                      <slot />
-                  </v-col>
-                  <v-col cols="12" md="4">
+                <v-col cols="12" md="8">
+                    <slot />
+                </v-col>
+                <v-col cols="12" md="4">
 
-                      <slot name="before-bio" />
+                    <slot name="before-bio" />
 
-                      <template v-if="account.bio && account.bio !== 'null'" >
+                    <template v-if="account.bio && account.bio !== 'null'" >
+                      <v-divider></v-divider>
+                        <h4 class="py-3">About {{account.name}}</h4>
                         <v-divider></v-divider>
-                          <h4 >About {{account.name}}</h4>
-                          <v-divider></v-divider>
-                         {{account.bio}}
-                      </template>
-                      <h2>Contact</h2>
-                      <v-card outlined>
-                        <v-card outlined dark :color="account.theme_color">
-                          <v-row>
-                            <v-col>
-                              <div class="text-center">
-                                <a :href="`tel: ${account.phone}`" class="prevent-default">
-                                  <v-btn icon large>
-                                    <v-icon>call</v-icon>
-                                  </v-btn>
-                                </a>
-                              </div>
-                            </v-col>
-                            <v-col>
-                              <div class="text-center">
-                                <a :href="`mailto: ${account.email}`" class="prevent-default">
-                                  <v-btn large icon>
-                                    <v-icon>email</v-icon>
-                                  </v-btn>
-                                </a>
-                              </div>
-                            </v-col>
-                          </v-row>
-                        </v-card>
-
-                         <slot name="after-contact" />
-
-                        <v-list v-if="anySocial()">
-                          <div class="mx-3"><h4>Socials</h4></div>
-                          <v-divider></v-divider>
-                          <v-list-item-group>
-                            <template v-for="(social, i) in socials" >
-                              <a v-if="social.link" :href="social.link" :key="i" target="_blank"  class="prevent-default">
-                                <v-list-item>
-                                  <v-list-item-icon>
-                                    <v-icon v-text="social.icon"></v-icon>
-                                  </v-list-item-icon>
-                                  <v-list-item-content>
-                                    <v-list-item-title v-text="social.text"></v-list-item-title>
-                                  </v-list-item-content>
-                                </v-list-item>
+                        <div class="my-3">{{account.bio}}</div>
+                        
+                    </template>
+                    <h4 class="py-3">Contact</h4>
+                    <v-card outlined dark :color="account.theme_color">
+                      <v-card-text>
+                        <v-row>
+                          <v-col class="text-truncate">
+                            <div class="text-center">
+                              <a :href="`tel: ${account.phone}`" class="prevent-default">
+                                <v-btn icon large>
+                                  <v-icon>call</v-icon>
+                                </v-btn>
                               </a>
-                            </template>
-                          </v-list-item-group>
-                        </v-list>
-                      </v-card>
+                              <div>{{ account.phone }}</div>
+                            </div>
+                          </v-col>
+                          <v-col class="text-truncate">
+                            <div class="text-center">
+                              <a :href="`mailto: ${account.email}`" class="prevent-default">
+                                <v-btn large icon>
+                                  <v-icon>email</v-icon>
+                                </v-btn>
+                              </a>
+                              <div>{{ account.email }}</div>
+                            </div>
+                          </v-col>
+                        </v-row>
+                      </v-card-text>
+                    </v-card>
 
-                  </v-col>
+                    <slot name="after-contact" />
+
+                    <v-list v-if="anySocial()">
+                      <div class="mx-3"><h4>Socials</h4></div>
+                      <v-divider></v-divider>
+                      <v-list-item-group>
+                        <template v-for="(social, i) in socials" >
+                          <a v-if="social.link" :href="social.link" :key="i" target="_blank"  class="prevent-default">
+                            <v-list-item>
+                              <v-list-item-icon>
+                                <v-icon v-text="social.icon"></v-icon>
+                              </v-list-item-icon>
+                              <v-list-item-content>
+                                <v-list-item-title v-text="social.text"></v-list-item-title>
+                              </v-list-item-content>
+                            </v-list-item>
+                          </a>
+                        </template>
+                      </v-list-item-group>
+                    </v-list>
+                </v-col>
               </v-row>
           </v-container>
       </div>

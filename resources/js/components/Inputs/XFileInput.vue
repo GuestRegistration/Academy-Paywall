@@ -1,9 +1,9 @@
  <template>
     <div>
-        <v-container mb-2>
-            <template v-if="!fileSelected && src">
-                <avatar v-if="isAvatar" :src="src" :color="$attrs.color" size="100" />
-                <v-img v-else :src="src" :aspect-ratio="aspectRatio"></v-img>
+        <div class="my-2">
+            <template v-if="!fileSelected && fileSrc">
+                <avatar v-if="isAvatar" :src="fileSrc" :color="$attrs.color" size="100" />
+                <v-img v-else :src="fileSrc" :aspect-ratio="aspectRatio"></v-img>
             </template>
             <template v-else v-for="(file, i) in files">
                 <template  v-if="file.type == 'image'">
@@ -11,31 +11,40 @@
                     <v-img v-else :src="file.src" :aspect-ratio="aspectRatio" :key="i"></v-img>
                 </template>
             </template>
-        </v-container>
-         
-        <v-file-input
-            counter
-            :label="label"
-            v-bind="$attrs"
-            :prepend-icon="prependIcon"
-            :append-icon="appendIcon"
-            outlined
+        </div>
+        <input
+            ref="uploader"
+            class="d-none"
+            type="file"
+            :accept="accept"
             @change="getFiles"
-           :error="errorString ? true : false"
-           :error-messages="errorString ? errorString : ''"
-
         >
-            <template v-slot:selection="{ index, text }">
-                <v-chip
-                    color="primary accent-4"
-                    dark
-                    label
-                    small
-                >
-                    {{ text }}
-                </v-chip>
-            </template>
-        </v-file-input>    
+        <v-btn
+        color="primary"
+        class="text-none"
+        rounded
+        depressed
+        :loading="isSelecting"
+        @click="onPlaceholderClick"
+        >
+            <v-icon left>
+            cloud_upload
+            </v-icon>
+            Upload
+        </v-btn>
+        <v-btn
+        color="red"
+        class="text-none white--text"
+        rounded
+        depressed
+        @click="removeFile"
+        v-if="fileSrc && removable"
+        >
+            <v-icon left>
+            close
+            </v-icon>
+            Remove
+        </v-btn>
     </div>
 </template>
 
@@ -46,6 +55,8 @@
         return {
             files: [],
             fileSelected: false,
+            isSelecting: false,
+            fileSrc: this.src,
         }
     },
     props: {
@@ -60,9 +71,17 @@
             default: () => false,
         },
         aspectRatio: {
-            type: Boolean,
+            type: String,
             default: () => '',
         },
+        accept: {
+            type: String,
+            default: () => 'image/*'
+        },
+        removable: {
+            type: Boolean,
+            default: () => false
+        }
     },
     computed: {
         errorString() {
@@ -74,17 +93,27 @@
     },
 
     methods:{
-         getFiles(files){
-            if(!files){
+
+        onPlaceholderClick() {
+            this.isSelecting = true
+            window.addEventListener('focus', () => {
+                this.isSelecting = false
+            }, { once: true })
+
+            this.$refs.uploader.click()
+        },
+
+        getFiles(e){
+            const files = e.target.files;
+            if(!files.length){
                  this.fileSelected = false;
                  this.$emit('change', files);
                  return;
              }
             this.files = [];
-            files = files instanceof Array ? files : [files];
             this.fileSelected = true;
-
-            files.forEach(file => {
+            
+            Array.from(files).forEach(file => {
                 const imageRegex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.png)$/;
                 let type = 'unknown'
                 if (imageRegex.test(file.name.toLowerCase())){//If a valid image
@@ -101,6 +130,13 @@
             });
             this.$emit('change', files);
         },
+
+        removeFile(){
+            this.$emit('change', null);
+            this.fileSrc = null;
+            this.fileSelected = true;
+            this.files = [];
+        }
     }
   }
 </script>

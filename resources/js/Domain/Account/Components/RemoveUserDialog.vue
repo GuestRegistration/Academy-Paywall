@@ -5,7 +5,11 @@
         v-if="user"
     >
     <v-card> 
-        <v-card-title class="headline red--text"><v-icon class="red--text">delete</v-icon> Remove Instructor</v-card-title>
+        <v-card-title class="headline red--text">
+            <v-icon class="red--text mr-2">delete</v-icon> Remove Instructor
+            <v-spacer></v-spacer>
+            <v-btn icon color="red" @click="cancel"><v-icon>close</v-icon></v-btn>
+        </v-card-title>
         <v-divider></v-divider>
         <v-card-text>
         <div class="text-center mt-3">
@@ -15,13 +19,6 @@
         </v-card-text>
         <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn
-            text
-            @click="cancel"
-        >
-            Cancel
-        </v-btn>
-
         <v-btn
             color="red"
             text

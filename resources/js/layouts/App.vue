@@ -4,7 +4,7 @@
     <nav-drawer />
    
     <v-app-bar app :color="authenticated && auth.account && route().current('account.*') ? auth.account.theme_color : 'secondary'" dark >
-      <v-btn @click="$store.state.navDrawer = !$store.state.navDrawer" icon>
+      <v-btn v-if="authenticated" @click="$store.state.navDrawer = !$store.state.navDrawer" icon>
         <v-icon>menu</v-icon>
       </v-btn>
        <inertia-link :href="route('home')" class="white--text" style="text-decoration: none">
@@ -14,10 +14,21 @@
         </inertia-link>
       <v-spacer></v-spacer>
         
+      <a href="/#features" class="prevent-default mx-1 d-none d-sm-inline-block" title="Features">
+        <v-btn text>FEATURES</v-btn>
+      </a>
+
+      <a href="/#pricing" class="prevent-default mx-1 d-none d-sm-inline-block" title="Features">
+        <v-btn text>PRICING</v-btn>
+      </a>
+
       <template v-if="authenticated">
-         <inertia-link v-if="auth.account" :href="route('account.show', {account: auth.account.username})" class="prevent-default mx-1">
-           <avatar :src="auth.account.avatar" :color="auth.account ? auth.account.theme_color : 'primary'" size="40" />
-        </inertia-link>
+         <a v-if="auth.account" :href="route('account.show', {account: auth.account.username})" class="prevent-default mx-1">
+           <v-avatar :src="auth.account.avatar" color="primary" size="40">
+             <v-img v-if="auth.account.avatar" :src="auth.account.avatar"></v-img>
+             <h2 v-else class="white--text">{{ auth.account.name.substring(0,1) }}</h2>
+           </v-avatar>
+        </a>
         <inertia-link v-else :href="route('account.setup')" class="prevent-default mx-1" title="Create your academy account">
           <v-btn icon><v-icon>add</v-icon></v-btn>
         </inertia-link>

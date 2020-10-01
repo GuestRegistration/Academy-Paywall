@@ -2,53 +2,42 @@
 
     <account-layout>
         <h2><v-icon>library_books</v-icon> Courses</h2>
-        <div class="text-center text-muted py-5" v-if="!current_courses.total">
-            <h3>No course yet</h3>
+        <div class="my-5">
+            <div class="text-center text-muted py-5" v-if="!current_courses.total">
+                <div v-if="isMyAccount(account)">
+                    <h4>You have 0 courses, click on the '+' icon to add a course</h4>
+                    <inertia-link :href="route('account.course.create', {account: account.username})" class="prevent-default" title="Create a course">
+                        <v-btn fab class="my-5"><v-icon>add</v-icon></v-btn>
+                    </inertia-link>
+                </div>
+                <div v-else>
+                    <h4>No course yet</h4>
+                </div>
+            </div>
+            <div v-else>
+                <v-row>
+                    <v-col cols="12" v-for="course in current_courses.data" :key="course.id">
+                        <course-card :course="course" :account="account" :showInstructor="false" display="list" :showStatus="true" />
+                    </v-col>
+                </v-row>
+                <pagination :resource="current_courses" :color="account.theme_color"/>
+            </div>        
         </div>
-        <div v-else>
-            <v-row>
-                <v-col cols="12" v-for="course in current_courses.data" :key="course.id">
-                    <course-card :course="course" :account="account" :showInstructor="false" display="list" :showStatus="true" />
-                </v-col>
-            </v-row>
-            <pagination :resource="current_courses" :color="account.theme_color"/>
-        </div>
-
-        <v-container v-if="instructors" class="mt-4">
+        <div v-if="instructors" class="mt-5">
             <h2><v-icon>group</v-icon> Instructors ({{instructors.length}}) </h2>
             <v-divider></v-divider>
             <div v-if="!instructors.length">
                 <h3 class="text-muted ">No instructor</h3>
             </div>
              <v-row v-else>
-                <v-col cols="12" md="6" v-for="(user) in instructors" :key="user.id">
-                    <profile-card :account="account" :instructor="user">
-                        <template v-slot:options>
-                            <v-menu origin="center center"  transition="scale-transition">
-                                <template v-slot:activator="{ on }">
-                                    <v-btn icon v-on="on">
-                                        <v-icon>more_vert</v-icon>
-                                    </v-btn>
-                                </template>
-                                <v-list>
-                                    <v-list-item @click="$inertia.visit(route('profile.show', {profile: user.profile.username}))">
-                                        <v-list-item-icon>
-                                        <v-icon>account_circle</v-icon>
-                                        </v-list-item-icon>
-                                        <v-list-item-content>
-                                        <v-list-item-title>View profile</v-list-item-title>
-                                        </v-list-item-content>
-                                    </v-list-item>
-                                </v-list>
-                            </v-menu>
-                        </template>
-                    </profile-card>
+                <v-col cols="12" md="3" v-for="(user) in instructors" :key="user.id">
+                    <profile-card :account="account" :instructor="user"></profile-card>
                 </v-col>
             </v-row>    
-        </v-container>
+        </div>
 
         <template v-slot:after-contact>
-            <div class="pa-3">
+            <div class="my-4">
                 <h4>Past Courses</h4>
                 <v-divider></v-divider>
                 <div v-if="!past_courses.length" class="text-muted my-2">

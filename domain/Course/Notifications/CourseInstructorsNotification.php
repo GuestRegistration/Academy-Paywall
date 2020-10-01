@@ -8,19 +8,19 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class CourseInstructionsNotification extends Notification
+class CourseInstructorsNotification extends Notification
 {
     use Queueable;
 
-    public $student;
+    public $course;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($student)
+    public function __construct($course)
     {
-        $this->student = $student;
+        $this->course = $course;
     }
 
     /**
@@ -42,9 +42,13 @@ class CourseInstructionsNotification extends Notification
      */
     public function toMail($notifiable)
     {
+        $subject = "{$this->course->account->name} added you to a course";
+
         return (new MailMessage)
-                    ->subject('Your enrollment for '.$this->student->course->title.' was successful')
-                    ->line(new HtmlString($this->student->course->instructions));
+                    ->subject($subject)
+                    ->line("You have been added as an instructor to a course in {$this->course->account->name}")
+                    ->line("Course: {$this->course->title}")
+                    ->action('View Course', route('account.course.show', ['account' => $this->course->account->username, 'course' => $this->course->slug]));
     }
 
     /**

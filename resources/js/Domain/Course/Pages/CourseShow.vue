@@ -87,7 +87,7 @@
                 <p class="text-muted">No instructor yet</p>
             </div>
              <v-row v-else>
-                <v-col cols="12" md="6" v-for="user in course.users" :key="user.id">
+                <v-col cols="6" md="3" v-for="user in course.users" :key="user.id">
                     <profile-card :account="account" :instructor="user">
                         <template v-slot:options >
                             <v-menu origin="center center"  transition="scale-transition">
@@ -113,7 +113,8 @@
             </v-row>    
         </v-container>
         <slot />
-        <v-btn v-if="!isOnMyAccount(course)" fixed dark bottom right large style="z-index: 100; right: 30px" :color="account.theme_color" :title="`Enroll for ${course.title}`" @click="enroll" >
+        
+        <v-btn v-if="!isOnMyAccount(course)" fixed dark bottom right large style="z-index: 100; right: 30px" :color="account.theme_color" :title="`Enroll for ${course.title}`" :disabled="course.ended" @click="enroll" >
             <v-icon>arrow_forward</v-icon> Enroll
         </v-btn>
          <v-btn v-else fixed dark fab bottom right large :color="account.theme_color" :title="`Edit ${course.title}`" @click="$inertia.visit(route('account.course.edit', {account: account.username, course: course.slug}))" >

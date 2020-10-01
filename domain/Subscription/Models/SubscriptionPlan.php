@@ -15,7 +15,9 @@ class SubscriptionPlan extends Model
             'amount' => 1,
             'currency' => 'USD',
             'month_duration' => null,
-            'description' => 'Each course cost 1 USD'
+            'description' => 'Each course cost 1 USD',
+            'max_users' => 0,
+            'max_courses' => 0,
     ];
 
     const PLAN_PROFESSIONAL = [
@@ -23,7 +25,9 @@ class SubscriptionPlan extends Model
             'amount' => 100,
             'currency' => 'USD',
             'month_duration' => 12,
-            'description' => 'Enjoy unlimited courses for 12 months'
+            'description' => 'Enjoy unlimited courses for 12 months',
+            'max_users' => 5,
+            'max_courses' => 200,
         ];
 
     const PLAN_UNLIMITED = [
@@ -31,16 +35,22 @@ class SubscriptionPlan extends Model
             'amount' => 0,
             'currency' => 'USD',
             'month_duration' => null,
-            'description' => "You do not need to worry about subscription. You are already covered"
+            'description' => "You do not need to worry about subscription. You are already covered",
+            'max_users' => null,
+            'max_courses' => null,
         ];
 
     
     protected $fillable = [
-        'name', 'description', 'month_duration', 'amount', 'currency'
+        'name', 'description', 'month_duration', 'amount', 'currency', 'max_users', 'max_courses'
     ];
 
     public static function unlimited(){
        return self::where('name', self::PLAN_UNLIMITED['name'])->first();
+    }
+
+    public static function payg(){
+        return self::where('name', self::PLAN_PAYG['name'])->first();
     }
 
     public function accounts(){

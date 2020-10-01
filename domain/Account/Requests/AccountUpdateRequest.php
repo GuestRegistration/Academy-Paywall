@@ -48,7 +48,7 @@ class AccountUpdateRequest extends FormRequest
         ]) + [
             'show_caption' => (Bool) $this->show_caption,
             'avatar' => FileUpload::storeFile($this, 'avatar', 'account/avatar'),
-            'cover_image' => FileUpload::storeFile($this, 'cover_image', 'account/covers'),
+            'cover_image' =>  FileUpload::storeFile($this, 'cover_image', 'account/covers'),
             'gtm_events' => collect(json_decode($this->get('gtm_events')))->map(function($event){
                 $event->triggers = array_map(function($trigger){
                     return trim($trigger);

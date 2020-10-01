@@ -12,6 +12,7 @@ use Domain\Account\Actions\AccountUserInviteAction;
 use Domain\Account\Actions\AccountStudentListAction;
 use Domain\Account\Actions\AccountPaymentStoreAction;
 use Domain\Account\Actions\AccountInstructorListAction;
+use Domain\Account\Actions\AccountUserInviteActionDelete;
 use Domain\Account\Actions\AccountUserInvitationAcceptAction;
 
 Route::get('account/{account}', AccountShowAction::class)->name('account.show.id');
@@ -28,6 +29,7 @@ Route::prefix('{account:username}')->group(function(){
     Route::post('/edit', AccountUpdateAction::class)->name('account.update');
     Route::post('/payment', AccountPaymentStoreAction::class)->name('account.payment.gateway.store');
     Route::post('/instructors/invite', AccountUserInviteAction::class)->name('account.instructor.invite.send');
+    Route::post('/instructors/invite-delete', AccountUserInviteActionDelete::class)->name('account.instructor.invite.delete');
     Route::post('/instructor/remove', AccountInstructorRemove::class)->name('account.instructor.remove');
 });
 

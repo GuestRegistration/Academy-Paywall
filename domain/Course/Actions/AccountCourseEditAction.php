@@ -24,7 +24,7 @@ class AccountCourseEditAction extends Controller
         $course->load(['users']);
 
         $payment_gateway = $account->paymentGateway ? $account->paymentGateway->only(['active', 'gateway', 'currency']) : null;
-        $payment_gateway = isset(PaymentGatewaySupport::GATEWAYS[$payment_gateway['gateway']]) ? $payment_gateway : null;
+        $payment_gateway = $payment_gateway && isset(PaymentGatewaySupport::GATEWAYS[$payment_gateway['gateway']]) ? $payment_gateway : null;
 
         return Inertia::render('Domain/Course/Pages/CourseEdit', compact('account', 'course', 'instructors', 'payment_gateway'));
     }

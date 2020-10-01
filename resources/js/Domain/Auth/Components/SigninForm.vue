@@ -20,7 +20,7 @@
         </v-alert>
 
         <!-- Form -->
-        <form @submit.prevent="submit" class="my-3">
+        <form @submit.prevent="submit" class="my-3" v-if="!status">
             <x-input :errors="errors" name="email" type="email" v-model="form.email" label="Email" required />
             <x-button :loading="ui.loading" type="submit"  dark color="accent-4" class="primary" block>
                 Sign in

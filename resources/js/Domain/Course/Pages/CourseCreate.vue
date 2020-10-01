@@ -1,19 +1,19 @@
 <template>
-    <v-container class="p-0">
-        <stripe-gateway ref="stripeGateway" :publishable-key="stripe_pk" :amount="payg.amount" :currency="payg.currency" :color="account.theme_color" :charge_callback="paymentCallback" @success="paymentSuccessful" @error="paymentError" />
-        
+    <v-container class="p-0">        
         <v-row justify="center">
             <v-col cols="12" md="8">
                 <template v-if="payment || (account.subscription && !account.subscription.expired)">
-                    <h4 class="my-2">New Course</h4>
+                    <h3 class="mb-2">New Course</h3>
                     <v-divider></v-divider>
                     <v-alert v-if="payment"  icon="info" prominent text type="info" class="my-2">
                         You are adding this course with the "Pay As You Go" payment of {{payment.amount | money(payment.currency)}} on {{payment.time}}
                     </v-alert>
-                    <v-alert v-else-if="account.subscription && !account.subscription.expired"  icon="info" prominent text type="info">
+                    <v-alert v-else-if="account.subscription && !account.subscription.expired"  icon="info"  class="my-2" prominent text type="info">
                         You are adding this course with your subscription
+                        <br>
+                        Slot Remaining: {{ account.courses_slot }}
                     </v-alert>
-                    <course-form @submit="submit" :loading="loading" :color="account.theme_color" :instructors="instructors" />
+                    <course-form v-if="account.is_unlimited || account.courses_slot > 0" @submit="submit" :loading="loading" :color="account.theme_color" :instructors="instructors" />
                 </template>
                 <template v-else-if="account.subscription && account.subscription.expired">
                     <v-alert  icon="info" prominent text type="info">
@@ -36,6 +36,7 @@
                 </template>
             </v-col>
         </v-row>
+        <stripe-gateway ref="stripeGateway" :publishable-key="stripe_pk" :amount="payg.amount" :currency="payg.currency" :color="account.theme_color" :charge_callback="paymentCallback" @success="paymentSuccessful" @error="paymentError" />
     </v-container>
 
 </template>

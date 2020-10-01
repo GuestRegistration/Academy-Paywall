@@ -3,10 +3,9 @@
 namespace Domain\Course\Listeners;
 
 use Domain\Course\Events\Enrolled;
-use Illuminate\Support\Facades\Notification;
-use Domain\Course\Notifications\CourseInstructionsNotification;
+use Domain\Course\Notifications\CourseOnboardingNotification;
 
-class SendInstructions
+class SendOnboardingNotification
 {
     /**
      * Create the event listener.
@@ -28,7 +27,7 @@ class SendInstructions
     {
         $course = $event->student->course;
         if($course->send_instructions){
-            $event->student->notify(new CourseInstructionsNotification($event->student));
+            $event->student->notify(new CourseOnboardingNotification($event->student));
         }
     }
 }

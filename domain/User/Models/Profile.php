@@ -50,5 +50,9 @@ class Profile extends Model
         );
     }
 
+    public function getAvatarAttribute($value){
+        return $value && $value !== 'null' ? $value : null;
+    }
+
 
 }

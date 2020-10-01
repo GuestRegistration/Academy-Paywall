@@ -31,7 +31,7 @@ class Account extends Model
     ];
 
     protected $appends = [
-        'at_username', 'profile_complete', 'is_unlimited'
+        'at_username', 'profile_complete', 'is_unlimited', 'is_payg', 'users_slot', 'courses_slot'
     ];
 
     protected $casts = [
@@ -70,6 +70,11 @@ class Account extends Model
     {
         return $value == 'null' ? null : $value;
     }
+    public function getBioAttribute($value)
+    {
+        return $value == 'null' ? null : $value;
+    }
+
 
     public function getAtUsernameAttribute($value){
         return "@$this->username";
@@ -80,12 +85,41 @@ class Account extends Model
     }
 
     public function getCoverImageAttribute($value){
-        return $value ?? asset('images/default-account-cover.png');
+        return $value && $value !== 'null' ? $value : asset('images/default-account-cover.png');
     }
+
+    public function getAvatarAttribute($value){
+        return $value && $value !== 'null' ? $value : null;
+    }
+
+    public function getUsersSlotAttribute()
+    {
+        if(!$this->subscription) return 0;
+
+        if($this->is_unlimited) return 'unlimited';
+
+        return $this->subscription->subscriptionPlan->max_users - ($this->users->count() + $this->invitations->count());
+    }
+
+    public function getCoursesSlotAttribute()
+    {
+        if(!$this->subscription) return 0;
+
+        if($this->is_unlimited) return 'unlimited';
+
+        return $this->subscription->subscriptionPlan->max_courses - $this->courses()->count();
+    }
+
 
     public function getIsUnlimitedAttribute(){
         $unlimited_plan = SubscriptionPlan::unlimited();
         return $this->subscription && $unlimited_plan && $this->subscription->subscription_plan_id == $unlimited_plan->id;
+    }
+
+    public function getIsPaygAttribute(){        
+        if(!$this->subscription) return true;
+
+        return $this->subscription && $this->subscription->expired ? true : false;
     }
 
     public function getInstructorsAttribute(){

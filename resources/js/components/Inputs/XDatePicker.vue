@@ -8,7 +8,16 @@
          </v-col>
          <v-col cols="12">
            <div class="text-center">
-            <v-date-picker :color="$attrs.color" v-model="picker" :show-current="selected" @change="(date) => $emit('change', date)"></v-date-picker>
+            <v-date-picker 
+            :color="$attrs.color" 
+            v-model="picker" 
+            :show-current="selected" 
+            @change="(date) => $emit('change', date)"
+            next-icon="navigate-next"
+            prev-icon="navigate-before"
+            >
+
+            </v-date-picker>
            </div>
          </v-col>
         </v-row>

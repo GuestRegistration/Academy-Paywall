@@ -21,8 +21,8 @@
                                 <v-expansion-panel-content class="py-3">
                                     <x-input :errors="errors" name="name" type="text" v-model="form.name" label="Organization name"  prependInnerIcon="account_box" />
                                     <x-input :errors="errors" name="username" type="text" v-model="form.username" @input="aliasInput" label="Alias" prependInnerIcon="alternate_email" />
-                                    <x-input :errors="errors" name="email" type="email" v-model="form.email" label="Email"  prependInnerIcon="email"/>
-                                    <x-input :errors="errors" name="phone" type="tel" v-model="form.phone" label="Phone"  prependInnerIcon="call" />
+                                    <x-input :errors="errors" name="email" type="email" v-model="form.email" label="Email"  prependInnerIcon="email" disabled/>
+                                    <tel-input :errors="errors" name="phone" v-model="form.phone" label="Phone" />
                                     <x-textarea :errors="errors" name="bio" v-model="form.bio" label="About" />
                                 </v-expansion-panel-content>
                             </v-expansion-panel>
@@ -43,7 +43,7 @@
                                     
                                         <div class="my-2" >
                                             <h5>Avatar</h5>
-                                            <x-file-input :errors="errors" name="avatar" label="Avatar" :src="account.avatar" :color="account.theme_color" :isAvatar="true" @change="getAvatar" />
+                                            <x-file-input :errors="errors" name="avatar" label="Avatar" :src="account.avatar" :color="account.theme_color" :is-avatar="true" :removable="true" @change="getAvatar" />
                                         </div>
                                         <div class="my-2">
                                             <h5>Cover image</h5>
@@ -145,10 +145,14 @@
 <script>
     import {mapState} from "vuex";
     import App from '@/layouts/App';
+    import TelInput from '@/components/Inputs/XTelInput.vue';
 
     export default {
         name: "AccountEdit",
         layout: (h, page) => h(App, [page]),
+        components: {
+            TelInput
+        },
         metaInfo()
          {
              return{
@@ -198,6 +202,12 @@
 
                 const fileKeys = ['avatar', 'cover_image'];
 
+                Object.keys(this.form).forEach(key =>{
+                    if(this.form[key] === null || this.form[key] === 'null'){
+                        delete this.form[key]
+                    }
+                });
+                
                 Object.keys(this.form).forEach(key => {
                     if(this.form[key] instanceof Object && !fileKeys.includes(key)){
                         form.append(key, JSON.stringify(this.form[key]))
@@ -220,11 +230,11 @@
             },
 
             getCoverImage(files){
-                this.form.cover_image = files[0];
+                this.form.cover_image = files ? files[0] : null;
             },
 
             getAvatar(files){
-                this.form.avatar = files[0];
+                this.form.avatar = files ? files[0] : null;
             },
 
         },
