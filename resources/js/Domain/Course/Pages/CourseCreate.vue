@@ -13,7 +13,7 @@
                         <br>
                         Slot Remaining: {{ account.courses_slot }}
                     </v-alert>
-                    <course-form v-if="account.is_unlimited || account.courses_slot > 0" @submit="submit" :loading="loading" :color="account.theme_color" :instructors="instructors" />
+                    <course-form v-if="account.is_unlimited || account.courses_slot > 0 || payment" @submit="submit" :loading="loading" :color="account.theme_color" :instructors="instructors" />
                 </template>
                 <template v-else-if="account.subscription && account.subscription.expired">
                     <v-alert  icon="info" prominent text type="info">
