@@ -15,8 +15,9 @@
         </v-list-item>
 
         <v-list dense>
+
           <template v-for="(item, i) in prependNavItems()">
-            <inertia-link v-if="item.render" :href="`${route(item.route, item.param)}${item.anchor ? '#'+item.anchor : ''}`"  class="prevent-default" :key="i">
+            <component :is="`${item.inertia ? 'inertia-link' : 'a'}`" v-if="item.render" :href="`${route(item.route, item.param)}${item.anchor ? '#'+item.anchor : ''}`"  class="prevent-default" :key="i">
               <v-list-item :color="authenticated && auth.account ? auth.account.theme_color : 'primary'" >
                 <v-list-item-icon>
                   <v-icon v-text="item.icon"></v-icon>
@@ -25,7 +26,7 @@
                   <v-list-item-title v-text="item.title"></v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
-            </inertia-link>
+            </component>
             <v-list-item v-else disabled :key="i">
               <v-list-item-icon>
                 <v-icon v-text="item.icon"></v-icon>
@@ -35,6 +36,7 @@
               </v-list-item-content>
             </v-list-item>
           </template>
+
         </v-list>
         <v-divider></v-divider>
       </template>
@@ -42,7 +44,7 @@
       <v-list dense>
         <v-list-item-group v-model="active" >
           <template v-for="(item, i) in navItems()">
-            <inertia-link v-if="item.render" :href="`${route(item.route, item.param)}${item.anchor ? '#'+item.anchor : ''}`"  class="prevent-default" :key="i">
+            <component :is="`${item.inertia ? 'inertia-link' : 'a'}`" v-if="item.render" :href="`${route(item.route, item.param)}${item.anchor ? '#'+item.anchor : ''}`"  class="prevent-default" :key="i">
               <v-list-item :color="authenticated && auth.account ? auth.account.theme_color : 'primary'" >
               <v-list-item-icon>
                 <v-icon v-text="item.icon"></v-icon>
@@ -51,7 +53,7 @@
                 <v-list-item-title v-text="item.title"></v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-          </inertia-link>
+          </component>
           <v-list-item v-else disabled :key="i">
               <v-list-item-icon>
                 <v-icon v-text="item.icon"></v-icon>
@@ -97,6 +99,7 @@
                 title: 'Home',
                 icon: 'home',
                 render: true,
+                inertia: false
               }
             ];
             if(this.authenticated){
@@ -109,6 +112,7 @@
                         title: 'My Account',
                         icon: 'account_circle',
                         render: true,
+                        inertia: false
                       },
                       {
                         route: this.auth.profile.username ? 'profile.edit' : 'profile.edit.alt',
@@ -118,6 +122,7 @@
                         title: 'Edit Account',
                         icon: 'edit',
                         render: true,
+                        inertia: false
                       },
                     ]);
             }
@@ -135,6 +140,7 @@
                           title: 'My Organization',
                           icon: 'school',
                           render: this.auth.account ? true : false,
+                          inertia: false
                         },
                         {
                           route: 'account.edit',
@@ -144,6 +150,7 @@
                           title: 'Edit Organization',
                           icon: 'edit',
                           render: this.auth.account ? true : false,
+                          inertia: true
                         },
                         {
                           route: 'account.instructor.list',
@@ -153,6 +160,7 @@
                           title: 'Instructors',
                           icon: 'recent_actors',
                           render: this.auth.account ? true : false,
+                          inertia: true
                         },
                         {
                           route: 'account.course.list',
@@ -162,6 +170,7 @@
                           title: 'Courses',
                           icon: 'library_books',
                           render: this.auth.account ? true : false,
+                          inertia: true
                         },
                          {
                           route: 'account.course.create',
@@ -171,6 +180,7 @@
                           title: 'Add Course',
                           icon: 'add_circle',
                           render: this.auth.account ? true : false,
+                          inertia: true
                         },
                         {
                           route: 'account.student.list',
@@ -180,6 +190,7 @@
                           title: 'Students',
                           icon: 'people',
                           render: this.auth.account ? true : false,
+                          inertia: true
                         },
                         {
                           route: 'account.payment.gateway',
@@ -189,6 +200,7 @@
                           title: 'Payment Settings',
                           icon: 'local_atm',
                           render: this.auth.account ? true : false,
+                          inertia: true
                         },
                         {
                           route: 'account.subscription.show',
@@ -198,6 +210,7 @@
                           title: 'Subscription',
                           icon: 'account_balance',
                           render: this.auth.account ? true : false,
+                          inertia: true
                         },
                       ]
             }

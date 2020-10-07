@@ -33,7 +33,7 @@
                 <h4 v-else>FREE</h4>
             </div>
             <div class="ml-auto text-right" >
-                <v-btn @click="enroll" dark :color="account.theme_color" :disabled="isOnMyAccount(course)">
+                <v-btn @click="enroll" dark :color="account.theme_color" :disabled="isOnMyAccount(course) || course.ended">
                     Enroll Now <v-icon>arrow_forward</v-icon>
                 </v-btn>
                 <v-btn icon @click="shareCourse(course)" :title="`Share ${course.title}`">
@@ -140,13 +140,13 @@
         components: {
             CourseStatus, ProfileCard, CourseShare, CourseDelete
         },
-         metaInfo()
-         {
-             return{
-                title: `${this.course.title} ${this.account.at_username}`,
-                titleTemplate: '%s - AcadaApp',
-             }
-        },
+        // metaInfo()
+        //  {
+        //      return{
+        //         title: `${this.course.title} ${this.account.at_username}`,
+        //         titleTemplate: '%s - AcadaApp',
+        //      }
+        // },
         computed: {
             ...mapGetters([
                 'auth', 'authenticated', 'isMyAccount', 'isOnMyAccount', 'localDate'

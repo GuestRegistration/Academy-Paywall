@@ -69,8 +69,7 @@ const isMobile = [
   return navigator.userAgent.match(toMatchItem);
 });
 
-
-new Vue({
+ new Vue({
   render: h => h(InertiaApp, {
     props: {
       initialPage: JSON.parse(app.dataset.page),

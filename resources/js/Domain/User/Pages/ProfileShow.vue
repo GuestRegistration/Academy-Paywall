@@ -24,13 +24,13 @@
     export default {
         name: "ProfileShow",
         layout: (h, page) => h(ProfileLayout, [page]),
-        metaInfo()
-         {
-             return{
-                title: `${this.profile.fullname} - ${this.profile.at_username}`,
-                titleTemplate: '%s - AcadaApp',
-             }
-        },
+        // metaInfo()
+        //  {
+        //      return{
+        //         title: `${this.profile.fullname} - ${this.profile.at_username}`,
+        //         titleTemplate: '%s - AcadaApp',
+        //      }
+        // },
 
         components: { CourseCard },
         props: {

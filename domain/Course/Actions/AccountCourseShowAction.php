@@ -25,7 +25,13 @@ class AccountCourseShowAction extends Controller
             }
         });
 
-        return Inertia::render('Domain/Course/Pages/CourseShow', compact('account', 'course'));
+        return Inertia::render('Domain/Course/Pages/CourseShow', compact('account', 'course'))
+                        ->withViewData([
+                            'title' => $course->title,
+                            'description' => strip_tags($course->description),
+                            'image' => $course->cover_image,
+                        ]);
+
     }
 
 }

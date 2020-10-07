@@ -23,7 +23,11 @@ class ProfileShowAction extends Controller
             $affiliations->push($profile->user->account->load('user.profile'));
         }
         $affiliations =  $affiliations->merge($profile->user->accounts()->with('user.profile')->get());
-        return Inertia::render('Domain/User/Pages/ProfileShow', compact('profile', 'courses', 'affiliations'));
+        return Inertia::render('Domain/User/Pages/ProfileShow', compact('profile', 'courses', 'affiliations'))                        ->withViewData([
+            'title' => $profile->fullname,
+            'description' => $profile->bio,
+            'image' => $profile->avatar,
+        ]);
     }
 
 }

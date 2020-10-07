@@ -70,13 +70,13 @@
 
     export default {
         name: "AccountShow",
-        metaInfo()
-         {
-             return{
-                title: `${this.account.name} ${this.account.at_username}`,
-                titleTemplate: '%s - AcadaApp',
-             }
-        },
+        // metaInfo()
+        //  {
+        //      return{
+        //         title: `${this.account.name} ${this.account.at_username}`,
+        //         titleTemplate: '%s - AcadaApp',
+        //      }
+        // },
         data(){
         return {
             // tab: null,

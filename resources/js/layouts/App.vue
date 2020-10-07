@@ -7,11 +7,11 @@
       <v-btn v-if="authenticated" @click="$store.state.navDrawer = !$store.state.navDrawer" icon>
         <v-icon>menu</v-icon>
       </v-btn>
-       <inertia-link :href="route('home')" class="white--text" style="text-decoration: none">
+       <a :href="route('home')" class="white--text" style="text-decoration: none">
           <v-toolbar-title dark>
                 <v-img src="/images/acada-text-logo-white.png" width="120"></v-img>
           </v-toolbar-title>
-        </inertia-link>
+        </a>
       <v-spacer></v-spacer>
         
       <a href="/#features" class="prevent-default mx-1 d-none d-sm-inline-block" title="Features">

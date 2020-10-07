@@ -23,9 +23,12 @@ class AccountShowAction extends Controller
         $past_courses =  $account->courses()->with('users.profile')->whereDate('end_at', '<', now())->latest()->get();
         $instructors = $account->instructors;
 
-        // dd($instructors->map(function($i){return $i->profile;}));
-
-        return Inertia::render('Domain/Account/Pages/AccountShow', compact('account', 'current_courses',  'past_courses', 'instructors'));
+        return Inertia::render('Domain/Account/Pages/AccountShow', compact('account', 'current_courses',  'past_courses', 'instructors'))
+                    ->withViewData([
+                        'title' => $account->name,
+                        'description' => $account->bio,
+                        'image' => $account->avatar,
+                    ]);
     }
 
 }

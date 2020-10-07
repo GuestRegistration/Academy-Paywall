@@ -9,7 +9,9 @@
                             <h1>FOR YOUR COURSES IN MINUTES</h1>
                             <div class="mt-3">
                                 <template v-if="authenticated">
-                                    <v-btn v-if="auth.account" class="ma-2 white--text" color="primary" @click="$inertia.visit(route('account.show', {account: auth.account.username}))"> <v-icon class="mr-2">school</v-icon> My Organization</v-btn>
+                                    <a v-if="auth.account" :href="route('account.show', {account: auth.account.username})">
+                                        <v-btn class="ma-2 white--text" color="primary"> <v-icon class="mr-2">school</v-icon> My Organization</v-btn>
+                                    </a>
                                     <v-btn v-else class="ma-2 white--text" color="primary" @click="$inertia.visit(route('account.setup'))"> <v-icon class="mr-2">add</v-icon> Create Organization</v-btn>
                                 </template>
                                 <v-btn v-else class="white--text" color="primary" @click.prevent="$refs.SigninModal.open('GET STARTED')">GET STARTED <v-icon>arrow_forward</v-icon></v-btn>
@@ -237,13 +239,6 @@
         components: {
             App, SigninModal, NavDrawer
         },
-        metaInfo()
-         {
-             return{
-                title: `Home`,
-                titleTemplate: '%s - AcadaApp',
-             }
-        },
         data(){
             return {
                 howItWork: [
@@ -316,7 +311,7 @@
                     {
                         icon: 'images/jobred.PNG',
                         heading: 'JobRed "Ajo Balogun"',
-                        text: 'When the pandemic caused us to stop physical classes, we needed a way to reach out to our students and ensure tjat the quality of out training was not compromised. Acada allowd us to hold classes on Google Classroom while ensuring that only students that paid for such classes had access to them.'
+                        text: 'When the pandemic caused us to stop physical classes, we needed a way to reach out to our students and ensure tjat the quality of out training was not compromised. Acada allowed us to hold classes on Google Classroom while ensuring that only students that paid for such classes had access to them.'
                     },
                     {
                         icon: 'images/healthboxes.PNG',

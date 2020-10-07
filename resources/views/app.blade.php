@@ -1,30 +1,47 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    @if (env('APP_ENV') == 'development')
-        <meta name="robots" content="noindex">
-    @endif
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <!-- Styles -->
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet" type="text/css">
-
-    <link rel="apple-touch-icon" sizes="180x180" ref="/apple-touch-icon.png">
-    <link rel ="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" >
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" >
-    <link rel ="manifest" href="/site.webmanifest">
-
-    <!-- Scripts -->
-    <script src="{{ mix('js/app.js') }}" defer></script>
-    <script src="https://unpkg.com/vue-tag-manager@x.x.x/lib/TagManager.js"></script>
-
-    @routes
-</head>
-<body>
-@inertia
-</body>
+    @php
+        $defaultKeywords = ['academics', 'course', 'online classes', 'learning'];
+    @endphp
+    <head>
+        <title>{{ $title ? $title.' - ' : '' }} Acada</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="robots" content="index, follow" />
+        <meta name="description" content="{{ $description ?? '' }}">
+        <meta name="keywords" content="{{ isset($keywords) ? join(', ', array_merge($keywords, $defaultKeywords)) : join(', ', $defaultKeywords) }}">
+        <meta name="environment" content="production">
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="{{ url()->current() }}" />
+        <meta property="og:title" content="{{ $title ?? '' }}" />
+        <meta property="og:description" content="{{ $description ?? '' }}" />
+        <meta property="og:site_name" content="Acada" />
+        {{-- <meta name="twitter:site" content=""> --}}
+        {{-- <meta name="twitter:creator" content=""> --}}
+        <meta name="twitter:title" content="{{ $title ?? '' }}">
+        <meta name="twitter:description" content="{{ $description ?? '' }}">
+        {{-- <meta name="twitter:card" content=""> --}}
+        {{-- <meta name="twitter:widgets:new-embed-design" content="on"> --}}
+        <meta property="og:image" content="{{ $image ?? asset('images/acada-icon.jpg') }}" />
+        <meta name="twitter:image:src" content="{{ $image ?? asset('images/acada-icon.jpg') }}">
+        <meta name="apple-mobile-web-app-title"content="{{ $title ?? '' }}">
+        <meta name="application-name" content="Acada">
+        <meta name="theme-color" content="{{ $color ?? '#C51E5B' }}" />
+        <!-- Fonts -->
+        <link rel="dns-prefetch" href="//fonts.gstatic.com">
+        <!-- Styles -->
+        <link href="{{ mix('css/app.css') }}" rel="stylesheet" type="text/css">
+        <link rel="apple-touch-icon" sizes="180x180" ref="/apple-touch-icon.png">
+        <link rel ="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" >
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" >
+        <link rel ="manifest" href="/site.webmanifest">
+        <script src="{{ mix('js/app.js') }}" defer></script>
+        <!-- Google Tag Manager -->
+        <script src="https://unpkg.com/vue-tag-manager@x.x.x/lib/TagManager.js"></script>
+        @routes
+    </head>
+    <body>
+        @inertia
+    </body>
 </html>
