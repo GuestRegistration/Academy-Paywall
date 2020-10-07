@@ -75,7 +75,6 @@ const isMobile = [
       initialPage: JSON.parse(app.dataset.page),
       resolveComponent: name => import(`./${name}`).then(module => module.default),
       transformProps: (props) => {
-        
         store.commit('setAuth', props.auth);
         store.commit('response/setErrors', props.errors);
         store.commit('setFrame');

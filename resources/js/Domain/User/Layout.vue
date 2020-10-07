@@ -80,23 +80,23 @@
                     <v-divider></v-divider>
                     <h4 class="mt-3">Organizations</h4>
                     <v-list v-if="affiliations.length">
-                      <v-list-item
-                        v-for="affiliation in affiliations" :key="affiliation.id"
-                        @click="$inertia.visit(route('account.show', {account: affiliation.username}))"
-                      >
-                        <v-list-item-avatar>
-                          <avatar :src="affiliation.avatar" :color="affiliation.theme_color" size="50" icon="school" />
-                        </v-list-item-avatar>
+                      <a v-for="affiliation in affiliations" :key="affiliation.id" :href="route('account.show', {account: affiliation.username})" class="prevent-default">
+                        <v-list-item>
+                          <v-list-item-avatar>
+                            <avatar :src="affiliation.avatar" :color="affiliation.theme_color" size="50" icon="school" />
+                          </v-list-item-avatar>
 
-                        <v-list-item-content>
-                          <v-list-item-title v-text="affiliation.name"></v-list-item-title>
-                          <v-list-item-subtitle v-if="affiliation.user.profile.id === profile.id">Owned by {{ affiliation.user.profile.fullname }}</v-list-item-subtitle>
-                        </v-list-item-content>
+                          <v-list-item-content>
+                            <v-list-item-title v-text="affiliation.name"></v-list-item-title>
+                            <v-list-item-subtitle v-if="affiliation.user.profile.id === profile.id">Owned by {{ affiliation.user.profile.fullname }}</v-list-item-subtitle>
+                          </v-list-item-content>
 
-                        <!-- <v-list-item-icon v-if="affiliation.user.id === auth.id">
-                          <v-icon color="primary">chat_bubble</v-icon>
-                        </v-list-item-icon> -->
-                      </v-list-item>
+                          <!-- <v-list-item-icon v-if="affiliation.user.id === auth.id">
+                            <v-icon color="primary">chat_bubble</v-icon>
+                          </v-list-item-icon> -->
+                        </v-list-item>
+                      </a>
+                      
                     </v-list>
                     <div v-else>
                     <v-alert
