@@ -8,7 +8,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        @if (env('APP_ENV') == 'development')
+        @if (env('APP_ENV') == 'development' || env('APP_ENV') == 'local')
             <meta name="robots" content="noindex">
         @elseif(env('APP_ENV') == 'production')
             <meta name="robots" content="index, follow" />
@@ -31,7 +31,7 @@
         <meta name="twitter:image:src" content="{{ $image ?? asset('images/acada-icon.jpg') }}">
         <meta name="apple-mobile-web-app-title"content="{{ $title ?? '' }}">
         <meta name="application-name" content="Acada">
-        <meta name="theme-color" content="{{ $color ?? '#C51E5B' }}" />
+        <meta name="theme-color" content="{{ $color ?? '#002B36' }}" />
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <!-- Styles -->

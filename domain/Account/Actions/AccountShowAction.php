@@ -28,6 +28,7 @@ class AccountShowAction extends Controller
                         'title' => $account->name,
                         'description' => $account->bio,
                         'image' => $account->avatar,
+                        'color' => $account->theme_color
                     ]);
     }
 

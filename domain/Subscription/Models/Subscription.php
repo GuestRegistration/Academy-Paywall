@@ -26,7 +26,7 @@ class Subscription extends Model
     }
 
     public function subscriptionPlan(){
-        return $this->belongsTo(subscriptionPlan::class);
+        return $this->belongsTo(SubscriptionPlan::class);
     }
 
     public function payment(){

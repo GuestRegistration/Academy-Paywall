@@ -90,6 +90,7 @@
                             Invitation not sent, check the emails
                         </v-alert>
                     </v-card-text>
+                    
                     <v-card-text v-else>
                         <v-alert
                         border="left"

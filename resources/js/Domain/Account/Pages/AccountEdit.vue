@@ -21,7 +21,7 @@
                                 <v-expansion-panel-content class="py-3">
                                     <x-input :errors="errors" name="name" type="text" v-model="form.name" label="Organization name"  prependInnerIcon="account_box" />
                                     <x-input :errors="errors" name="username" type="text" v-model="form.username" @input="aliasInput" label="Alias" prependInnerIcon="alternate_email" />
-                                    <x-input :errors="errors" name="email" type="email" v-model="form.email" label="Email"  prependInnerIcon="email" disabled/>
+                                    <x-input :errors="errors" name="email" type="email" v-model="form.email" label="Email"  prependInnerIcon="email"/>
                                     <tel-input :errors="errors" name="phone" v-model="form.phone" label="Phone" />
                                     <x-textarea :errors="errors" name="bio" v-model="form.bio" label="About" />
                                 </v-expansion-panel-content>

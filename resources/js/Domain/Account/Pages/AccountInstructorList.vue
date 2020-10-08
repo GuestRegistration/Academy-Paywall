@@ -3,7 +3,7 @@
       <div class="d-flex">
         <h4>Instructors ({{ data.length }})<v-btn icon class="ml-5" @click="$refs.inviteUserDialog.set(true)"><v-icon>person_add</v-icon></v-btn></h4>
         <div class="ml-auto">
-          <a href="#invitations" @click="showPendingInvitations = !showPendingInvitations" class="prevent-default"><v-icon>hourglass_empty</v-icon> Pending Invitations ({{invitations.length}})</a> 
+          <a href="#invitations" class="prevent-default"><v-icon>hourglass_empty</v-icon> Pending Invitations ({{invitations.length}})</a> 
         </div>
       </div>
       <v-alert
@@ -58,9 +58,7 @@
         <v-col v-if="showPendingInvitations" cols="12" md="4" id="invitations">
           <v-card>
             <v-card-title class="text-center">
-              Pending Invitations
-              <v-spacer></v-spacer>
-              <v-btn icon @click="showPendingInvitations = false" color="red"><v-icon>close</v-icon></v-btn>
+              Pending Invitations              
             </v-card-title>
             <v-divider></v-divider>
             <v-card-text>
