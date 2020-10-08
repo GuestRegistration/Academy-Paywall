@@ -2,10 +2,13 @@
     <v-container class="p-0">        
         <v-row justify="center">
             <v-col cols="12" md="8">
-                <template v-if="payment || (account.subscription && !account.subscription.expired)">
+                <template v-if="payment || (account.subscription && !account.subscription.expired) || account.has_free_course_slot">
                     <h3 class="mb-2">New Course</h3>
                     <v-divider></v-divider>
-                    <v-alert v-if="payment"  icon="info" prominent text type="info" class="my-2">
+                     <v-alert v-if="account.has_free_course_slot"  icon="info" prominent text type="info" class="my-2">
+                        You are enjoying your first free course
+                    </v-alert>
+                    <v-alert v-else-if="payment"  icon="info" prominent text type="info" class="my-2">
                         You are adding this course with the "Pay As You Go" payment of {{payment.amount | money(payment.currency)}} on {{payment.time}}
                     </v-alert>
                     <v-alert v-else-if="account.subscription && !account.subscription.expired"  icon="info"  class="my-2" prominent text type="info">
@@ -13,7 +16,7 @@
                         <br>
                         Slot Remaining: {{ account.courses_slot }}
                     </v-alert>
-                    <course-form v-if="account.is_unlimited || account.courses_slot > 0 || payment" @submit="submit" :loading="loading" :color="account.theme_color" :instructors="instructors" />
+                    <course-form v-if="account.has_free_course_slot || account.is_unlimited || account.courses_slot > 0 || payment" @submit="submit" :loading="loading" :color="account.theme_color" :instructors="instructors" />
                 </template>
                 <template v-else-if="account.subscription && account.subscription.expired">
                     <v-alert  icon="info" prominent text type="info">
@@ -69,6 +72,7 @@
             payg: Object,
             instructors: Array,
             stripe_pk: String,
+            first_course: Boolean,
         },
         methods: {
            async submit(formData){

@@ -31,7 +31,8 @@ class Account extends Model
     ];
 
     protected $appends = [
-        'at_username', 'profile_complete', 'is_unlimited', 'is_payg', 'users_slot', 'courses_slot'
+        'at_username', 'profile_complete', 'is_unlimited', 'is_payg', 'users_slot', 'courses_slot',
+        'has_free_course_slot'
     ];
 
     protected $casts = [
@@ -107,9 +108,8 @@ class Account extends Model
 
         if($this->is_unlimited) return 'unlimited';
 
-        return $this->subscription->subscriptionPlan->max_courses - $this->courses()->count();
+        return $this->subscription->subscriptionPlan->max_courses - $this->courses()->withTrashed()->count();
     }
-
 
     public function getIsUnlimitedAttribute(){
         $unlimited_plan = SubscriptionPlan::unlimited();
@@ -126,6 +126,11 @@ class Account extends Model
         return collect([$this->user->load(['profile'])])->merge($this->users()->with(['profile'])->get())->filter(function($user){
             return $user->profile !== null;
         });
+    }
+
+    public function getHasFreeCourseSlotAttribute()
+    {
+        return $this->courses_slot == 0 && $this->courses()->withTrashed()->count() == 0 ? true : false;
     }
 
     public function user(){

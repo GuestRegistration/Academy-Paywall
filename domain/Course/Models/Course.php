@@ -7,10 +7,11 @@ use App\Classes\UUID;
 use App\Traits\HasLocalDates;
 use Domain\Account\Models\Account;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Course extends Model
 {
-    use UUID, HasLocalDates;
+    use UUID, HasLocalDates, SoftDeletes;
 
     const MIN_DESCRIPTION_CHARACTER = 120;
     

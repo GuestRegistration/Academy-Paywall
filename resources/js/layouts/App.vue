@@ -24,7 +24,7 @@
 
       <template v-if="authenticated">
          <a v-if="auth.account" :href="route('account.show', {account: auth.account.username})" class="prevent-default mx-1">
-           <v-avatar :src="auth.account.avatar" color="primary" size="40">
+           <v-avatar :src="auth.account.avatar" :color="auth.account.theme_color" size="40">
              <v-img v-if="auth.account.avatar" :src="auth.account.avatar"></v-img>
              <h2 v-else class="white--text">{{ auth.account.name.substring(0,1) }}</h2>
            </v-avatar>

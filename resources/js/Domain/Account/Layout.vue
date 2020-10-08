@@ -115,7 +115,7 @@
                                   <v-icon>call</v-icon>
                                 </v-btn>
                               </a>
-                              <div>{{ account.phone }}</div>
+                              <!-- <div>{{ account.phone }}</div> -->
                             </div>
                           </v-col>
                           <v-col class="text-truncate">
@@ -125,7 +125,7 @@
                                   <v-icon>email</v-icon>
                                 </v-btn>
                               </a>
-                              <div>{{ account.email }}</div>
+                              <!-- <div>{{ account.email }}</div> -->
                             </div>
                           </v-col>
                         </v-row>

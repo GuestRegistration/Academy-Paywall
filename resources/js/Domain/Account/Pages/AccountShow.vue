@@ -6,6 +6,9 @@
             <div class="text-center text-muted py-5" v-if="!current_courses.total">
                 <div v-if="isMyAccount(account)">
                     <h4>You have 0 courses, click on the '+' icon to add a course</h4>
+                     <v-alert v-if="account.has_free_course_slot"  icon="info" prominent text type="info" class="my-2">
+                        Your first course is free!
+                    </v-alert>
                     <inertia-link :href="route('account.course.create', {account: account.username})" class="prevent-default" title="Create a course">
                         <v-btn fab class="my-5"><v-icon>add</v-icon></v-btn>
                     </inertia-link>
