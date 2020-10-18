@@ -4,16 +4,19 @@
             <stripe-gateway ref="stripeGateway" :publishable-key="stripe_pk" :amount="plan.amount" :currency="plan.currency" :color="account.theme_color" :charge_callback="chargeCallback" @success="paymentSuccessful" @error="paymentError" />
             <v-row justify="center">
                 <v-col cols="12" md="8" lg="6">
-                    <h4>Subscriptions</h4>
+                    <h4>Subscription</h4>
                     <template v-if="account.is_unlimited">
                         <v-alert
-                            icon="info"
+                            icon="check_circle"
                             prominent
                             text
-                            type="info"
+                            type="success"
                             >
-                            You are currently on an unlimited plan
+                            You are currently on an enterprise plan
                         </v-alert>
+                        <div class="text-center">
+                            <small>{{account.subscription.start_time}} - {{account.subscription.end_time}}, {{account.subscription.expiring_time}} days remaining</small>
+                        </div>
                     </template>
                     <template v-else-if="!account.subscription">
                         <v-alert
@@ -56,7 +59,9 @@
                                         >
                                             You are currently subscribed
                                         </v-alert>
-                                        {{account.subscription.start_time}} - {{account.subscription.end_time}}, {{account.subscription.expiring_time}} days remaining
+                                        <div class="text-center">
+                                            <small>{{account.subscription.start_time}} - {{account.subscription.end_time}}, {{account.subscription.expiring_time}} days remaining</small>
+                                        </div>
                                     </div>
                                     <div v-else>
                                         <v-alert

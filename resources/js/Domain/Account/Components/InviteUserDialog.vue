@@ -150,7 +150,7 @@ import { mapGetters } from 'vuex'
             },
 
             limitReached(){
-                if(this.account.is_unlimited) return true;
+                if(this.account.is_unlimited) return false;
 
                 if(this.selected.length > this.account.users_slot){
                     this.warning = `Cannot invite ${this.selected.length} users`;
