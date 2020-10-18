@@ -36,8 +36,19 @@
 
         methods: {
             paginate(page){
-                this.$inertia.visit(`${this.resource.path}?page=${page}`);
+                this.$inertia.visit(`${this.getUrl(page)}`);
+            },
+
+            getUrl(page) {
+                let queryString = '';
+                const urlParams = new URLSearchParams(window.location.search);
+                for (const key of urlParams.keys()) {
+                    queryString += key != 'page' ? `${key}=${urlParams.get(key)}&` : '';
+                }
+                return `${this.resource.path}?${queryString}page=${page}`
             }
-        }
+        },
+
+        
     }
 </script>

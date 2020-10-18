@@ -1,6 +1,12 @@
 <template>
     <div>
-        <h1>{{course.title}}</h1>
+        <div class="d-flex">
+            <v-btn icon @click="$inertia.visit(route('account.show', {account: account.username}))" class="mr-2">
+                <v-icon>arrow_back</v-icon>
+            </v-btn>
+            <h2>{{course.title}}</h2>
+        </div>
+        
         <v-img :src="course.cover_image" ></v-img>
         <div>
             <div class="text-muted mt-3">
@@ -83,7 +89,7 @@
         <v-container v-if="course.users" class="mt-4">
             <h2>Instructors ({{course.users.length}}) </h2>
             <v-divider></v-divider>
-            <div v-if="!course.users.length" >
+            <div v-if="!course.users.length" class="text-center py-5" >
                 <p class="text-muted">No instructor yet</p>
             </div>
              <v-row v-else>

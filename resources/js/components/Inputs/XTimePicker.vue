@@ -12,9 +12,9 @@
            </div>
          </v-col>
         </v-row>
-        <div v-if="errorString" class="text-danger text-center">
+        <small v-if="errorString" class="error--text text-center">
             {{ errorString }}
-        </div>
+        </small>
     </div>
 </template>
 

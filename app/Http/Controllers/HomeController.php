@@ -75,18 +75,18 @@ class HomeController extends Controller
             [
                 'icon' => asset('images/account.PNG'),
                 'heading' => 'Set up your profile',
-                'text' => 'You can get started with just your email without having to remember any password.',
+                'text' => 'Create your account and set up your personal and academy profile. Good news! you do not need a password',
             ],
             
             [
                 'icon' => asset('images/add-course.PNG'),
                 'heading' => 'Add Course',
-                'text' => 'You get to include the course title, description (Ability to add text, videos and images) and price for each course you desire to add.',
+                'text' => 'Add your course with just a few clicks. Include the course title, course description, your preferred LMS and the cost of the course.',
             ],
             [
                 'icon' => 'images/get-paid.PNG',
-                'heading' => 'Receive Payment',
-                'text' => 'Receive payment every time someone registers for your course and add your participants to the conferencing or LMS platform of choice.'
+                'heading' => 'Get Paid',
+                'text' => 'Receive payment every time someone registers for your course and automatically send them instructions on how to join the class.'
             ]
 
         ];
@@ -104,12 +104,12 @@ class HomeController extends Controller
             [
                 'icon' =>   asset('images/authorization.PNG'),
                 'heading' =>  'Authorized Access Only',
-                'text' =>  'Links to your courses will only be made available to people who have successfully paid and enrolled for the course.'
+                'text' =>  'Access to courses is limited to only participants who have paid and enrolled for the course.'
             ],
             [
                 'icon' =>   asset('images/currency.PNG'),
                 'heading' =>  'Multi-Currency',
-                'text' =>  'We do not charge extra for enrollment, your money is all yours.'
+                'text' =>  'You can choose the currency in which you charge for your courses.'
             ],
             [
                 'icon' =>   asset('images/zero-fee.PNG'),
@@ -150,7 +150,7 @@ class HomeController extends Controller
             [
                 'icon' =>  asset('images/jobred.PNG'),
                 'heading' =>  'JobRed "Ajo Balogun"',
-                'text' =>  'When the pandemic caused us to stop physical classes, we needed a way to reach out to our students and ensure tjat the quality of out training was not compromised. Acada allowed us to hold classes on Google Classroom while ensuring that only students that paid for such classes had access to them.'
+                'text' =>  'When the pandemic caused us to stop physical classes completely, we needed a way to reach out to our students and ensure that the quality of our trainings was not compromised. Acada App allowed us to hold classes on online platforms while ensuring that course contents were limited to only participants that have successfully enrolled for the course.'
             ],
             [
                 'icon' =>   asset('images/healthboxes.PNG'),
@@ -159,8 +159,8 @@ class HomeController extends Controller
             ],
             [
                 'icon' =>  asset('images/prof-elegbe.PNG'),
-                'heading' =>  'Professor Elegbe',
-                'text' =>  'I help anesthesiologist prepare for exams with the West African College of Surgeons. Acada has made it easy for me to reach my students during the Covid pandemic, continue with the classes and keep track of them.'
+                'heading' =>  'Macaulay Gidado',
+                'text' =>  'As a business owner and techpreneur, I always hold bite-sized trainings where I share hacks and tips that I have learnt from experience across varying fields. I now use Acada app to host such courses and I must say that it has never been easier. Thank you Acada 👍🏽'
             ]
         ];
     }

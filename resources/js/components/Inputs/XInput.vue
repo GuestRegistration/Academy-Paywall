@@ -11,7 +11,7 @@
             :prepend-inner-icon="prependInnerIcon"
             :append-icon="appendIcon"
             :append-inner-icon="appendInnerIcon"
-
+            :rules="rules"
         >
             <slot
             slot="append-outer"
@@ -28,7 +28,7 @@
     props: {
         errors: null,
         label: String,
-        rule: String,
+        rules: Array,
         appendIcon: String,
         prependIcon: String,
         appendInnerIcon: String,

@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use Domain\Course\Actions\CourseListAction;
 
+use Domain\Course\Actions\CourseSearchAction;
 use Domain\Course\Actions\AccountCourseEditAction;
 use Domain\Course\Actions\AccountCourseShowAction;
 use Domain\Course\Actions\AccountCourseStoreAction;
@@ -14,7 +15,7 @@ use Domain\Course\Actions\AccountCourseRegisterAction;
 use Domain\Course\Actions\AccountCourseStudentListAction;
 
 Route::get('/courses', CourseListAction::class)->name('course.list');
-
+Route::get('/search/course/{account:username?}', CourseSearchAction::class)->name('course.search');
 Route::prefix('{account:username}')->group(function(){
     Route::get('/course/create', AccountCourseCreateAction::class)->name('account.course.create');
     Route::get('/{course:slug}', AccountCourseShowAction::class)->name('account.course.show');

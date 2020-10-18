@@ -48,7 +48,7 @@
         <section class="page-section" id="features">
             <div class="section-head">
                 <h1>FEATURES</h1>
-                <hr class="bg-custom-primary">
+                <hr>
             </div>
             <div class="container">
                 <div class="row">
@@ -93,6 +93,14 @@
                                                 <v-list-item-title>1 USD per course</v-list-item-title>
                                             </v-list-item-content>
                                         </v-list-item>
+                                        <v-list-item>
+                                            <v-list-item-icon color="primary" class="mr-2">
+                                                <v-icon class="text-custom-primary">group</v-icon>
+                                            </v-list-item-icon>
+                                            <v-list-item-content>
+                                                <v-list-item-title>1 instructor</v-list-item-title>
+                                            </v-list-item-content>
+                                        </v-list-item>
                                     </v-list>
                                 </div>
                                 <div class="plan-action text-center">   
@@ -107,7 +115,6 @@
                                     <h4>Bundle</h4>
                                     <hr class="bg-custom-primary">
                                 </div>
-
                                 <div class="plan-info">
                                     <v-list style="background: inherit">
                                         <v-list-item>
@@ -240,9 +247,9 @@
             App, SigninModal, NavDrawer
         },
         props: {
-            howItWork: Object,
-            features: Object,
-            communities: Object,
+            howItWork: Array,
+            features: Array,
+            communities: Array,
         },
         data(){
             return {
@@ -270,7 +277,7 @@
     }
     .page-section
     {
-        margin: 70px 0;
+        padding: 50px 0;
     }
     .section-head hr{
         width: 200px;
@@ -296,6 +303,22 @@
     #banner-overlay
     {
         background-color: rgba(0, 0, 0, 0.65)
+    }
+
+    section#features{
+        background-image: linear-gradient( #002B36, #fff);
+    }
+
+    section#features .info-box{
+        background-color: #fff;
+    }
+
+    section#features .section-head h1{
+        color: #fff;
+    }
+
+    section#features .section-head hr{
+        background-color: #fff;
     }
 
     .banner-content

@@ -47,7 +47,7 @@
                                         </div>
                                         <div class="my-2">
                                             <h5>Cover image</h5>
-                                            <x-file-input :errors="errors" name="cover_image" label="Cover image" :src="account.cover_image" aspect-ratio="8.1" @change="getCoverImage" />
+                                            <x-file-input :errors="errors" name="cover_image" label="Cover image" :src="account.cover_image" aspect-ratio="8.1" @change="getCoverImage" :removable="true" />
                                             <small>Recommended Aspect Ratio: 8:1</small>
                                         </div>
                                     </div>

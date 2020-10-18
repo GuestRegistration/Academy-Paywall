@@ -1,26 +1,35 @@
 <template>
     <div class="form-group mb-4">
-        <div class="d-flex">
-            <div>
-                <label :for="$attrs.id" v-if="label">{{ label }} : {{ value }}</label>
-                <div v-if="inputPayload.phoneNumber && !inputPayload.isValid" class="red--text">
-                    Invalid phone number
-                </div>
+        <v-text-field
+            outlined
+            v-bind="$attrs"
+            v-on="$listeners"
+            :value="value"
+            :label="label"
+            prepend-inner-icon="local_phone"
+            @focus="edit = true"
+            :disabled="edit"
+        >
+        </v-text-field>    
+        <div class="d-flex mb-3" v-if="edit">
+            <div style="width: 90%">
+                <VuePhoneNumberInput v-model="phone"
+                    @input="phoneInput"
+                    @update="phoneUpdated"
+                    :error="thereIsError"
+                    :no-use-browser-locale="true"
+                    />
+                <small v-if="errorString" 
+                    class="error--text"
+                >
+                    {{ errorString }}
+                </small>
             </div>
             <v-spacer></v-spacer>
-            <v-btn icon @click="edit = !edit">
-                <v-icon>create</v-icon>
+            <v-btn icon @click="edit = false">
+                <v-icon>close</v-icon>
             </v-btn>
-        </div>
-       <VuePhoneNumberInput v-if="edit" v-model="phone"
-        @input="phoneInput"
-        @update="phoneUpdated"
-        :error="thereIsError"
-        :no-use-browser-locale="false"
-        />
-        <span v-if="errorString" class="red--text">
-            {{ errorString }}
-        </span>
+        </div>       
     </div>
 
 </template>
@@ -44,11 +53,13 @@
             return {
                 phone: '',
                 edit: false,
-                inputPayload: {}
+                inputPayload: {},
+                oldValue: '',
             }
         },
         computed: {
             errorString() {
+                if(this.inputPayload.phoneNumber && !this.inputPayload.isValid) return 'Invalid phone number'
                 if (typeof this.errors === 'string') return this.errors;
                 if (!(this.errors && this.errors[this.$attrs.name])) return null;
                 const error = this.errors[this.$attrs.name];
@@ -67,8 +78,15 @@
             },
 
             phoneInput(value){
-                this.$emit('input', this.inputPayload.isValid ? value : undefined)
+                this.$emit('input', this.inputPayload.isValid ? value.replace(/ /g,'') : undefined);
+            },
+
+            cancelEdit()
+            {
+                this.$emit('input', this.oldValue)
             }
-        }
+        },
+
+       
     }
 </script>

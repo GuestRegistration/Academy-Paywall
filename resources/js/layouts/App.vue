@@ -1,7 +1,7 @@
 <template>
       <!-- App.vue -->
   <v-app>
-    <nav-drawer />
+    <nav-drawer v-if="authenticated" />
    
     <v-app-bar app :color="authenticated && auth.account && route().current('account.*') ? auth.account.theme_color : 'secondary'" dark >
       <v-btn v-if="authenticated" @click="$store.state.navDrawer = !$store.state.navDrawer" icon>
@@ -29,7 +29,7 @@
              <h2 v-else class="white--text">{{ auth.account.name.substring(0,1) }}</h2>
            </v-avatar>
         </a>
-        <inertia-link v-else :href="route('account.setup')" class="prevent-default mx-1" title="Create your academy account">
+        <inertia-link v-else-if="route().current() !== 'account.setup'" :href="route('account.setup')" class="prevent-default mx-1" title="Create your academy account">
           <v-btn icon><v-icon>add</v-icon></v-btn>
         </inertia-link>
       </template>

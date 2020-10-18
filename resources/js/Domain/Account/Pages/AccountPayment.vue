@@ -6,23 +6,19 @@
                  <form @submit.prevent="saveGateway" >
                     <x-select :errors="errors" :value="form.currency" label="Currency" name="currency" :items="availableCurrencies" outlined @change="currencyChanged" />
                      <template v-if="form.currency"> 
-                        <h4>Available gateway for {{form.currency}}</h4>
-                        <v-card outlined >
-                            <v-card-text v-if="gateways.length">
-                                <v-radio-group v-model="form.gateway" @change="gatewayChanged">
-                                    <v-radio v-for="(gateway, g) in gateways" :key="g" :label="gateway.label" :value="gateway.name" :color="account.theme_color" off-icon="radio_button_unchecked" on-icon="radio_button_checked"></v-radio>
-                                </v-radio-group>
-                                <template v-if="form.gateway">
-                                    <h4 class="text-center">{{gateways.find(g=>g.name==form.gateway).label}} Setup</h4>
-                                    <v-switch v-model="form.active" label="Enable" :color="account.theme_color" ></v-switch>
-                                    <x-input type="password" v-for="(credential, c) in credentials" :key="c" :errors="errors" :name="`credentials.${credential.slug}`" :label="credential.name" v-model="form.credentials[credential.slug]" :disabled="!form.active" />
-                                    <x-button type="sumbit" :loading="loading"  :color="account.theme_color" dark>Save</x-button>
-                                </template>
-                            </v-card-text>
-                            <v-card-text v-else class="text-muted text-center">
-                                <p class="text-muted">No supported gateway support for {{form.currency}}  yet</p>
-                            </v-card-text>
-                        </v-card>
+                        <h4 class="text-center">Available gateway for {{form.currency}}</h4>
+                        <div v-if="gateways.length">
+                            <v-row justify="center">
+                                <v-col v-for="(gateway, g) in gateways" :key="g"
+                                cols="12"
+                                md="6">
+                                    <payment-gateway :gateway="gateway" :form="form" @gateway-updated="gatewayUpdated" />
+                                </v-col>
+                            </v-row>
+                        </div>
+                        <div v-else class="text-center">
+                            <p class="grey--text">No payment gateway available for {{ form.currency }} yet</p>
+                        </div>
                      </template>
                 </form> 
             </v-col>
@@ -33,10 +29,14 @@
 <script>
     import {mapState} from "vuex";
     import App from '@/layouts/App';
+    import PaymentGateway from '../Components/PaymentGateway.vue';
 
     export default {
         name: "AccountPayment",
         layout: (h, page) => h(App, [page]),
+        components: {
+            PaymentGateway
+        },
         metaInfo()
          {
              return{
@@ -71,13 +71,9 @@
             },
 
             gateways(){
-                return this.form.currency ? this.currencies.find(currency => currency.currency == this.form.currency).gateways || [] : [];
+               return this.form.currency ? this.currencies.find(currency => currency.currency == this.form.currency).gateways || [] : [];
+                
             },
-
-            credentials(){
-                const gateway = this.form.gateway ? this.gateways.find(gateway => gateway.name == this.form.gateway) : null;
-                return gateway ? gateway.credentials : [];
-            }
 
         },
 
@@ -95,21 +91,10 @@
                 }
             },
 
-            gatewayChanged(gateway){
-                if(gateway !== this.gateway.gateway){
-                    this.form.active = false;
-                    this.form.credentials = {}
-                }else{
-                    this.form.active = this.gateway.active;
-                    this.form.credentials = this.gateway.credentials;
-                }
+            gatewayUpdated(gateway) {
+                this.form = gateway
             },
             
-           async saveGateway(){
-                this.loading = true;
-                await this.$inertia.post(this.route('account.payment.gateway.store', { account: this.account.username }), this.form);
-                this.loading = false;
-            }
         },
 
         mounted(){

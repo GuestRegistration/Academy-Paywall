@@ -13,17 +13,17 @@
             v-model="picker" 
             :show-current="selected" 
             @change="(date) => $emit('change', date)"
-            next-icon="navigate-next"
-            prev-icon="navigate-before"
+            next-icon="chevron_right"
+            prev-icon="chevron_left"
             >
 
             </v-date-picker>
            </div>
          </v-col>
         </v-row>
-        <div v-if="errorString" class="text-danger text-center">
+        <small v-if="errorString" class="error--text text-center">
             {{ errorString }}
-        </div>
+        </small>
     </div>
 </template>
 

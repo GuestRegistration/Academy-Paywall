@@ -7,12 +7,13 @@ use App\Classes\UUID;
 use Domain\Course\Models\Course;
 use Domain\Subscription\Models\Payment;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use Domain\Subscription\Models\Subscription;
 use Domain\Subscription\Models\SubscriptionPlan;
 
 class Account extends Model
 {
-    use UUID;
+    use UUID, Notifiable;
 
     /**
      * The attributes that are mass assignable.

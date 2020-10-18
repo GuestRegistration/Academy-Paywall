@@ -28,6 +28,11 @@
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
+      <a href="#search" class="prevent-default d-md-none">
+        <v-btn icon>
+          <v-icon>search</v-icon>
+        </v-btn>
+      </a>
       <inertia-link v-if="authenticated && auth.account && !isMyAccount(account)" :href="auth.account.username ? route('account.show', {account: auth.account.username}) : '#'" class="prevent-default mx-1">
          <avatar :src="auth.account.avatar" :color="auth.account.theme_color" size="40" icon="school" />
       </inertia-link>
@@ -83,9 +88,9 @@
                   <h1>{{account.caption}}</h1>
                   <h4>{{account.subcaption}}</h4>
               </div>
-              <template v-if="courses">
+              <!-- <template v-if="courses">
                 <courses-quick-enroll :account="account" :courses="courses" />
-              </template>
+              </template> -->
             </div>
           </div>
           <v-container>
@@ -94,7 +99,10 @@
                     <slot />
                 </v-col>
                 <v-col cols="12" md="4">
-
+                    <div id="search">
+                      <course-search :account="account" />
+                    </div>
+                    
                     <slot name="before-bio" />
 
                     <template v-if="account.bio && account.bio !== 'null'" >
@@ -134,24 +142,17 @@
 
                     <slot name="after-contact" />
 
-                    <v-list v-if="anySocial()">
-                      <div class="mx-3"><h4>Socials</h4></div>
+                    <div v-if="anySocial()">
+                      <div class="mx-3 my-3"><h4>Socials</h4></div>
                       <v-divider></v-divider>
-                      <v-list-item-group>
+                      <div class="text-center my-3">
                         <template v-for="(social, i) in socials" >
-                          <a v-if="social.link" :href="social.link" :key="i" target="_blank"  class="prevent-default">
-                            <v-list-item>
-                              <v-list-item-icon>
-                                <v-icon v-text="social.icon"></v-icon>
-                              </v-list-item-icon>
-                              <v-list-item-content>
-                                <v-list-item-title v-text="social.text"></v-list-item-title>
-                              </v-list-item-content>
-                            </v-list-item>
+                          <a v-if="social.link" :href="social.link" :key="i" target="_blank"  class="prevent-default ma-2 d-inline-block">
+                            <v-img :src="social.image" :title="social.text" width="50px" ></v-img>
                           </a>
                         </template>
-                      </v-list-item-group>
-                    </v-list>
+                      </div>
+                    </div>
                 </v-col>
               </v-row>
           </v-container>
@@ -168,11 +169,11 @@
 <script>
     import {mapGetters, mapState} from "vuex";
     import NavDrawer from '@/components/NavDrawer';
-    import CoursesQuickEnroll from './Components/CoursesQuickEnroll';
+    import CourseSearch from '../Course/Components/CourseSearch.vue';
     export default {
         name: 'AccountLayout',
         components: {
-          NavDrawer, CoursesQuickEnroll
+          NavDrawer, CourseSearch
         },
         data(){
           return {
@@ -197,30 +198,42 @@
               return [
                 {
                   icon: 'link',
+                  image: '/images/facebook.png',
                   text: 'Facebook',
                   link: this.account.facebook_url,
                 },
 
                 {
                   icon: 'link',
+                  image: '/images/instagram.png',
                   text: 'Instagram',
                   link: this.account.instagram_url,
                 },
 
                 {
                   icon: 'link',
+                  image: '/images/twitter.png',
                   text: 'Twitter',
                   link: this.account.twitter_url,
                 },
 
                 {
                   icon: 'link',
+                  image: '/images/linkedin.png',
                   text: 'LinkedIn',
                   link: this.account.linkedin_url,
                 },
 
                 {
                   icon: 'link',
+                  image: '/images/youtube.png',
+                  text: 'Youtube',
+                  link: this.account.youtube_url,
+                },
+
+                {
+                  icon: 'link',
+                  image: '/images/website.png',
                   text: 'Website',
                   link: this.account.website,
                 },
@@ -232,8 +245,6 @@
           anySocial(){
               return this.socials.filter(s => s.link ?  true : false).length
             },
-
-           
         },
 
         mounted(){

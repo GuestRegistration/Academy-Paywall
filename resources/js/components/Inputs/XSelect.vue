@@ -21,7 +21,10 @@
         errors: null,
         label: String,
         rule: String,
-        appendIcon: String,
+        appendIcon: {
+          type: String,
+          default: () => 'arrow_drop_down'
+        },
         appendOuterIcon: String,
         items: Array,
     },

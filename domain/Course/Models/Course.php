@@ -153,5 +153,15 @@ class Course extends Model
         ];
     }
 
+    public function scopePast($query){
+        return $query->whereDate('end_at', '<', now());
+    }
 
+    public function scopeOngoing($query){
+        return $query->whereDate('end_at', '>=', now());
+    }
+
+    public function scopeUpcoming($query){
+        return $query->whereDate('start_at', '>', now());
+    }
 }

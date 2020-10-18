@@ -29,6 +29,7 @@ class AccountPaymentAction extends Controller
                     return [
                         'label' => PaymentGatewaySupport::GATEWAYS[$gateway]['name'],
                         'name' => $gateway, 
+                        'image' => asset(PaymentGatewaySupport::GATEWAYS[$gateway]['image']),
                         'credentials' => PaymentGatewaySupport::credentials($gateway)
                     ];
                     })

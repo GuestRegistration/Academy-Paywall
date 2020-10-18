@@ -5,6 +5,7 @@ namespace Domain\Course\Actions;
 use Inertia\Inertia;
 use Domain\Course\Models\Course;
 use Domain\Account\Models\Account;
+use Domain\Course\Events\Enrolled;
 use App\Http\Controllers\Controller;
 
 class AccountCourseShowAction extends Controller

@@ -36,7 +36,6 @@
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <!-- Styles -->
         <link href="{{ mix('css/app.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ asset('prerender/css/preloader.css') }}" rel="stylesheet" type="text/css">
         <link rel="apple-touch-icon" sizes="180x180" ref="/apple-touch-icon.png">
         <link rel ="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" >
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" >
@@ -61,12 +60,13 @@
             {
                 width: 90%;
                 margin: auto;
-                margin-top: 20vh;
+                margin-top: 40vh;
+                text-align: center;
             }
             @media (min-width: 768px){
                 #preloader-content
                 {
-                    width: 60%
+                    width: 40%
                 }
             }
         </style>
@@ -77,7 +77,7 @@
         <div id="preloader">
             <div id="preloader-container">
                 <div id="preloader-content">
-                    <img src="{{ asset('images/acada-text-logo-white.png') }}" alt="Acade App" width="100%">
+                    <img src="{{ asset('images/acada-text-logo-white.png') }}" alt="Acade App" width="200px">
                 </div>
             </div>
         </div>

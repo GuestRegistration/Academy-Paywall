@@ -17,11 +17,12 @@
                     </v-expansion-panel-header>
                     <v-expansion-panel-content class="py-3">
                         <x-input :errors="errors" name="title" type="text" v-model="form.title" label="Course title" />
-                        <x-select :errors="errors" :value="form.course_type" label="Select your learning platform" name="course_type" :items="course_types" outlined @change="(selected) => form.course_type = selected" />
+                        <x-select :errors="errors" :value="form.course_type" label="Select your learning platform" name="course_type" :items="course_types" outlined @change="courseTypeChanged" />
+                        <x-input v-if="otherCourseType" :errors="errors" type="text" v-model="form.other_course_type" label="Other learning platform"/>
                         <div class="form-group" style="overflow: auto">
                             <label>Course description</label>
                             <wysiwyg v-model="form.description" />
-                            <div v-if="errors && errors.description && errors.description.length" class="text-danger">{{ errors.description[0] }}</div>
+                            <small v-if="errors && errors.description && errors.description.length" class="error--text">{{ errors.description[0] }}</small>
                         </div>
                     </v-expansion-panel-content>
                 </v-expansion-panel>
@@ -55,7 +56,8 @@
                                 <div class="text-right">
                                     <inertia-link :href="route('account.payment.gateway', {account: account.username})" class="prevent-default">
                                         <v-icon>settings</v-icon> Payment method settings
-                                    </inertia-link>                                </div>
+                                    </inertia-link>                                
+                                </div>
                                 <x-input  :errors="errors" name="price" type="number" v-model="form.price" label="Price" />
                             </div>
                         </template>
@@ -84,7 +86,7 @@
                     </v-expansion-panel-content>
                 </v-expansion-panel>
 
-                    <v-expansion-panel>
+                <v-expansion-panel>
                     <v-expansion-panel-header>
                         <h4>
                             <v-icon v-if="Object.keys(errors).some(error => ['end_date','end_time'].includes(error))" color="red" class="mr-3" title="There is error in this section">report_problem</v-icon>
@@ -162,8 +164,15 @@
                                     close
                                 >
                                     <avatar :src="getInstructor(data.item).profile.avatar" :color="account.theme_color" size="30" :text="getInstructor(data.item).profile.initials" />
-                                    <span class="ml-2">{{ getInstructor(data.item).profile.fullname}}</span>
-
+                                    <span class="mx-2">{{ getInstructor(data.item).profile.fullname}}</span>
+                                    <v-icon
+                                        small
+                                        @click="data.parent.selectItem(data.item)"
+                                        class="ml-1"
+                                        color="red"
+                                        >
+                                            close
+                                        </v-icon>
                                 </v-chip>
                             </template>
                         </v-combobox>
@@ -185,7 +194,7 @@
                         <div v-if="form.send_instructions" style="overflow: auto">
                             <label>Compose message</label>
                             <wysiwyg v-model="form.instructions" />
-                            <div v-if="errors && errors['instructions'] && errors['instructions'].length" class="text-danger">{{ errors['instructions'][0] }}</div>
+                            <div v-if="errors && errors['instructions'] && errors['instructions'].length" class="error--text">{{ errors['instructions'][0] }}</div>
                         </div>
                     </v-expansion-panel-content>
                 </v-expansion-panel>
@@ -212,17 +221,19 @@
             color: String,
             instructors: Array,
         },
+        
         data(){
             return {
                 form: {},
                 course_types: [
-                    'Zoom', 'Google classroom'
+                    'Zoom', 'Google classroom', 'WhatsApp', 'Zoom', 'Other'
                 ],
                 selectedInstructors: [],
                 start_date: null,
                 start_time: null,
                 end_date: null,
                 end_time: null,
+                otherCourseType: false,
             }
         },
         computed: {
@@ -257,6 +268,10 @@
                 this.form.start_date = `${this.start_date} ${this.start_time}`;
                 this.form.end_date = `${this.end_date} ${this.end_time}`;
 
+                if(this.otherCourseType){
+                    this.form.course_type = this.form.other_course_type
+                }
+
                 Object.keys(this.form).forEach(key => {
                     if(this.form[key] != null && this.form[key] != "null"){
                         form.append(key, this.form[key]);
@@ -264,6 +279,11 @@
                 })
                 return form;
             },
+            courseTypeChanged(type)
+            {
+              this.form.course_type = type;
+               this.otherCourseType = type === 'Other';
+            }
         },
         mounted(){
             if(this.course){
@@ -276,6 +296,11 @@
                     ...this.course,
                     requires_payment: this.course.payment.require,
                 };
+                if(!this.course_types.includes(this.course.course_type)){
+                   this.form.course_type = 'Other';
+                   this.form.other_course_type = this.course.course_type;
+                   this.otherCourseType = true;
+                }
                 this.selectedInstructors = this.course.users.map(user => user.id);
             }else{
                 this.start_date = new Date().toISOString().substr(0, 10);

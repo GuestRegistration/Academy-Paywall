@@ -13,12 +13,14 @@ class PaymentGatewaySupport {
     const GATEWAYS = [
         'paystack' => [
             'name' => 'Paystack',
+            'image' => 'images/paystack.png',
             'credentials' => [
                 'Public Key',
             ],
         ],
         'stripe' => [
             'name' => 'Stripe',
+            'image' => 'images/stripe.png',
             'credentials' => [
                 'Publishable Key',
                 'Secret Key'
@@ -32,9 +34,14 @@ class PaymentGatewaySupport {
      * 
      */
     const CURRENCIES = [
+        'CAD' => [
+            'stripe'
+        ],
+        'EUR' => [
+            'stripe'
+        ],
         'NGN' => [
             'paystack',
-            // 'stripe'
         ],
         'USD' => [
             'stripe'

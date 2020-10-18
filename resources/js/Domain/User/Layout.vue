@@ -61,7 +61,7 @@
                                   <v-icon>call</v-icon>
                                 </v-btn>
                               </a>
-                              <div class="text-truncate">{{ profile.phone }}</div>
+                              <!-- <div class="text-truncate">{{ profile.phone }}</div> -->
                             </div>
                           </v-col>
                           <v-col class="text-truncate">
@@ -71,7 +71,7 @@
                                   <v-icon>email</v-icon>
                                 </v-btn>
                               </a>
-                              <div>{{ profile.email }}</div>
+                              <!-- <div>{{ profile.email }}</div> -->
                             </div>
                           </v-col>
                         </v-row>
@@ -105,15 +105,21 @@
                         type="error"
                         elevation="2"
                       >
-                      Not affiliated to any organization
+                      <span v-if="isMyProfile(profile)">{{ profile.first_name }}, You are not affiliated to any organization</span>
+                      <span v-else>Not affiliated to any organization</span> 
                       </v-alert>
                     </div>
-
-                    <div class="text-right mt-4">
-                      <inertia-link v-if="isMyProfile(profile) && !auth.account" :href="route('account.setup')" class="prevent-default mx-1" title="Create your academy account">
-                        <v-btn fab><v-icon>add</v-icon></v-btn>
-                      </inertia-link>
-                    </div>
+                    <template v-if="isMyProfile(profile) && !auth.account">
+                      <div class="text--secondary text-center">
+                        <p>Click on the icon below to set up your own organization account</p>
+                        <p> <i>Please note that you can not create a course without setting an academy account</i> </p>
+                      </div>
+                      <div class="text-right mt-4">
+                        <inertia-link  :href="route('account.setup')" class="prevent-default mx-1" title="Create your academy account">
+                          <v-btn fab><v-icon>add</v-icon></v-btn>
+                        </inertia-link>
+                      </div>
+                    </template>
                   </v-container>
                 </v-col>
                 <v-col cols="12" md="8" id="rhs">
