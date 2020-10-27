@@ -16,28 +16,17 @@
         label="Search for course"
         placeholder="Start typing to Search"
         prepend-icon="search"
+        :append-icon="`${model ? 'close' : ''}`"
+        @click:append="model = null"
         return-object
         dark
       ></v-autocomplete>
-      <div class="d-flex">
-          <v-spacer></v-spacer>
-            <v-btn
-            :disabled="!model"
-            color="red"
-            @click="model = null"
-            text
-        >
-            Clear
-            <v-icon right>
-            close
-            </v-icon>
-      </v-btn>
-
-      </div>
     </v-card-text>
     <v-divider></v-divider>
     <v-expand-transition light v-if="model">
+      <div class="expanded-course-search">
         <course-card :course="model" :showStatus="true" :showInstructor="false" display="grid" />
+      </div>
     </v-expand-transition>
     
   </v-card>
@@ -98,3 +87,11 @@
     },
   }
 </script>
+
+<style lang="scss">
+  .expanded-course-search{
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+  }
+</style>

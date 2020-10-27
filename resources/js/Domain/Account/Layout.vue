@@ -70,28 +70,39 @@
     
     <v-main>
       <div id="scrolling-techniques-5"  class="overflow-y-auto" style="max-height: 100vh;">
-          <v-img :src="account.cover_image" aspect-ratio="8.1"></v-img>
+          <div id="search">
+            <v-img :src="account.cover_image" aspect-ratio="8.1"></v-img>
+          </div>
           <div :style="`background-color: ${account.theme_color}; color: #fff`" id="account-banner">
-            <div class="pa-3" style="background-color: rgba(0,0,0, .2)">
-              <div v-if="!account.show_caption" class="d-flex align-center mb-2">
-                <div class="mr-2">
-                    <avatar :src="account.avatar" :color="account.theme_color" size="100" iconSize="50" icon="school" />
-                </div>
-                <div style="margin-top: 50px">
-                    <h4>{{ account.name }}</h4>
-                    <div>
-                        <small>{{account.username}}</small>
+            <v-row>
+              <v-col cols="12" md="8">
+                <div class="pa-3" >
+                  <div v-if="!account.show_caption" class="d-flex align-center mb-2">
+                    <div class="mr-2">
+                        <avatar :src="account.avatar" :color="account.theme_color" size="100" iconSize="50" icon="school" />
                     </div>
+                    <div style="margin-top: 50px">
+                        <h4>{{ account.name }}</h4>
+                        <div>
+                            <small>{{account.username}}</small>
+                        </div>
+                    </div>
+                  </div>
+                  <div v-else class="text-center mb-2" style="margin-top: 50px">
+                      <h1>{{account.caption}}</h1>
+                      <h4>{{account.subcaption}}</h4>
+                  </div>
+                  <!-- <template v-if="courses">
+                    <courses-quick-enroll :account="account" :courses="courses" />
+                  </template> -->
                 </div>
-              </div>
-              <div v-else class="text-center mb-2" style="margin-top: 50px">
-                  <h1>{{account.caption}}</h1>
-                  <h4>{{account.subcaption}}</h4>
-              </div>
-              <!-- <template v-if="courses">
-                <courses-quick-enroll :account="account" :courses="courses" />
-              </template> -->
-            </div>
+              </v-col>
+              <v-col cols="12" md="4">
+                <div class="search-container">
+                    <course-search :account="account" />
+                  </div>
+              </v-col>
+            </v-row>
           </div>
           <v-container>
               <v-row>
@@ -99,10 +110,7 @@
                     <slot />
                 </v-col>
                 <v-col cols="12" md="4">
-                    <div id="search">
-                      <course-search :account="account" />
-                    </div>
-                    
+
                     <slot name="before-bio" />
 
                     <template v-if="account.bio && account.bio !== 'null'" >
@@ -264,9 +272,18 @@
   }
 
   #account-banner{
-    margin: 0 2%;
-    border-radius: 5px;
+    border-radius: 0px 0px 5px 5px;
     margin-top: -50px;
+  }
+
+  @media (min-width: 768px) {
+    .search-container{
+      margin-top: 50px;
+    }
+    #account-banner{
+      margin-left: 2%;
+      margin-right: 2%;
+    }
   }
 
 </style>
