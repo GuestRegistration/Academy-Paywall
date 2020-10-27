@@ -115,13 +115,12 @@ const isMobile = [
             toastr.info(props.alerts.info);
         }
 
-       if(props.config.analytics && props.config.env == 'local')
+       if(props.config.analytics && props.config.env === 'production')
         {
             Vue.use(VueAnalytics, {
                 id: props.config.analytics
               });
             Vue.$ga.page(window.location.pathname);
-            console.log(props.config.analytics, window.location.pathname)
        }
         return props;
       },
