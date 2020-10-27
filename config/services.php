@@ -33,6 +33,10 @@ return [
     'gtm' => [
         'id' => env('GTM_ID', null),
         'triggers' => explode(',', env('GTM_TRIGGERS', ''))
+    ],
+
+    'analytics' => [
+        'id' => env('ANALYTICS_ID')
     ]
 
 ];

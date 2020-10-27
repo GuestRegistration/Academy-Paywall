@@ -30,6 +30,7 @@
         "jstz": "^2.1.1",
         "material-design-icons-iconfont": "^5.0.1",
         "toastr": "^2.1.4",
+        "vue-analytics": "^5.22.1",
         "vue-gtm": "^2.3.4",
         "vue-meta": "^2.4.0",
         "vue-phone-number-input": "^1.1.10",

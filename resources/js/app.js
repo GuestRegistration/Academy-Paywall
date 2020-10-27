@@ -10,6 +10,8 @@ import VueMeta from 'vue-meta'
 import store from './store';
 import toastr from 'toastr';
 import wysiwyg from "vue-wysiwyg";
+import VueAnalytics from 'vue-analytics';
+
 // import VueTagManager from "vue-tag-manager";
 
 window.Vue = Vue;
@@ -112,6 +114,15 @@ const isMobile = [
         if(props.alerts.info){
             toastr.info(props.alerts.info);
         }
+
+       if(props.config.analytics && props.config.env == 'local')
+        {
+            Vue.use(VueAnalytics, {
+                id: props.config.analytics
+              });
+            Vue.$ga.page(window.location.pathname);
+            console.log(props.config.analytics, window.location.pathname)
+       }
         return props;
       },
     },

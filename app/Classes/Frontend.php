@@ -15,7 +15,9 @@ class Frontend
         Inertia::share([
             'config' => [
                 'app_name' => config('app.name'),
-                'default_theme_color' => config('custom.default_theme_color')
+                'default_theme_color' => config('custom.default_theme_color'),
+                'analytics' => config('services.analytics.id'),
+                'env' => config('app.env'),
             ],
             'errors' => function () {
                 return self::errors();
