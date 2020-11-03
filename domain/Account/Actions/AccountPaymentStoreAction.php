@@ -22,13 +22,15 @@ class AccountPaymentStoreAction extends Controller
 
     public function __invoke(AccountPaymentGatewaySaveRequest $request, Account $account)
     {
-        $gateway =  $account->paymentGateway;
+        $gateway = $account->paymentGateway;
         $stripe_user_id = null;
 
         DB::beginTransaction();
         try {
-            if($gateway->gateway == 'stripe' && $request->gateway !== 'stripe'){
-                $stripe_user_id = $gateway->credentials->stripe_user_id;
+            if($gateway){
+                if($gateway->gateway == 'stripe' && $request->gateway !== 'stripe'){
+                    $stripe_user_id = $gateway->credentials->stripe_user_id;
+                }
             }
     
             $gateway ? $gateway->update($request->data()) : $account->paymentGateway()->create($request->data());

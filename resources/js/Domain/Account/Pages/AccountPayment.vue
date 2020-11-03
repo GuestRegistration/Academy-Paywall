@@ -87,8 +87,8 @@
                     this.form =  {
                         currency,
                         active: false,
-                        gateway: this.gateway.gateway,
-                        credentials: this.gateway.credentials
+                        gateway: this.gateway ? this.gateway.gateway : undefined,
+                        credentials: this.gateway ? this.gateway.credentials : {}
                     }
                 }
             },
