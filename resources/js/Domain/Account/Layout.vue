@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <nav-drawer />
+    <nav-drawer v-if="authenticated" />
     <v-app-bar
       app
       :color="account.theme_color"
@@ -10,7 +10,7 @@
       scroll-target="#scrolling-techniques-5"
       inverted-scroll
     >
-      <v-btn @click="$store.state.navDrawer = !$store.state.navDrawer" icon>
+      <v-btn v-if="authenticated" @click="$store.state.navDrawer = !$store.state.navDrawer" icon>
         <v-icon>menu</v-icon>
       </v-btn>
 

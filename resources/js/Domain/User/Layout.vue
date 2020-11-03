@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <nav-drawer />
+    <nav-drawer v-if="authenticated" />
 
     <!-- sm app bar -->
     <v-app-bar
@@ -8,15 +8,19 @@
       dark
       class="d-md-none"
     >
-    <v-btn  @click="$store.state.navDrawer = !$store.state.navDrawer" icon>
+    <v-btn v-if="authenticated" @click="$store.state.navDrawer = !$store.state.navDrawer" icon>
       <v-icon>menu</v-icon>
     </v-btn>
       
       <v-toolbar-title dark >
-        <inertia-link :href="route('profile.show', {profile: profile.username})" class="prevent-default" style="color: #fff">
+        <a :href="route('profile.show', {profile: profile.username})" class="prevent-default" style="color: #fff">
           <avatar :src="profile.avatar" color="primary" size="30"  /> {{ profile.fullname }}
-        </inertia-link>
+        </a>
       </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <a :href="route('home')" class="prevent-default" style="color: #fff">
+        <v-img src="/images/acada-icon.png" width="50"></v-img>
+      </a>
     </v-app-bar>
     
     <div id="scrolling-techniques-5"  class="overflow-y-auto" style="max-height: 100vh;">
@@ -30,7 +34,7 @@
                     dark
                     class="d-none d-md-block"
                   >
-                    <v-btn @click="$store.state.navDrawer = !$store.state.navDrawer" icon>
+                    <v-btn v-if="authenticated" @click="$store.state.navDrawer = !$store.state.navDrawer" icon>
                       <v-icon>menu</v-icon>
                     </v-btn>
                     <v-toolbar-title dark >
