@@ -111,7 +111,7 @@
       @aborted="freeProcess" />
 
     <stripe-gateway ref="stripeGateway" v-else-if="course.payment.require && course.payment.gateway == 'stripe'"
-      :publishable-key="payment_gateway.credentials.publishable_key" 
+      :publishable-key="payment_gateway.publishable_key" 
       :amount="course.price" 
       :currency="course.payment.currency" 
       :color="account.theme_color" 
@@ -270,7 +270,8 @@
             return new Promise((resolve, reject) => {
                 axios.post(this.route('course.stripe.charge', {course: this.course.slug}), {
                     token,
-                    secret_key: this.payment_gateway.credentials.secret_key,
+                    //secret_key: this.payment_gateway.credentials.secret_key,
+                    stripe_account: this.payment_gateway.credentials.stripe_user_id,
                     receipt_email: this.student.email
                 })
                 .then(response => {

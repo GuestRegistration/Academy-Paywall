@@ -11,9 +11,12 @@ use Domain\Account\Actions\AccountSetupStoreAction;
 use Domain\Account\Actions\AccountUserInviteAction;
 use Domain\Account\Actions\AccountStudentListAction;
 use Domain\Account\Actions\AccountPaymentStoreAction;
+use Domain\Account\Actions\AccountStripeConnectAction;
 use Domain\Account\Actions\AccountInstructorListAction;
+use Domain\Account\Actions\AccountStripeDisconnectAction;
 use Domain\Account\Actions\AccountUserInviteActionDelete;
 use Domain\Account\Actions\AccountUserInvitationAcceptAction;
+use Domain\Account\Actions\AccountStripeConnectCallbackAction;
 
 Route::get('account/{account}', AccountShowAction::class)->name('account.show.id');
 Route::get('/account', AccountSetupAction::class)->name('account.setup');
@@ -35,5 +38,9 @@ Route::prefix('{account:username}')->group(function(){
 
 Route::prefix('{account}')->group(function(){
     Route::get('/invitation/{invitation}', AccountUserInvitationAcceptAction::class)->name('account.instructor.invitation');
+    Route::post('/stripe-connect', AccountStripeConnectAction::class)->name('account.stripe.connect');
+    Route::post('/stripe-disconnect', AccountStripeDisconnectAction::class)->name('account.stripe.disconnect');
 });
+Route::get('oauth/stripe', AccountStripeConnectCallbackAction::class)->name('account.stripe.connect.callback');
+
 

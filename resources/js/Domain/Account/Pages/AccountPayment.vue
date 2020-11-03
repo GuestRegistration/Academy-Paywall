@@ -1,8 +1,11 @@
 <template>
     <v-container>
         <v-row justify="center">
-            <v-col cols="12" md="8" lg="6">
+            <v-col cols="12" md="8">
                 <h4 class="text-center">Payment Gateways</h4>
+                <v-alert icon="report_problem" prominent text type="error" v-if="Object.keys(errors).length">
+                    Set up a payment gateway
+                </v-alert>
                  <form @submit.prevent="saveGateway" >
                     <x-select :errors="errors" :value="form.currency" label="Currency" name="currency" :items="availableCurrencies" outlined @change="currencyChanged" />
                      <template v-if="form.currency"> 
@@ -11,7 +14,7 @@
                             <v-row justify="center">
                                 <v-col v-for="(gateway, g) in gateways" :key="g"
                                 cols="12"
-                                md="6">
+                                >
                                     <payment-gateway :gateway="gateway" :form="form" @gateway-updated="gatewayUpdated" />
                                 </v-col>
                             </v-row>
@@ -72,7 +75,6 @@
 
             gateways(){
                return this.form.currency ? this.currencies.find(currency => currency.currency == this.form.currency).gateways || [] : [];
-                
             },
 
         },
@@ -81,13 +83,13 @@
             currencyChanged(currency){
                 if(this.gateway && currency == this.gateway.currency){
                     this.form = { ...this.gateway };
-                    return;
-                }
-                this.form =  {
-                    currency,
-                    active: false,
-                    gateway: undefined,
-                    credentials: {}
+                }else{
+                    this.form =  {
+                        currency,
+                        active: false,
+                        gateway: this.gateway.gateway,
+                        credentials: this.gateway.credentials
+                    }
                 }
             },
 

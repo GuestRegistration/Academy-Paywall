@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StripeWebhook;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentController;
 
@@ -19,3 +20,4 @@ Route::post('payment', PaymentController::class);
 Route::get('/migrate', 'App\Http\Controllers\SystemController@migrate');
 Route::get('/lstorage', 'App\Http\Controllers\SystemController@linkStorage');
 
+Route::get('webhook/stripe', StripeWebhook::class)->name('stripe.webhook');

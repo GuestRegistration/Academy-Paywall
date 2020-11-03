@@ -22,8 +22,9 @@ class PaymentGatewaySupport {
             'name' => 'Stripe',
             'image' => 'images/stripe.png',
             'credentials' => [
-                'Publishable Key',
-                'Secret Key'
+                // 'Publishable Key',
+                // 'Secret Key'
+                'Stripe User Id'
             ],
         ],
     ];

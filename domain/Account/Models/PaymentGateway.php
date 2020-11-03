@@ -25,7 +25,7 @@ class PaymentGateway extends Model
 
     public function getCredentialsAttribute($value)
     {
-        return json_decode(decrypt($value));
+        return $value ? json_decode(decrypt($value)) : (object) [];
     }
 
     public function getCredentialsCompleteAttribute(){

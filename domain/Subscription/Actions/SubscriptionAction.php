@@ -25,7 +25,7 @@ class SubscriptionAction extends Controller
 
     public function __invoke(SubscriptionRequest $request, Account $account)
     {
-        Stripe::setApiKey(env('STRIPE_SK'));
+        Stripe::setApiKey(config('services.stripe.secret_key'));
         $charge = Charge::create($request->data());
         
         if($charge){

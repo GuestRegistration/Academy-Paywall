@@ -9,9 +9,11 @@
             :error-messages="errorString ? errorString : ''"
             :prepend-icon="prependIcon"
             :prepend-inner-icon="prependInnerIcon"
-            :append-icon="appendIcon"
+            :append-icon="toggleVisibility ? (visible ? 'visibility_off' : 'visibility') : appendIcon"
             :append-inner-icon="appendInnerIcon"
             :rules="rules"
+            :type="toggleVisibility ? (visible ? 'text' : 'password') : $attrs.type"
+            @click:append="visible = !visible"
         >
             <slot
             slot="append-outer"
@@ -25,6 +27,11 @@
 <script>
   export default {
     name: 'XInput',
+    data(){
+        return {
+            visible: false
+        }
+    },
     props: {
         errors: null,
         label: String,
@@ -33,6 +40,10 @@
         prependIcon: String,
         appendInnerIcon: String,
         prependInnerIcon: String,
+        toggleVisibility: {
+            type: Boolean,
+            default: false
+        }
     },
     computed: {
         errorString() {
@@ -41,6 +52,7 @@
         const error = this.errors[this.$attrs.name];
         return error.constructor === Array ? error[0] : error;
         },
+
     },
   }
 </script>

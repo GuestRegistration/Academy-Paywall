@@ -31,7 +31,7 @@ if (token) {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 window.pushGTMEvent = (GTMID, events = []) => {
-    console.log(events, ' will be fired in ', GTMID);
+    // console.log(events, ' will be fired in ', GTMID);
     if(window.GTMinitialized !== GTMID){
         VueTagManager.initialize({
             gtmId: GTMID

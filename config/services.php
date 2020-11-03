@@ -30,6 +30,13 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'stripe' => [
+        'publishable_key' => env('STRIPE_PK'),
+        'secret_key' => env('STRIPE_SK'),
+        'client_id' => env('STRIPE_CLIENT_ID'),
+        'webhook_secret' => env('STRIPE_WEBHOOK_SECRET')
+    ],
+
     'gtm' => [
         'id' => env('GTM_ID', null),
         'triggers' => explode(',', env('GTM_TRIGGERS', ''))
