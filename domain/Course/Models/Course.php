@@ -158,7 +158,7 @@ class Course extends Model
     }
 
     public function scopeOngoing($query){
-        return $query->whereDate('end_at', '>=', now());
+        return $query->whereDate('start_at', '<=', now())->whereDate('end_at', '>=', now());
     }
 
     public function scopeUpcoming($query){
