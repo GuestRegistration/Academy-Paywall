@@ -11,7 +11,7 @@ import store from './store';
 import toastr from 'toastr';
 import wysiwyg from "vue-wysiwyg";
 import VueAnalytics from 'vue-analytics';
-
+import GA from './plugins/analytics';
 // import VueTagManager from "vue-tag-manager";
 
 window.Vue = Vue;
@@ -117,12 +117,11 @@ const isMobile = [
 
        if(props.config.analytics && props.config.env === 'production')
         {
-            Vue.use(VueAnalytics, {
-                id: props.config.analytics
-              });
-            Vue.$ga.page(window.location.pathname);
+          Vue.use(GA, {
+            id: props.config.analytics
+          });
        }
-        return props;
+      return props;
       },
     },
   }),

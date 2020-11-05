@@ -43,6 +43,11 @@
         <script src="{{ mix('js/app.js') }}" id="app-script" defer></script>
         <!-- Google Tag Manager -->
         <script src="https://unpkg.com/vue-tag-manager@x.x.x/lib/TagManager.js"></script>
+        @if (config('services.analytics.id'))
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('services.analytics.id') }}"></script>
+        @endif
+        
         @routes
         <style>
             #preloader-container
