@@ -24,9 +24,11 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "@fracto/vue-credit-card": "^0.5.0",
         "@inertiajs/inertia": "^0.1.9",
         "@inertiajs/inertia-vue": "^0.1.2",
         "@mdi/font": "^5.3.45",
+        "flag-icon-css": "^3.5.0",
         "jstz": "^2.1.1",
         "material-design-icons-iconfont": "^5.0.1",
         "toastr": "^2.1.4",
@@ -38,6 +40,7 @@
         "vue-tag-manager": "^0.1.2",
         "vue-wysiwyg": "^1.7.2",
         "vuetify": "^2.3.7",
+        "vuetify-credit-card": "^1.0.1",
         "vuex": "^3.5.1"
     }
 }

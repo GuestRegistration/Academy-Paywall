@@ -5,7 +5,6 @@ namespace Domain\Course\Actions;
 use Stripe\Charge;
 use Stripe\Stripe;
 use Inertia\Inertia;
-use Stripe\PaymentIntent;
 use Illuminate\Http\Request;
 use Domain\Course\Models\Course;
 use App\Http\Controllers\Controller;
@@ -30,20 +29,12 @@ class CourseStripeChargeAction extends Controller
             'amount', 'currency', 'description', 'source', 'receipt_email'
         ]);
         
-        // Stripe::setApiKey($request->get('secret_key'));
         Stripe::setApiKey(config('services.stripe.secret_key'));
 
         $charge = Charge::create($data, [
             'stripe_account' => $request->get('stripe_account')
         ]);
         
-        // $payment_intent = PaymentIntent::create([
-        //     'payment_method_types' => ['card'],
-        //     'amount' => 1000,
-        //     'currency' => 'usd',
-        //   ], ['stripe_account' => $request->get('stripe_user_id') ]);
-
-
         return response([
             'charge' => $charge
         ]);

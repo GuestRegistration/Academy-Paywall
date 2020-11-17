@@ -11,7 +11,7 @@ class PaymentGateway extends Model
     use UUID;
 
     protected $fillable = [
-        'account_id', 'currency', 'gateway', 'active', 'credentials', 
+        'account_id', 'country', 'gateway', 'active', 'credentials', 
     ];
 
     protected $appends = [
@@ -41,6 +41,11 @@ class PaymentGateway extends Model
             }
         }
         return $complete;
+    }
+
+    public function getCurrenciesAttribute()
+    {
+        return PaymentGatewaySupport::GATEWAYS[$this->gateway]['currencies'];
     }
 
 }

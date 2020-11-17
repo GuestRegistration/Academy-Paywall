@@ -11,6 +11,7 @@ use Domain\Course\Actions\AccountCourseCreateAction;
 use Domain\Course\Actions\AccountCourseDeleteAction;
 use Domain\Course\Actions\AccountCourseEnrollAction;
 use Domain\Course\Actions\AccountCourseUpdateAction;
+use Domain\Course\Actions\CourseMidtransChargeAction;
 use Domain\Course\Actions\AccountCourseRegisterAction;
 use Domain\Course\Actions\AccountCourseStudentListAction;
 
@@ -27,4 +28,5 @@ Route::prefix('{account:username}')->group(function(){
     Route::post('/{course:slug}/enroll', AccountCourseRegisterAction::class)->name('account.course.register');
     Route::delete('/{course:slug}/delete', AccountCourseDeleteAction::class)->name('account.course.delete');
 });
-Route::post('/{course:slug}/charge', CourseStripeChargeAction::class)->name('course.stripe.charge');
+Route::post('/{course:slug}/stripe-charge', CourseStripeChargeAction::class)->name('course.stripe.charge');
+Route::post('/{course:slug}/midtrans-charge', CourseMidtransChargeAction::class)->name('course.midtrans.charge');

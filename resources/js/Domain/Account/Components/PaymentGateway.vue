@@ -35,7 +35,7 @@
                   method="post"
                 >
                   <csrf />
-                  <input type="hidden" name="currency" v-model="f.currency">
+                  <input type="hidden" name="country" v-model="f.country">
                   <v-btn
                     dark
                     :color="auth.account.theme_color"
@@ -130,19 +130,19 @@
             }
         },
         computed: {
-            auth() {
-                return this.$page.auth
-            },
-            errors() {
-                return this.$page.errors
-            },
-            rules(){
-                return validation.rules;
-            },
-            credentials(){
-              const gateway = this.form.gateway ? this.gateways.find(gateway => gateway.name == this.form.gateway) : null;
-              return gateway ? gateway.credentials : [];
-          }
+          auth() {
+              return this.$page.auth
+          },
+          errors() {
+              return this.$page.errors
+          },
+          rules(){
+              return validation.rules;
+          },
+          // credentials(){
+          //   const gateway = this.form.gateway ? this.gateways.find(gateway => gateway.name == this.form.gateway) : null;
+          //   return gateway ? gateway.credentials : [];
+          // }
         },
         methods: {
           async submit()
@@ -154,8 +154,8 @@
               this.edit = false;
               this.saved = true;
               this.$emit('gateway-updated', this.f);
-
           },
+
           gatewayActivated() {
               //this.$emit('gateway-updated', this.f);
           },
@@ -183,7 +183,7 @@
               }else{
                 this.f = {
                   active: false,
-                  currency: form.currency,
+                  country: form.country,
                   gateway: this.gateway.name,
                   credentials:  form.gateway == this.gateway.name ? form.credentials : {}
                 }

@@ -39,7 +39,7 @@ class AccountStripeConnectCallbackAction extends Controller
                 $gateway =  $account->paymentGateway;
                 $data = [
                     'gateway' => 'stripe',
-                    'currency' => Cache::get($account->getKey().'-stripe-currency'),
+                    'country' => Cache::get($account->getKey().'-stripe-country'),
                     'active' => 1,
                     'credentials' => encrypt(json_encode([
                         'stripe_user_id' => $response->stripe_user_id
@@ -48,7 +48,7 @@ class AccountStripeConnectCallbackAction extends Controller
         
                 $gateway ? $gateway->update($data) : $account->paymentGateway()->create($data);
         
-                Cache::forget($account->getKey().'-stripe-currency');
+                Cache::forget($account->getKey().'-stripe-country');
 
                 DB::commit();
             } catch (Exception $e) {

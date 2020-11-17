@@ -6,10 +6,42 @@
                 <v-alert icon="report_problem" prominent text type="error" v-if="Object.keys(errors).length">
                     Set up a payment gateway
                 </v-alert>
+
                  <form @submit.prevent="saveGateway" >
-                    <x-select :errors="errors" :value="form.currency" label="Currency" name="currency" :items="availableCurrencies" outlined @change="currencyChanged" />
-                     <template v-if="form.currency"> 
-                        <h4 class="text-center">Available gateway for {{form.currency}}</h4>
+                    <v-combobox
+                        v-model="form.country"
+                        :items="countryCodes"
+                        label="Select country"
+                        append-icon="arrow_drop_down"
+                        outlined
+                        :error="errors && errors.country && errors.country.length ? true : false"
+                        :error-messages="errors && errors.country && errors.country.length ? errors.country[0] : ''"
+                        :filter="filterCountries"
+                        @change="countryChanged"
+                        >
+                            <template v-slot:item="data" >
+                                <div class="d-flex align-items-center py-1">
+                                    <div class="mr-2">
+                                        <span :class="`flag-icon flag-icon-${data.item.toLowerCase()}`"></span>
+                                    </div>
+                                    <div>
+                                        {{ countries[data.item].name }}
+                                    </div>
+                                </div>
+                            </template>
+                            <template v-slot:selection="data">
+                                <div class="d-flex align-items-center">
+                                    <div class="mr-2">
+                                        <span :class="`flag-icon flag-icon-${data.item.toLowerCase()}`"></span>
+                                    </div>
+                                    <div>{{ countries[data.item].name }}</div>
+                                </div>
+                            </template>
+                    </v-combobox>
+
+                    <!-- <x-select :errors="errors" :value="form.currency" label="Currency" name="currency" :items="availableCurrencies" outlined @change="currencyChanged" /> -->
+                     <template v-if="form.country"> 
+                        <h4 class="text-center">Available gateway in  <span :class="`flag-icon flag-icon-${form.country.toLowerCase()}`"></span> {{ countries[form.country].name }}</h4>
                         <div v-if="gateways.length">
                             <v-row justify="center">
                                 <v-col v-for="(gateway, g) in gateways" :key="g"
@@ -20,8 +52,13 @@
                             </v-row>
                         </div>
                         <div v-else class="text-center">
-                            <p class="grey--text">No payment gateway available for {{ form.currency }} yet</p>
+                            <p class="grey--text">No payment gateway integrated in {{ countries[form.country].name }} yet</p>
                         </div>
+                     </template>
+                     <template v-else>
+                          <div class="text-center grey--text">
+                              <p>Select country</p>
+                          </div>
                      </template>
                 </form> 
             </v-col>
@@ -33,6 +70,7 @@
     import {mapState} from "vuex";
     import App from '@/layouts/App';
     import PaymentGateway from '../Components/PaymentGateway.vue';
+    import 'flag-icon-css/css/flag-icon.min.css';
 
     export default {
         name: "AccountPayment",
@@ -58,6 +96,7 @@
             account: Object,
             gateway: Object,
             currencies: Array,
+            countries: Object,
         },
         computed: {
             ...mapState({
@@ -69,28 +108,38 @@
                 return this.$page.errors;
             },
 
-            availableCurrencies(){
-                return this.currencies.map((currency) => currency.currency.toUpperCase());
-            },
+            // availableCurrencies(){
+            //     return this.currencies.map((currency) => currency.currency.toUpperCase());
+            // },
 
             gateways(){
-               return this.form.currency ? this.currencies.find(currency => currency.currency == this.form.currency).gateways || [] : [];
+               return this.form.country ? this.countries[this.form.country].gateways : [];
             },
+
+            countryCodes(){
+                return Object.keys(this.countries);
+            }
 
         },
 
         methods: {
-            currencyChanged(currency){
-                if(this.gateway && currency == this.gateway.currency){
+            countryChanged(country){
+                if(this.gateway && country == this.gateway.country){
                     this.form = { ...this.gateway };
                 }else{
                     this.form =  {
-                        currency,
+                        country,
                         active: false,
                         gateway: this.gateway ? this.gateway.gateway : undefined,
                         credentials: this.gateway ? this.gateway.credentials : {}
                     }
                 }
+            },
+
+            filterCountries(item, queryText, itemText){
+                // let countries = Object.keys(this.countries).map(code => this.countries[code].name);
+                // return countries.find(country => country.search(queryText) >= 0) ? true : false;
+                return true;
             },
 
             gatewayUpdated(gateway) {

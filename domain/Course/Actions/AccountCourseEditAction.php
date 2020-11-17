@@ -25,8 +25,10 @@ class AccountCourseEditAction extends Controller
 
         $payment_gateway = $account->paymentGateway ? $account->paymentGateway->only(['active', 'gateway', 'currency']) : null;
         $payment_gateway = $payment_gateway && isset(PaymentGatewaySupport::GATEWAYS[$payment_gateway['gateway']]) ? $payment_gateway : null;
+        
+        $currencies = $account->paymentGateway ?  $account->paymentGateway->currencies : [];
 
-        return Inertia::render('Domain/Course/Pages/CourseEdit', compact('account', 'course', 'instructors', 'payment_gateway'));
+        return Inertia::render('Domain/Course/Pages/CourseEdit', compact('account', 'course', 'instructors', 'payment_gateway', 'currencies'));
     }
 
 }

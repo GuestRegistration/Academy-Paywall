@@ -50,15 +50,22 @@
                         
                         <template v-if="form.requires_payment">
                             <div v-if="paymentGateway && paymentGateway.active">
-                                <v-alert icon="info" prominent text type="info">
+                                <!-- <v-alert icon="info" prominent text type="info">
                                     Payment would will be received in <strong>{{paymentGateway.currency}}</strong> via {{paymentGateway.gateway}}
-                                </v-alert>
+                                </v-alert> -->
                                 <div class="text-right">
                                     <inertia-link :href="route('account.payment.gateway', {account: account.username})" class="prevent-default">
                                         <v-icon>settings</v-icon> Payment method settings
                                     </inertia-link>                                
                                 </div>
-                                <x-input  :errors="errors" name="price" type="number" v-model="form.price" label="Price" />
+                                <v-row align="center">
+                                    <v-col>
+                                        <x-select :errors="errors" v-model="form.currency" label="Currency" name="currency" :items="supportedCurrencies" outlined />
+                                    </v-col>
+                                    <v-col>
+                                        <x-input  :errors="errors" name="price" type="number" v-model="form.price" label="Price" />
+                                    </v-col>
+                                </v-row>
                             </div>
                         </template>
                     </v-expansion-panel-content>
@@ -220,6 +227,7 @@
             loading: Boolean,
             color: String,
             instructors: Array,
+            currencies: Array,
         },
         
         data(){
@@ -251,6 +259,10 @@
             },
             account(){
                 return this.$page.account
+            },
+            supportedCurrencies(){
+                const allCurrencies = require('../../../../assets/currencies.json');
+                return this.currencies === 'all' ? Object.keys(allCurrencies) : this.currencies;
             }
         },
 

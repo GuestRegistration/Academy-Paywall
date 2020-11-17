@@ -26,8 +26,8 @@ class AccountPaymentGatewaySaveRequest extends FormRequest
     public function rules()
     {
         $rules = [
-                'currency' => ['required', Rule::in(array_keys(PaymentGatewaySupport::CURRENCIES))],
-                'gateway' => $this->currency ? ['required', Rule::in(PaymentGatewaySupport::CURRENCIES[$this->currency])] : [],
+                'country' => ['required'],
+                'gateway' => $this->currency ? ['required', Rule::in(\array_keys(PaymentGatewaySupport::GATEWAYS))] : [],
                 'credentials' => ['required', 'array']
             ];
             foreach($this->credentialKeys() as $key){
@@ -44,7 +44,7 @@ class AccountPaymentGatewaySaveRequest extends FormRequest
             'active' => (Bool) $this->active,
             'credentials' => \encrypt(json_encode($this->get('credentials')))
         ])->only([
-            'currency', 'gateway', 'active', 'credentials'
+            'country', 'gateway', 'active', 'credentials'
         ]);
     }
 

@@ -16,7 +16,7 @@ class Course extends Model
     const MIN_DESCRIPTION_CHARACTER = 120;
     
     protected $fillable = [
-        'account_id', 'title', 'description', 'price', 'cover_image', 'published_at', 'slug',
+        'account_id', 'title', 'description', 'price', 'currency', 'cover_image', 'published_at', 'slug',
         'preview_video', 'start_at', 'end_at', 'course_type', 'send_instructions', 'instructions'
     ];
 
@@ -146,7 +146,6 @@ class Course extends Model
     public function getPaymentAttribute(){
         return [
             'require' => $this->price ? true : false,
-            'currency' => optional($this->account->paymentGateway)->currency,
             'gateway' =>  optional($this->account->paymentGateway)->gateway,
             'gateway_active' =>  optional($this->account->paymentGateway)->active,
             'gateway_clear' =>  optional($this->account->paymentGateway)->credentials_complete,

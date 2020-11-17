@@ -19,7 +19,9 @@ class AccountCourseEnrollAction extends Controller
     {
        $course->load('users.profile');
        $payment_gateway =  $account->paymentGateway;
-       $payment_gateway->publishable_key = config('services.stripe.publishable_key');
+       if($payment_gateway->gateway == 'stripe'){
+        $payment_gateway->publishable_key = config('services.stripe.publishable_key');
+       }
        
         return Inertia::render('Domain/Course/Pages/CourseEnroll', compact('account', 'course', 'payment_gateway'))
                         ->withViewData([

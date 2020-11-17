@@ -24,7 +24,7 @@ class AccountStripeConnectAction extends Controller
         $clientId = config('services.stripe.client_id');
         $url = "https://connect.stripe.com/oauth/authorize?response_type=code&client_id={$clientId}&scope=read_write&redirect_uri=".route('account.stripe.connect.callback');
         
-        Cache::add($account->getKey().'-stripe-currency', $request->get('currency'));
+        Cache::add($account->getKey().'-stripe-country', $request->get('country'));
 
         return Redirect::away($url);
     }

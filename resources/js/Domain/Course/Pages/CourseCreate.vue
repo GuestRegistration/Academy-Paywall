@@ -16,7 +16,7 @@
                         <br>
                         Slot Remaining: {{ account.courses_slot }}
                     </v-alert>
-                    <course-form v-if="account.has_free_course_slot || account.is_unlimited || account.courses_slot > 0 || payment" @submit="submit" :loading="loading" :color="account.theme_color" :instructors="instructors" />
+                    <course-form v-if="account.has_free_course_slot || account.is_unlimited || account.courses_slot > 0 || payment" @submit="submit" :loading="loading" :color="account.theme_color" :instructors="instructors" :currencies="currencies" />
                 </template>
                 <template v-else-if="account.subscription && account.subscription.expired">
                     <v-alert  icon="info" prominent text type="info">
@@ -73,6 +73,7 @@
             instructors: Array,
             stripe_pk: String,
             first_course: Boolean,
+            currencies: Array,
         },
         methods: {
            async submit(formData){

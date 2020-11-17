@@ -35,7 +35,9 @@ class AccountCourseCreateAction extends Controller
 
         $payment_gateway = $payment_gateway && isset(PaymentGatewaySupport::GATEWAYS[$payment_gateway['gateway']]) ? $payment_gateway : null;
 
-        return Inertia::render('Domain/Course/Pages/CourseCreate', compact('account', 'payg', 'stripe_pk', 'payment', 'instructors', 'payment_gateway'));
+        $currencies = $account->paymentGateway ?  $account->paymentGateway->currencies : [];
+
+        return Inertia::render('Domain/Course/Pages/CourseCreate', compact('account', 'payg', 'stripe_pk', 'payment', 'instructors', 'payment_gateway', 'currencies'));
     }
 
 }

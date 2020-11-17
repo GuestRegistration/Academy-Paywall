@@ -65,7 +65,7 @@
                   </div>
                   <v-spacer></v-spacer>
                   <div>
-                    <h4 v-if="course.payment.require">{{course.price | money(course.payment.currency)}}</h4>
+                    <h4 v-if="course.payment.require">{{course.price | money(course.currency)}}</h4>
                     <h4 v-else>FREE</h4>
                   </div>
                 </div>               
@@ -91,7 +91,7 @@
       :public-key="payment_gateway.credentials.public_key"
       :email="student.email" 
       :amount="course.price * 100" 
-      :currency="course.payment.currency"
+      :currency="course.currency"
       :charge_callback="paystackCallBack"   
       :data="{
         ref: student.id,
@@ -113,12 +113,24 @@
     <stripe-gateway ref="stripeGateway" v-else-if="course.payment.require && course.payment.gateway == 'stripe'"
       :publishable-key="payment_gateway.publishable_key" 
       :amount="course.price" 
-      :currency="course.payment.currency" 
+      :currency="course.currency" 
       :color="account.theme_color" 
       :charge_callback="stripeCallBack" 
       @success="registrationSuccessfull" 
       @error="registrationFailed"
       @aborted="freeProcess" />
+
+    <midtrans-gateway ref="midtransGateway" v-else-if="course.payment.require && course.payment.gateway == 'midtrans'"
+      :client-key="payment_gateway.credentials.client_key"
+      :amount="course.price" 
+      :currency="course.currency"
+      :color="account.theme_color"
+      :charge="midtransCharge"
+      :charge_callback="midtransRegister"
+      @success="registrationSuccessfull" 
+      @error="registrationFailed"  
+      @aborted="freeProcess"
+    />
 
     <student-enrollment 
       :account="account"  
@@ -136,7 +148,6 @@
     import CourseShow from './CourseShow.vue';
     import CourseStatus from '../Components/CourseStatus.vue'
     import StudentEnrollment from './../Components/StudentEnrollment.vue';
-    import PaystackGateway from '@/components/PaystackGateway.vue';
 
     const EVENT = 'open_enrollment_form';
 
@@ -154,7 +165,7 @@
                               h(CourseShow, [page])
                             ]),
         components: {
-            StudentEnrollment, PaystackGateway, CourseStatus
+            StudentEnrollment, CourseStatus
         },
 
         data(){
@@ -238,6 +249,10 @@
                 this.$refs.stripeGateway.open();
               break;
 
+              case 'midtrans':
+                this.$refs.midtransGateway.open();
+              break;
+
               default:
                 toastr.error("We do not support that payment gateway yet. We are working on it.");
                 this.freeProcess();
@@ -270,7 +285,6 @@
             return new Promise((resolve, reject) => {
                 axios.post(this.route('course.stripe.charge', {course: this.course.slug}), {
                     token,
-                    //secret_key: this.payment_gateway.credentials.secret_key,
                     stripe_account: this.payment_gateway.credentials.stripe_user_id,
                     receipt_email: this.student.email
                 })
@@ -282,7 +296,7 @@
                       raw: true,
                       for_real: true,
                       payment_gateway: this.course.payment.gateway,
-                      currency: this.course.payment.currency,
+                      currency: this.course.currency,
                       amount: this.course.price
                     })
                 })
@@ -295,6 +309,41 @@
             })
           },
 
+          midtransCharge(token){
+            return new Promise((resolve, reject) => {
+              axios.post(this.route('course.midtrans.charge', {course: this.course.slug}), {
+                    token, ...this.student,
+                    server_key: this.payment_gateway.credentials.server_key,
+                }).then(response => {
+                  resolve(response.data.charge);
+                })
+                .catch(e => {
+                    reject(e);
+                })
+            });
+          },
+
+          midtransRegister(charge){
+            return new Promise((resolve, reject) => {
+                this.process = `Registering you as ${this.student.first_name} ${this.student.last_name}`;
+                this.register({
+                  ...this.student,
+                  payment_ref: charge.transaction_id,
+                  raw: true,
+                  for_real: true,
+                  payment_gateway: this.course.payment.gateway,
+                  currency: this.course.currency,
+                  amount: this.course.price
+                })
+                .then(response => {
+                  resolve(response, true);
+                })
+                .catch(e => {
+                    reject(e);
+                });
+            });
+          },
+          
           registrationSuccessfull(response){
             this.freeProcess();
             this.student = response.data;

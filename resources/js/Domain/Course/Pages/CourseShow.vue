@@ -35,7 +35,7 @@
         <v-divider></v-divider>
         <div class="d-flex my-3">
             <div>
-                <h4 v-if="course.payment.require">{{course.price | money(course.payment.currency)}}</h4>
+                <h4 v-if="course.payment.require">{{course.price | money(course.currency)}}</h4>
                 <h4 v-else>FREE</h4>
             </div>
             <div class="ml-auto text-right" >

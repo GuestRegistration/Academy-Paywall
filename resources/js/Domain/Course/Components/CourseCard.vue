@@ -41,7 +41,7 @@
         </v-card-text>
 
         <v-card-actions>
-          <h4 v-if="course.payment.require">{{course.price | money(course.payment.currency)}}</h4>
+          <h4 v-if="course.payment.require">{{course.price | money(course.currency)}}</h4>
           <h4 v-else>FREE</h4>
           <v-spacer></v-spacer>
           <inertia-link :href="route('account.course.show', {account: course.account.username, course: course.slug})" class="prevent-default">

@@ -21,7 +21,7 @@
                 <template v-else>
                     <h3 class="mb-3"> {{ 'Edit course: '+course.title }} </h3>
                     <v-divider></v-divider>
-                    <course-form @submit="submit" :course="course" :loading="loading" :color="account.theme_color"  :instructors="instructors" />
+                    <course-form @submit="submit" :course="course" :loading="loading" :color="account.theme_color"  :instructors="instructors" :currencies="currencies" />
                 </template>
             </v-col>
         </v-row>
@@ -55,6 +55,7 @@
             account: Object,
             course: Object,
             instructors: Array,
+            currencies: Array,
         },
         methods: {
             async submit(formData){

@@ -10,6 +10,7 @@ class PaymentGatewaySupport {
      * Integrated gateways
      * 
      */
+
     const GATEWAYS = [
         'paystack' => [
             'name' => 'Paystack',
@@ -17,38 +18,101 @@ class PaymentGatewaySupport {
             'credentials' => [
                 'Public Key',
             ],
+            'countries' => [
+                'NG' => 'Nigeria'
+            ],
+            'currencies' => [
+                'NGN', 'GHS', 'ZAR'
+            ]
         ],
+
+        'midtrans' => [
+            'name' => 'Midtrans',
+            'image' => 'images/midtrans.png',
+            'credentials' => [
+                'Client Key',
+                'Server Key'
+            ],
+            'countries' => [
+                'ID' => 'Indonesia'
+            ],
+            'currencies' => [
+                'IDR'
+            ]
+        ],  
+
         'stripe' => [
             'name' => 'Stripe',
             'image' => 'images/stripe.png',
             'credentials' => [
-                // 'Publishable Key',
-                // 'Secret Key'
                 'Stripe User Id'
             ],
+            'countries' => [
+                'AU' => 'Australia',
+                'AT' => 'Austria',
+                'BE' => 'Belgium',
+                'BR' => 'Brazil',
+                'BG' => 'Bulgaria',
+                'CA' => 'Canada',
+                'CY' => 'Cyprus',
+                'CZ' => 'Czech Republic',
+                'DK' => 'Denmark',
+                'EE' => 'Estonia',
+                'FI' => 'Finland',
+                'FR' => 'France',
+                'DE' => 'Germany',
+                'GR' => 'Greece',
+                'HK' => 'Hong Kong',
+                'HU' => 'Hungary',
+                'IN' =>'India',
+                'IE' => 'Ireland',
+                'IT' => 'Italy',
+                'JP' => 'Japan',
+                'LV' => 'Latvia',
+                'LT' => 'Lithuania',
+                'LU' => 'Luxembourg',
+                'MY' => 'Malaysia',
+                'MT' => 'Malta',
+                'MX' => 'Mexico',
+                'NL' => 'Netherland',
+                'NZ' => 'New Zealand',
+                'NO' => 'Norway',
+                'PL' => 'Poland',
+                'PT' => 'Portugal',
+                'RO' => 'Romania',
+                'SG' => 'Singapore',
+                'SK' => 'Slovakia',
+                'SL' => 'Slovenia',
+                'ES' => 'Spain',
+                'SE' => 'Sweden',
+                'CH' => 'Switzerland',
+                'GB' => 'United Kingdom',
+                'US' => 'United States'
+            ],
+            'currencies' => 'all'
         ],
     ];
-
     /**
      * 
      * supported currencies
      * 
      */
-    const CURRENCIES = [
-        'CAD' => [
-            'stripe'
-        ],
-        'EUR' => [
-            'stripe'
-        ],
-        'NGN' => [
-            'paystack',
-        ],
-        'USD' => [
-            'stripe'
-        ]
+    // const CURRENCIES = [
+    //     'CAD' => [
+    //         'stripe'
+    //     ],
+    //     'EUR' => [
+    //         'stripe'
+    //     ],
+    //     'NGN' => [
+    //         'paystack',
+    //     ],
+    //     'USD' => [
+    //         'stripe'
+    //     ]
 
-    ];
+    // ];
+
 
     /**
      * 
