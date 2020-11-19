@@ -123,7 +123,10 @@ const isMobile = [
             id: props.config.analytics
           });
        }
-      if(typeof window.Intercom !== undefined) window.Intercom("update");
+       
+      if(typeof window.Intercom === 'function'){
+        window.Intercom("update");
+      } 
      
       return props;
       },
