@@ -123,6 +123,8 @@ const isMobile = [
             id: props.config.analytics
           });
        }
+      if(typeof window.Intercom !== undefined) window.Intercom("update");
+     
       return props;
       },
     },

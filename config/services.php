@@ -44,6 +44,11 @@ return [
 
     'analytics' => [
         'id' => env('ANALYTICS_ID')
+    ],
+
+    'intercom' => [
+        'app_id' => env('INTERCOM_APP_ID'),
+        'id_verification_secret' => env('INTERCOM_ID_VERIFICATION_SECRET'),
     ]
 
 ];
