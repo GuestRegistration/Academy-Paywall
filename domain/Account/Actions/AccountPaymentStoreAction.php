@@ -27,8 +27,9 @@ class AccountPaymentStoreAction extends Controller
 
         DB::beginTransaction();
         try {
+            
             if($gateway){
-                if($gateway->gateway == 'stripe' && $request->gateway !== 'stripe'){
+                if($gateway->gateway == 'stripe' && $request->gateway !== 'stripe' && \property_exists($gateway->credentials, 'stripe_user_id')){
                     $stripe_user_id = $gateway->credentials->stripe_user_id;
                 }
             }
