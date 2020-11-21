@@ -24,7 +24,7 @@ class CourseStripeChargeAction extends Controller
             'amount' => $course->price * 100,
             'description' => "Course fee for {$course->title}",
             'source' => $request->get('token'),
-            'currency' => $course->payment['currency'],
+            'currency' => $course->currency,
         ])->only([
             'amount', 'currency', 'description', 'source', 'receipt_email'
         ]);
