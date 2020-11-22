@@ -135,7 +135,7 @@ class Course extends Model
 
     public function getPublishedTimeAttribute(){
         return optional($this->published_at)->format('d F, Y');
-    }
+    }   
 
     public function getSnippetAttribute(){
         $length = self::MIN_DESCRIPTION_CHARACTER;
@@ -149,6 +149,7 @@ class Course extends Model
             'gateway' =>  optional($this->account->paymentGateway)->gateway,
             'gateway_active' =>  optional($this->account->paymentGateway)->active,
             'gateway_clear' =>  optional($this->account->paymentGateway)->credentials_complete,
+            'gateway_supported' => $this->account->paymentGateway ? in_array($this->currency, $this->account->paymentGateway->currencies) : false
         ];
     }
 

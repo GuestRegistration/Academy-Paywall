@@ -39,7 +39,19 @@
             <v-card-text>
               <div class="text-center">
                   <h1>Ooops!</h1>
-                  Enrollment for this course requires payment but payment gateway is currently not set by the organizer
+                  <p>Enrollment for this course requires payment but payment gateway is currently not set by the organizer</p>
+                <v-divider></v-divider>
+                <v-btn type="button" color="red darken-1" text @click="$inertia.visit(route('account.course.show', {account: account.username, course: course.slug}))">Go back</v-btn>
+              </div>
+            </v-card-text>
+          </v-card>
+        </div>
+        <div v-else-if="!course.payment.gateway_supported">
+          <v-card>
+            <v-card-text>
+              <div class="text-center">
+                  <h1>Ooops!</h1>
+                  <p>Payment gateway not supported</p>
                 <v-divider></v-divider>
                 <v-btn type="button" color="red darken-1" text @click="$inertia.visit(route('account.course.show', {account: account.username, course: course.slug}))">Go back</v-btn>
               </div>

@@ -30,6 +30,8 @@ Vue.mixin({
 
 Vue.filter('money', (value, currency = null) => {
   const currencies = require('../assets/currencies.json');
+  if(!currency) return new Intl.NumberFormat().format(value);
+  
   const symbol = currencies[currency] ? currencies[currency].symbol_native : currency;
   return `${symbol}${new Intl.NumberFormat().format(value)}`;
 });
