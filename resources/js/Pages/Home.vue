@@ -69,6 +69,43 @@
             </div>
         </section>
 
+        <section class="page-section" id="countries">
+            <v-row justify="center" align="center">
+                <v-col cols="12" md="6">
+                    <div class="section-head">
+                        <h1>RECEIVE ANY CURRENCY FROM <span class="text-custom-primary">40+ COUNTRIES</span></h1>
+                    </div>
+                    <div class="container text-center">
+                        <p>You can recive payment for your courses in any currency from over 40 different countries in the world</p>
+                    </div>
+                </v-col>
+                <v-col cols="12" md="6">
+                    <div class="container">
+                        <div class="text-center">
+                            <span v-for="country in availableCountries" :key="country.code" :class="`flag-icon flag-icon-${country.code.toLowerCase()} ma-2`" :title="country.name"></span>
+                        </div>
+                    </div>
+                </v-col>
+            </v-row>
+
+            <div class="container mt-5">
+                <div class="section-head">
+                        <h2>NO NEED TO WORRY ABOUT PAYMENTT GATEWAY</h2>
+                        <p>We already have all worked out for you.</p>
+                </div>
+                <v-row justify="center" align="center">
+                    <v-col v-for="(gateway, i) in gateways" :key="i">
+                        <div class="pa-2 text-center">
+                            <a :href="gateway.link" target="_blank">
+                                <img :src="gateway.image" :title="gateway.name" height="100px" />
+                            </a>
+                        </div>
+                    </v-col>
+                </v-row>
+            </div>
+        </section>
+
+
         <section class="page-section" id="pricing">
             <div class="bg-custom-primary text-center mb-3" style="height: 200px">
                 <img src="/images/arrow-divider2.PNG" width="100%">
@@ -196,6 +233,7 @@
             </div>
         </section>
 
+
         <section class="page-section" id="community">
             <div class="section-head">
                 <h1>OUR COMMUNITY</h1>
@@ -240,6 +278,7 @@
     import App from '@/layouts/App.vue';
     import SigninModal from '@/Domain/Auth/Components/SigninModal';
     import NavDrawer from '@/components/NavDrawer';
+    import 'flag-icon-css/css/flag-icon.min.css';
 
     export default {
         name: "HomePage",
@@ -250,6 +289,8 @@
             howItWork: Array,
             features: Array,
             communities: Array,
+            countries: Object,
+            gateways: Array,
         },
         data(){
             return {
@@ -259,6 +300,12 @@
              ...mapGetters([
                 'auth', 'authenticated'
             ]),
+            availableCountries(){
+                return Object.keys(this.countries).map(code => ({
+                    code: code,
+                    name: this.countries[code]
+                }))
+            }
         }
     }
 </script>

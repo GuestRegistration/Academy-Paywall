@@ -15,6 +15,7 @@ class PaymentGatewaySupport {
         'paystack' => [
             'name' => 'Paystack',
             'image' => 'images/paystack.png',
+            'link' => 'https://paystack.com',
             'credentials' => [
                 'Public Key',
             ],
@@ -29,6 +30,7 @@ class PaymentGatewaySupport {
         'midtrans' => [
             'name' => 'Midtrans',
             'image' => 'images/midtrans.png',
+            'link' => 'https://midtrans.com',
             'credentials' => [
                 'Client Key',
                 'Server Key'
@@ -44,6 +46,7 @@ class PaymentGatewaySupport {
         'stripe' => [
             'name' => 'Stripe',
             'image' => 'images/stripe.png',
+            'link' => 'https://stripe.com',
             'credentials' => [
                 'Stripe User Id'
             ],

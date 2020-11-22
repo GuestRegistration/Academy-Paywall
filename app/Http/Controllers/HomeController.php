@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Http\Controllers\Controller;
+use App\Classes\PaymentGatewaySupport;
 
 class HomeController extends Controller
 {
@@ -14,11 +15,12 @@ class HomeController extends Controller
     
     public function __invoke(){
         
-
         return Inertia::render('Pages/Home', [
             'howItWork' => $this->hiw(),
             'features' => $this->features(),
             'communities' => $this->communities(),
+            'countries' => $this->countries(),
+            'gateways' => $this->gateways(),
         ])
         ->withViewData([
             'title' => 'Create and Manage your Online Courses',
@@ -32,7 +34,10 @@ class HomeController extends Controller
 
     public function getSSR()
     {
-        $ssr = "<div><h1>Create a website for your courses</h1></div>";
+        $ssr = "<div style='text-align: center'>";
+        
+        $ssr .= "<div><h1>Create a website for your courses</h1></div>";
+
         $ssr .= "<h2>How it Work</h2>";
         $hiws = $this->hiw();
         foreach ($hiws  as $hiw) {
@@ -44,6 +49,8 @@ class HomeController extends Controller
                 </div>
             ";
         }
+
+        $ssr .= "<h2>FEATURES</h2>";
         $features = $this->features();
         foreach ($features  as $feature) {
             $ssr .= "
@@ -55,6 +62,7 @@ class HomeController extends Controller
             ";
         }
 
+        $ssr .= "<h2>OUR COMMUNITIES</h2>";
         $communities = $this->communities();
         foreach ($communities  as $community) {
             $ssr .= "
@@ -65,6 +73,27 @@ class HomeController extends Controller
                 </div>
             ";
         }
+
+        $ssr .= "<h2>NO NEED TO WORRY ABOUT PAYMENTT GATEWAY</h2>";
+        $ssr .= " <p>We already have all worked out for you.</p>";
+        $gateways = $this->gateways();
+        foreach ($gateways  as $gateway) {
+            $ssr .= "<a href='{$gateway['link']}'>
+                        <img src='{$gateway['image']}' alt='{$gateway['name']}' width='200px'  />
+                    </a>";
+        }
+
+        $ssr .= "<h2>RECEIVE ANY CURRENCY FROM 40+ COUNTRIES</h2>";
+        $ssr .= "<p>You can recive payment for your courses in any currency from over 40 different countries in the world</p>";
+
+        $countries = $this->countries();
+        $ssr .= "<ol>";
+        foreach ($countries  as $country) {
+            $ssr .= "<li>{$country}</li>";
+        }
+        $ssr .= "</ol>";
+
+        $ssr .="</div>";
 
         return $ssr;
     }
@@ -163,5 +192,34 @@ class HomeController extends Controller
                 'text' =>  'As a business owner and techpreneur, I always hold bite-sized trainings where I share hacks and tips that I have learnt from experience across varying fields. I now use Acada app to host such courses and I must say that it has never been easier. Thank you Acada 👍🏽'
             ]
         ];
+    }
+
+    public function gateways(){
+        $paymentGateways = PaymentGatewaySupport::GATEWAYS;
+        $gateways = [];
+        foreach ($paymentGateways as $key => $_gateway) {
+            array_push($gateways, [
+                'name' => $_gateway['name'],
+                'image' => asset($_gateway['image']),
+                'link' => $_gateway['link'],
+            ]);
+        }
+
+        return $gateways;
+    }
+
+    public function countries(){
+        $paymentGateways = PaymentGatewaySupport::GATEWAYS;
+        $countries = [];
+        foreach ($paymentGateways as $key => $_gateway) {
+            foreach ($_gateway['countries'] as $code => $country) {
+                if(!array_key_exists($code, $countries)){
+                    $countries[$code] = $country;
+                }
+            }
+        }
+        \ksort($countries);
+
+        return $countries;
     }
 }
