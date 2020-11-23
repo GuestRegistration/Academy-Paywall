@@ -76,7 +76,7 @@
                         <h1>RECEIVE ANY CURRENCY FROM <span class="text-custom-primary">40+ COUNTRIES</span></h1>
                     </div>
                     <div class="container text-center">
-                        <p>You can recive payment for your courses in any currency from over 40 different countries in the world</p>
+                        <p>You can receive payment for your courses in any currency from over 40 different countries in the world</p>
                     </div>
                 </v-col>
                 <v-col cols="12" md="6">
@@ -90,8 +90,8 @@
 
             <div class="container mt-5">
                 <div class="section-head">
-                        <h2>NO NEED TO WORRY ABOUT PAYMENTT GATEWAY</h2>
-                        <p>We already have all worked out for you.</p>
+                        <h2>NO NEED TO WORRY ABOUT PAYMENT GATEWAY</h2>
+                        <p>We already have it all worked out for you.</p>
                 </div>
                 <v-row justify="center" align="center">
                     <v-col v-for="(gateway, i) in gateways" :key="i">
