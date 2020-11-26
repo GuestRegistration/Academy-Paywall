@@ -73,7 +73,7 @@
                 })
             },
 
-        paystackPayment(){
+            paystackPayment(){
             const handler = PaystackPop.setup({
                  ...this.data,
               key: this.publicKey,
@@ -81,14 +81,14 @@
               amount: this.amount,
               currency: this.currency,
               callback: (response) => {
-                 this.$emit('payment-success');
-                  this.charge_callback(response)
-                  .then((response) => {
-                      this.$emit('success', response);
+                this.$emit('payment-success');
+                this.charge_callback(response)
+                .then((response) => {
+                    this.$emit('success', response);
                   })
-                  .catch(e => {
+                .catch(e => {
                        this.$emit('error', e);
-                  })
+                })
               },
               onClose: () => {
                   this.$emit('aborted');
@@ -96,7 +96,7 @@
             });
             this.$emit('process', null);
             handler.openIframe();
-          },
+            },
         },
     }
 </script>

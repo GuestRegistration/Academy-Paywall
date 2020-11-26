@@ -60,7 +60,8 @@ class AccountPaymentAction extends Controller
             'label' => PaymentGatewaySupport::GATEWAYS[$gateway]['name'],
             'name' => $gateway, 
             'image' => asset(PaymentGatewaySupport::GATEWAYS[$gateway]['image']),
-            'credentials' => PaymentGatewaySupport::credentials($gateway)
+            'credentials' => PaymentGatewaySupport::credentials($gateway),
+            'instructions' => isset(PaymentGatewaySupport::GATEWAYS[$gateway]['instructions']) ? PaymentGatewaySupport::GATEWAYS[$gateway]['instructions'] : null
         ];
     }
 

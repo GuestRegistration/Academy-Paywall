@@ -73,10 +73,10 @@
             <v-row justify="center" align="center">
                 <v-col cols="12" md="6">
                     <div class="section-head">
-                        <h1>RECEIVE ANY CURRENCY FROM <span class="text-custom-primary">40+ COUNTRIES</span></h1>
+                        <h1>RECEIVE ANY CURRENCY FROM <span class="text-custom-primary">{{ availableCountries.length - 1 }}+ COUNTRIES</span></h1>
                     </div>
                     <div class="container text-center">
-                        <p>You can receive payment for your courses in any currency from over 40 different countries in the world</p>
+                        <p>You can receive payment for your courses in any currency from over {{  availableCountries.length - 1 }} different countries in the world</p>
                     </div>
                 </v-col>
                 <v-col cols="12" md="6">

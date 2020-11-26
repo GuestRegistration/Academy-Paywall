@@ -65,6 +65,9 @@
             </v-card-title>
             <v-divider></v-divider>
             <v-card-text>
+
+              
+
                 <div class="d-flex mb-5">
                   <div>
                     <div>
@@ -90,8 +93,10 @@
             <v-card-actions>
               <v-btn type="button" color="red darken-1" text @click="$inertia.visit(route('account.course.show', {account: account.username, course: course.slug}))">Cancel</v-btn>
               <v-spacer></v-spacer>
-
-              <v-btn v-if="course.payment.require" type="submit" :loading="loading" :color="account.theme_color" dark >Proceed to payment  <v-icon>arrow_forward</v-icon></v-btn>
+              <template v-if="course.payment.require">
+                <v-btn type="submit" :loading="loading" :color="account.theme_color" dark >Proceed to payment  <v-icon>arrow_forward</v-icon></v-btn>
+                
+              </template>
               <v-btn v-else type="submit" :loading="loading" :color="account.theme_color" dark >Submit <v-icon>arrow_forward</v-icon></v-btn>
             </v-card-actions>
           </v-card>
@@ -143,6 +148,19 @@
       @error="registrationFailed"  
       @aborted="freeProcess"
     />
+
+    <paypal-gateway ref="paypalGateway" v-if="course.payment.require && course.payment.gateway == 'paypal'"
+      :amount="`${course.price}`" 
+      :currency="course.currency"
+      :environment="payment_gateway.credentials.environment"  
+      :client="{sandbox: payment_gateway.credentials.client_id, production: payment_gateway.credentials.client_id}"
+      :charge_callback="paypalCallBack"   
+      :description="`Payment for course ${course.title} by ${account.name} on Acada`"
+      :buyer-note="`Thank you for enrolling for ${course.title}`"
+      @process="(p) => { process = p }"
+      @success="registrationSuccessfull"
+      @error="registrationFailed"
+      @aborted="freeProcess" />
 
     <student-enrollment 
       :account="account"  
@@ -265,6 +283,10 @@
                 this.$refs.midtransGateway.open();
               break;
 
+            case 'paypal':
+                this.$refs.paypalGateway.open();
+              break;
+
               default:
                 toastr.error("We do not support that payment gateway yet. We are working on it.");
                 this.freeProcess();
@@ -281,7 +303,7 @@
                   raw: true,
                   for_real: true,
                   payment_gateway: this.course.payment.gateway,
-                  currency: this.course.payment.currency,
+                  currency: this.course.currency,
                   amount: this.course.price
                 })
                 .then(response => {
@@ -354,6 +376,27 @@
                     reject(e);
                 });
             });
+          },
+
+          paypalCallBack(response){
+            return new Promise((resolve, reject) => {
+                this.process = `Registering you as ${this.student.first_name} ${this.student.last_name}`;
+                this.register({
+                  ...this.student,
+                  payment_ref: response.paymentID,
+                  raw: true,
+                  for_real: true,
+                  payment_gateway: this.course.payment.gateway,
+                  currency: this.course.currency,
+                  amount: this.course.price
+                })
+                .then(response => {
+                  resolve(response);
+                })
+                .catch(e => {
+                  reject(e);
+                })
+              })
           },
           
           registrationSuccessfull(response){

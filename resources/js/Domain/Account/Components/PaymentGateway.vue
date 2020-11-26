@@ -59,6 +59,7 @@
             <div v-show="edit">
               <v-divider></v-divider>
               <v-card-text>
+                <div v-if="gateway.instructions" v-html="gateway.instructions"></div>
                 <v-form ref="form" v-if="gateway.name == 'stripe'" @submit.prevent="submit">
                   <template v-if="f.credentials.stripe_user_id">
                     <v-switch v-model="f.active" label="Enable" :color="auth.account.theme_color" @change="gatewayActivated" ></v-switch>
@@ -88,15 +89,27 @@
                 <v-form v-else ref="form" @submit.prevent="submit" >
                   <v-switch v-model="f.active" label="Enable" :color="auth.account.theme_color" @change="gatewayActivated" ></v-switch>
                   <template v-if="f.active && gateway.name !== 'stripe'">
-                      <x-input 
-                        v-for="(credential, c) in gateway.credentials" 
-                        :key="c" :errors="errors" :name="`credentials.${credential.slug}`" 
-                        :label="credential.name" 
-                        v-model="f.credentials[credential.slug]" 
-                        :disabled="!f.active"
-                        :rules="[rules.required]"
-                        :toggle-visibility="true"
-                      />
+                      
+                      <div v-for="(credential, c) in gateway.credentials" :key="c">
+                        <x-select 
+                          v-if="gateway.name == `paypal` && credential.slug == `environment`"
+                          v-model="f.credentials.environment" 
+                          label="Environment" 
+                          name="credentials.environment" 
+                          :items="['sandbox', 'production']" 
+                          :rules="[rules.required]"
+                          outlined />
+                        <x-input 
+                          v-else
+                          :errors="errors" :name="`credentials.${credential.slug}`" 
+                          :label="credential.name" 
+                          v-model="f.credentials[credential.slug]" 
+                          :disabled="!f.active"
+                          :rules="[rules.required]"
+                          :toggle-visibility="true"
+                        />
+                      </div>
+                      
                   </template>
                   <x-button type="sumbit" :loading="loading"  :color="auth.account.theme_color" dark>Save</x-button>
                 </v-form>
