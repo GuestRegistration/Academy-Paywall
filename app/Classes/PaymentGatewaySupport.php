@@ -32,7 +32,7 @@ class PaymentGatewaySupport {
             'name' => 'Midtrans',
             'image' => 'images/midtrans.png',
             'link' => 'https://midtrans.com',
-            'instructions' => 'Obtain your client and server key <a href="https://dashboard.sandbox.midtrans.com/settings/config_info" target="_blank">here</a>',
+            'instructions' => 'Obtain your client and server key <a href="https://dashboard.midtrans.com/settings/config_info" target="_blank">here</a>',
             'credentials' => [
                 'Client Key',
                 'Server Key'
@@ -49,7 +49,6 @@ class PaymentGatewaySupport {
             'name' => 'Stripe',
             'image' => 'images/stripe.png',
             'link' => 'https://stripe.com',
-            'instructions' => 'Obtain your client and server key <a href="https://dashboard.midtrans.com/settings/config_info" target="_blank">here</a>',
             'credentials' => [
                 'Stripe User Id'
             ],

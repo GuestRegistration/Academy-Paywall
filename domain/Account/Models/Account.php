@@ -22,7 +22,7 @@ class Account extends Model
      */
     protected $fillable = [
         'name', 'email', 'phone', 'username', 'bio',
-        'facebook_url', 'twitter_url', 'instagram_url', 'linkedin_url', 
+        'facebook_url', 'twitter_url', 'instagram_url', 'linkedin_url',
         'youtube_url', 'website', 'avatar', 'cover_image', 'theme_color',
         'caption', 'subcaption', 'show_caption', 'google_tag_manager', 'gtm_events'
     ];
@@ -42,7 +42,7 @@ class Account extends Model
 
     public function getProfileCompleteAttribute(){
         $profile = $this;
-        return 
+        return
             collect($this->essentials)->every(function($info) use($profile){
                 return $profile->$info !== null;
             });
@@ -100,7 +100,7 @@ class Account extends Model
 
         if($this->is_unlimited) return 'unlimited';
 
-        return $this->subscription->subscriptionPlan->max_users - ($this->users->count() + $this->invitations->count());
+        return $this->subscription->subscriptionPlan->max_users - ($this->instructors->count() + $this->invitations->count());
     }
 
     public function getCoursesSlotAttribute()
@@ -117,7 +117,7 @@ class Account extends Model
         return $this->subscription && $unlimited_plan && $this->subscription->subscription_plan_id == $unlimited_plan->id;
     }
 
-    public function getIsPaygAttribute(){        
+    public function getIsPaygAttribute(){
         if(!$this->subscription) return true;
 
         return $this->subscription && $this->subscription->expired ? true : false;
@@ -161,5 +161,5 @@ class Account extends Model
     public function invitations(){
         return $this->hasMany(Invitation::class);
     }
-    
+
 }

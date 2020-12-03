@@ -73,7 +73,7 @@
             <v-row justify="center" align="center">
                 <v-col cols="12" md="6">
                     <div class="section-head">
-                        <h1>RECEIVE ANY CURRENCY FROM <span class="text-custom-primary">{{ availableCountries.length - 1 }}+ COUNTRIES</span></h1>
+                        <h1>AVAILABLE IN <span class="text-custom-primary">{{ availableCountries.length - 1 }}+ COUNTRIES</span></h1>
                     </div>
                     <div class="container text-center">
                         <p>You can receive payment for your courses in any currency from over {{  availableCountries.length - 1 }} different countries in the world</p>
@@ -94,17 +94,16 @@
                         <p>We already have it all worked out for you.</p>
                 </div>
                 <v-row justify="center" align="center">
-                    <v-col v-for="(gateway, i) in gateways" :key="i">
+                    <v-col cols="12" :md="Math.ceil(12/gateways.length)" v-for="(gateway, i) in gateways" :key="i">
                         <div class="pa-2 text-center">
                             <a :href="gateway.link" target="_blank">
-                                <img :src="gateway.image" :title="gateway.name" height="100px" />
+                                <img :src="gateway.image" :title="gateway.name" width="250px" />
                             </a>
                         </div>
                     </v-col>
                 </v-row>
             </div>
         </section>
-
 
         <section class="page-section" id="pricing">
             <div class="bg-custom-primary text-center mb-3" style="height: 200px">

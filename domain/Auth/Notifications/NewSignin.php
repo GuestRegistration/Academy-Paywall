@@ -43,14 +43,13 @@ class NewSignin extends Notification
     public function toMail($notifiable)
     {
 
-
         return (new MailMessage)
                 ->subject('Sign in to '.config('app.name'))
                 ->line('Thank you for choosing '.config('app.name').', click on the button below to confirm your account and sign in.')
                 ->action("SIGNIN NOW", URL::temporarySignedRoute('magic.signin', now()->addMinutes(config('auth.token_expire')), ['token' => $this->user->signin_token]))
                 ->line('Please note that this link expires in '.config('auth.token_expire').' minutes');
 
-    }
+    } 
 
     /**
      * Get the array representation of the notification.

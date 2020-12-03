@@ -6,7 +6,7 @@
             </v-btn>
             <h2>{{course.title}}</h2>
         </div>
-        
+
         <v-img :src="course.cover_image" ></v-img>
         <div>
             <div class="text-muted mt-3">
@@ -116,18 +116,12 @@
                         </template>
                     </profile-card>
                 </v-col>
-            </v-row>    
+            </v-row>
         </v-container>
         <slot />
-        
-        <v-btn v-if="!isOnMyAccount(course)" fixed dark bottom right large style="z-index: 100; right: 30px" :color="account.theme_color" :title="`Enroll for ${course.title}`" :disabled="course.ended" @click="enroll" >
-            <v-icon>arrow_forward</v-icon> Enroll
-        </v-btn>
-         <v-btn v-else fixed dark fab bottom right large :color="account.theme_color" :title="`Edit ${course.title}`" @click="$inertia.visit(route('account.course.edit', {account: account.username, course: course.slug}))" >
-            <v-icon>edit</v-icon>
-        </v-btn>
+
     </div>
-    
+
 </template>
 
 <script>
@@ -191,7 +185,7 @@
             const event =  this.$page.account.gtm_events.find(e => e.slug == EVENT);
             if(this.$page.account.google_tag_manager && event){
                  this.pushGTMEvent({
-                    id: this.$page.account.google_tag_manager, 
+                    id: this.$page.account.google_tag_manager,
                     events: event.triggers
                 })
             }

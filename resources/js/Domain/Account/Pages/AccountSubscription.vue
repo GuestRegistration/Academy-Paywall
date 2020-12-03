@@ -4,7 +4,9 @@
             <stripe-gateway ref="stripeGateway" :publishable-key="stripe_pk" :amount="plan.amount" :currency="plan.currency" :color="account.theme_color" :charge_callback="chargeCallback" @success="paymentSuccessful" @error="paymentError" />
             <v-row justify="center">
                 <v-col cols="12" md="8" lg="6">
-                    <h4>Subscription</h4>
+                    <div class="text-center">
+                        <h2>Subscription</h2>
+                    </div>
                     <template v-if="account.is_unlimited">
                         <v-alert
                             icon="check_circle"

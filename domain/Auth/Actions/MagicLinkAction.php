@@ -46,7 +46,7 @@ class MagicLinkAction extends Controller
             throw $exception;
         }   
         
-        return response("Signin link has been sent. Follow the link to sign in");
+        return response("Sign in link has been sent to {$email}. Follow the link to confirm your account");
     }
 
 }

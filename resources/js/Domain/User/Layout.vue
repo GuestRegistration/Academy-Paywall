@@ -11,7 +11,7 @@
     <v-btn v-if="authenticated" @click="$store.state.navDrawer = !$store.state.navDrawer" icon>
       <v-icon>menu</v-icon>
     </v-btn>
-      
+
       <v-toolbar-title dark >
         <a :href="route('profile.show', {profile: profile.username})" class="prevent-default" style="color: #fff">
           <avatar :src="profile.avatar" color="primary" size="30"  /> {{ profile.fullname }}
@@ -22,7 +22,7 @@
         <v-img src="/images/acada-icon.png" width="50"></v-img>
       </a>
     </v-app-bar>
-    
+
     <div id="scrolling-techniques-5"  class="overflow-y-auto" style="max-height: 100vh;">
         <v-container style="min-height: 110vh" fluid>
             <v-row>
@@ -100,7 +100,7 @@
                           </v-list-item-icon> -->
                         </v-list-item>
                       </a>
-                      
+
                     </v-list>
                     <div v-else>
                     <v-alert
@@ -109,17 +109,17 @@
                         type="error"
                         elevation="2"
                       >
-                      <span v-if="isMyProfile(profile)">{{ profile.first_name }}, You are not affiliated to any organization</span>
-                      <span v-else>Not affiliated to any organization</span> 
+                      <span v-if="isMyProfile(profile)">You are not affiliated to any organization</span>
+                      <span v-else>Not affiliated to any organization</span>
                       </v-alert>
                     </div>
                     <template v-if="isMyProfile(profile) && !auth.account">
                       <div class="text--secondary text-center">
-                        <p>Click on the icon below to set up your own organization account</p>
-                        <p> <i>Please note that you can not create a course without setting an academy account</i> </p>
+                        <p>Click on the icon below to set up your own organization account.</p>
+                        <p>Please note that you can not create a course without setting an academy account.</p>
                       </div>
                       <div class="text-right mt-4">
-                        <inertia-link  :href="route('account.setup')" class="prevent-default mx-1" title="Create your academy account">
+                        <inertia-link :href="route('account.setup')" class="prevent-default mx-1" title="Create your academy account">
                           <v-btn fab><v-icon>add</v-icon></v-btn>
                         </inertia-link>
                       </div>
@@ -172,12 +172,12 @@
         destroyed(){
           document.querySelector('html').removeAttribute('no-scroll');
         }
-        
+
     }
 </script>
 
 <style lang="scss">
- 
+
   @media (min-width: 960px)
     {
        #lhs{

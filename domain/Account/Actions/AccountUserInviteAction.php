@@ -34,7 +34,7 @@ class AccountUserInviteAction extends Controller
         })
         ->whereNotNull('email');
 
-        if($emailsToInvite->count() > $acount->users_slot) return redirect()->back()->with('error', 'Cannot send invitations');
+        if(!$account->is_unlimited && $emailsToInvite->count() > $account->users_slot) return redirect()->back()->with('error', 'Cannot send invitations');
 
         $invitations = $account->invitations()->createMany($emailsToInvite);
         

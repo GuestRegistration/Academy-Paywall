@@ -1,30 +1,45 @@
 <template>
     <v-container>
-      <div class="d-flex">
-        <div>
-          <h4>Courses ({{ courses.total }})</h4>
-          <small class="grey--text">{{ filter }}</small>
-        </div>
-        <v-spacer></v-spacer> 
-        <course-filter @filter="applyFilter" :filter="filter" />
-          <v-btn class="d-none d-md-inline-block" icon v-if="display == 'grid'" @click="display = 'list'" title="List view">
-            <v-icon>view_list</v-icon>
-          </v-btn>
-          <v-btn icon class="d-none d-md-inline-block" v-if="display == 'list'" @click="display = 'grid'" title="Grid view">
-            <v-icon>view_module</v-icon>
-          </v-btn>
-      </div>
       <v-row>
-        <v-col cols="12" md="4">
-          <course-search :account="auth.account" />
+        <v-col cols="12" md="6">
+          <div class="d-flex">
+            <h4>Courses ({{ courses.total }})</h4>
+            <v-spacer></v-spacer>
+            <v-btn
+              :color="account.theme_color"
+              dark
+              icon
+              large
+              title="Create  course"
+              @click="$inertia.visit(route('account.course.create', {account: account.username}))"
+            >
+          <v-icon>add</v-icon>
+      </v-btn>
+          </div>
+          <!-- <small class="grey--text">{{ filter }}</small> -->
+          <course-filter @filter="applyFilter" :filter="filter" />
         </v-col>
-        <v-col cols="12" md="8">
+        <v-col cols="12" md="6">
+          <course-search :account="auth.account" />
+          <div class="text-right">
+            <v-btn class="d-none d-md-inline-block" icon v-if="display == 'grid'" @click="display = 'list'" title="List view">
+              <v-icon>view_list</v-icon>
+            </v-btn>
+            <v-btn icon class="d-none d-md-inline-block" v-if="display == 'list'" @click="display = 'grid'" title="Grid view">
+              <v-icon>view_module</v-icon>
+            </v-btn>
+          </div>
+        </v-col>
+      </v-row>
+
+      <v-row>
+        <v-col cols="12">
           <div class="text-center text-muted my-5" v-if="!courses.total">
             No course available
           </div>
           <div v-else>
             <v-row>
-                <v-col cols="12" :md="display == 'grid' ? 6 : 12" :lg="display == 'grid' ? 6 : 12"  v-for="course in courses.data" :key="course.id">
+                <v-col cols="12" :md="display == 'grid' ? 4 : 12" :lg="display == 'grid' ? 4 : 12"  v-for="course in courses.data" :key="course.id">
                     <course-card :account="account" :course="course" :showStatus="true" :showInstructor="false" :display="display">
                       <template v-slot:options>
                         <v-menu v-if="isOnMyAccount(course)" origin="center center"  transition="scale-transition">
@@ -75,19 +90,6 @@
         </v-col>
       </v-row>
     
-      <v-btn
-          :color="account.theme_color"
-          dark
-          large
-          fixed
-          bottom
-          right
-          fab
-          title="Create  course"
-          @click="$inertia.visit(route('account.course.create', {account: account.username}))"
-        >
-          <v-icon>add</v-icon>
-      </v-btn>
     </v-container>
 </template>
 

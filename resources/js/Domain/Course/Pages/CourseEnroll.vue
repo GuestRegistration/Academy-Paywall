@@ -46,7 +46,7 @@
             </v-card-text>
           </v-card>
         </div>
-        <div v-else-if="!course.payment.gateway_supported">
+        <div v-else-if="course.payment.require && !course.payment.gateway_supported">
           <v-card>
             <v-card-text>
               <div class="text-center">
@@ -65,9 +65,6 @@
             </v-card-title>
             <v-divider></v-divider>
             <v-card-text>
-
-              
-
                 <div class="d-flex mb-5">
                   <div>
                     <div>
@@ -83,7 +80,7 @@
                     <h4 v-if="course.payment.require">{{course.price | money(course.currency)}}</h4>
                     <h4 v-else>FREE</h4>
                   </div>
-                </div>               
+                </div>
                 <x-input :errors="errors" name="first_name" type="text" v-model="student.first_name" label="First name*" />
                 <x-input :errors="errors" name="last_name" type="text" v-model="student.last_name" label="Last name*" />
                 <x-input :errors="errors" name="email" type="text" v-model="student.email" label="Email*" />
@@ -95,21 +92,21 @@
               <v-spacer></v-spacer>
               <template v-if="course.payment.require">
                 <v-btn type="submit" :loading="loading" :color="account.theme_color" dark >Proceed to payment  <v-icon>arrow_forward</v-icon></v-btn>
-                
+
               </template>
               <v-btn v-else type="submit" :loading="loading" :color="account.theme_color" dark >Submit <v-icon>arrow_forward</v-icon></v-btn>
             </v-card-actions>
           </v-card>
         </form>
-        
+
     </v-dialog>
-    
+
     <paystack-gateway ref="paystackGateway" v-if="course.payment.require && course.payment.gateway == 'paystack'"
       :public-key="payment_gateway.credentials.public_key"
-      :email="student.email" 
-      :amount="course.price * 100" 
+      :email="student.email"
+      :amount="course.price * 100"
       :currency="course.currency"
-      :charge_callback="paystackCallBack"   
+      :charge_callback="paystackCallBack"
       :data="{
         ref: student.id,
         firstname: student.first_name,
@@ -121,40 +118,40 @@
               }
           ]
         },
-      }" 
+      }"
       @process="(p) => { process = p }"
       @success="registrationSuccessfull"
       @error="registrationFailed"
       @aborted="freeProcess" />
 
     <stripe-gateway ref="stripeGateway" v-else-if="course.payment.require && course.payment.gateway == 'stripe'"
-      :publishable-key="payment_gateway.publishable_key" 
-      :amount="course.price" 
-      :currency="course.currency" 
-      :color="account.theme_color" 
-      :charge_callback="stripeCallBack" 
-      @success="registrationSuccessfull" 
+      :publishable-key="payment_gateway.publishable_key"
+      :amount="course.price"
+      :currency="course.currency"
+      :color="account.theme_color"
+      :charge_callback="stripeCallBack"
+      @success="registrationSuccessfull"
       @error="registrationFailed"
       @aborted="freeProcess" />
 
     <midtrans-gateway ref="midtransGateway" v-else-if="course.payment.require && course.payment.gateway == 'midtrans'"
       :client-key="payment_gateway.credentials.client_key"
-      :amount="course.price" 
+      :amount="course.price"
       :currency="course.currency"
       :color="account.theme_color"
       :charge="midtransCharge"
       :charge_callback="midtransRegister"
-      @success="registrationSuccessfull" 
-      @error="registrationFailed"  
+      @success="registrationSuccessfull"
+      @error="registrationFailed"
       @aborted="freeProcess"
     />
 
     <paypal-gateway ref="paypalGateway" v-if="course.payment.require && course.payment.gateway == 'paypal'"
-      :amount="`${course.price}`" 
+      :amount="`${course.price}`"
       :currency="course.currency"
-      :environment="payment_gateway.credentials.environment"  
+      :environment="payment_gateway.credentials.environment"
       :client="{sandbox: payment_gateway.credentials.client_id, production: payment_gateway.credentials.client_id}"
-      :charge_callback="paypalCallBack"   
+      :charge_callback="paypalCallBack"
       :description="`Payment for course ${course.title} by ${account.name} on Acada`"
       :buyer-note="`Thank you for enrolling for ${course.title}`"
       @process="(p) => { process = p }"
@@ -162,10 +159,10 @@
       @error="registrationFailed"
       @aborted="freeProcess" />
 
-    <student-enrollment 
-      :account="account"  
-      :student="student" 
-      :show="showEnrollment" 
+    <student-enrollment
+      :account="account"
+      :student="student"
+      :show="showEnrollment"
       @close="$inertia.visit(route('account.show', {account: account.username}))" />
 
   </v-row>
@@ -241,7 +238,7 @@
             this.process = '';
             this.loading = false;
           },
-          
+
           register(student){
             return axios.post(this.route('account.course.register', {account: this.account.username, course: this.course.slug}), student)
           },
@@ -398,7 +395,7 @@
                 })
               })
           },
-          
+
           registrationSuccessfull(response){
             this.freeProcess();
             this.student = response.data;
@@ -416,7 +413,7 @@
 
             if(this.$page.account.google_tag_manager && event){
               this.pushGTMEvent({
-                  id: this.$page.account.google_tag_manager, 
+                  id: this.$page.account.google_tag_manager,
                   events: event.triggers
               })
             }

@@ -28,12 +28,12 @@ class AccountPaymentAction extends Controller
         //         'gateways' => collect(PaymentGatewaySupport::CURRENCIES[$currency])->map(function($gateway){
         //             return [
         //                 'label' => PaymentGatewaySupport::GATEWAYS[$gateway]['name'],
-        //                 'name' => $gateway, 
+        //                 'name' => $gateway,
         //                 'image' => asset(PaymentGatewaySupport::GATEWAYS[$gateway]['image']),
         //                 'credentials' => PaymentGatewaySupport::credentials($gateway)
         //             ];
         //             })
-        //         ]; 
+        //         ];
         //     });
 
         $gateways = PaymentGatewaySupport::GATEWAYS;
@@ -50,6 +50,7 @@ class AccountPaymentAction extends Controller
                 }
             }
         }
+
         \ksort($countries);
 
         return Inertia::render('Domain/Account/Pages/AccountPayment', compact('account', 'gateway', 'countries'));
@@ -58,7 +59,7 @@ class AccountPaymentAction extends Controller
     private function getGateway($gateway){
         return [
             'label' => PaymentGatewaySupport::GATEWAYS[$gateway]['name'],
-            'name' => $gateway, 
+            'name' => $gateway,
             'image' => asset(PaymentGatewaySupport::GATEWAYS[$gateway]['image']),
             'credentials' => PaymentGatewaySupport::credentials($gateway),
             'instructions' => isset(PaymentGatewaySupport::GATEWAYS[$gateway]['instructions']) ? PaymentGatewaySupport::GATEWAYS[$gateway]['instructions'] : null

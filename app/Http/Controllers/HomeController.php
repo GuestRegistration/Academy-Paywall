@@ -12,9 +12,9 @@ class HomeController extends Controller
     {
         $this->middleware('inertia-conflict');
     }
-    
+
     public function __invoke(){
-        
+
         return Inertia::render('Pages/Home', [
             'howItWork' => $this->hiw(),
             'features' => $this->features(),
@@ -35,7 +35,7 @@ class HomeController extends Controller
     public function getSSR()
     {
         $ssr = "<div style='text-align: center'>";
-        
+
         $ssr .= "<div><h1>Create a website for your courses</h1></div>";
 
         $ssr .= "<h2>How it Work</h2>";
@@ -83,10 +83,11 @@ class HomeController extends Controller
                     </a>";
         }
 
-        $ssr .= "<h2>RECEIVE ANY CURRENCY FROM 40+ COUNTRIES</h2>";
-        $ssr .= "<p>You can recive payment for your courses in any currency from over 40 different countries in the world</p>";
-
         $countries = $this->countries();
+
+        $ssr .= "<h2>AVAILABLE IN ".(count($countries) - 1)."+ COUNTRIES</h2>";
+        $ssr .= "<p>You can recive payment for your courses in any currency from over ".(count($countries) - 1)."+ different countries in the world</p>";
+
         $ssr .= "<ol>";
         foreach ($countries  as $country) {
             $ssr .= "<li>{$country}</li>";
@@ -106,7 +107,7 @@ class HomeController extends Controller
                 'heading' => 'Set up your profile',
                 'text' => 'Create your account and set up your personal and academy profile. Good news! you do not need a password',
             ],
-            
+
             [
                 'icon' => asset('images/add-course.PNG'),
                 'heading' => 'Add Course',
@@ -127,8 +128,8 @@ class HomeController extends Controller
         return [
             [
                 'icon' =>  asset('images/web.PNG'),
-                'heading' =>  'A Customizable Website for your Courses',
-                'text' =>  'Get a beautiful website for less than the cost of a flyer in just a few clicks.'
+                'heading' =>  'A Customizable web page for your Courses',
+                'text' =>  'Get a beautiful web page for less than the cost of a flyer in just a few clicks.'
             ],
             [
                 'icon' =>   asset('images/authorization.PNG'),
@@ -153,7 +154,7 @@ class HomeController extends Controller
             [
                 'icon' =>   asset('images/accept-payment.PNG'),
                 'heading' =>  'Third-Party Integration',
-                'text' =>  'Pick your preferred conferencing or LMS (such as Zoom, Google Hangouts, WhatsApp, Google Classrom, nd others) and submit the URL to your audience.'
+                'text' =>  'Pick your preferred conferencing or LMS (such as Zoom, Google Hangouts, WhatsApp, Google Classroom, and others) and submit the URL to your audience.'
             ],
             [
                 'icon' =>   asset('images/participants-list.PNG'),

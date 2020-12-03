@@ -96,7 +96,15 @@
                                     </h3>
                                 </v-expansion-panel-header>
                                 <v-expansion-panel-content class="my-3">
-                                    <x-input :errors="errors" name="google_tag_manager" type="text" v-model="form.google_tag_manager" label="Google Tag Manager" placeholder="GTM-xxxxxx" />
+                                    <v-alert
+                                        border="left"
+                                        colored-border
+                                        color="primary accent-4"
+                                        elevation="2"
+                                        v-if="!account.is_unlimited">
+                                        Only available in enterprise
+                                    </v-alert>
+                                    <x-input :errors="errors" name="google_tag_manager" type="text" v-model="form.google_tag_manager" label="Google Tag Manager" placeholder="GTM-xxxxxx" :disabled="!account.is_unlimited"/>
                                     <h5>Event Tracking</h5>
                                     <v-divider></v-divider>
                                      <div>
@@ -116,7 +124,7 @@
                                                     <tr v-for="(event, i) in form.gtm_events" :key="event.slug">
                                                         <td>{{ event.name }}</td>
                                                         <td class="pt-5">
-                                                            <x-input type="text" v-model="form.gtm_events[i].triggers" label="Triggers seperated by comma (,)" />
+                                                            <x-input type="text" v-model="form.gtm_events[i].triggers" label="Triggers seperated by comma (,)" :disabled="!account.is_unlimited" />
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -127,13 +135,15 @@
                                 </v-expansion-panel-content>
                             </v-expansion-panel>
                         </v-expansion-panels>
-
-                        <v-btn fixed dark bottom right x-large
-                            style="z-index:100; bottom: 40px"
-                            :loading="loading" type="submit"
-                            :color="form.theme_color">
-                            <v-icon>done</v-icon> Save
-                        </v-btn>
+                        
+                        <div class="ml-5 mt-5">
+                            <v-btn dark bottom right large
+                                :loading="loading" type="submit"
+                                :color="form.theme_color">
+                                <v-icon>done</v-icon> Save
+                            </v-btn>
+                        </div>
+                        
 
                 </form>
             </v-col>

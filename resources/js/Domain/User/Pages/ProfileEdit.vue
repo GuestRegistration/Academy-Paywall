@@ -15,15 +15,16 @@
                     <x-input :errors="errors" name="email" type="email" v-model="form.email" label="Email"  prependInnerIcon="email" disabled />
                     <tel-input :errors="errors" name="phone" v-model="form.phone" label="Phone"/>
                     <x-textarea :errors="errors" name="bio" v-model="form.bio" label="About" />
+
+                    <v-btn dark bottom right x-large
+                        :loading="loading" type="submit"
+                        color="primary">
+                        <v-icon>done</v-icon> Save
+                    </v-btn>
                 </v-col>
                 
             </v-row>
-            <v-btn fixed dark bottom right x-large
-                :loading="loading" type="submit"
-                style="bottom: 40px"
-                color="primary">
-                <v-icon>done</v-icon> Save
-            </v-btn>
+           
         </form>
     </v-container>
 </template>

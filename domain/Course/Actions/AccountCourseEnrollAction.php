@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 
 class AccountCourseEnrollAction extends Controller
 {
-    
+
     public function __construct()
     {
 
@@ -19,10 +19,10 @@ class AccountCourseEnrollAction extends Controller
     {
        $course->load('users.profile');
        $payment_gateway =  $account->paymentGateway;
-       if($payment_gateway->gateway == 'stripe'){
+       if(optional($payment_gateway)->gateway == 'stripe'){
         $payment_gateway->publishable_key = config('services.stripe.publishable_key');
        }
-       
+
         return Inertia::render('Domain/Course/Pages/CourseEnroll', compact('account', 'course', 'payment_gateway'))
                         ->withViewData([
                             'title' => $course->title,

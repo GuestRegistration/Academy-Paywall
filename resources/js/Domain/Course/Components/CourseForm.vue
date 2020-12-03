@@ -36,7 +36,7 @@
                     </v-expansion-panel-header>
                     <v-expansion-panel-content class="py-3">
                         <v-switch v-model="form.requires_payment" label="Require payment for enrollment" :color="account.theme_color" :disabled="!paymentGateway || !paymentGateway.active  ? true : false" ></v-switch>
-                        
+
                         <template v-if="!paymentGateway || !paymentGateway.active" >
                             <v-alert icon="info" prominent text type="info">
                                 You need to set up your payment or activate it to charge for course
@@ -47,7 +47,7 @@
                                 </inertia-link>
                             </div>
                         </template>
-                        
+
                         <template v-if="form.requires_payment">
                             <div v-if="paymentGateway && paymentGateway.active">
                                 <!-- <v-alert icon="info" prominent text type="info">
@@ -56,7 +56,7 @@
                                 <div class="text-right">
                                     <inertia-link :href="route('account.payment.gateway', {account: account.username})" class="prevent-default">
                                         <v-icon>settings</v-icon> Payment method settings
-                                    </inertia-link>                                
+                                    </inertia-link>
                                 </div>
                                 <v-row align="center">
                                     <v-col>
@@ -84,7 +84,7 @@
                                 Timezone: {{ auth.timezone }}
                             </v-col>
                             <v-col cols="12" lg="6">
-                                <x-date-picker :errors="errors" label="Date" name="start_date" :current="start_date" @change="(date) => {start_date = date; end_date = date}"  :color="account.theme_color" />
+                                <x-date-picker :errors="errors" label="Date" name="start_date" :current="start_date" @change="(date) => {start_date = date}"  :color="account.theme_color" :min="minStartDate" />
                             </v-col>
                             <v-col cols="12" lg="6">
                                 <x-time-picker :errors="errors" label="Time" name="start_date" @input="(time) => {start_time = time; end_time = time}" :value="start_time"  :color="account.theme_color" />
@@ -106,7 +106,7 @@
                         </v-col>
                         <v-row>
                             <v-col cols="12" lg="6">
-                                <x-date-picker :errors="errors" label="Date" name="end_date" :current="end_date" @change="(date) => end_date = date"  :color="account.theme_color" />
+                                <x-date-picker :errors="errors" label="Date" name="end_date" :current="end_date" @change="(date) => end_date = date"  :color="account.theme_color" :min="start_date"  />
                             </v-col>
                             <v-col cols="12" lg="6">
                                 <x-time-picker :errors="errors" label="Time" name="end_time" v-model="end_time" :color="account.theme_color" />
@@ -162,7 +162,7 @@
                                 </div>
                             </template>
                             <template v-slot:selection="data">
-                                <v-chip 
+                                <v-chip
                                     :key="data.item"
                                     v-bind="data.attrs"
                                     :input-value="data.selected"
@@ -208,15 +208,16 @@
 
             </v-expansion-panels>
 
-            <v-btn fixed dark bottom right x-large
-                style="z-index:100; bottom: 40px"
-                :loading="loading" type="submit"
-                :color="account.theme_color">
-                <v-icon>done</v-icon> Save
-            </v-btn>
-           
+            <div class="ml-2 mt-5">
+                <v-btn  dark bottom right x-large
+                    :loading="loading" type="submit"
+                    :color="account.theme_color">
+                    <v-icon>done</v-icon> Save
+                </v-btn>
+            </div>
+            
         </v-container>
-    </form>  
+    </form>
 </template>
 
 <script>
@@ -229,7 +230,7 @@
             instructors: Array,
             currencies: Array,
         },
-        
+
         data(){
             return {
                 form: {},
@@ -263,6 +264,15 @@
             supportedCurrencies(){
                 const allCurrencies = require('../../../../assets/currencies.json');
                 return this.currencies === 'all' ? Object.keys(allCurrencies) : this.currencies;
+            },
+
+            minStartDate(){
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                var yyyy = today.getFullYear();
+
+                return  yyyy + '-' + mm + '-' + dd;
             }
         },
 
