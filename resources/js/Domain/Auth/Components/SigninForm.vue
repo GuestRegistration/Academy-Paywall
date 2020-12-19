@@ -49,7 +49,7 @@
                 ui: {
                     loading: false,
                 },
-                status: 'fuck',
+                status: '',
                 error: null,
                 errors: null
             };
