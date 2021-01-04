@@ -149,7 +149,7 @@ class Course extends Model
             'gateway' =>  optional($this->account->paymentGateway)->gateway,
             'gateway_active' =>  optional($this->account->paymentGateway)->active,
             'gateway_clear' =>  optional($this->account->paymentGateway)->credentials_complete,
-            'gateway_supported' => $this->account->paymentGateway ? in_array($this->currency, $this->account->paymentGateway->currencies) : false
+            'gateway_supported' => $this->account->paymentGateway ? ($this->account->paymentGateway->currencies == 'all' ? true : in_array($this->currency, $this->account->paymentGateway->currencies))  : false
         ];
     }
 
