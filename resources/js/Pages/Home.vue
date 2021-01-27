@@ -262,7 +262,7 @@
         <template v-slot:after-container>
             <section id="footer">
             <div class="text-center text--primary">
-                <p>&copy; 2020 ACADA</p>
+                <p>&copy; 2021 ACADA</p>
             </div>
             </section>        
         </template>

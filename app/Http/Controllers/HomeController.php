@@ -178,18 +178,18 @@ class HomeController extends Controller
     {
         return [
             [
-                'icon' =>  asset('images/jobred.PNG'),
-                'heading' =>  'JobRed "Ajo Balogun"',
+                'icon' =>  asset('images/ajo.png'),
+                'heading' =>  'Ajo',
                 'text' =>  'When the pandemic caused us to stop physical classes completely, we needed a way to reach out to our students and ensure that the quality of our trainings was not compromised. Acada App allowed us to hold classes on online platforms while ensuring that course contents were limited to only participants that have successfully enrolled for the course.'
             ],
             [
-                'icon' =>   asset('images/healthboxes.PNG'),
-                'heading' =>  'Health Boxes "Lola Kogbodoku"',
+                'icon' =>   asset('images/lola.jpeg'),
+                'heading' =>  'Lola',
                 'text' =>  'Charging for training and keeping track of participant registrations have been made easier with this app. I do not even need flyers, propspective applicants can simply browse through my page and register for their preferred course.'
             ],
             [
-                'icon' =>  asset('images/prof-elegbe.PNG'),
-                'heading' =>  'Macaulay Gidado',
+                'icon' =>  asset('images/festus.png'),
+                'heading' =>  'Festus',
                 'text' =>  'As a business owner and techpreneur, I always hold bite-sized trainings where I share hacks and tips that I have learnt from experience across varying fields. I now use Acada app to host such courses and I must say that it has never been easier. Thank you Acada 👍🏽'
             ]
         ];
