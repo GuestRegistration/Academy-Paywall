@@ -99,9 +99,9 @@
                 </div>
                 <v-row justify="center" align="center">
                     <v-col cols="12" :md="Math.ceil(12/gateways.length)" v-for="(gateway, i) in gateways" :key="i">
-                        <div class="pa-2 text-center">
+                        <div class="pa-2 text-center payment-gateway">
                             <a :href="gateway.link" target="_blank">
-                                <img :src="gateway.image" :title="gateway.name" width="250px" />
+                                <img :src="gateway.image" :title="gateway.name" />
                             </a>
                         </div>
                     </v-col>
@@ -455,21 +455,14 @@
          padding: 30px 0;
     }
 
+    .payment-gateway img{
+        width: 250px;
+    }
+
     @media (min-width: 768px){
         .banner-content
         {
             padding-top: 15%;
-        }
-
-
-        #features .info-box
-        {
-            min-height: 300px;
-        }
-
-        #community .info-box
-        {
-            min-height: 400px;
         }
 
         .pricing-container
@@ -480,6 +473,23 @@
         {
             margin: 0 20px;
         }
+
     }
+
+     @media (min-width: 960px){
+        #features .info-box
+        {
+            min-height: 300px;
+        }
+        #community .info-box
+        {
+            min-height: 450px;
+        }
+
+
+        .payment-gateway img{
+            width: 100%;
+        }
+     }
 
 </style>
