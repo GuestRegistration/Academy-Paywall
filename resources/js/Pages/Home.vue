@@ -22,7 +22,7 @@
             </div>
 
             <div class="d-flex justify-center align-center" style="margin-top: -150px">
-                <iframe width="660" height="315" src="https://www.youtube-nocookie.com/embed/gO4s5jtVBTA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="660" height="315" src="https://www.youtube.com/embed/gO4s5jtVBTA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
 
         <section class="page-section" id="how-it-work">

@@ -4,6 +4,7 @@
 /public/js
 /public/css
 /public/*.js
+!/public/registerServiceWorker.js
 /public/storage
 /public/.htaccess
 /public/mix-manifest.json

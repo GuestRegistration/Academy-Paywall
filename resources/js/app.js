@@ -3,6 +3,10 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+/**
+ * just messing with you!
+ */
+
 import { InertiaApp } from '@inertiajs/inertia-vue';
 import Vue from 'vue';
 import Vuetify from 'vuetify';
@@ -10,7 +14,6 @@ import VueMeta from 'vue-meta'
 import store from './store';
 import toastr from 'toastr';
 import wysiwyg from "vue-wysiwyg";
-import VueAnalytics from 'vue-analytics';
 import GA from './plugins/analytics';
 
 // import VueTagManager from "vue-tag-manager";

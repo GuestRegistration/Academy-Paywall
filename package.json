@@ -33,6 +33,7 @@
         "flag-icon-css": "^3.5.0",
         "jstz": "^2.1.1",
         "material-design-icons-iconfont": "^5.0.1",
+        "register-service-worker": "^1.7.2",
         "toastr": "^2.1.4",
         "vue-analytics": "^5.22.1",
         "vue-gtm": "^2.3.4",

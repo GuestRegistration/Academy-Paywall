@@ -48,6 +48,17 @@
       <!-- Provides the application the proper gutter -->
       <v-container fluid>
         <slot />
+        <v-snackbar bottom left :value="updateExists" :timeout="-1" color="primary">
+            <div class="d-flex align-center">
+                <div>
+                    We have some update, would you love to install ?
+                </div>
+                <v-spacer></v-spacer>
+                <v-btn text @click="refreshApp">
+                    Yes install
+                </v-btn>
+            </div>
+        </v-snackbar>
       </v-container>
 
       <slot name="after-container" />
@@ -65,9 +76,10 @@
 <script>
     import {mapState, mapGetters, mapMutations} from "vuex";
     import navDrawer from '../components/NavDrawer';
-
+    import SWupdate from '../mixins/SWupdate';
     export default {
         name: 'LayoutApp',
+        mixins: [SWupdate],
         components: {
           navDrawer
         },
@@ -76,6 +88,7 @@
               'auth', 'authenticated',
             ])
         },
+       
     }
 </script>
 

@@ -14,6 +14,7 @@ const WebpackPwaManifest = require('webpack-pwa-manifest');
  */
 
 mix.js('resources/js/app.js', 'public/js')
+    .js('resources/js/registerServiceWorker.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .webpackConfig({
         resolve: {
@@ -43,7 +44,7 @@ mix.js('resources/js/app.js', 'public/js')
                 cleanupOutdatedCaches: true,
                 swDest: path.join(`${__dirname}/public`, 'service-worker.js'),
                 clientsClaim: true,
-                skipWaiting: true,
+                skipWaiting: false,
                 runtimeCaching: [
                     {
                         urlPattern: new RegExp(`${process.env.APP_URL}`),
@@ -63,4 +64,7 @@ mix.js('resources/js/app.js', 'public/js')
                 excludeChunks: ['runtime'],
             }),
         ],
+        output: {
+            publicPath: ''
+        }
     }).version();
