@@ -40,7 +40,7 @@
         <link rel ="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" >
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" >
         <link rel ="manifest" href="/site.webmanifest">
-        <script src="{{ mix('js/app.js') }}" id="app-script" defer></script>
+        
         <!-- Google Tag Manager -->
         <script src="https://unpkg.com/vue-tag-manager@x.x.x/lib/TagManager.js"></script>
         @if (config('services.analytics.id'))
@@ -50,43 +50,72 @@
         
         @routes
         <style>
-            #preloader-container
-            {
-                position: fixed;
-                left: 0;
+            .overflow-hidden{
+                overflow: hidden
+            }
+            .page-loader-background {
+                position: absolute;
+                background: #fff;
+                bottom: 0;
                 right: 0;
                 top: 0;
-                bottom: 0;
-                height: 100vh;
-                background-color: #C51E5B;
+                left: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 z-index: 10000;
             }
-            #preloader-content
-            {
-                width: 90%;
+            .page-loader-background img {
                 margin: auto;
-                margin-top: 40vh;
-                text-align: center;
+                animation-name: loading;
+                animation-timing-function: linear;
+                animation-duration: 1s;
+                animation-iteration-count: infinite;
             }
-            @media (min-width: 768px){
-                #preloader-content
-                {
-                    width: 40%
-                }
+
+            @keyframes loading{
+                0%   { opacity: 0.5 }
+                50%  { opacity: 1 }
+                100% { opacity: 0.5 }
             }
         </style>
     </head>
-    <body>
+    <body class="overflow-hidden">
         @inertia
         <div id="ssr">{!! $ssr ?? '' !!}</div>
-        <div id="preloader">
-            <div id="preloader-container">
-                <div id="preloader-content">
-                    <img src="{{ asset('images/acada-text-logo-white.png') }}" alt="Acade App" width="200px">
-                </div>
-            </div>
+
+        <div class="page-loader-background" id="page-loader">
+            <img src="{{ asset('/icon_192x192.png') }}" alt="Landshop">
         </div>
-        <script src="{{ asset('prerender/js/prerender.js') }}"></script>
+        
+
+    <script>
+        if ('serviceWorker' in navigator ) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/acada/public/service-worker.js').then(function(registration) {
+                    // Registration was successful
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, function(err) {
+                    // registration failed :(
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
+    <script src="{{ mix('js/app.js') }}" id="app-script" defer></script>
+    <script>
+        const get = S => document.querySelector(S);const hideElement = E => E.setAttribute('style', 'display: none');let preLoader = get('#preloader');
+        const appScript = get('#app-script');
+        const loader = get('#page-loader');
+        const ssr = get('#ssr');
+        appScript.onload = e => {
+            document.querySelector('body').classList.toggle('overflow-hidden');
+            loader.parentNode.removeChild(loader);
+            ssr.parentNode.removeChild(ssr);
+        };
+    </script>
+
+           
         @if (config('services.intercom.app_id'))
             <script>
                 const APP_ID = "{{ config('services.intercom.app_id') }}";
@@ -127,6 +156,7 @@
                 </script>
             @endif
         @endif
+
 
     </body>
 </html>

@@ -13,7 +13,6 @@ import wysiwyg from "vue-wysiwyg";
 import VueAnalytics from 'vue-analytics';
 import GA from './plugins/analytics';
 
-
 // import VueTagManager from "vue-tag-manager";
 
 window.Vue = Vue;

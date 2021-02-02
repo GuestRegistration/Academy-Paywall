@@ -21,7 +21,9 @@
         "sass": "^1.26.10",
         "sass-loader": "^8.0.0",
         "vue": "^2.5.17",
-        "vue-template-compiler": "^2.6.10"
+        "vue-template-compiler": "^2.6.10",
+        "webpack-pwa-manifest": "^4.2.0",
+        "workbox-webpack-plugin": "^4.3.1"
     },
     "dependencies": {
         "@fracto/vue-credit-card": "^0.5.0",
