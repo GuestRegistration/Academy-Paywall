@@ -40,7 +40,6 @@ mix.js('resources/js/app.js', 'public/js')
                 }]
             }),
             new GenerateSW({
-                
                 cleanupOutdatedCaches: true,
                 swDest: path.join(`${__dirname}/public`, 'service-worker.js'),
                 clientsClaim: true,
@@ -65,6 +64,6 @@ mix.js('resources/js/app.js', 'public/js')
             }),
         ],
         output: {
-            publicPath: ''
-        }
+            publicPath: '/'
+        },
     }).version();
