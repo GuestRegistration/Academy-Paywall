@@ -5,6 +5,8 @@
 /public/css
 /public/*.js
 !/public/registerServiceWorker.js
+/public/icon_*
+public/manifest.json
 /public/storage
 /public/.htaccess
 /public/mix-manifest.json
