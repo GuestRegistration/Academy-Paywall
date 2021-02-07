@@ -2,6 +2,53 @@ const mix = require('laravel-mix');
 const { GenerateSW } = require('workbox-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 
+let plugins = [];
+
+if(process.env.APP_ENV == 'production'){
+    plugins = [
+        new WebpackPwaManifest({
+            "name": "Acada",
+            "short_name": "Acada",
+            "theme_color": "#C51E5B",
+            "background_color": "#002B36",
+            "display": "standalone",
+            "Scope": "/",
+            "start_url": "/",
+            "fingerprints": false,
+            "icons": [{
+                src: `${__dirname}/public/images/acada-icon.png`,
+                sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
+            }]
+        }),
+        new GenerateSW({
+            cleanupOutdatedCaches: true,
+            swDest: path.join(`${__dirname}/public`, 'service-worker.js'),
+            clientsClaim: true,
+            skipWaiting: false,
+            runtimeCaching: [
+                {
+                    urlPattern: new RegExp(`${process.env.APP_URL}`),
+                    handler: 'NetworkFirst',
+                    options: {
+                        cacheName: `${process.env.APP_NAME}-${process.env.APP_ENV}`
+                    }
+                },
+                {
+                    urlPattern: new RegExp('https://fonts.(googleapis|gstatic).com'),
+                    handler: 'CacheFirst',
+                    options: {
+                        cacheName: 'google-fonts'
+                    }
+                }
+            ],
+            excludeChunks: ['runtime'],
+            modifyURLPrefix: {
+                '//': '/'
+            }
+        }),
+    ]
+}
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -24,46 +71,10 @@ mix.js('resources/js/app.js', 'public/js')
                 '@assets': path.resolve('resources/assets'),
             },
         },
-        plugins: [
-            new WebpackPwaManifest({
-                "name": "Acada",
-                "short_name": "Acada",
-                "theme_color": "#C51E5B",
-                "background_color": "#002B36",
-                "display": "standalone",
-                "Scope": "/",
-                "start_url": "/",
-                "fingerprints": false,
-                "icons": [{
-                    src: `${__dirname}/public/images/acada-icon.png`,
-                    sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
-                }]
-            }),
-            new GenerateSW({
-                cleanupOutdatedCaches: true,
-                swDest: path.join(`${__dirname}/public`, 'service-worker.js'),
-                clientsClaim: true,
-                skipWaiting: false,
-                runtimeCaching: [
-                    {
-                        urlPattern: new RegExp(`${process.env.APP_URL}`),
-                        handler: 'NetworkFirst',
-                        options: {
-                            cacheName: `${process.env.APP_NAME}-${process.env.APP_ENV}`
-                        }
-                    },
-                    {
-                        urlPattern: new RegExp('https://fonts.(googleapis|gstatic).com'),
-                        handler: 'CacheFirst',
-                        options: {
-                            cacheName: 'google-fonts'
-                        }
-                    }
-                ],
-                excludeChunks: ['runtime'],
-            }),
-        ],
+        plugins,
         output: {
             publicPath: '/'
         },
-    }).version();
+    }).version()
+    
+

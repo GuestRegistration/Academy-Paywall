@@ -7,6 +7,20 @@
                         <div class="text-center banner-text">
                             <h1>CREATE A WEBSITE</h1>
                             <h1>FOR YOUR COURSES IN MINUTES</h1>
+                            <v-dialog
+                                v-model="videoDialog"
+                                max-width="660"
+                                >
+                                <template v-slot:activator="{ on, attrs }">
+                                    <div class="text-center">
+                                        <img  v-bind="attrs" v-on="on" src="/images/play-icon.jpg" alt="Play" width="120px">
+                                    </div>
+                                </template>
+                                <div v-if="videoDialog" style="background-color: #fff">
+                                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/gO4s5jtVBTA?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                            </v-dialog>
+
                             <div class="mt-3">
                                 <template v-if="authenticated">
                                     <a v-if="auth.account" :href="route('account.show', {account: auth.account.username})">
@@ -19,10 +33,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="d-flex justify-center align-center" style="margin-top: -150px">
-                <iframe width="660" height="315" src="https://www.youtube.com/embed/gO4s5jtVBTA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
 
         <section class="page-section" id="how-it-work">
@@ -250,7 +260,8 @@
                                 <img :src="community.icon" height="100x" style="max-width: 60%">
                             </div>
                             <div class="text-center">
-                                <h4>{{ community.heading }}</h4>
+                                <h1>{{ community.name }}</h1>
+                                <h4>{{ community.owner }}</h4>
                             </div>
                             <div class="box-text">
                                 <p>{{ community.text }}</p>
@@ -297,6 +308,7 @@
         },
         data(){
             return {
+                videoDialog: false
             }
         },
         computed: {
@@ -483,7 +495,7 @@
         }
         #community .info-box
         {
-            min-height: 450px;
+            min-height: 490px;
         }
 
 

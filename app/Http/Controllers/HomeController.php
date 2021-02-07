@@ -68,7 +68,8 @@ class HomeController extends Controller
             $ssr .= "
                 <div>
                     <img src='{$community['icon']}' alt='acada-communities' width='200px'  />
-                    <h4>{$community['heading']}</h4>
+                    <h1>{$community['name']}</h1>
+                    <h4>{$community['owner']}</h4>
                     <p>{$community['text']}</p>
                 </div>
             ";
@@ -179,17 +180,20 @@ class HomeController extends Controller
         return [
             [
                 'icon' =>  asset('images/ajo.png'),
-                'heading' =>  'Ajo',
+                'name' => 'Jobred',
+                'owner' =>  'Ajo',
                 'text' =>  'When the pandemic caused us to stop physical classes completely, we needed a way to reach out to our students and ensure that the quality of our trainings was not compromised. Acada App allowed us to hold classes on online platforms while ensuring that course contents were limited to only participants that have successfully enrolled for the course.'
             ],
             [
                 'icon' =>   asset('images/lola.jpeg'),
-                'heading' =>  'Lola',
+                'name' => 'HealthBoxes',
+                'owner' =>  'Lola',
                 'text' =>  'Charging for training and keeping track of participant registrations have been made easier with this app. I do not even need flyers, propspective applicants can simply browse through my page and register for their preferred course.'
             ],
             [
                 'icon' =>  asset('images/festus.png'),
-                'heading' =>  'Festus',
+                'name' => 'Macaulay Gidado',
+                'owner' =>  'Festus',
                 'text' =>  'As a business owner and techpreneur, I always hold bite-sized trainings where I share hacks and tips that I have learnt from experience across varying fields. I now use Acada app to host such courses and I must say that it has never been easier. Thank you Acada 👍🏽'
             ]
         ];

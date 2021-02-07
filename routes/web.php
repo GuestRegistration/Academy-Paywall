@@ -20,4 +20,4 @@ Route::post('payment', PaymentController::class);
 Route::get('/migrate', 'App\Http\Controllers\SystemController@migrate');
 Route::get('/lstorage', 'App\Http\Controllers\SystemController@linkStorage');
 
-Route::get('webhook/stripe', StripeWebhook::class)->name('stripe.webhook');
+Route::post('webhook/stripe', StripeWebhook::class)->name('stripe.webhook');
