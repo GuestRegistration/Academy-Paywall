@@ -261,11 +261,14 @@
                             </div>
                             <div class="text-center">
                                 <h1>{{ community.name }}</h1>
-                                <h4>{{ community.owner }}</h4>
                             </div>
                             <div class="box-text">
                                 <p>{{ community.text }}</p>
                             </div>
+                            <div class="text-center owner pr-2">
+                                <p> {{ community.owner }}</p>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -462,6 +465,11 @@
         background-color: #fff;
     }
 
+    #community .owner {
+        font-weight: bold;
+        text-color: #f7f7f7;
+    }
+
     #footer
     {
          padding: 30px 0;
@@ -493,11 +501,10 @@
         {
             min-height: 300px;
         }
-        #community .info-box
+        #community .info-box .box-text
         {
-            min-height: 490px;
+            min-height: 300px;
         }
-
 
         .payment-gateway img{
             width: 100%;

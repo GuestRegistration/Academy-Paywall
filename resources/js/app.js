@@ -128,9 +128,9 @@ const isMobile = [
           });
        }
        
-      if(typeof window.Intercom === 'function'){
-        window.Intercom("update");
-      } 
+      // if(typeof window.Intercom === 'function'){
+      //   window.Intercom("update");
+      // } 
      
       return props;
       },

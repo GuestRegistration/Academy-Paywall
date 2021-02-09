@@ -69,8 +69,8 @@ class HomeController extends Controller
                 <div>
                     <img src='{$community['icon']}' alt='acada-communities' width='200px'  />
                     <h1>{$community['name']}</h1>
-                    <h4>{$community['owner']}</h4>
                     <p>{$community['text']}</p>
+                    <p>{$community['owner']}</p>
                 </div>
             ";
         }
