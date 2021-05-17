@@ -44,7 +44,7 @@ class UserInvitationToAccount extends Notification
         
         return (new MailMessage)
                     ->subject("Invitation to {$notifiable->account->name}")
-                    ->line(Auth::user()->profile->fullname." is inviting you to {$notifiable->account->name} as an instructor on acadaapp")
+                    ->line(Auth::user()->profile->fullname." is inviting you to {$notifiable->account->name} as an instructor on ".config('app.name'))
                     ->line("Click on the button below to accept the invitation")
                     ->action('Accept Invitation', URL::signedRoute('account.instructor.invitation', ['account' => $notifiable->account->getKey(), 'invitation' => $notifiable->getKey()]));
         }

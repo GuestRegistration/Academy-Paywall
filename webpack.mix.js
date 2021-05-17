@@ -4,7 +4,7 @@ const WebpackPwaManifest = require('webpack-pwa-manifest');
 
 let plugins = [];
 
-if(process.env.APP_ENV == 'production'){
+if(process.env.APP_ENV != 'local'){
     plugins = [
         new WebpackPwaManifest({
             "name": "Acada",

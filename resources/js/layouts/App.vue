@@ -51,11 +51,11 @@
         <v-snackbar bottom left :value="updateExists" :timeout="-1" color="primary">
             <div class="d-flex align-center">
                 <div class="mr-2">
-                    We have some update, would you like to install?
+                    We have an update, would you like to install?
                 </div>
                 <v-spacer></v-spacer>
                 <v-btn text @click="refreshApp">
-                    Yes install
+                    Yes
                 </v-btn>
             </div>
         </v-snackbar>
